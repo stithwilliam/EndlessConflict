@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.media.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.StartController">
+   <children>
+      <Label layoutX="64.0" layoutY="80.0" text="Endless Conflict" textFill="#478ba1">
+         <font>
+            <Font name="Haettenschweiler" size="140.0" />
+         </font>
+      </Label>
+      <Button fx:id="newGameBtn" layoutX="259.0" layoutY="440.0" mnemonicParsing="false" text="New Game">
+         <font>
+            <Font name="Britannic Bold" size="18.0" />
+         </font></Button>
+      <Button fx:id="loadGameBtn" layoutX="434.0" layoutY="440.0" mnemonicParsing="false" text="Load Game">
+         <font>
+            <Font name="Britannic Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="rulesBtn" layoutX="365.0" layoutY="520.0" mnemonicParsing="false" text="Rules">
+         <font>
+            <Font name="Britannic Bold" size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

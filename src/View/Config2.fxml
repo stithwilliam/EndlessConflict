@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Config2Controller">
+   <children>
+      <Label layoutX="126.0" layoutY="35.0" text="Choose Your Commander" textFill="#478ba1">
+         <font>
+            <Font name="Haettenschweiler" size="72.0" />
+         </font>
+      </Label>
+      <Button fx:id="backBtn" layoutX="17.0" layoutY="335.0" mnemonicParsing="false" text="Back">
+         <font>
+            <Font name="Britannic Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="okBtn" layoutX="725.0" layoutY="335.0" mnemonicParsing="false" text="OK">
+         <font>
+            <Font name="Britannic Bold" size="18.0" />
+         </font>
+      </Button>
+      <HBox fx:id="humanBox" alignment="CENTER_LEFT" layoutX="100.0" layoutY="150.0" prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: darkorange; -fx-border-width: 2; -fx-border-color: sandybrown;">
+         <children>
+            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
+            <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@humanCommanderPortrait.png" />
+               </image>
+            </ImageView>
+            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
+            <VBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" text="Commander in Chief">
+                     <font>
+                        <Font name="Britannic Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" text="HUMANS">
+                     <font>
+                        <Font name="Britannic Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="100.0" prefWidth="300.0">
+               <children>
+                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" text="Leader of The Stronghold, the last civilized group of human fighters dedicated to winning back their planet and destroying all machines." textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="Britannic Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" text="Fights primarily with Humans. They excel at killing Robots but fall easily to Mutants" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="Britannic Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox fx:id="robotBox" alignment="CENTER_LEFT" layoutX="100.0" layoutY="300.0" prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: royalblue; -fx-border-width: 2; -fx-border-color: slateblue;">
+         <children>
+            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
+            <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@robotCommanderPortrait.png" />
+               </image>
+            </ImageView>
+            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
+            <VBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" text="The Singularity">
+                     <font>
+                        <Font name="Britannic Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" text="ROBOTS">
+                     <font>
+                        <Font name="Britannic Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="100.0" prefWidth="300.0">
+               <children>
+                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" text="This superintelligent AI has surpassed human intelligence and now leads the most dangerous threat to the human race, the robot rebellion" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="Britannic Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" text="Fights primarily with Robots. They excel at killing Mutants but fall easily to Humans" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="Britannic Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox fx:id="mutantBox" alignment="CENTER_LEFT" layoutX="100.0" layoutY="450.0" prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: chartreuse; -fx-border-width: 2; -fx-border-color: lawngreen;">
+         <children>
+            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
+            <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@mutantCommanderPortrait.png" />
+               </image>
+            </ImageView>
+            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
+            <VBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" text="The Genespinner">
+                     <font>
+                        <Font name="Britannic Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" text="MUTANTS">
+                     <font>
+                        <Font name="Britannic Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="100.0" prefWidth="300.0">
+               <children>
+                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" text="Capable of creating any biological horror imaginable, the Singularity's rogue creation leads The Swarm in it's attempt at domination " textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="Britannic Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" text="Fights primarily with Mutants. They excel at killing Humans but fall easily to Robots" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="Britannic Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

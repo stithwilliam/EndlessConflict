@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Config1Controller">
+   <children>
+      <Label layoutX="154.0" layoutY="60.0" text="Choose Your Difficulty" textFill="#478ba1">
+         <font>
+            <Font name="Haettenschweiler" size="72.0" />
+         </font>
+      </Label>
+      <Label layoutX="220.0" layoutY="300.0" text="Choose Your Mode" textFill="#478ba1">
+         <font>
+            <Font name="Haettenschweiler" size="64.0" />
+         </font>
+      </Label>
+      <Button fx:id="backBtn" layoutX="20.0" layoutY="541.0" mnemonicParsing="false" text="Back">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Button>
+      <Button fx:id="okBtn" layoutX="730.0" layoutY="541.0" mnemonicParsing="false" text="OK">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <RadioButton fx:id="easyRadio" layoutX="260.0" layoutY="187.0" mnemonicParsing="false" style="-fx-text-fill: green;" text="Easy">
+         <font>
+            <Font name="Britannic Bold" size="18.0" />
+         </font></RadioButton>
+      <RadioButton fx:id="mediumRadio" layoutX="349.0" layoutY="187.0" mnemonicParsing="false" style="-fx-text-fill: yellowgreen;" text="Medium">
+         <font>
+            <Font name="Britannic Bold" size="18.0" />
+         </font></RadioButton>
+      <RadioButton fx:id="hardRadio" layoutX="472.0" layoutY="187.0" mnemonicParsing="false" style="-fx-text-fill: red;" text="Hard">
+         <font>
+            <Font name="Britannic Bold" size="18.0" />
+         </font></RadioButton>
+      <Label fx:id="errorLabel" layoutX="181.0" layoutY="126.0" text="Must select difficulty and map" textFill="RED" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <RadioButton fx:id="softcoreRadio" layoutX="286.0" layoutY="460.0" mnemonicParsing="false" style="-fx-text-fill: green;" text="Softcore">
+         <font>
+            <Font name="Britannic Bold" size="18.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="hardcoreRadio" layoutX="410.0" layoutY="460.0" mnemonicParsing="false" style="-fx-text-fill: red;" text="Hardcore">
+         <font>
+            <Font name="Britannic Bold" size="18.0" />
+         </font>
+      </RadioButton>
+   </children>
+</AnchorPane>

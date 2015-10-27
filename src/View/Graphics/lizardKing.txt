@@ -1,0 +1,3 @@
+This is the first hero for the Mutants.
+Should look like the lizard person from Spiderman.
+Will be melee

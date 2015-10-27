@@ -13,7 +13,7 @@ public class Game {
     private Difficulty difficulty;
     private Mode mode;
     private Commander commander;
-    private ArrayList<Unit> army;
+    private ArrayList<Fighter> army;
 
     //Constructor
     public Game() {
@@ -25,7 +25,7 @@ public class Game {
 
     public void startGame() {
         MasterController.getInstance().setMapScene();
-        MasterController.getInstance().getMapController().generateMap(new Map(20, 10));
+        MasterController.getInstance().getMapController().generateMap(new Map(12, 8));
 
     }
 
@@ -33,13 +33,13 @@ public class Game {
     public Difficulty getDifficulty() {return difficulty;}
     public Mode getMode() {return mode;}
     public Commander getCommander() {return commander;}
-    public ArrayList<Unit> getArmy() {return army;}
+    public ArrayList<Fighter> getArmy() {return army;}
     //Setters
     public void setDifficulty(Difficulty d) {difficulty = d;}
     public void setMode(Mode m) {mode = m;}
     public void setCommander(Commander c) {commander = c;}
-    public void setArmy(ArrayList<Unit> a) {army = a;}
+    public void setArmy(ArrayList<Fighter> a) {army = a;}
     //Adders
-    public void addToArmy(Unit u) {army.add(u);}
+    public void addToArmy(Fighter u) {army.add(u);}
 
 }

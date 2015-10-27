@@ -1,0 +1,2 @@
+This is the background to the main battle screen. 
+I'm not sure exactly how all of the buttons will be situated, so don't work on this yet.

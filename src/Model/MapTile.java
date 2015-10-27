@@ -1,27 +1,34 @@
 package Model;
 
-import java.util.Map;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Created by William on 10/26/2015.
+ * Created by William on 10/27/2015.
  */
-public enum MapTile {
-    PLAIN(true, 1), FOREST(true, 2), ROCK(false, 2);
+public class MapTile {
 
-    private Map<String, String> imagePath;
+    Tile tile;
+    int xPos, yPos;
+    private boolean hasFighter;
     private boolean moveable;
     private int moveCost;
 
-    MapTile(boolean b, int i) {
-        moveable = b;
-        moveCost = i;
-        imagePath = new HashMap<>();
-        imagePath.put("PLAIN", "/View/Graphics/plainTile.png");
-        imagePath.put("FOREST", "/View/Graphics/forestTile.png");
-        imagePath.put("ROCK", "/View/Graphics/rockTile.png");
+    public MapTile(Tile t, int x, int y) {
+        tile = t;
+        xPos = x;
+        yPos = y;
+        moveable = t.isMoveable();
+        moveCost = t.getMoveCost();
+        hasFighter = false;
     }
 
-    public String imagePath() { return imagePath.get(this.name());}
+    //Getters
+    public int getxPos() {return xPos;}
+    public int getyPos() {return yPos;}
+    public boolean hasFighter() {return hasFighter;}
     public boolean isMoveable() {return moveable;}
+    public int getMoveCost() {return moveCost;}
+    public String imagePath() {return tile.imagePath();}
+
 }

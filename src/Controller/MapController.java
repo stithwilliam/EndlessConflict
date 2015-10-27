@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Fighter;
 import Model.Hero;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -36,13 +37,12 @@ public class MapController {
     private HashMap<String, StackPane> stackPanes = new HashMap<>();
 
     public void generateMap(Map map) {
-        System.out.println("generating map");
         myMap = map;
         int width = map.getWidth();
         int height = map.getHeight();
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                ImageView tile = new ImageView(map.getTile(i, j).imagePath());
+                ImageView tile = new ImageView(map.getMapTile(i, j).imagePath());
                 StackPane tileContainer = new StackPane();
                 tileContainer.getChildren().add(tile);
                 gridPane.add(tileContainer, i, j);
@@ -51,7 +51,24 @@ public class MapController {
         }
         gridPane.setVgap(0);
         gridPane.setHgap(0);
-        StackPane center = getStackPane(5, 4);
+
+        //Test code
+        StackPane center = getStackPane(7, 4);
+        Fighter theKing = new Fighter(Hero.LIZARDKING, 7, 4);
+        map.addFighter(theKing);
+        boolean[][] valid = map.getValidMoves(theKing);
+        for (int i = 0; i < valid[0].length; i++) {
+            for (int j = 0; j < valid.length; j++) {
+                if (valid[j][i]) {
+                    System.out.println("GOOD at " + i + "," + j);
+                    ImageView good = new ImageView(Hero.MODELX.imagePath());
+                    StackPane pane = getStackPane(i, j);
+                    pane.getChildren().add(good);
+                } else {
+                    System.out.println("BAD at " + i + "," + j);
+                }
+            }
+        }
         center.getChildren().add(new ImageView(Hero.LIZARDKING.imagePath()));
     }
 

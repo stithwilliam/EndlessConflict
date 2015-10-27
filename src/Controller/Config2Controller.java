@@ -61,7 +61,6 @@ public class Config2Controller {
         if (selected) {
             Game game = Main.myGame;
             Main.myGame.setCommander(commander);
-            System.out.println("DIFFICULTY: " + game.getDifficulty() + "\nMODE: " + game.getMode() + "\nCOMMANDER: " + game.getCommander());
             Main.myGame.startGame();
         }
     }

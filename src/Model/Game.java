@@ -1,5 +1,8 @@
 package Model;
 
+import Controller.MapController;
+import Controller.MasterController;
+
 import java.util.ArrayList;
 
 /**
@@ -18,6 +21,12 @@ public class Game {
         mode = null;
         commander = null;
         army = null;
+    }
+
+    public void startGame() {
+        MasterController.getInstance().setMapScene();
+        MasterController.getInstance().getMapController().generateMap(new Map(20, 10));
+
     }
 
     //Getters

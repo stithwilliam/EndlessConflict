@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MapController">
+   <children>
+      <Pane layoutX="80.0" layoutY="80.0" prefHeight="386.0" prefWidth="640.0">
+         <children>
+            <GridPane fx:id="gridPane" style="-: GREEN;">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="NEVER" maxWidth="64.0" minWidth="64.0" percentWidth="0.0" prefWidth="64.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="64.0" minHeight="64.0" percentHeight="0.0" prefHeight="64.0" valignment="BASELINE" vgrow="NEVER" />
+               </rowConstraints>
+            </GridPane>
+         </children>
+      </Pane>
+      <ScrollPane fx:id="scrollPane" layoutX="80.0" layoutY="80.0" opacity="0.0" prefHeight="386.0" prefWidth="640.0" />
+      <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Graphics/battleBoard.png" />
+         </image>
+      </ImageView>
+      <Rectangle fx:id="upRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="64.0" layoutX="336.0" layoutY="16.0" stroke="BLACK" strokeType="INSIDE" width="128.0" />
+      <Rectangle fx:id="downRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="64.0" layoutX="344.0" layoutY="466.0" stroke="BLACK" strokeType="INSIDE" width="128.0" />
+      <Rectangle fx:id="rightRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="128.0" layoutX="720.0" layoutY="209.0" stroke="BLACK" strokeType="INSIDE" width="64.0" />
+      <Rectangle fx:id="leftRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="128.0" layoutX="16.0" layoutY="210.0" stroke="BLACK" strokeType="INSIDE" width="64.0" />
+      <Label layoutX="386.0" layoutY="36.0" text="UP">
+         <font>
+            <Font name="Britannic Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="376.0" layoutY="486.0" text="DOWN">
+         <font>
+            <Font name="Britannic Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="746.0" layoutY="262.0" text="R">
+         <font>
+            <Font name="Britannic Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="40.0" layoutY="262.0" text="L">
+         <font>
+            <Font name="Britannic Bold" size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -30,7 +30,7 @@
             <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
             <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@humanCommanderPortrait.png" />
+                  <Image url="@Graphics/humanCommanderPortrait.png" />
                </image>
             </ImageView>
             <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
@@ -69,7 +69,7 @@
             <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
             <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@robotCommanderPortrait.png" />
+                  <Image url="@Graphics/robotCommanderPortrait.png" />
                </image>
             </ImageView>
             <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
@@ -108,7 +108,7 @@
             <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
             <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@mutantCommanderPortrait.png" />
+                  <Image url="@Graphics/mutantCommanderPortrait.png" />
                </image>
             </ImageView>
             <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />

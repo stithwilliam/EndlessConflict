@@ -13,13 +13,14 @@ import java.io.IOException;
 public class MasterController {
 
     private Stage stage;
-    private Scene startScene, config1Scene, config2Scene;
+    private Scene startScene, config1Scene, config2Scene, mapScene;
     private FXMLLoader loader;
+    private MapController mapController;
 
     //create a singleton
     private static MasterController masterController = new MasterController();
 
-    //returns the single instance of MasterController within the entire scope of the project
+    //returns the singleton within the entire scope of the project
     public static MasterController getInstance() { return masterController; }
 
     //called once
@@ -39,12 +40,23 @@ public class MasterController {
             root = loader.load(getClass().getResource("/View/Config2.fxml"));
             config2Scene = new Scene(root);
 
+            loader = new FXMLLoader(getClass().getResource("/View/Map.fxml"));
+            root = (Parent) loader.load();
+            mapScene = new Scene(root);
+            mapController = (MapController) loader.getController();
+
         } catch (IOException e) {
             System.out.println("Shit's broke: " + e);
         }
     }
 
+    //Scene setters
     public void setStartScene() { stage.setScene(startScene);}
     public void setConfig1Scene() { stage.setScene(config1Scene);}
     public void setConfig2Scene() { stage.setScene(config2Scene);}
+    public void setMapScene() { stage.setScene(mapScene);}
+    //Scene loaders
+
+    //Getters
+    public MapController getMapController() { return mapController;}
 }

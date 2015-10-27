@@ -62,7 +62,7 @@ public class Config2Controller {
             Game game = Main.myGame;
             Main.myGame.setCommander(commander);
             System.out.println("DIFFICULTY: " + game.getDifficulty() + "\nMODE: " + game.getMode() + "\nCOMMANDER: " + game.getCommander());
-            //TODO: change scene
+            Main.myGame.startGame();
         }
     }
 

@@ -20,9 +20,9 @@ public class Map {
             {p, r, p, p, p, p, p, p, r, p, f, f},
             {p, r, p, p, p, p, p, p, r, p, f, f},
             {p, r, p, p, p, p, p, p, r, p, f, f},
-            {p, r, r, r, r, r, r, r, r, p, f, f},
-            {f, f, f, f, f, f, f, f, f, f, f, f},
-            {f, f, f, f, f, f, f, f, f, f, f, f}
+            {p, r, r, r, r, r, r, p, r, p, f, f},
+            {f, f, f, f, f, f, p, p, p, f, f, f},
+            {f, f, f, f, f, f, p, p, p, f, f, f}
     };
 
     public Map(int w, int h) {
@@ -41,8 +41,6 @@ public class Map {
         }
         return board;
     }
-
-    //Getters
 
     //Uses a DFS to find all of the valid moves for a fighter f
     public boolean[][] getValidMoves(Fighter f) { //TODO Make this backed by a priority queue
@@ -76,26 +74,21 @@ public class Map {
     public List<MapTile> getMoves(MapTile tile) {
         int x = tile.getxPos();
         int y = tile.getyPos();
-        System.out.println("getting moves for " + x + "," + y);
         List<MapTile> list = new ArrayList<>();
         MapTile left = getMapTile(x-1, y);
         if (left != null && left.isMoveable()) {
-            System.out.println("" + (x-1) + "," + y + " is a move");
             list.add(left);
         }
         MapTile right = getMapTile(x+1, y);
         if (right != null && right.isMoveable()) {
-            System.out.println("" + (x+1) + "," + y + " is a move");
             list.add(right);
         }
         MapTile up = getMapTile(x, y-1);
         if (up != null && up.isMoveable()) {
-            System.out.println("" + x + "," + (y-1) + " is a move");
             list.add(up);
         }
         MapTile down = getMapTile(x, y+1);
         if (down != null && down.isMoveable()) {
-            System.out.println("" + x + "," + (y+1) + " is a move");
             list.add(down);
         }
         return list;
@@ -109,6 +102,7 @@ public class Map {
         }
     }
 
+    //Getters
     public int getHeight() { return height;}
     public int getWidth() { return width;}
 

@@ -1,5 +1,7 @@
 package Model;
 
+import javafx.scene.layout.StackPane;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,11 +10,12 @@ import java.util.List;
  */
 public class MapTile {
 
-    Tile tile;
+    public Tile tile;
     int xPos, yPos;
     private boolean hasFighter;
     private boolean moveable;
     private int moveCost;
+    private StackPane stackPane;
 
     public MapTile(Tile t, int x, int y) {
         tile = t;
@@ -21,6 +24,7 @@ public class MapTile {
         moveable = t.isMoveable();
         moveCost = t.getMoveCost();
         hasFighter = false;
+        stackPane = null;
     }
 
     //Getters
@@ -30,5 +34,9 @@ public class MapTile {
     public boolean isMoveable() {return moveable;}
     public int getMoveCost() {return moveCost;}
     public String imagePath() {return tile.imagePath();}
+    public StackPane getStackPane() {return stackPane;}
+
+    //Setters
+    public void setStackPane(StackPane s) {stackPane = s;}
 
 }

@@ -7,10 +7,10 @@ public class Fighter {
 
     private Placeable model;
     int xPos, yPos;
-    boolean melee, flying;
+    boolean melee, flying, enemy;
     int attack, defense, hp, speed, movement, vision;
 
-    public Fighter(Placeable p, int x, int y) {
+    public Fighter(Placeable p, int x, int y, boolean e) {
         model = p;
         melee = model.isMelee();
         flying = model.isFlying();
@@ -22,11 +22,13 @@ public class Fighter {
         vision = model.getVis();
         xPos = x;
         yPos = y;
+        enemy = e;
     }
 
 
 
     //Getters
+    public String imagePath() {return model.imagePath();}
     public int getxPos() {return xPos;}
     public int getyPos() {return yPos;}
     public int getAtt() {return attack;}

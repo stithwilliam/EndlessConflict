@@ -22,27 +22,29 @@
             </GridPane>
          </children>
       </Pane>
-      <ScrollPane fx:id="scrollPane" layoutX="80.0" layoutY="80.0" opacity="0.0" prefHeight="386.0" prefWidth="640.0" />
-      <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="136.0" fitWidth="640.0" layoutX="80.0" layoutY="466.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Graphics/battleBoard.png" />
+            <Image url="@Graphics/bottomBoard.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="80.0" fitWidth="640.0" layoutX="80.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Graphics/topBoard.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="600.0" fitWidth="80.0" layoutX="720.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Graphics/rightBoard.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="600.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Graphics/leftBoard.png" />
          </image>
       </ImageView>
       <Rectangle fx:id="upRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="64.0" layoutX="336.0" layoutY="16.0" stroke="BLACK" strokeType="INSIDE" width="128.0" />
-      <Rectangle fx:id="downRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="64.0" layoutX="344.0" layoutY="466.0" stroke="BLACK" strokeType="INSIDE" width="128.0" />
-      <Rectangle fx:id="rightRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="128.0" layoutX="720.0" layoutY="209.0" stroke="BLACK" strokeType="INSIDE" width="64.0" />
       <Rectangle fx:id="leftRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="128.0" layoutX="16.0" layoutY="210.0" stroke="BLACK" strokeType="INSIDE" width="64.0" />
       <Label layoutX="386.0" layoutY="36.0" text="UP">
-         <font>
-            <Font name="Britannic Bold" size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="376.0" layoutY="486.0" text="DOWN">
-         <font>
-            <Font name="Britannic Bold" size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="746.0" layoutY="262.0" text="R">
          <font>
             <Font name="Britannic Bold" size="24.0" />
          </font>
@@ -52,5 +54,29 @@
             <Font name="Britannic Bold" size="24.0" />
          </font>
       </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="136.0" layoutY="466.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: lightgreen;" width="336.0" />
+      <Rectangle fx:id="downRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="64.0" layoutX="336.0" layoutY="466.0" stroke="BLACK" strokeType="INSIDE" width="128.0" />
+      <Label layoutX="367.0" layoutY="486.0" text="DOWN">
+         <font>
+            <Font name="Britannic Bold" size="24.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="136.0" layoutX="464.0" layoutY="466.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: yellow;" width="328.0" />
+      <Button fx:id="moveBtn" layoutX="493.0" layoutY="492.0" mnemonicParsing="false" text="MOVE">
+         <font>
+            <Font name="Britannic Bold" size="18.0" />
+         </font>
+      </Button>
+      <Rectangle fx:id="rightRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="128.0" layoutX="720.0" layoutY="209.0" stroke="BLACK" strokeType="INSIDE" width="64.0" />
+      <Label layoutX="746.0" layoutY="262.0" text="R">
+         <font>
+            <Font name="Britannic Bold" size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="atkBtn" layoutX="493.0" layoutY="547.0" mnemonicParsing="false" text="ATTACK">
+         <font>
+            <Font name="Britannic Bold" size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

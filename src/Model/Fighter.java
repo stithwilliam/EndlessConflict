@@ -5,13 +5,15 @@ package Model;
  */
 public class Fighter {
 
+    String name;
     private Placeable model;
-    int xPos, yPos;
-    boolean melee, flying, enemy;
-    int attack, defense, hp, speed, movement, vision;
+    private int xPos, yPos;
+    private boolean melee, flying, enemy;
+    private int attack, defense, hp, speed, movement, vision, range;
 
     public Fighter(Placeable p, int x, int y, boolean e) {
         model = p;
+        name = p.getName();
         melee = model.isMelee();
         flying = model.isFlying();
         attack = model.getAtt();
@@ -20,6 +22,7 @@ public class Fighter {
         speed = model.getSpd();
         movement = model.getMov();
         vision = model.getVis();
+        range = 1;
         xPos = x;
         yPos = y;
         enemy = e;
@@ -29,6 +32,7 @@ public class Fighter {
 
     //Getters
     public String imagePath() {return model.imagePath();}
+    public String getName() {return name;}
     public int getxPos() {return xPos;}
     public int getyPos() {return yPos;}
     public int getAtt() {return attack;}
@@ -37,8 +41,10 @@ public class Fighter {
     public int getSpd() {return speed;}
     public int getMov() {return movement;}
     public int getVis() {return vision;}
+    public int getRange() {return range;}
     public boolean isMelee() {return melee;}
     public boolean isFlying() {return flying;}
+    public boolean isEnemy() {return enemy;}
     //Setters
     public void setxPos(int xPos) {this.xPos = xPos;}
     public void setyPos(int yPos) {this.yPos = yPos;}
@@ -48,7 +54,9 @@ public class Fighter {
     public void setSpd(int speed) {this.speed = speed;}
     public void setMov(int movement) {this.movement = movement;}
     public void setVis(int vision) {this.vision = vision;}
+    public void setRange(int range) {this.range = range;}
     public void setMelee(boolean melee) {this.melee = melee;}
     public void setFlying(boolean flying) {this.flying = flying;}
+    public void setEnemy(boolean enemy) {this.enemy = enemy;}
 }
 

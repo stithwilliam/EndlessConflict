@@ -11,6 +11,7 @@ import java.util.List;
 public class MapTile {
 
     public Tile tile;
+    String name;
     int xPos, yPos;
     private boolean hasFighter;
     private boolean moveable;
@@ -19,6 +20,7 @@ public class MapTile {
 
     public MapTile(Tile t, int x, int y) {
         tile = t;
+        name = t.getName();
         xPos = x;
         yPos = y;
         moveable = t.isMoveable();
@@ -28,6 +30,7 @@ public class MapTile {
     }
 
     //Getters
+    public String getName() {return name;}
     public int getxPos() {return xPos;}
     public int getyPos() {return yPos;}
     public boolean hasFighter() {return hasFighter;}

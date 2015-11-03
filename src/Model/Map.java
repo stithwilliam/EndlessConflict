@@ -42,13 +42,11 @@ public class Map {
         return board;
     }
 
-    //Uses a DFS to find all of the valid moves for a fighter f
+    //Uses a BFS to find all of the valid moves for a fighter f
     public boolean[][] getValidMoves(Fighter f) { //TODO Make this backed by a priority queue
         boolean[][] valid = new boolean[height][width];
         Queue<MapTile> queue = new LinkedList<>();
-        List<MapTile> visited = new ArrayList<>();
         MapTile startingTile = getMapTile(f.getxPos(), f.getyPos());
-        visited.add(startingTile);
         HashMap<MapTile, Integer> costMap = new HashMap<>();
         for (MapTile x : getMoves(startingTile)) {
             queue.add(x);
@@ -56,21 +54,25 @@ public class Map {
         }
         while (!queue.isEmpty()) {
             MapTile tile = queue.poll();
-            if (!visited.contains(tile)) {
-                visited.add(tile);
-                valid[tile.getyPos()][tile.getxPos()] = true;
-                int currentCost = costMap.get(tile);
-                if (currentCost < f.getMov()) {
-                    for (MapTile x : getMoves(tile)) {
-                        queue.add(x);
-                        costMap.put(x, currentCost + x.getMoveCost());
-                    }
+            valid[tile.getyPos()][tile.getxPos()] = true;
+            int currentCost = costMap.get(tile);
+            if (currentCost < f.getMov()) {
+                for (MapTile x : getMoves(tile)) {
+                    queue.add(x);
+                    costMap.put(x, currentCost + x.getMoveCost());
                 }
             }
+        }
+        for (Fighter a : fighters) {
+            int x = a.getxPos();
+            int y = a.getyPos();
+            valid[y][x] = false;
         }
         return valid;
     }
 
+    //helper function for getValidMoves
+    //gets the adjacent, moveable tiles of tile.
     public List<MapTile> getMoves(MapTile tile) {
         int x = tile.getxPos();
         int y = tile.getyPos();
@@ -94,12 +96,55 @@ public class Map {
         return list;
     }
 
+    //uses a BFS to find the valid attacks of f
+    public boolean[][] getValidAttacks(Fighter f) { //TODO implement terrain blocking
+        boolean[][] valid = new boolean[height][width];
+        Queue<MapTile> queue = new LinkedList<>();
+        MapTile startingTile = getMapTile(f.getxPos(), f.getyPos());
+        HashMap<MapTile, Integer> rangeMap = new HashMap<>();
+        for (MapTile x : getMoves(startingTile)) {
+            queue.add(x);
+            rangeMap.put(x, 1);
+        }
+        while (!queue.isEmpty()) {
+            MapTile tile = queue.poll();
+            valid[tile.getyPos()][tile.getxPos()] = true;
+            int currentRange = rangeMap.get(tile);
+            if (currentRange < f.getRange()) {
+                for (MapTile x : getMoves(tile)) {
+                    queue.add(x);
+                    rangeMap.put(x, currentRange + 1);
+                }
+            }
+        }
+        boolean[][] inRange = new boolean[height][width];
+        for (Fighter a : fighters) {
+            if (a.isEnemy()) {
+                int x = a.getxPos();
+                int y = a.getyPos();
+                if (valid[y][x]) {
+                    inRange[y][x] = true;
+                }
+            }
+        }
+        return inRange;
+    }
+
     public MapTile getMapTile(int x, int y) {
         if (x >= width || y >= height || x < 0 || y < 0) {
             return null;
         } else {
             return board[y][x];
         }
+    }
+
+    public Fighter getFighter(int x, int y) {
+        for (Fighter f : fighters) {
+            if (f.getxPos() == x && f.getyPos() == y) {
+                return f;
+            }
+        }
+        return null;
     }
 
     //Getters

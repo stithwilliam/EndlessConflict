@@ -8,6 +8,7 @@ public interface Placeable {
 
     //Getters
     String imagePath();
+    String getName();
     boolean isFlying();
     boolean isMelee();
     int getAtt();

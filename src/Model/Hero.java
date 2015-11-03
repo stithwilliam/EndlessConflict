@@ -7,15 +7,17 @@ import java.util.Map;
  * Created by William on 10/27/2015.
  */
 public enum Hero implements Placeable {
-    LIZARDKING(30, 30, 100, 20, 4, 0, true, false), MODELX(20, 40, 100, 20, 4, 0, false, false),
-    CHAOS(40, 20, 100, 20, 4, 0, false, true);
+    LIZARDKING(30, 30, 100, 20, 4, 4, true, false, "Lizard King"), MODELX(20, 40, 100, 20, 4, 4, false, false, "Model X"),
+    CHAOS(40, 20, 100, 20, 4, 4, false, true, "Commander Chaos");
 
+    private String name;
     private int attack, defense, hp, speed, movement, vision;
     private boolean melee, flying;
     private Map<String, String> imagePath = new HashMap<>();
 
     //Constructor
-    Hero(int a, int d, int h, int s, int m, int v, boolean me, boolean f) {
+    Hero(int a, int d, int h, int s, int m, int v, boolean me, boolean f, String n) {
+        name = n;
         attack = a;
         defense = d;
         hp = h;
@@ -24,9 +26,9 @@ public enum Hero implements Placeable {
         vision = v;
         melee = me;
         flying = f;
-        imagePath.put("LIZARDKING", "/View/Graphics/lizardKing.png");
-        imagePath.put("MODELX", "/View/Graphics/modelX.png");
-        imagePath.put("CHAOS", "/View/Graphics/commanderChaos.png");
+        imagePath.put("LIZARDKING", "/View/Graphics/Placeable/lizardKing.png");
+        imagePath.put("MODELX", "/View/Graphics/Placeable/modelX.png");
+        imagePath.put("CHAOS", "/View/Graphics/Placeable/commanderChaos.png");
     }
 
     //Bio info for each hero.
@@ -48,7 +50,8 @@ public enum Hero implements Placeable {
     }
 
     //Getters
-    public String imagePath() { return imagePath.get(this.name());}
+    public String imagePath() {return imagePath.get(this.name());}
+    public String getName() {return name;}
     public int getAtt() {return attack;}
     public int getDef() {return defense;}
     public int getHp() {return hp;}

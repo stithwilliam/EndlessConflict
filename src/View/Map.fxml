@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.image.*?>
@@ -21,6 +22,9 @@
                </rowConstraints>
             </GridPane>
          </children>
+         <padding>
+            <Insets right="5.0" />
+         </padding>
       </Pane>
       <ImageView fitHeight="136.0" fitWidth="640.0" layoutX="80.0" layoutY="466.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -94,6 +98,10 @@
          </font>
       </Button>
       <VBox prefHeight="200.0" prefWidth="100.0" />
-      <FlowPane fx:id="terminal" alignment="BOTTOM_RIGHT" layoutX="7.0" layoutY="473.0" maxHeight="122.0" maxWidth="320.0" prefHeight="122.0" prefWidth="320.0" rowValignment="BOTTOM" style="-fx-background-color: BLACK;" />
+      <VBox fx:id="terminal" alignment="BOTTOM_RIGHT" layoutX="8.0" layoutY="473.0" maxHeight="122.0" maxWidth="320.0" minHeight="122.0" minWidth="320.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="122.0" prefWidth="320.0" style="-fx-background-color: BLACK;">
+         <padding>
+            <Insets right="5.0" />
+         </padding>
+      </VBox>
    </children>
 </AnchorPane>

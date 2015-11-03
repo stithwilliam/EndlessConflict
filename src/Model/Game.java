@@ -13,14 +13,15 @@ public class Game {
     private Difficulty difficulty;
     private Mode mode;
     private Commander commander;
-    private ArrayList<Fighter> army;
+    private ArrayList<Fighter> allies, enemies;
 
     //Constructor
     public Game() {
         difficulty = null;
         mode = null;
         commander = null;
-        army = null;
+        allies = new ArrayList<>();
+        enemies = new ArrayList<>();
     }
 
     public void startGame() {
@@ -33,13 +34,16 @@ public class Game {
     public Difficulty getDifficulty() {return difficulty;}
     public Mode getMode() {return mode;}
     public Commander getCommander() {return commander;}
-    public ArrayList<Fighter> getArmy() {return army;}
+    public ArrayList<Fighter> getAllies() {return allies;}
+    public ArrayList<Fighter> getEnemies() {return enemies;}
     //Setters
     public void setDifficulty(Difficulty d) {difficulty = d;}
     public void setMode(Mode m) {mode = m;}
     public void setCommander(Commander c) {commander = c;}
-    public void setArmy(ArrayList<Fighter> a) {army = a;}
+    public void setAllies(ArrayList<Fighter> a) {allies = a;}
+    public void setEnemies(ArrayList<Fighter> e) {enemies = e;}
     //Adders
-    public void addToArmy(Fighter u) {army.add(u);}
+    public void addToAllies(Fighter f) {allies.add(f);}
+    public void addToEnemies(Fighter f) {enemies.add(f);}
 
 }

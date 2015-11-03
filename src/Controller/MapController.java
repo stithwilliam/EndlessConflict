@@ -6,16 +6,18 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -44,7 +46,7 @@ public class MapController {
     @FXML
     private Button nextBtn;
     @FXML
-    private FlowPane terminal;
+    private VBox terminal;
 
     private Map map;
     private Fighter fighter;
@@ -70,18 +72,35 @@ public class MapController {
         gridPane.setHgap(0);
 
         //test code
-        Fighter theKing = new Fighter(Hero.LIZARDKING, 7, 4, false);
-        Fighter chaos = new Fighter(Hero.CHAOS, 2, 2, true);
-        StackPane starter = map.getMapTile(7, 4).getStackPane();
-        starter.getChildren().add(new ImageView(Hero.LIZARDKING.imagePath()));
-        StackPane pane = map.getMapTile(2, 2).getStackPane();
-        pane.getChildren().add(new ImageView(Hero.CHAOS.imagePath()));
-        map.addFighter(chaos);
-        map.addFighter(theKing);
-        fighter = theKing;
-        //test code \\
+        Fighter lizard = new Fighter(Hero.LIZARDKING, 2, 2, false);
+        fighter = lizard;
+        Fighter chaos = new Fighter(Hero.CHAOS, 7, 2, true);
+        Main.myGame.addToAllies(lizard);
+        Main.myGame.addToEnemies(chaos);
+        populateMap();
+
     }
 
+    //overloaded populateMap that populates with just allies and enemies
+    public void populateMap() {
+        ArrayList<Fighter> fighters = new ArrayList<>();
+        fighters.addAll(Main.myGame.getAllies());
+        fighters.addAll(Main.myGame.getEnemies());
+        populateMap(fighters);
+    }
+
+    public void populateMap(ArrayList<Fighter> fighters) {
+        for (Fighter f : fighters) {
+            int x = f.getxPos();
+            int y = f.getyPos();
+            ImageView image = new ImageView(f.imagePath());
+            StackPane pane = map.getMapTile(x, y).getStackPane();
+            pane.getChildren().add(image);
+            map.addFighter(f);
+        }
+    }
+
+    //used to navigate the map
     private void setRectClicked(MouseEvent e) {
         double y = gridPane.getTranslateY();
         double x = gridPane.getTranslateX();
@@ -104,23 +123,23 @@ public class MapController {
         }
     }
 
+    //code for Move button
     private void setMoveBtn(ActionEvent e) {
         boolean[][] valid = map.getValidMoves(fighter);
         for (int i = 0; i < valid[0].length; i++) {
             for (int j = 0; j < valid.length; j++) {
                 if (valid[j][i]) {
-                    ImageView good = new ImageView("/View/Graphics/moveSelect.png");
+                    ImageView move = new ImageView("/View/Graphics/Tile/moveSelect.png");
                     StackPane pane = map.getMapTile(i, j).getStackPane();
-                    pane.getChildren().add(good);
+                    pane.getChildren().add(move);
                     pane.setOnMouseClicked(this::moveHere);
                 }
             }
         }
     }
 
+    //moves fighter to a valid tile
     private void moveHere(MouseEvent e) {
-        System.out.println("MOVE HERE");
-        //REMOVE MOVE STUFF
         //removing valid tile image
         boolean[][] valid = map.getValidMoves(fighter);
         for (int i = 0; i < valid[0].length; i++) {
@@ -128,13 +147,14 @@ public class MapController {
                 if (valid[j][i]) {
                     StackPane pane = map.getMapTile(i, j).getStackPane();
                     pane.getChildren().remove(1);
+                    pane.setOnMouseClicked(null);
                 }
             }
         }
         //remove old fighter
         StackPane oldPane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
         oldPane.getChildren().remove(1);
-        //MOVE FIGHTER
+        //move fighter
         StackPane pane = (StackPane) e.getSource();
         MapTile tile = paneToTile.get(pane);
         int x = tile.getxPos();
@@ -142,12 +162,87 @@ public class MapController {
         fighter.setxPos(x);
         fighter.setyPos(y);
         pane.getChildren().add(new ImageView(fighter.imagePath()));
+        //print to terminal
+        putOnTerminal(fighter.getName() + " moved to " + tile.getName() + " at " + (x+1) + ", " + (y+1));
     }
 
+    //code for Attack button
     private void setAtkBtn(ActionEvent e) {
-        System.out.println("attack!");
+        boolean[][] valid = map.getValidAttacks(fighter);
+        for (int i = 0; i < valid[0].length; i++) {
+            for (int j = 0; j < valid.length; j++) {
+                if (valid[j][i]) {
+                    ImageView atk = new ImageView("/View/Graphics/Tile/attackSelect.png");
+                    StackPane pane = map.getMapTile(i, j).getStackPane();
+                    pane.getChildren().add(atk);
+                    pane.setOnMouseClicked(this::attackHere);
+                }
+            }
+        }
+        boolean hasAttack = false;
+        for (int i = 0; i < valid[0].length; i++) {
+            for (int j = 0; j < valid.length; j++) {
+                if (valid[j][i]) { hasAttack = true;}
+            }
+        }
+        if (!hasAttack) {
+            putOnTerminal(fighter.getName() + " has no valid targets");
+        }
     }
 
+    private void attackHere(MouseEvent e) {
+        //removing valid tile image
+        boolean[][] valid = map.getValidAttacks(fighter);
+        for (int i = 0; i < valid[0].length; i++) {
+            for (int j = 0; j < valid.length; j++) {
+                if (valid[j][i]) {
+                    StackPane pane = map.getMapTile(i, j).getStackPane();
+                    pane.getChildren().remove(2);
+                    pane.setOnMouseClicked(null);
+                }
+            }
+        }
+        StackPane pane = (StackPane) e.getSource();
+        MapTile tile = paneToTile.get(pane);
+        int x = tile.getxPos();
+        int y = tile.getyPos();
+        putOnTerminal(fighter.getName() + " attacking " + map.getFighter(x, y).getName() + " at " + (x+1) + ", " + (y+1));
+    }
+
+    private void setSkillBtn(ActionEvent e) {
+        putOnTerminal("I have no skills yet");
+    }
+
+    //overloaded putOnTerminal
+    private void putOnTerminal(String s) {
+        putOnTerminal(s, true);
+    }
+
+    //puts s on the terminal
+    private void putOnTerminal(String s, boolean newLine) {
+        if (s.length() > 38) {
+            String s1 = s.substring(0, 38);
+            String s2 = s.substring(38);
+            putOnTerminal(s1, true);
+            putOnTerminal(s2, false);
+        } else {
+            Label l;
+            if (newLine) {
+                l = new Label(s + " >>");
+            } else {
+                l = new Label(s + "      ");
+            }
+            l.setWrapText(true);
+            l.setTextFill(Paint.valueOf("lime"));
+            l.setFont(Font.font("System Regular", 14));
+            terminal.getChildren().add(l);
+            while (terminal.getChildren().size() > 6) {
+                terminal.getChildren().remove(0);
+            }
+        }
+    }
+
+    //initializes the map buttons
     public void initialize() {
         upRect.setOnMouseClicked(this::setRectClicked);
         downRect.setOnMouseClicked(this::setRectClicked);
@@ -155,15 +250,8 @@ public class MapController {
         leftRect.setOnMouseClicked(this::setRectClicked);
         moveBtn.setOnAction(this::setMoveBtn);
         atkBtn.setOnAction(this::setAtkBtn);
-        Label toConsole = new Label();
-        toConsole.setText("I am a console hear me roar! ");
-        terminal.getChildren().add(consoleLabel(toConsole));
+        skillBtn.setOnAction(this::setSkillBtn);
     }
 
-    private Label consoleLabel(Label l) {
-        l.setTextFill(Paint.valueOf("lime"));
-        l.setFont(Font.font("System Regular", 16));
-        System.out.println("label: " + l.getText());
-        return l;
-    }
+
 }

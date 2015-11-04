@@ -19,6 +19,7 @@ import javafx.scene.text.Font;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Stack;
 
 /**
  * Created by William on 10/26/2015.
@@ -49,11 +50,13 @@ public class MapController {
     private VBox terminal;
 
     private Map map;
+    private Game game;
     private Fighter fighter;
     private HashMap<StackPane, MapTile> paneToTile;
 
     public void generateMap(Map map) {
         this.map = map;
+        this.game = Main.myGame;
         int width = map.getWidth();
         int height = map.getHeight();
         paneToTile = new HashMap<>();
@@ -72,11 +75,18 @@ public class MapController {
         gridPane.setHgap(0);
 
         //test code
-        Fighter lizard = new Fighter(Hero.LIZARDKING, 2, 2, false);
+        Fighter lizard = new Fighter(Hero.LIZARDKING, 0, 0, false);
         fighter = lizard;
-        Fighter chaos = new Fighter(Hero.CHAOS, 7, 2, true);
-        Main.myGame.addToAllies(lizard);
-        Main.myGame.addToEnemies(chaos);
+        Fighter slimeBall1 = new Fighter(Unit.SLIMEBALL, 1, 0, false);
+        slimeBall1.setName("Slime ball");
+        Fighter slimeBall2 = new Fighter(Unit.SENTRYDRONE, 0, 1, false);
+        slimeBall2.setName("Sentry drone");
+        Fighter chaos = new Fighter(Hero.CHAOS, 6, 3, true);
+        game.addToAllies(lizard);
+        game.addToAllies(slimeBall1);
+        game.addToAllies(slimeBall2);
+        game.addToEnemies(chaos);
+        game.setFighter(lizard);
         populateMap();
 
     }
@@ -84,8 +94,8 @@ public class MapController {
     //overloaded populateMap that populates with just allies and enemies
     public void populateMap() {
         ArrayList<Fighter> fighters = new ArrayList<>();
-        fighters.addAll(Main.myGame.getAllies());
-        fighters.addAll(Main.myGame.getEnemies());
+        fighters.addAll(game.getAllies());
+        fighters.addAll(game.getEnemies());
         populateMap(fighters);
     }
 
@@ -98,6 +108,8 @@ public class MapController {
             pane.getChildren().add(image);
             map.addFighter(f);
         }
+        StackPane pane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
+        pane.getChildren().add(new ImageView("/View/Graphics/Tile/fighterSelect.png"));
     }
 
     //used to navigate the map
@@ -105,7 +117,7 @@ public class MapController {
         double y = gridPane.getTranslateY();
         double x = gridPane.getTranslateX();
         if (e.getSource() == downRect) {
-            if (y >= -map.getHeight() * 64 + 386) {
+            if (y > -map.getHeight() * 64 + 64*6) {
                 gridPane.setTranslateY(y - 64);
             }
         } else if (e.getSource() == upRect) {
@@ -114,17 +126,40 @@ public class MapController {
             }
         } else if (e.getSource() == leftRect) {
             if (x < 0) {
-                gridPane.setTranslateX(gridPane.getTranslateX() + 64);
+                gridPane.setTranslateX(x + 64);
             }
         } else if (e.getSource() == rightRect){
-            if (x > -map.getWidth() * 64 + 640) {
-                gridPane.setTranslateX(gridPane.getTranslateX() - 64);
+            if (x > -map.getWidth() * 64 + 64*10) {
+                gridPane.setTranslateX(x - 64);
             }
+        }
+    }
+
+    private void putInFocus(int x, int y) {
+        double gridX = gridPane.getTranslateX();
+        double gridY = gridPane.getTranslateY();
+        while ((-1*gridX/64) > x) {
+            gridPane.setTranslateX(gridX + 64);
+            gridX = gridPane.getTranslateX();
+        }
+        while (((-1*gridX/64) + 9) < x) {
+            gridPane.setTranslateX(gridX - 64);
+            gridX = gridPane.getTranslateX();
+        }
+        while ((-1*gridY/64) > y) {
+            gridPane.setTranslateY(gridY + 64);
+            gridY = gridPane.getTranslateY();
+        }
+        while (((-1*gridY/64) + 5) < y) {
+            gridPane.setTranslateY(gridY - 64);
+            gridY = gridPane.getTranslateY();
         }
     }
 
     //code for Move button
     private void setMoveBtn(ActionEvent e) {
+        buttonsToCancelMove();
+        putInFocus(fighter.getxPos(), fighter.getyPos());
         boolean[][] valid = map.getValidMoves(fighter);
         for (int i = 0; i < valid[0].length; i++) {
             for (int j = 0; j < valid.length; j++) {
@@ -153,6 +188,7 @@ public class MapController {
         }
         //remove old fighter
         StackPane oldPane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
+        oldPane.getChildren().remove(2);
         oldPane.getChildren().remove(1);
         //move fighter
         StackPane pane = (StackPane) e.getSource();
@@ -162,12 +198,38 @@ public class MapController {
         fighter.setxPos(x);
         fighter.setyPos(y);
         pane.getChildren().add(new ImageView(fighter.imagePath()));
+        pane.getChildren().add(new ImageView("/View/Graphics/Tile/fighterSelect.png"));
         //print to terminal
-        putOnTerminal(fighter.getName() + " moved to " + tile.getName() + " at " + (x+1) + ", " + (y+1));
+        putOnTerminal(fighter.getName() + " moved to " + tile.getName() + " at " + (x + 1) + ", " + (y + 1));
+        buttonsToDefault();
+    }
+
+    private void buttonsToCancelMove() {
+        moveBtn.setOnAction(this::cancelMove);
+        atkBtn.setOnAction(this::cancelMove);
+        skillBtn.setOnAction(this::cancelMove);
+        nextBtn.setOnAction(this::cancelMove);
+        prevBtn.setOnAction(this::cancelMove);
+    }
+
+    private void cancelMove(ActionEvent e) {
+        boolean[][] valid = map.getValidMoves(fighter);
+        for (int i = 0; i < valid[0].length; i++) {
+            for (int j = 0; j < valid.length; j++) {
+                if (valid[j][i]) {
+                    StackPane pane = map.getMapTile(i, j).getStackPane();
+                    pane.getChildren().remove(1);
+                    pane.setOnMouseClicked(null);
+                }
+            }
+        }
+        putOnTerminal(fighter.getName() + "'s move was canceled");
+        buttonsToDefault();
     }
 
     //code for Attack button
     private void setAtkBtn(ActionEvent e) {
+        putInFocus(fighter.getxPos(), fighter.getyPos());
         boolean[][] valid = map.getValidAttacks(fighter);
         for (int i = 0; i < valid[0].length; i++) {
             for (int j = 0; j < valid.length; j++) {
@@ -187,6 +249,8 @@ public class MapController {
         }
         if (!hasAttack) {
             putOnTerminal(fighter.getName() + " has no valid targets");
+        } else {
+            buttonsToCancelAttack();
         }
     }
 
@@ -206,11 +270,64 @@ public class MapController {
         MapTile tile = paneToTile.get(pane);
         int x = tile.getxPos();
         int y = tile.getyPos();
-        putOnTerminal(fighter.getName() + " attacking " + map.getFighter(x, y).getName() + " at " + (x+1) + ", " + (y+1));
+        putOnTerminal(fighter.getName() + " attacked " + map.getFighter(x, y).getName() + " at " + (x+1) + ", " + (y+1));
+        buttonsToDefault();
+    }
+
+    private void buttonsToCancelAttack() {
+        moveBtn.setOnAction(this::cancelAttack);
+        atkBtn.setOnAction(this::cancelAttack);
+        skillBtn.setOnAction(this::cancelAttack);
+        nextBtn.setOnAction(this::cancelAttack);
+        prevBtn.setOnAction(this::cancelAttack);
+    }
+
+    private void cancelAttack(ActionEvent e) {
+        boolean[][] valid = map.getValidAttacks(fighter);
+        for (int i = 0; i < valid[0].length; i++) {
+            for (int j = 0; j < valid.length; j++) {
+                if (valid[j][i]) {
+                    StackPane pane = map.getMapTile(i, j).getStackPane();
+                    pane.getChildren().remove(2);
+                    pane.setOnMouseClicked(null);
+                }
+            }
+        }
+        putOnTerminal(fighter.getName() + "'s attack was canceled");
+        buttonsToDefault();
     }
 
     private void setSkillBtn(ActionEvent e) {
+        putInFocus(fighter.getxPos(), fighter.getyPos());
         putOnTerminal("I have no skills yet");
+    }
+
+    private void setNextBtn(ActionEvent e) {
+        StackPane oldPane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
+        oldPane.getChildren().remove(2);
+        fighter = game.nextFighter();
+        StackPane newPane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
+        newPane.getChildren().add(new ImageView("/View/Graphics/Tile/fighterSelect.png"));
+        putInFocus(fighter.getxPos(), fighter.getyPos());
+        putOnTerminal("Next fighter is " + fighter.getName());
+    }
+
+    private void setPrevBtn(ActionEvent e) {
+        StackPane oldPane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
+        oldPane.getChildren().remove(2);
+        fighter = game.prevFighter();
+        StackPane newPane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
+        newPane.getChildren().add(new ImageView("/View/Graphics/Tile/fighterSelect.png"));
+        putInFocus(fighter.getxPos(), fighter.getyPos());
+        putOnTerminal("Previous fighter is " + fighter.getName());
+    }
+
+    private void buttonsToDefault() {
+        moveBtn.setOnAction(this::setMoveBtn);
+        atkBtn.setOnAction(this::setAtkBtn);
+        skillBtn.setOnAction(this::setSkillBtn);
+        nextBtn.setOnAction(this::setNextBtn);
+        prevBtn.setOnAction(this::setPrevBtn);
     }
 
     //overloaded putOnTerminal
@@ -221,8 +338,12 @@ public class MapController {
     //puts s on the terminal
     private void putOnTerminal(String s, boolean newLine) {
         if (s.length() > 38) {
-            String s1 = s.substring(0, 38);
-            String s2 = s.substring(38);
+            int cut = 38;
+            while (s.charAt(cut) != ' ') {
+                cut--;
+            }
+            String s1 = s.substring(0, cut);
+            String s2 = s.substring(cut);
             putOnTerminal(s1, true);
             putOnTerminal(s2, false);
         } else {
@@ -251,6 +372,8 @@ public class MapController {
         moveBtn.setOnAction(this::setMoveBtn);
         atkBtn.setOnAction(this::setAtkBtn);
         skillBtn.setOnAction(this::setSkillBtn);
+        nextBtn.setOnAction(this::setNextBtn);
+        prevBtn.setOnAction(this::setPrevBtn);
     }
 
 

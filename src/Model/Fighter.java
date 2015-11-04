@@ -22,10 +22,14 @@ public class Fighter {
         speed = model.getSpd();
         movement = model.getMov();
         vision = model.getVis();
-        range = 1;
         xPos = x;
         yPos = y;
         enemy = e;
+        if (melee) {
+            range = 1;
+        } else {
+            range = vision;
+        }
     }
 
 
@@ -47,6 +51,7 @@ public class Fighter {
     public boolean isEnemy() {return enemy;}
     //Setters
     public void setxPos(int xPos) {this.xPos = xPos;}
+    public void setName(String name) {this.name = name;}
     public void setyPos(int yPos) {this.yPos = yPos;}
     public void setAtt(int attack) {this.attack = attack;}
     public void setDef(int defense) {this.defense = defense;}

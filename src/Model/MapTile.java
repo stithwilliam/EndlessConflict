@@ -10,11 +10,10 @@ import java.util.List;
  */
 public class MapTile {
 
-    public Tile tile;
-    String name;
-    int xPos, yPos;
-    private boolean hasFighter;
-    private boolean moveable;
+    private Tile tile;
+    private String name;
+    private int xPos, yPos;
+    private boolean hasFighter, moveable, blocking;
     private int moveCost;
     private StackPane stackPane;
 
@@ -25,6 +24,7 @@ public class MapTile {
         yPos = y;
         moveable = t.isMoveable();
         moveCost = t.getMoveCost();
+        blocking = t.isBlocking();
         hasFighter = false;
         stackPane = null;
     }
@@ -35,6 +35,7 @@ public class MapTile {
     public int getyPos() {return yPos;}
     public boolean hasFighter() {return hasFighter;}
     public boolean isMoveable() {return moveable;}
+    public boolean isBlocking() {return blocking;}
     public int getMoveCost() {return moveCost;}
     public String imagePath() {return tile.imagePath();}
     public StackPane getStackPane() {return stackPane;}

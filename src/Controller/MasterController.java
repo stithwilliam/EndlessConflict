@@ -13,7 +13,7 @@ import java.io.IOException;
 public class MasterController {
 
     private Stage stage;
-    private Scene startScene, config1Scene, config2Scene, mapScene;
+    private Scene startScene, config1Scene, config2Scene, mapScene, headquartersScene;
     private FXMLLoader loader;
     private MapController mapController;
 
@@ -45,6 +45,9 @@ public class MasterController {
             mapScene = new Scene(root);
             mapController = (MapController) loader.getController();
 
+            root = loader.load(getClass().getResource("/View/Headquarters.fxml"));
+            headquartersScene = new Scene(root);
+
         } catch (IOException e) {
             System.out.println("Shit's broke: " + e);
         }
@@ -55,6 +58,7 @@ public class MasterController {
     public void setConfig1Scene() { stage.setScene(config1Scene);}
     public void setConfig2Scene() { stage.setScene(config2Scene);}
     public void setMapScene() { stage.setScene(mapScene);}
+    public void setHeadquartersScene() { stage.setScene(headquartersScene);}
     //Scene loaders
 
     //Getters

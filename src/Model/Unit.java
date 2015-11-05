@@ -25,8 +25,8 @@ public enum Unit implements Placeable {
         melee = me;
         flying = f;
         //images of Units
-        imagePath.put("SENTRYDRONE", "/View/Graphics/Placeable/sentryDrone.png");
-        imagePath.put("SLIMEBALL", "/View/Graphics/Placeable/slimeBall.png");
+        imagePath.put("SENTRYDRONE", "/View/Graphics/Placeable/sentryDroneResting.gif");
+        imagePath.put("SLIMEBALL", "/View/Graphics/Placeable/slimeBallResting.gif");
         imagePath.put("RANGER", "/View/Graphics/Placeable/humanRanger.png");
     }
 

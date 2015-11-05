@@ -109,7 +109,7 @@ public class MapController {
             map.addFighter(f);
         }
         StackPane pane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
-        pane.getChildren().add(new ImageView("/View/Graphics/Tile/fighterSelect.png"));
+        pane.getChildren().add(new ImageView("/View/Graphics/Tile/fighterSelect.gif"));
     }
 
     //used to navigate the map
@@ -198,7 +198,7 @@ public class MapController {
         fighter.setxPos(x);
         fighter.setyPos(y);
         pane.getChildren().add(new ImageView(fighter.imagePath()));
-        pane.getChildren().add(new ImageView("/View/Graphics/Tile/fighterSelect.png"));
+        pane.getChildren().add(new ImageView("/View/Graphics/Tile/fighterSelect.gif"));
         //print to terminal
         putOnTerminal(fighter.getName() + " moved to " + tile.getName() + " at " + (x + 1) + ", " + (y + 1));
         buttonsToDefault();
@@ -307,7 +307,7 @@ public class MapController {
         oldPane.getChildren().remove(2);
         fighter = game.nextFighter();
         StackPane newPane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
-        newPane.getChildren().add(new ImageView("/View/Graphics/Tile/fighterSelect.png"));
+        newPane.getChildren().add(new ImageView("/View/Graphics/Tile/fighterSelect.gif"));
         putInFocus(fighter.getxPos(), fighter.getyPos());
         putOnTerminal("Next fighter is " + fighter.getName());
     }
@@ -317,7 +317,7 @@ public class MapController {
         oldPane.getChildren().remove(2);
         fighter = game.prevFighter();
         StackPane newPane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
-        newPane.getChildren().add(new ImageView("/View/Graphics/Tile/fighterSelect.png"));
+        newPane.getChildren().add(new ImageView("/View/Graphics/Tile/fighterSelect.gif"));
         putInFocus(fighter.getxPos(), fighter.getyPos());
         putOnTerminal("Previous fighter is " + fighter.getName());
     }

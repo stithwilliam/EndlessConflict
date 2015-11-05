@@ -25,6 +25,13 @@ public class Map {
             {f, f, f, f, f, f, p, p, p, f, f, f}
     };
 
+    public Map(MapType type) {
+        board = generateBoard(type.getTileArr());
+        height = board.length;
+        width = board[0].length;
+        fighters = new ArrayList<>();
+    }
+
     public Map(int w, int h) {
         width = w;
         height = h;
@@ -43,23 +50,42 @@ public class Map {
     }
 
     //Uses a BFS to find all of the valid moves for a fighter f
-    public boolean[][] getValidMoves(Fighter f) { //TODO Make this backed by a priority queue
+    public boolean[][] getValidMoves(Fighter f) {
         boolean[][] valid = new boolean[height][width];
-        Queue<MapTile> queue = new LinkedList<>();
+
         MapTile startingTile = getMapTile(f.getxPos(), f.getyPos());
         HashMap<MapTile, Integer> costMap = new HashMap<>();
+        PriorityQueue queue = new PriorityQueue<>(new Comparator() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                MapTile a = (MapTile)o1;
+                MapTile b = (MapTile)o2;
+                if (costMap.get(a) != null && costMap.get(b) != null) {
+                    return (costMap.get(b) - costMap.get(a));
+                } else {
+                    return 0;
+                }
+            }
+        });
         for (MapTile x : getMoves(startingTile)) {
             queue.add(x);
             costMap.put(x, x.getMoveCost());
         }
         while (!queue.isEmpty()) {
-            MapTile tile = queue.poll();
+            MapTile tile = (MapTile)queue.poll();
             valid[tile.getyPos()][tile.getxPos()] = true;
             int currentCost = costMap.get(tile);
             if (currentCost < f.getMov()) {
                 for (MapTile x : getMoves(tile)) {
-                    queue.add(x);
-                    costMap.put(x, currentCost + x.getMoveCost());
+                    if (!valid[x.getyPos()][x.getxPos()]) {
+                        queue.add(x);
+                        int nextCost = currentCost + x.getMoveCost();
+                        if (costMap.containsKey(x)) {
+                            costMap.put(x, Math.min(nextCost, costMap.get(x)));
+                        } else {
+                            costMap.put(x, nextCost);
+                        }
+                    }
                 }
             }
         }

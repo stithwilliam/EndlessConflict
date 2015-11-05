@@ -1,6 +1,5 @@
 package Model;
 
-import Controller.MapController;
 import Controller.MasterController;
 
 import java.util.ArrayList;
@@ -15,6 +14,7 @@ public class Game {
     private Commander commander;
     private ArrayList<Fighter> allies, enemies;
     private Fighter fighter;
+    private Map map;
 
     //Constructor
     public Game() {
@@ -24,11 +24,13 @@ public class Game {
         allies = new ArrayList<>();
         enemies = new ArrayList<>();
         fighter = null;
+        map = null;
     }
 
     public void startGame() {
         MasterController.getInstance().setMapScene();
-        MasterController.getInstance().getMapController().generateMap(new Map(12, 8));
+        map = new Map(MapType.TUTORIAL);
+        MasterController.getInstance().getMapController().constructMap(map);
     }
 
     //sets fighter to the next fighter on allies, and then returns fighter

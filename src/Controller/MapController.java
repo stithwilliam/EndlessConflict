@@ -54,7 +54,7 @@ public class MapController {
     private Fighter fighter;
     private HashMap<StackPane, MapTile> paneToTile;
 
-    public void generateMap(Map map) {
+    public void constructMap(Map map) {
         this.map = map;
         this.game = Main.myGame;
         int width = map.getWidth();
@@ -81,11 +81,11 @@ public class MapController {
         slimeBall1.setName("Slime ball");
         Fighter slimeBall2 = new Fighter(Unit.SENTRYDRONE, 0, 1, false);
         slimeBall2.setName("Sentry drone");
-        Fighter chaos = new Fighter(Hero.CHAOS, 6, 3, true);
+        Fighter x = new Fighter(Hero.MODELX, 6, 3, true);
         game.addToAllies(lizard);
         game.addToAllies(slimeBall1);
         game.addToAllies(slimeBall2);
-        game.addToEnemies(chaos);
+        game.addToEnemies(x);
         game.setFighter(lizard);
         populateMap();
 

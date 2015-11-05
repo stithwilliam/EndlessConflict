@@ -27,7 +27,7 @@ public enum Hero implements Placeable {
         melee = me;
         flying = f;
         imagePath.put("LIZARDKING", "/View/Graphics/Placeable/lizardKing.png");
-        imagePath.put("MODELX", "/View/Graphics/Placeable/modelX.png");
+        imagePath.put("MODELX", "/View/Graphics/Placeable/modelXresting.gif");
         imagePath.put("CHAOS", "/View/Graphics/Placeable/commanderChaos.png");
     }
 

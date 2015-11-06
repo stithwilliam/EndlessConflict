@@ -9,7 +9,7 @@ public class Fighter {
     private Placeable model;
     private int xPos, yPos;
     private boolean melee, flying, enemy;
-    private int attack, defense, hp, speed, movement, vision, range;
+    private int attack, defense, maxHP, hp, speed, movement, vision, range;
 
     public Fighter(Placeable p, int x, int y, boolean e) {
         model = p;
@@ -18,7 +18,8 @@ public class Fighter {
         flying = model.isFlying();
         attack = model.getAtt();
         defense = model.getDef();
-        hp = model.getHp();
+        maxHP = model.getHp();
+        hp = maxHP;
         speed = model.getSpd();
         movement = model.getMov();
         vision = model.getVis();
@@ -32,9 +33,16 @@ public class Fighter {
         }
     }
 
-
-
     //Getters
+    public String getStats() {
+        if (enemy) {
+            return "Enemy " + name + ": HP - " + hp + "/" + maxHP + ". Atk - " + attack + ". Def - " + defense +
+                    ". Spd - " + speed + ". Mov - " + movement;
+        } else {
+            return "Ally " + name + ": HP - " + hp + "/" + maxHP + ". Atk - " + attack + ". Def - " + defense +
+                    ". Spd - " + speed + ". Mov - " + movement;
+        }
+    }
     public String imagePath() {return model.imagePath();}
     public String getName() {return name;}
     public int getxPos() {return xPos;}

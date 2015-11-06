@@ -106,6 +106,7 @@ public class MapController {
             ImageView image = new ImageView(f.imagePath());
             StackPane pane = map.getMapTile(x, y).getStackPane();
             pane.getChildren().add(image);
+            pane.setOnMouseClicked(this::fighterStats);
             map.addFighter(f);
         }
         StackPane pane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
@@ -330,6 +331,15 @@ public class MapController {
         prevBtn.setOnAction(this::setPrevBtn);
     }
 
+    private void fighterStats(MouseEvent e) {
+        StackPane pane = (StackPane) e.getSource();
+        MapTile tile = paneToTile.get(pane);
+        int x = tile.getxPos();
+        int y = tile.getyPos();
+        Fighter f = map.getFighter(x, y);
+        putOnTerminal(f.getStats());
+    }
+
     //overloaded putOnTerminal
     private void putOnTerminal(String s) {
         putOnTerminal(s, true);
@@ -344,7 +354,11 @@ public class MapController {
             }
             String s1 = s.substring(0, cut);
             String s2 = s.substring(cut);
-            putOnTerminal(s1, true);
+            if (newLine) {
+                putOnTerminal(s1, true);
+            } else {
+                putOnTerminal(s1, false);
+            }
             putOnTerminal(s2, false);
         } else {
             Label l;

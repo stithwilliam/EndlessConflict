@@ -61,7 +61,8 @@ public class Map {
                 MapTile a = (MapTile)o1;
                 MapTile b = (MapTile)o2;
                 if (costMap.get(a) != null && costMap.get(b) != null) {
-                    return (costMap.get(b) - costMap.get(a));
+                    System.out.println("I'm working. b: ");
+                    return (costMap.get(a) - costMap.get(b));
                 } else {
                     return 0;
                 }

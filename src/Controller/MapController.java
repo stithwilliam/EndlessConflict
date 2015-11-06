@@ -113,29 +113,6 @@ public class MapController {
         pane.getChildren().add(new ImageView("/View/Graphics/Tile/fighterSelect.gif"));
     }
 
-    //used to navigate the map
-    private void setRectClicked(MouseEvent e) {
-        double y = gridPane.getTranslateY();
-        double x = gridPane.getTranslateX();
-        if (e.getSource() == downRect) {
-            if (y > -map.getHeight() * 64 + 64*6) {
-                gridPane.setTranslateY(y - 64);
-            }
-        } else if (e.getSource() == upRect) {
-            if (y < 0) {
-                gridPane.setTranslateY(y + 64);
-            }
-        } else if (e.getSource() == leftRect) {
-            if (x < 0) {
-                gridPane.setTranslateX(x + 64);
-            }
-        } else if (e.getSource() == rightRect){
-            if (x > -map.getWidth() * 64 + 64*10) {
-                gridPane.setTranslateX(x - 64);
-            }
-        }
-    }
-
     private void putInFocus(int x, int y) {
         double gridX = gridPane.getTranslateX();
         double gridY = gridPane.getTranslateY();
@@ -191,6 +168,7 @@ public class MapController {
         StackPane oldPane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
         oldPane.getChildren().remove(2);
         oldPane.getChildren().remove(1);
+        oldPane.setOnMouseClicked(null);
         //move fighter
         StackPane pane = (StackPane) e.getSource();
         MapTile tile = paneToTile.get(pane);
@@ -200,6 +178,7 @@ public class MapController {
         fighter.setyPos(y);
         pane.getChildren().add(new ImageView(fighter.imagePath()));
         pane.getChildren().add(new ImageView("/View/Graphics/Tile/fighterSelect.gif"));
+        pane.setOnMouseClicked(this::fighterStats);
         //print to terminal
         putOnTerminal(fighter.getName() + " moved to " + tile.getName() + " at " + (x + 1) + ", " + (y + 1));
         buttonsToDefault();
@@ -373,6 +352,29 @@ public class MapController {
             terminal.getChildren().add(l);
             while (terminal.getChildren().size() > 6) {
                 terminal.getChildren().remove(0);
+            }
+        }
+    }
+
+    //used to navigate the map
+    private void setRectClicked(MouseEvent e) {
+        double y = gridPane.getTranslateY();
+        double x = gridPane.getTranslateX();
+        if (e.getSource() == downRect) {
+            if (y > -map.getHeight() * 64 + 64*6) {
+                gridPane.setTranslateY(y - 64);
+            }
+        } else if (e.getSource() == upRect) {
+            if (y < 0) {
+                gridPane.setTranslateY(y + 64);
+            }
+        } else if (e.getSource() == leftRect) {
+            if (x < 0) {
+                gridPane.setTranslateX(x + 64);
+            }
+        } else if (e.getSource() == rightRect){
+            if (x > -map.getWidth() * 64 + 64*10) {
+                gridPane.setTranslateX(x - 64);
             }
         }
     }

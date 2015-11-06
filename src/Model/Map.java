@@ -8,45 +8,15 @@ import java.util.*;
  */
 public class Map {
 
-    Tile p = Tile.PLAIN;
-    Tile f = Tile.FOREST;
-    Tile r = Tile.ROCK;
     private int  width, height;
     private MapTile[][] board;
     private ArrayList<Fighter> fighters;
-    private final Tile[][] tutorialBoard = {
-            {p, p, p, p, p, p, p, p, p, p, f, f},
-            {p, p, p, p, p, p, p, p, p, p, f, f},
-            {p, p, p, r, p, r, p, p, p, p, f, f},
-            {p, p, p, p, p, p, p, p, p, p, f, f},
-            {p, p, p, r, p, r, p, p, p, p, f, f},
-            {p, p, p, p, p, p, p, p, p, p, f, f},
-            {f, f, f, f, f, f, p, p, p, f, f, f},
-            {f, f, f, f, f, f, p, p, p, f, f, f}
-    };
 
     public Map(MapType type) {
-        board = generateBoard(type.getTileArr());
+        board = type.getBoard();
         height = board.length;
         width = board[0].length;
         fighters = new ArrayList<>();
-    }
-
-    public Map(int w, int h) {
-        width = w;
-        height = h;
-        board = generateBoard(tutorialBoard);
-        fighters = new ArrayList<>();
-    }
-
-    public MapTile[][] generateBoard(Tile[][] tiles) {
-        MapTile[][] board = new MapTile[tiles.length][tiles[0].length];
-        for (int i = 0; i < tiles.length; i++) {
-            for (int j = 0; j < tiles[i].length; j++) {
-                board[i][j] = new MapTile(tiles[i][j], j, i);
-            }
-        }
-        return board;
     }
 
     //Uses a BFS to find all of the valid moves for a fighter f
@@ -55,13 +25,12 @@ public class Map {
 
         MapTile startingTile = getMapTile(f.getxPos(), f.getyPos());
         HashMap<MapTile, Integer> costMap = new HashMap<>();
-        PriorityQueue queue = new PriorityQueue<>(new Comparator() {
+        PriorityQueue<MapTile> queue = new PriorityQueue<MapTile>(new Comparator() {
             @Override
             public int compare(Object o1, Object o2) {
                 MapTile a = (MapTile)o1;
                 MapTile b = (MapTile)o2;
                 if (costMap.get(a) != null && costMap.get(b) != null) {
-                    System.out.println("I'm working. b: ");
                     return (costMap.get(a) - costMap.get(b));
                 } else {
                     return 0;
@@ -73,7 +42,7 @@ public class Map {
             costMap.put(x, x.getMoveCost());
         }
         while (!queue.isEmpty()) {
-            MapTile tile = (MapTile)queue.poll();
+            MapTile tile = queue.poll();
             valid[tile.getyPos()][tile.getxPos()] = true;
             int currentCost = costMap.get(tile);
             if (currentCost < f.getMov()) {

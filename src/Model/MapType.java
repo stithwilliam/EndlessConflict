@@ -48,8 +48,6 @@ public enum MapType {
                         } else {
                             board[i][j] = nextTile(board, tiles, probs, j, i);
                         }
-                        System.out.println("i: " + i + " j: " + j);
-                        System.out.println(board[i][j]);
                     }
                 }
         }

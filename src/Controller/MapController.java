@@ -125,6 +125,15 @@ public class MapController {
     }
 
     //code for Move button
+    private void showMoves(MouseEvent e) {
+        boolean[][] valid = map.getValidMoves(fighter);
+        for (int i = 0; i < valid.length; i++) {
+            for (int j = 0; j < valid[0].length; j++) {
+                ImageView move = new ImageView(Graphic.MOVESLCT.imagePath());
+            }
+        }
+    }
+
     private void setMoveBtn(ActionEvent e) {
         buttonsToCancelMove();
         putInFocus(fighter.getxPos(), fighter.getyPos());
@@ -132,7 +141,7 @@ public class MapController {
         for (int i = 0; i < valid[0].length; i++) {
             for (int j = 0; j < valid.length; j++) {
                 if (valid[j][i]) {
-                    ImageView move = new ImageView("/View/Graphics/Tile/moveSelect.png");
+                    ImageView move = new ImageView(Graphic.MOVESLCT.imagePath());
                     StackPane pane = map.getMapTile(i, j).getStackPane();
                     pane.getChildren().add(move);
                     pane.setOnMouseClicked(this::moveHere);
@@ -167,7 +176,7 @@ public class MapController {
         fighter.setxPos(x);
         fighter.setyPos(y);
         pane.getChildren().add(new ImageView(fighter.imagePath()));
-        pane.getChildren().add(new ImageView("/View/Graphics/Tile/fighterSelect.gif"));
+        pane.getChildren().add(new ImageView(Graphic.FIGHTERSLCT.imagePath()));
         pane.setOnMouseClicked(this::fighterStats);
         //print to terminal
         putOnTerminal(fighter.getName() + " moved to " + tile.getName() + " at " + (x + 1) + ", " + (y + 1));
@@ -204,7 +213,7 @@ public class MapController {
         for (int i = 0; i < valid[0].length; i++) {
             for (int j = 0; j < valid.length; j++) {
                 if (valid[j][i]) {
-                    ImageView atk = new ImageView("/View/Graphics/Tile/attackSelect.png");
+                    ImageView atk = new ImageView(Graphic.FIGHTERSLCT.imagePath());
                     StackPane pane = map.getMapTile(i, j).getStackPane();
                     pane.getChildren().add(atk);
                     pane.setOnMouseClicked(this::attackHere);
@@ -286,7 +295,7 @@ public class MapController {
         oldPane.getChildren().remove(2);
         fighter = game.prevFighter();
         StackPane newPane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
-        newPane.getChildren().add(new ImageView("/View/Graphics/Tile/fighterSelect.gif"));
+        newPane.getChildren().add(new ImageView(Graphic.FIGHTERSLCT.imagePath()));
         putInFocus(fighter.getxPos(), fighter.getyPos());
         putOnTerminal("Previous fighter is " + fighter.getName());
     }

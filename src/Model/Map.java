@@ -240,4 +240,7 @@ public class Map {
 
     //Adders
     public void addFighter(Fighter f) {fighters.add(f);}
+
+    //Removers
+    public void removeFighter(Fighter f) {fighters.remove(f);}
 }

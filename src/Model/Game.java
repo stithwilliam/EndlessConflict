@@ -3,6 +3,7 @@ package Model;
 import Controller.MasterController;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by William on 10/26/2015.
@@ -41,6 +42,28 @@ public class Game {
         }
         fighter = allies.get(0);
         MasterController.getInstance().getMapController().constructMap(map);
+    }
+
+    public String attackFighter(Fighter f) {
+        Random r = new Random();
+        int attack = fighter.getAtt();
+        int defense = f.getDef();
+        int damage = (attack * 2 - defense) + r.nextInt(10);
+        if (damage < 0) { damage = 0;}
+        f.setHp(f.getHp() - damage);
+        String s = (fighter.getName() + " dealt " + damage + " damage to " + f.getName());
+        if (f.getHp() <= 0) {
+            s += (". " + f.getName() + " has been killed!");
+            killedFighter(f);
+        }
+        return s;
+    }
+
+    public void killedFighter(Fighter f) {
+        enemies.remove(f);
+        fighters.remove(f);
+        map.removeFighter(f);
+        MasterController.getInstance().getMapController().removeFighter(f);
     }
 
     //sets fighter to the next fighter on allies, and then returns fighter

@@ -95,6 +95,14 @@ public class MapController {
         pane.getChildren().add(new ImageView("/View/Graphics/Tile/fighterSelect.gif"));
     }
 
+    public void removeFighter(Fighter f) {
+        int x = f.getxPos();
+        int y = f.getyPos();
+        MapTile mapTile = map.getMapTile(x, y);
+        mapTile.getStackPane().getChildren().remove(1);
+        mapTile.getStackPane().setOnMouseClicked(null);
+    }
+
     private void putInFocus(int x, int y) {
         double gridX = gridPane.getTranslateX();
         double gridY = gridPane.getTranslateY();
@@ -224,15 +232,14 @@ public class MapController {
                 if (valid[j][i]) {
                     StackPane pane = map.getMapTile(i, j).getStackPane();
                     pane.getChildren().remove(2);
-                    pane.setOnMouseClicked(null);
+                    pane.setOnMouseClicked(this::fighterStats);
                 }
             }
         }
         StackPane pane = (StackPane) e.getSource();
         MapTile tile = paneToTile.get(pane);
-        int x = tile.getxPos();
-        int y = tile.getyPos();
-        putOnTerminal(fighter.getName() + " attacked " + map.getFighter(x, y).getName() + " at " + (x+1) + ", " + (y+1));
+        Fighter attacked = map.getFighter(tile.getxPos(), tile.getyPos());
+        putOnTerminal(Main.myGame.attackFighter(attacked));
         buttonsToDefault();
     }
 

@@ -12,7 +12,7 @@ public class Game {
     private Difficulty difficulty;
     private Mode mode;
     private Commander commander;
-    private ArrayList<Fighter> allies, enemies;
+    private ArrayList<Fighter> fighters, allies, enemies;
     private Fighter fighter;
     private Map map;
 
@@ -21,6 +21,7 @@ public class Game {
         difficulty = null;
         mode = null;
         commander = null;
+        fighters = new ArrayList<>();
         allies = new ArrayList<>();
         enemies = new ArrayList<>();
         fighter = null;
@@ -30,6 +31,15 @@ public class Game {
     public void startGame() {
         MasterController.getInstance().setMapScene();
         map = new Map(MapType.TUTORIAL);
+        fighters = map.getFighters();
+        for (Fighter f: fighters) {
+            if (f.isEnemy()) {
+                enemies.add(f);
+            } else {
+                allies.add(f);
+            }
+        }
+        fighter = allies.get(0);
         MasterController.getInstance().getMapController().constructMap(map);
     }
 

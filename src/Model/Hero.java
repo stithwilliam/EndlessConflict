@@ -11,7 +11,7 @@ public enum Hero implements Placeable {
     CHAOS(40, 20, 100, 20, 4, 4, false, true, "Commander Chaos");
 
     private String name;
-    private int attack, defense, hp, speed, movement, vision;
+    private int attack, defense, hp, speed, movement, vision, level;
     private boolean melee, flying;
     private Map<String, String> imagePath = new HashMap<>();
 
@@ -24,6 +24,7 @@ public enum Hero implements Placeable {
         speed = s;
         movement = m;
         vision = v;
+        level = 1;
         melee = me;
         flying = f;
         imagePath.put("LIZARDKING", "/View/Graphics/Placeable/lizardKing.png");
@@ -58,6 +59,7 @@ public enum Hero implements Placeable {
     public int getSpd() {return speed;}
     public int getMov() {return movement;}
     public int getVis() {return vision;}
+    public int getLevel() {return level;}
     public boolean isMelee() {return melee;}
     public boolean isFlying() {return flying;}
 }

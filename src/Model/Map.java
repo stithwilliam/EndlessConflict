@@ -17,6 +17,14 @@ public class Map {
         height = board.length;
         width = board[0].length;
         fighters = new ArrayList<>();
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                Fighter f = board[i][j].getFighter();
+                if (f != null) {
+                    fighters.add(f);
+                }
+            }
+        }
     }
 
     //Uses a BFS to find all of the valid moves for a fighter f
@@ -228,6 +236,7 @@ public class Map {
     //Getters
     public int getHeight() { return height;}
     public int getWidth() { return width;}
+    public ArrayList<Fighter> getFighters() { return fighters;}
 
     //Adders
     public void addFighter(Fighter f) {fighters.add(f);}

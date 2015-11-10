@@ -19,6 +19,7 @@ public class MapTile {
     private Fighter fighter;
 
     public MapTile(Tile t, int x, int y) {
+        tile = t;
         name = t.getName();
         xPos = x;
         yPos = y;
@@ -34,6 +35,7 @@ public class MapTile {
     public int getxPos() {return xPos;}
     public int getyPos() {return yPos;}
     public boolean hasFighter() {return (fighter != null);}
+    public Fighter getFighter() {return fighter;}
     public boolean isMoveable() {return moveable;}
     public boolean isBlocking() {return blocking;}
     public int getMoveCost() {return moveCost;}
@@ -44,4 +46,8 @@ public class MapTile {
     public void setStackPane(StackPane s) {stackPane = s;}
     public void setFighter(Fighter f) {fighter = f;}
 
+    //test code
+    public String toString() {
+        return "x: " + xPos + ", y: " + yPos + "" + "\nimagePath: " + imagePath();
+    }
 }

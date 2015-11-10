@@ -73,30 +73,13 @@ public class MapController {
         }
         gridPane.setVgap(0);
         gridPane.setHgap(0);
-
-        //test code
-        Fighter lizard = new Fighter(Hero.LIZARDKING, 0, 0, false);
-        fighter = lizard;
-        Fighter slimeBall1 = new Fighter(Unit.SLIMEBALL, 1, 0, false);
-        slimeBall1.setName("Slime ball");
-        Fighter slimeBall2 = new Fighter(Unit.SENTRYDRONE, 0, 1, false);
-        slimeBall2.setName("Sentry drone");
-        Fighter x = new Fighter(Hero.MODELX, 6, 3, true);
-        game.addToAllies(lizard);
-        game.addToAllies(slimeBall1);
-        game.addToAllies(slimeBall2);
-        game.addToEnemies(x);
-        game.setFighter(lizard);
+        fighter = game.getFighter();
         populateMap();
-
     }
 
-    //overloaded populateMap that populates with just allies and enemies
+    //overloaded populateMap that populates with fighters in map
     public void populateMap() {
-        ArrayList<Fighter> fighters = new ArrayList<>();
-        fighters.addAll(game.getAllies());
-        fighters.addAll(game.getEnemies());
-        populateMap(fighters);
+        populateMap(map.getFighters());
     }
 
     public void populateMap(ArrayList<Fighter> fighters) {
@@ -107,7 +90,6 @@ public class MapController {
             StackPane pane = map.getMapTile(x, y).getStackPane();
             pane.getChildren().add(image);
             pane.setOnMouseClicked(this::fighterStats);
-            map.addFighter(f);
         }
         StackPane pane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
         pane.getChildren().add(new ImageView("/View/Graphics/Tile/fighterSelect.gif"));

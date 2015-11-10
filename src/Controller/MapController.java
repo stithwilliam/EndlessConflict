@@ -129,7 +129,23 @@ public class MapController {
         boolean[][] valid = map.getValidMoves(fighter);
         for (int i = 0; i < valid.length; i++) {
             for (int j = 0; j < valid[0].length; j++) {
-                ImageView move = new ImageView(Graphic.MOVESLCT.imagePath());
+                if (valid[i][j]) {
+                    ImageView move = new ImageView(Graphic.MOVESLCT.imagePath());
+                    StackPane pane = map.getMapTile(j, i).getStackPane();
+                    pane.getChildren().add(move);
+                }
+            }
+        }
+    }
+
+    private void noShowMoves(MouseEvent e) {
+        boolean[][] valid = map.getValidMoves(fighter);
+        for (int i = 0; i < valid.length; i++) {
+            for (int j = 0; j < valid[0].length; j++) {
+                if (valid[i][j]) {
+                    StackPane pane = map.getMapTile(j, i).getStackPane();
+                    pane.getChildren().remove(pane.getChildren().size() - 1);
+                }
             }
         }
     }
@@ -207,9 +223,34 @@ public class MapController {
     }
 
     //code for Attack button
+    private void showAttacks(MouseEvent e) {
+        boolean[][] valid = map.getValidAttacks(fighter);
+        for (int i = 0; i < valid.length; i++) {
+            for (int j = 0; j < valid[0].length; j++) {
+                if (valid[i][j]) {
+                    ImageView move = new ImageView(Graphic.ATTACKSLCT.imagePath());
+                    StackPane pane = map.getMapTile(j, i).getStackPane();
+                    pane.getChildren().add(move);
+                }
+            }
+        }
+    }
+
+    private void noShowAttacks(MouseEvent e) {
+        boolean[][] valid = map.getValidAttacks(fighter);
+        for (int i = 0; i < valid.length; i++) {
+            for (int j = 0; j < valid[0].length; j++) {
+                if (valid[i][j]) {
+                    StackPane pane = map.getMapTile(j, i).getStackPane();
+                    pane.getChildren().remove(pane.getChildren().size() - 1);
+                }
+            }
+        }
+    }
+
     private void setAtkBtn(ActionEvent e) {
         putInFocus(fighter.getxPos(), fighter.getyPos());
-        boolean[][] valid = map.getValidAttacks(fighter);
+        boolean[][] valid = map.getAttackable(fighter);
         for (int i = 0; i < valid[0].length; i++) {
             for (int j = 0; j < valid.length; j++) {
                 if (valid[j][i]) {
@@ -235,12 +276,12 @@ public class MapController {
 
     private void attackHere(MouseEvent e) {
         //removing valid tile image
-        boolean[][] valid = map.getValidAttacks(fighter);
+        boolean[][] valid = map.getAttackable(fighter);
         for (int i = 0; i < valid[0].length; i++) {
             for (int j = 0; j < valid.length; j++) {
                 if (valid[j][i]) {
                     StackPane pane = map.getMapTile(i, j).getStackPane();
-                    pane.getChildren().remove(2);
+                    pane.getChildren().remove(pane.getChildren().size() - 1);
                     pane.setOnMouseClicked(this::fighterStats);
                 }
             }
@@ -266,7 +307,7 @@ public class MapController {
             for (int j = 0; j < valid.length; j++) {
                 if (valid[j][i]) {
                     StackPane pane = map.getMapTile(i, j).getStackPane();
-                    pane.getChildren().remove(2);
+                    pane.getChildren().remove(pane.getChildren().size() - 1);
                     pane.setOnMouseClicked(null);
                 }
             }
@@ -384,7 +425,11 @@ public class MapController {
         rightRect.setOnMouseClicked(this::setRectClicked);
         leftRect.setOnMouseClicked(this::setRectClicked);
         moveBtn.setOnAction(this::setMoveBtn);
+        moveBtn.setOnMouseEntered(this::showMoves);
+        moveBtn.setOnMouseExited(this::noShowMoves);
         atkBtn.setOnAction(this::setAtkBtn);
+        atkBtn.setOnMouseEntered(this::showAttacks);
+        atkBtn.setOnMouseExited(this::noShowAttacks);
         skillBtn.setOnAction(this::setSkillBtn);
         nextBtn.setOnAction(this::setNextBtn);
         prevBtn.setOnAction(this::setPrevBtn);

@@ -6,8 +6,8 @@ import java.util.*;
  * Created by William on 10/26/2015.
  */
 public enum Unit implements Placeable {
-    SENTRYDRONE(10, 10, 20, 10, 3, 6, false, true, "Sentry Drone"), SLIMEBALL(10, 10, 20, 10, 3, 3, true, false, "Slime Ball"),
-    RANGER(10, 10, 20, 10, 3, 3, false, false, "Human Ranger");
+    SENTRYDRONE(10, 10, 20, 10, 3, 6, false, true, "Sentry Drone"), SLIMEBALL(10, 10, 20, 10, 3, 4, false, false, "Slime Ball"),
+    RANGER(10, 10, 20, 10, 3, 4, false, false, "Human Ranger");
 
     String name;
     boolean melee, flying;

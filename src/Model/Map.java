@@ -132,7 +132,11 @@ public class Map {
                 }
             }
         }
-        //finds the enemies in range
+        return valid;
+    }
+
+    public boolean[][] getAttackable(Fighter f) {
+        boolean[][] valid = getValidAttacks(f);
         boolean[][] inRange = new boolean[height][width];
         for (Fighter a : fighters) {
             if (a.isEnemy()) {

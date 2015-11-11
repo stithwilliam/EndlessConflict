@@ -33,7 +33,7 @@ public class Map {
 
         MapTile startingTile = getMapTile(f.getxPos(), f.getyPos());
         HashMap<MapTile, Integer> costMap = new HashMap<>();
-        PriorityQueue<MapTile> queue = new PriorityQueue<MapTile>(new Comparator() {
+        PriorityQueue<MapTile> queue = new PriorityQueue<>(new Comparator() {
             @Override
             public int compare(Object o1, Object o2) {
                 MapTile a = (MapTile)o1;

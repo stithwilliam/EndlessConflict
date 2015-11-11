@@ -2,9 +2,6 @@ package Model;
 
 import javafx.scene.layout.StackPane;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by William on 10/27/2015.
  */

@@ -9,10 +9,8 @@ public enum MapType {
 
     TUTORIAL;
 
-    private MapTile[][] board;
-
     public MapTile[][] getBoard() {
-        board = new MapTile[0][0];
+        MapTile[][] board = new MapTile[0][0];
         Tile F = Tile.FOREST;
         Tile P = Tile.PLAIN;
         Tile R = Tile.ROCK;

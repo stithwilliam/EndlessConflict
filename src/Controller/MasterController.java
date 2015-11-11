@@ -41,9 +41,9 @@ public class MasterController {
             config2Scene = new Scene(root);
 
             loader = new FXMLLoader(getClass().getResource("/View/Map.fxml"));
-            root = (Parent) loader.load();
+            root = loader.load();
             mapScene = new Scene(root);
-            mapController = (MapController) loader.getController();
+            mapController = loader.getController();
 
             root = loader.load(getClass().getResource("/View/Headquarters.fxml"));
             headquartersScene = new Scene(root);

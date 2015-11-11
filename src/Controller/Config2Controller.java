@@ -60,8 +60,8 @@ public class Config2Controller {
     private void setOkBtn(ActionEvent e) {
         if (selected) {
             Game game = Main.myGame;
-            Main.myGame.setCommander(commander);
-            Main.myGame.startGame();
+            game.setCommander(commander);
+            game.startGame();
         }
     }
 

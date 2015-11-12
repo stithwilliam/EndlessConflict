@@ -233,6 +233,7 @@ public class MapController {
                 }
             }
         }
+        atkBtn.setOnMouseExited(this::noShowAttacks);
     }
 
     private void noShowAttacks(MouseEvent e) {
@@ -254,7 +255,7 @@ public class MapController {
         for (int i = 0; i < valid[0].length; i++) {
             for (int j = 0; j < valid.length; j++) {
                 if (valid[j][i]) {
-                    ImageView atk = new ImageView(Graphic.FIGHTERSLCT.imagePath());
+                    ImageView atk = new ImageView(Graphic.ATTACKSLCT.imagePath());
                     StackPane pane = map.getMapTile(i, j).getStackPane();
                     pane.getChildren().add(atk);
                     pane.setOnMouseClicked(this::attackHere);
@@ -268,6 +269,7 @@ public class MapController {
             }
         }
         if (!hasAttack) {
+            atkBtn.setOnMouseExited(null);
             putOnTerminal(fighter.getName() + " has no valid targets");
         } else {
             buttonsToCancelAttack();
@@ -318,6 +320,10 @@ public class MapController {
         }
         putOnTerminal(fighter.getName() + "'s attack was canceled");
         buttonsToDefault();
+        /*
+        if (e.getSource() == atkBtn) {
+            atkBtn.setOnMouseExited(this::noShowAttacksSetter);
+        } */
     }
 
     private void setSkillBtn(ActionEvent e) {

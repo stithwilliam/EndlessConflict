@@ -174,6 +174,70 @@ public class Map {
     }
 
     public boolean[][] fixObstacle(boolean[][] valid, int x, int y, Fighter f) {
+        valid[y][x] = false;
+        int posX = f.getxPos();
+        int posY = f.getyPos();
+        int height = valid.length;
+        int width = valid[0].length;
+        int difX = x - posX;
+        int difY = y - posY;
+        if (difX == 0 || difY == 0) {
+            if (difX == 0 && difY > 0) {
+                int count = 0;
+                for (int i = y; i < height; i++) {
+                    for (int j = count; j >= 0; j--) {
+                        if ((x + j) < width) {
+                            valid[i][x + j] = false;
+                        }
+                        if ((x - j) >= 0) {
+                            valid[i][x - j] = false;
+                        }
+                    }
+                    count++;
+                }
+            } else if (difX == 0 && difY < 0) {
+                int count = 0;
+                for (int i = y; i >= 0; i--) {
+                    for (int j = count; j >= 0; j--) {
+                        if ((x + j) < width) {
+                            valid[i][x + j] = false;
+                        }
+                        if ((x - j) >= 0) {
+                            valid[i][x - j] = false;
+                        }
+                    }
+                    count++;
+                }
+            } else if (difY == 0 && difX > 0) {
+                int count = 0;
+                for (int i = x; i < width; i++) {
+                    for (int j = count; j >= 0; j--) {
+                        if ((y + j) < height) {
+                            valid[y + j][i] = false;
+                        }
+                        if ((y - j) >= 0) {
+                            valid[y - j][i] = false;
+                        }
+                    }
+                    count++;
+                }
+            } else {
+                int count = 0;
+                for (int i = x; i >= 0; i--) {
+                    for (int j = count; j>= 0; j--) {
+                        if ((y + j) < height) {
+                            valid[y + j][i] = false;
+                        }
+                        if ((y - j) >= 0) {
+                            valid[y - j][i] = false;
+                        }
+                    }
+                    count++;
+                }
+            }
+
+        }
+        return valid;
         /*
         int posX = f.getxPos();
         int posY = f.getyPos();
@@ -217,7 +281,6 @@ public class Map {
 
         }
         */
-        return valid;
     }
 
     public MapTile getMapTile(int x, int y) {

@@ -3,6 +3,7 @@ package Controller;
 import Model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -153,9 +154,7 @@ public class MapController {
         for (int i = 0; i < valid[0].length; i++) {
             for (int j = 0; j < valid.length; j++) {
                 if (valid[j][i]) {
-                    ImageView move = new ImageView(Graphic.MOVESLCT.imagePath());
                     StackPane pane = map.getMapTile(i, j).getStackPane();
-                    pane.getChildren().add(move);
                     pane.setOnMouseClicked(this::moveHere);
                 }
             }
@@ -197,7 +196,11 @@ public class MapController {
 
     private void buttonsToCancelMove() {
         moveBtn.setOnAction(this::cancelMove);
+        moveBtn.setOnMouseEntered(null);
+        moveBtn.setOnMouseExited(null);
         atkBtn.setOnAction(this::cancelMove);
+        atkBtn.setOnMouseEntered(null);
+        atkBtn.setOnMouseExited(null);
         skillBtn.setOnAction(this::cancelMove);
         nextBtn.setOnAction(this::cancelMove);
         prevBtn.setOnAction(this::cancelMove);
@@ -246,6 +249,7 @@ public class MapController {
 
     private void setAtkBtn(ActionEvent e) {
         putInFocus(fighter.getxPos(), fighter.getyPos());
+        noShowAttacks(null);
         boolean[][] valid = map.getAttackable(fighter);
         for (int i = 0; i < valid[0].length; i++) {
             for (int j = 0; j < valid.length; j++) {
@@ -290,8 +294,12 @@ public class MapController {
     }
 
     private void buttonsToCancelAttack() {
-        moveBtn.setOnAction(this::cancelAttack);
-        atkBtn.setOnAction(this::cancelAttack);
+        moveBtn.setOnAction(this::cancelMove);
+        moveBtn.setOnMouseEntered(null);
+        moveBtn.setOnMouseExited(null);
+        atkBtn.setOnAction(this::cancelMove);
+        atkBtn.setOnMouseEntered(null);
+        atkBtn.setOnMouseExited(null);
         skillBtn.setOnAction(this::cancelAttack);
         nextBtn.setOnAction(this::cancelAttack);
         prevBtn.setOnAction(this::cancelAttack);
@@ -339,7 +347,11 @@ public class MapController {
 
     private void buttonsToDefault() {
         moveBtn.setOnAction(this::setMoveBtn);
+        moveBtn.setOnMouseEntered(this::showMoves);
+        moveBtn.setOnMouseExited(this::noShowMoves);
         atkBtn.setOnAction(this::setAtkBtn);
+        atkBtn.setOnMouseEntered(this::showAttacks);
+        atkBtn.setOnMouseExited(this::noShowAttacks);
         skillBtn.setOnAction(this::setSkillBtn);
         nextBtn.setOnAction(this::setNextBtn);
         prevBtn.setOnAction(this::setPrevBtn);

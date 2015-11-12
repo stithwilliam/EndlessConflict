@@ -53,7 +53,7 @@ public class Game {
         f.setHp(f.getHp() - damage);
         String s = (fighter.getName() + " dealt " + damage + " damage to " + f.getName());
         if (f.getHp() <= 0) {
-            s += (". " + f.getName() + " has been killed!");
+            s += (" and killed " + f.getName() + "!");
             killedFighter(f);
         }
         return s;

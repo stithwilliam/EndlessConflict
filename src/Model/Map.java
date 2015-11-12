@@ -100,6 +100,54 @@ public class Map {
         return list;
     }
 
+    public boolean[][] getTilesWithin(int x, int y, int range) {
+        boolean[][] valid = new boolean[height][width];
+        Queue<MapTile> queue = new LinkedList<>();
+        MapTile startingTile = getMapTile(x, y);
+        HashMap<MapTile, Integer> costMap = new HashMap<>();
+        for (MapTile t : getAdjacent(startingTile)) {
+            queue.add(t);
+            costMap.put(t, 1);
+        }
+        while (!queue.isEmpty()) {
+            MapTile tile = queue.poll();
+            valid[tile.getyPos()][tile.getxPos()] = true;
+            int currentCost = costMap.get(tile);
+            if (currentCost < range) {
+                for (MapTile t : getAdjacent(tile)) {
+                    if (!costMap.containsKey(t)) {
+                        queue.add(t);
+                        costMap.put(t, currentCost + 1);
+                    }
+                }
+            }
+        }
+        return valid;
+    }
+
+    public List<MapTile> getAdjacent(MapTile tile) {
+        int x = tile.getxPos();
+        int y = tile.getyPos();
+        List<MapTile> list = new ArrayList<>();
+        MapTile left = getMapTile(x - 1, y);
+        if (left != null) {
+            list.add(left);
+        }
+        MapTile right = getMapTile(x + 1, y);
+        if (right != null) {
+            list.add(right);
+        }
+        MapTile up = getMapTile(x, y-1);
+        if (up != null) {
+            list.add(up);
+        }
+        MapTile down = getMapTile(x, y+1);
+        if (down != null) {
+            list.add(down);
+        }
+        return list;
+    }
+
     //uses a BFS to find the valid attacks of f
     public boolean[][] getValidAttacks(Fighter f) { //TODO implement terrain blocking
         //finds the valid squares
@@ -110,6 +158,12 @@ public class Map {
         for (MapTile x : getAttacks(startingTile)) {
             queue.add(x);
             rangeMap.put(x, 1);
+        }
+        if (f.isMelee()) {
+            for (MapTile x : getDiagAttacks(startingTile)) {
+                queue.add(x);
+                rangeMap.put(x, 1);
+            }
         }
         while (!queue.isEmpty()) {
             MapTile tile = queue.poll();
@@ -169,6 +223,29 @@ public class Map {
         MapTile down = getMapTile(x, y+1);
         if (down != null) {
             list.add(down);
+        }
+        return list;
+    }
+
+    public List<MapTile> getDiagAttacks(MapTile tile) {
+        int x = tile.getxPos();
+        int y = tile.getyPos();
+        List<MapTile> list = new ArrayList<>();
+        MapTile btmLeft = getMapTile(x - 1, y + 1);
+        if (btmLeft != null) {
+            list.add(btmLeft);
+        }
+        MapTile btmRight = getMapTile(x + 1, y + 1);
+        if (btmRight != null) {
+            list.add(btmRight);
+        }
+        MapTile topLeft = getMapTile(x - 1, y - 1);
+        if (topLeft != null) {
+            list.add(topLeft);
+        }
+        MapTile topRight = getMapTile(x + 1, y - 1);
+        if (topRight != null) {
+            list.add(topRight);
         }
         return list;
     }
@@ -234,7 +311,6 @@ public class Map {
                 count += 0.5;
             }
         } else if (difX > 0 && difY > 0) { // bottom right
-            System.out.println("BTM RIGHT: difX = " + difX + ", difY = " + difY);
             double count = 0.5;
             for (int i = 0; i < Math.max(width, height); i++) {
                 for (int j = (int) count; j >= 0; j--) {
@@ -248,7 +324,6 @@ public class Map {
                 count += 0.5;
             }
         } else if (difX < 0 && difY > 0) { //bottom left
-            System.out.println("BTM LEFT: difX = " + difX + ", difY = " + difY);
             double count = 0.5;
             for (int i = 0; i < Math.max(width, height); i++) {
                 for (int j = (int) count; j >= 0; j--) {
@@ -262,7 +337,6 @@ public class Map {
                 count += 0.5;
             }
         } else if (difX > 0 && difY < 0) { //top right
-            System.out.println("TOP RIGHT: difX = " + difX + ", difY = " + difY);
             double count = 0.5;
             for (int i = 0; i < Math.max(width, height); i++) {
                 for (int j = (int) count; j >= 0; j--) {
@@ -276,7 +350,6 @@ public class Map {
                 count += 0.5;
             }
         } else if (difX < 0 && difY < 0) { //top left
-            System.out.println("TOP LEFT: difX = " + difX + ", difY = " + difY);
             double count = 0.5;
             for (int i = 0; i < Math.max(width, height); i++) {
                 for (int j = (int) count; j >= 0; j--) {

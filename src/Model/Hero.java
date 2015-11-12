@@ -1,5 +1,8 @@
 package Model;
 
+import Controller.MapController;
+import Controller.MasterController;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +33,25 @@ public enum Hero implements Placeable {
         imagePath.put("LIZARDKING", "/View/Graphics/Placeable/lizardKing.png");
         imagePath.put("MODELX", "/View/Graphics/Placeable/modelXresting.gif");
         imagePath.put("CHAOS", "/View/Graphics/Placeable/commanderChaos.png");
+    }
+
+    public void showSkill() {
+        MapController mapCtr = MasterController.getInstance().getMapController();
+        switch (this) {
+            case LIZARDKING:
+                mapCtr.showLizardJump();
+                break;
+            case MODELX:
+                mapCtr.showTractorBeam();
+                break;
+            case CHAOS:
+                mapCtr.showGrenade();
+                break;
+        }
+    }
+
+    public void doSkill() {
+
     }
 
     //Bio info for each hero.

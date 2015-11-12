@@ -133,6 +133,7 @@ public class MapController {
                 }
             }
         }
+        moveBtn.setOnMouseExited(this::noShowMoves);
     }
 
     private void noShowMoves(MouseEvent e) {
@@ -320,15 +321,101 @@ public class MapController {
         }
         putOnTerminal(fighter.getName() + "'s attack was canceled");
         buttonsToDefault();
-        /*
-        if (e.getSource() == atkBtn) {
-            atkBtn.setOnMouseExited(this::noShowAttacksSetter);
-        } */
     }
 
     private void setSkillBtn(ActionEvent e) {
         putInFocus(fighter.getxPos(), fighter.getyPos());
-        putOnTerminal("I have no skills yet");
+        if (fighter.getModel() instanceof Hero) {
+            ((Hero) fighter.getModel()).showSkill();
+        } else {
+            putOnTerminal("I have no skills ");
+        }
+    }
+
+    //SKILLS
+    //LizardKing's skill
+    public void showLizardJump() {
+        buttonsToCancelLizardJump();
+        putInFocus(fighter.getxPos(), fighter.getyPos());
+        boolean[][] valid = map.getTilesWithin(fighter.getxPos(), fighter.getyPos(), fighter.getMov() + 2);
+        for (int i = 0; i < valid.length; i++) {
+            for (int j = 0; j < valid[i].length; j++) {
+                if (valid[i][j] && map.getMapTile(j, i).isMoveable() && !map.getMapTile(j, i).hasFighter()) {
+                    StackPane stackPane = map.getMapTile(j, i).getStackPane();
+                    stackPane.getChildren().add(new ImageView(Graphic.MOVESLCT.imagePath()));
+                    stackPane.setOnMouseClicked(this::doLizardJump);
+                }
+            }
+        }
+        putOnTerminal("Choose a location to jump to");
+    }
+
+    public void doLizardJump(MouseEvent e) {
+        boolean[][] valid = map.getTilesWithin(fighter.getxPos(), fighter.getyPos(), fighter.getMov() + 2);
+        for (int i = 0; i < valid.length; i++) {
+            for (int j = 0; j < valid[i].length; j++) {
+                if (valid[i][j] && map.getMapTile(j, i).isMoveable() && !map.getMapTile(j, i).hasFighter()) {
+                    StackPane stackPane = map.getMapTile(j, i).getStackPane();
+                    stackPane.getChildren().remove(1);
+                    stackPane.setOnMouseClicked(null);
+                }
+            }
+        }
+        //remove old fighter
+        StackPane oldPane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
+        oldPane.getChildren().remove(2);
+        oldPane.getChildren().remove(1);
+        oldPane.setOnMouseClicked(null);
+        //move fighter
+        StackPane pane = (StackPane) e.getSource();
+        MapTile tile = paneToTile.get(pane);
+        int x = tile.getxPos();
+        int y = tile.getyPos();
+        fighter.setxPos(x);
+        fighter.setyPos(y);
+        pane.getChildren().add(new ImageView(fighter.imagePath()));
+        pane.getChildren().add(new ImageView(Graphic.FIGHTERSLCT.imagePath()));
+        pane.setOnMouseClicked(this::fighterStats);
+        //print to terminal
+        putOnTerminal(fighter.getName() + " jumped to " + tile.getName() + " at " + (x + 1) + ", " + (y + 1));
+        buttonsToDefault();
+    }
+
+    public void cancelLizardJump(ActionEvent e) {
+        boolean[][] valid = map.getTilesWithin(fighter.getxPos(), fighter.getyPos(), fighter.getMov() + 2);
+        for (int i = 0; i < valid.length; i++) {
+            for (int j = 0; j < valid[i].length; j++) {
+                if (valid[i][j] && map.getMapTile(j, i).isMoveable() && !map.getMapTile(j, i).hasFighter()) {
+                    StackPane stackPane = map.getMapTile(j, i).getStackPane();
+                    stackPane.getChildren().remove(stackPane.getChildren().size() - 1);
+                    stackPane.setOnMouseClicked(null);
+                }
+            }
+        }
+        putOnTerminal(fighter.getName() + "'s jump was cancelled");
+        buttonsToDefault();
+    }
+
+    public void buttonsToCancelLizardJump() {
+        moveBtn.setOnAction(this::cancelLizardJump);
+        moveBtn.setOnMouseEntered(null);
+        moveBtn.setOnMouseExited(null);
+        atkBtn.setOnAction(this::cancelLizardJump);
+        atkBtn.setOnMouseEntered(null);
+        atkBtn.setOnMouseExited(null);
+        skillBtn.setOnAction(this::cancelLizardJump);
+        nextBtn.setOnAction(this::cancelLizardJump);
+        prevBtn.setOnAction(this::cancelLizardJump);
+    }
+
+    //modelX's skill
+    public void showTractorBeam() {
+        putOnTerminal("Choose an enemy to suspend");
+    }
+
+    //Chaos's skill
+    public void showGrenade() {
+        putOnTerminal("Choose a location to bomb");
     }
 
     private void setNextBtn(ActionEvent e) {
@@ -354,10 +441,10 @@ public class MapController {
     private void buttonsToDefault() {
         moveBtn.setOnAction(this::setMoveBtn);
         moveBtn.setOnMouseEntered(this::showMoves);
-        moveBtn.setOnMouseExited(this::noShowMoves);
+        moveBtn.setOnMouseExited(null);
         atkBtn.setOnAction(this::setAtkBtn);
         atkBtn.setOnMouseEntered(this::showAttacks);
-        atkBtn.setOnMouseExited(this::noShowAttacks);
+        atkBtn.setOnMouseExited(null);
         skillBtn.setOnAction(this::setSkillBtn);
         nextBtn.setOnAction(this::setNextBtn);
         prevBtn.setOnAction(this::setPrevBtn);
@@ -440,10 +527,8 @@ public class MapController {
         leftRect.setOnMouseClicked(this::setRectClicked);
         moveBtn.setOnAction(this::setMoveBtn);
         moveBtn.setOnMouseEntered(this::showMoves);
-        moveBtn.setOnMouseExited(this::noShowMoves);
         atkBtn.setOnAction(this::setAtkBtn);
         atkBtn.setOnMouseEntered(this::showAttacks);
-        atkBtn.setOnMouseExited(this::noShowAttacks);
         skillBtn.setOnAction(this::setSkillBtn);
         nextBtn.setOnAction(this::setNextBtn);
         prevBtn.setOnAction(this::setPrevBtn);

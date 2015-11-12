@@ -45,6 +45,7 @@ public class Fighter {
     }
     public String imagePath() {return model.imagePath();}
     public String getName() {return name;}
+    public Placeable getModel() {return model;}
     public int getxPos() {return xPos;}
     public int getyPos() {return yPos;}
     public int getAtt() {return attack;}

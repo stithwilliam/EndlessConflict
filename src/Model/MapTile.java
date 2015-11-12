@@ -38,6 +38,7 @@ public class MapTile {
     public int getMoveCost() {return moveCost;}
     public String imagePath() {return tile.imagePath();}
     public StackPane getStackPane() {return stackPane;}
+    public Tile getTile() {return tile;}
 
     //Setters
     public void setStackPane(StackPane s) {stackPane = s;}

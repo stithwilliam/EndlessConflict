@@ -17,12 +17,14 @@ import javafx.scene.text.Font;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Stack;
 
 /**
  * Created by William on 10/26/2015.
  */
 public class MapController {
 
+    //FXML injections
     @FXML
     private GridPane gridPane;
     @FXML
@@ -46,11 +48,13 @@ public class MapController {
     @FXML
     private VBox terminal;
 
+    //Global vars
     private Map map;
     private Game game;
     private Fighter fighter;
     private HashMap<StackPane, MapTile> paneToTile;
 
+    //GENERAL
     public void constructMap(Map map) {
         this.map = map;
         this.game = Main.myGame;
@@ -74,7 +78,6 @@ public class MapController {
         populateMap();
     }
 
-    //overloaded populateMap that populates with fighters in map
     public void populateMap() {
         populateMap(map.getFighters());
     }
@@ -121,7 +124,7 @@ public class MapController {
         }
     }
 
-    //code for Move button
+    //MOVE
     private void showMoves(MouseEvent e) {
         boolean[][] valid = map.getValidMoves(fighter);
         for (int i = 0; i < valid.length; i++) {
@@ -142,7 +145,8 @@ public class MapController {
             for (int j = 0; j < valid[0].length; j++) {
                 if (valid[i][j]) {
                     StackPane pane = map.getMapTile(j, i).getStackPane();
-                    pane.getChildren().remove(pane.getChildren().size() - 1);
+                    int idx = pane.getChildren().size() - 1;
+                    pane.getChildren().remove(idx);
                 }
             }
         }
@@ -162,7 +166,6 @@ public class MapController {
         }
     }
 
-    //moves fighter to a valid tile
     private void moveHere(MouseEvent e) {
         //removing valid tile image
         boolean[][] valid = map.getValidMoves(fighter);
@@ -222,7 +225,7 @@ public class MapController {
         buttonsToDefault();
     }
 
-    //code for Attack button
+    //ATTACK
     private void showAttacks(MouseEvent e) {
         boolean[][] valid = map.getValidAttacks(fighter);
         for (int i = 0; i < valid.length; i++) {
@@ -243,7 +246,8 @@ public class MapController {
             for (int j = 0; j < valid[0].length; j++) {
                 if (valid[i][j]) {
                     StackPane pane = map.getMapTile(j, i).getStackPane();
-                    pane.getChildren().remove(pane.getChildren().size() - 1);
+                    int idx = pane.getChildren().size() - 1;
+                    pane.getChildren().remove(idx);
                 }
             }
         }
@@ -284,7 +288,8 @@ public class MapController {
             for (int j = 0; j < valid.length; j++) {
                 if (valid[j][i]) {
                     StackPane pane = map.getMapTile(i, j).getStackPane();
-                    pane.getChildren().remove(pane.getChildren().size() - 1);
+                    int idx = pane.getChildren().size() - 1;
+                    pane.getChildren().remove(idx);
                     pane.setOnMouseClicked(this::fighterStats);
                 }
             }
@@ -314,7 +319,8 @@ public class MapController {
             for (int j = 0; j < valid.length; j++) {
                 if (valid[j][i]) {
                     StackPane pane = map.getMapTile(i, j).getStackPane();
-                    pane.getChildren().remove(pane.getChildren().size() - 1);
+                    int idx = pane.getChildren().size() - 1;
+                    pane.getChildren().remove(idx);
                     pane.setOnMouseClicked(null);
                 }
             }
@@ -381,21 +387,6 @@ public class MapController {
         buttonsToDefault();
     }
 
-    public void cancelLizardJump(ActionEvent e) {
-        boolean[][] valid = map.getTilesWithin(fighter.getxPos(), fighter.getyPos(), fighter.getMov() + 2);
-        for (int i = 0; i < valid.length; i++) {
-            for (int j = 0; j < valid[i].length; j++) {
-                if (valid[i][j] && map.getMapTile(j, i).isMoveable() && !map.getMapTile(j, i).hasFighter()) {
-                    StackPane stackPane = map.getMapTile(j, i).getStackPane();
-                    stackPane.getChildren().remove(stackPane.getChildren().size() - 1);
-                    stackPane.setOnMouseClicked(null);
-                }
-            }
-        }
-        putOnTerminal(fighter.getName() + "'s jump was cancelled");
-        buttonsToDefault();
-    }
-
     public void buttonsToCancelLizardJump() {
         moveBtn.setOnAction(this::cancelLizardJump);
         moveBtn.setOnMouseEntered(null);
@@ -408,6 +399,22 @@ public class MapController {
         prevBtn.setOnAction(this::cancelLizardJump);
     }
 
+    public void cancelLizardJump(ActionEvent e) {
+        boolean[][] valid = map.getTilesWithin(fighter.getxPos(), fighter.getyPos(), fighter.getMov() + 2);
+        for (int i = 0; i < valid.length; i++) {
+            for (int j = 0; j < valid[i].length; j++) {
+                if (valid[i][j] && map.getMapTile(j, i).isMoveable() && !map.getMapTile(j, i).hasFighter()) {
+                    StackPane pane = map.getMapTile(j, i).getStackPane();
+                    int idx = pane.getChildren().size() - 1;
+                    pane.getChildren().remove(idx);
+                    pane.setOnMouseClicked(null);
+                }
+            }
+        }
+        putOnTerminal(fighter.getName() + "'s jump was cancelled");
+        buttonsToDefault();
+    }
+
     //modelX's skill
     public void showTractorBeam() {
         putOnTerminal("Choose an enemy to suspend");
@@ -415,7 +422,115 @@ public class MapController {
 
     //Chaos's skill
     public void showGrenade() {
-        putOnTerminal("Choose a location to bomb");
+        buttonsToCancelGrenade();
+        boolean[][] valid = map.getValidAttacks(fighter);
+        for (int i = 0; i < valid.length; i++) {
+            for (int j = 0; j < valid[i].length; j++) {
+                if (valid[i][j]) {
+                    StackPane pane = map.getMapTile(j, i).getStackPane();
+                    pane.setOnMouseEntered(this::mouseOverGrenade);
+                }
+            }
+        }
+        putOnTerminal("Choose a location to throw a grenade");
+    }
+
+    public void mouseOverGrenade(MouseEvent e) {
+        StackPane pane = (StackPane) e.getSource();
+        pane.setOnMouseClicked(this::doGrenade);
+        pane.setOnMouseExited(this::exitMouseOverGrenade);
+        pane.getChildren().add(new ImageView(Graphic.ATTACKSLCT.imagePath()));
+        MapTile tile = paneToTile.get(pane);
+        for (MapTile t : map.getAdjacent(tile)) {
+            t.getStackPane().getChildren().add(new ImageView(Graphic.ATTACKSLCT.imagePath()));
+        }
+        for (MapTile t : map.getDiagAttacks(tile)) {
+            t.getStackPane().getChildren().add(new ImageView(Graphic.ATTACKSLCT.imagePath()));
+        }
+    }
+
+    public void exitMouseOverGrenade(MouseEvent e) {
+        StackPane pane = (StackPane) e.getSource();
+        MapTile tile = paneToTile.get(pane);
+        pane.setOnMouseClicked(null);
+        int idx = pane.getChildren().size() - 1;
+        pane.getChildren().remove(idx);
+        for (MapTile t : map.getAdjacent(tile)) {
+            StackPane p = t.getStackPane();
+            int i = p.getChildren().size() - 1;
+            p.getChildren().remove(i);
+        }
+        for (MapTile t : map.getDiagAttacks(tile)) {
+            StackPane p = t.getStackPane();
+            int i = p.getChildren().size() - 1;
+            p.getChildren().remove(i);
+        }
+    }
+
+    public void doGrenade(MouseEvent e) {
+        //remove mouseOvers
+        boolean[][] valid = map.getValidAttacks(fighter);
+        for (int i = 0; i < valid.length; i++) {
+            for (int j = 0; j < valid[i].length; j++) {
+                if (valid[i][j]) {
+                    StackPane pane = map.getMapTile(j, i).getStackPane();
+                    pane.setOnMouseEntered(null);
+                    pane.setOnMouseExited(null);
+                }
+            }
+        }
+        //grenade logic
+        boolean hit = false;
+        ArrayList<MapTile> tiles = new ArrayList<>();
+        StackPane pane = (StackPane) e.getSource();
+        MapTile tile = paneToTile.get(pane);
+        tiles.addAll(map.getAttacks(tile));
+        tiles.addAll(map.getDiagAttacks(tile));
+        String s = fighter.getName() + " lobbed a grenade! ";
+        for (MapTile t : tiles) {
+            if (t.getFighter() != null && t.getFighter().isEnemy()) {
+                hit = true;
+                s += (game.attackFighter(t.getFighter()));
+                if (t.getFighter().getHp() > 0) {
+                    s += ".";
+                }
+                s += " ";
+            }
+        }
+        if (!hit) {
+            putOnTerminal(s + fighter.getName() + "'s grenade didn't hit anyone!");
+        } else {
+            putOnTerminal(s);
+        }
+        exitMouseOverGrenade(e);
+        buttonsToDefault();
+    }
+
+    public void buttonsToCancelGrenade() {
+        moveBtn.setOnAction(this::cancelGrenade);
+        moveBtn.setOnMouseEntered(null);
+        moveBtn.setOnMouseExited(null);
+        atkBtn.setOnAction(this::cancelGrenade);
+        atkBtn.setOnMouseEntered(null);
+        atkBtn.setOnMouseExited(null);
+        skillBtn.setOnAction(this::cancelGrenade);
+        nextBtn.setOnAction(this::cancelGrenade);
+        prevBtn.setOnAction(this::cancelGrenade);
+    }
+
+    public void cancelGrenade(ActionEvent e) {
+        boolean[][] valid = map.getValidAttacks(fighter);
+        for (int i = 0; i < valid.length; i++) {
+            for (int j = 0; j < valid[i].length; j++) {
+                if (valid[i][j]) {
+                    StackPane pane = map.getMapTile(j, i).getStackPane();
+                    pane.setOnMouseEntered(null);
+                    pane.setOnMouseExited(null);
+                }
+            }
+        }
+        putOnTerminal(fighter.getName() + "'s skill was cancelled");
+        buttonsToDefault();
     }
 
     private void setNextBtn(ActionEvent e) {
@@ -459,12 +574,11 @@ public class MapController {
         putOnTerminal(f.getStats());
     }
 
-    //overloaded putOnTerminal
     private void putOnTerminal(String s) {
         putOnTerminal(s, true);
     }
 
-    //puts s on the terminal
+    //puts string on terminal
     private void putOnTerminal(String s, boolean newLine) {
         if (s.length() > 38) {
             int cut = 38;

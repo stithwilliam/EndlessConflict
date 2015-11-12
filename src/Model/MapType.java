@@ -20,11 +20,11 @@ public enum MapType {
                 int h = 6;
                 int w = 15;
                 Tile[] tiles = {P, F, R};
-                int[] probs = {75, 15, 10};
+                int[] probs = {70, 10, 20};
                 board = new MapTile[h][w];
                 for (int i = 0; i < h; i++) {
                     for (int j = 0; j < w; j++) {
-                        if ((i <= 4 && j <= 2) || (i == 3 && (j == 8 || j == 14))) {
+                        if ((i <= 4 && j <= 2) || ((i == 3 || i == 2 || i == 4) && (j == 8 || j == 7 || j == 9 || j >= 13))) {
                             board[i][j] = new MapTile(P, j, i);
                             Fighter f = null;
                             if (i == 2 && j == 1) {

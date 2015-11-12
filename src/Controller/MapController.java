@@ -546,6 +546,7 @@ public class MapController {
         ArrayList<MapTile> tiles = new ArrayList<>();
         StackPane pane = (StackPane) e.getSource();
         MapTile tile = paneToTile.get(pane);
+        tiles.add(tile);
         tiles.addAll(map.getAttacks(tile));
         tiles.addAll(map.getDiagAttacks(tile));
         String s = fighter.getName() + " lobbed a grenade! ";

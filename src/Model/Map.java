@@ -181,106 +181,116 @@ public class Map {
         int width = valid[0].length;
         int difX = x - posX;
         int difY = y - posY;
-        if (difX == 0 || difY == 0) {
-            if (difX == 0 && difY > 0) {
-                int count = 0;
-                for (int i = y; i < height; i++) {
-                    for (int j = count; j >= 0; j--) {
-                        if ((x + j) < width) {
-                            valid[i][x + j] = false;
-                        }
-                        if ((x - j) >= 0) {
-                            valid[i][x - j] = false;
-                        }
-                    }
-                    count++;
-                }
-            } else if (difX == 0 && difY < 0) {
-                int count = 0;
-                for (int i = y; i >= 0; i--) {
-                    for (int j = count; j >= 0; j--) {
-                        if ((x + j) < width) {
-                            valid[i][x + j] = false;
-                        }
-                        if ((x - j) >= 0) {
-                            valid[i][x - j] = false;
-                        }
-                    }
-                    count++;
-                }
-            } else if (difY == 0 && difX > 0) {
-                int count = 0;
-                for (int i = x; i < width; i++) {
-                    for (int j = count; j >= 0; j--) {
-                        if ((y + j) < height) {
-                            valid[y + j][i] = false;
-                        }
-                        if ((y - j) >= 0) {
-                            valid[y - j][i] = false;
-                        }
-                    }
-                    count++;
-                }
-            } else {
-                int count = 0;
-                for (int i = x; i >= 0; i--) {
-                    for (int j = count; j>= 0; j--) {
-                        if ((y + j) < height) {
-                            valid[y + j][i] = false;
-                        }
-                        if ((y - j) >= 0) {
-                            valid[y - j][i] = false;
-                        }
-                    }
-                    count++;
-                }
-            }
-
-        }
-        return valid;
-        /*
-        int posX = f.getxPos();
-        int posY = f.getyPos();
-        int height = valid.length;
-        int width = valid[0].length;
-        if (x - posX == 0) {
-            int p = (posY - y) / Math.abs(posY - y);
-            int count = 0;
-            for (int i = y; i < height && i >= 0; i += p) {
-                count++;
-                for (int j = count * -1; j <= count; j++) {
-                    if ((x + j) < width && (x + j) >= 0) {
+        if (difX == 0 && difY > 0) { // directly down
+            double count = 0;
+            for (int i = y; i < height; i++) {
+                for (int j = (int) count; j >= 0; j--) {
+                    if ((x + j) < width) {
                         valid[i][x + j] = false;
                     }
-                }
-            }
-        } else if (y - posY == 0) {
-            int p = (posX - x) / Math.abs(posX - x);
-            int count = 0;
-            for (int i = x; i < width && i >= 0; i+= p) {
-                count++;
-                for (int j = count * -1; j <= count; j++) {
-                    if ((y + j) < height && (y + j) >= 0) {
-                        valid[y+j][i] = false;
+                    if ((x - j) >= 0) {
+                        valid[i][x - j] = false;
                     }
                 }
+                count += 0.5;
             }
-        } else if (Math.abs(y - posY) == Math.abs(x - posX)) {
-            int deltY = (posY - y) / Math.abs(posY - y);
-            int deltX = (posX - x) / Math.abs(posX - x);
-            int i = y;
-            int j = x;
-            while (i < height && i >= 0 && j < width && j >= 0) {
-                i += deltY;
-                j += deltX;
-                valid[i][j] = false;
+        } else if (difX == 0 && difY < 0) { // directly up
+            double count = 0;
+            for (int i = y; i >= 0; i--) {
+                for (int j = (int) count; j >= 0; j--) {
+                    if ((x + j) < width) {
+                        valid[i][x + j] = false;
+                    }
+                    if ((x - j) >= 0) {
+                        valid[i][x - j] = false;
+                    }
+                }
+                count += 0.5;
             }
-        } else if (Math.abs(x - posX) > Math.abs(y - posY)) {
-
-        } else if (Math.abs(x - posX) < Math.abs(y - posY)) {
-
+        } else if (difY == 0 && difX > 0) { // directly right
+            double count = 0;
+            for (int i = x; i < width; i++) {
+                for (int j = (int) count; j >= 0; j--) {
+                    if ((y + j) < height) {
+                        valid[y + j][i] = false;
+                    }
+                    if ((y - j) >= 0) {
+                        valid[y - j][i] = false;
+                    }
+                }
+                count += 0.5;
+            }
+        } else if (difY == 0 && difX < 0){ //directly left
+            double count = 0;
+            for (int i = x; i >= 0; i--) {
+                for (int j = (int) count; j>= 0; j--) {
+                    if ((y + j) < height) {
+                        valid[y + j][i] = false;
+                    }
+                    if ((y - j) >= 0) {
+                        valid[y - j][i] = false;
+                    }
+                }
+                count += 0.5;
+            }
+        } else if (difX > 0 && difY > 0) { // bottom right
+            System.out.println("BTM RIGHT: difX = " + difX + ", difY = " + difY);
+            double count = 0.5;
+            for (int i = 0; i < Math.max(width, height); i++) {
+                for (int j = (int) count; j >= 0; j--) {
+                    if ((x + i - j) < width && (y + i) < height) {
+                        valid[y + i][x + i - j] = false;
+                    }
+                    if ((x + i) < width && (y + i - j) < height) {
+                        valid[y + i - j][x + i] = false;
+                    }
+                }
+                count += 0.5;
+            }
+        } else if (difX < 0 && difY > 0) { //bottom left
+            System.out.println("BTM LEFT: difX = " + difX + ", difY = " + difY);
+            double count = 0.5;
+            for (int i = 0; i < Math.max(width, height); i++) {
+                for (int j = (int) count; j >= 0; j--) {
+                    if ((x - i + j) >= 0 && (y + i) < height) {
+                        valid[y + i][x - i + j] = false;
+                    }
+                    if ((x - i) >= 0 && (y + i - j) < height) {
+                        valid[y + i - j][x - i] = false;
+                    }
+                }
+                count += 0.5;
+            }
+        } else if (difX > 0 && difY < 0) { //top right
+            System.out.println("TOP RIGHT: difX = " + difX + ", difY = " + difY);
+            double count = 0.5;
+            for (int i = 0; i < Math.max(width, height); i++) {
+                for (int j = (int) count; j >= 0; j--) {
+                    if ((x + i - j) < width && (y - i) >= 0) {
+                        valid[y - i][x + i - j] = false;
+                    }
+                    if ((x + i) < width && (y - i + j) >= 0) {
+                        valid[y - i + j][x + i] = false;
+                    }
+                }
+                count += 0.5;
+            }
+        } else if (difX < 0 && difY < 0) { //top left
+            System.out.println("TOP LEFT: difX = " + difX + ", difY = " + difY);
+            double count = 0.5;
+            for (int i = 0; i < Math.max(width, height); i++) {
+                for (int j = (int) count; j >= 0; j--) {
+                    if ((x - i + j) >= 0 && (y - i) >= 0) {
+                        valid[y - i][x - i + j] = false;
+                    }
+                    if ((x - i) >= 0 && (y - i + j) >= 0) {
+                        valid[y - i + j][x - i] = false;
+                    }
+                }
+                count += 0.5;
+            }
         }
-        */
+        return valid;
     }
 
     public MapTile getMapTile(int x, int y) {

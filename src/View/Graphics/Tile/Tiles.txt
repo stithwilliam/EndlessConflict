@@ -1,5 +1,0 @@
-Plain Tile: A grassy tile. Fighters will mostly be walking on these.
-
-Forest Tile: A wooded tile. It takes fighters twice as long to go through a forest as a plain. 
-
-Rock Tile: A large boulder that blocks the fighter's movement. Should look good sitting in plains.

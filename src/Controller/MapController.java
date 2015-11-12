@@ -302,10 +302,10 @@ public class MapController {
     }
 
     private void buttonsToCancelAttack() {
-        moveBtn.setOnAction(this::cancelMove);
+        moveBtn.setOnAction(this::cancelAttack);
         moveBtn.setOnMouseEntered(null);
         moveBtn.setOnMouseExited(null);
-        atkBtn.setOnAction(this::cancelMove);
+        atkBtn.setOnAction(this::cancelAttack);
         atkBtn.setOnMouseEntered(null);
         atkBtn.setOnMouseExited(null);
         skillBtn.setOnAction(this::cancelAttack);
@@ -314,7 +314,7 @@ public class MapController {
     }
 
     private void cancelAttack(ActionEvent e) {
-        boolean[][] valid = map.getValidAttacks(fighter);
+        boolean[][] valid = map.getAttackable(fighter);
         for (int i = 0; i < valid[0].length; i++) {
             for (int j = 0; j < valid.length; j++) {
                 if (valid[j][i]) {
@@ -417,7 +417,69 @@ public class MapController {
 
     //modelX's skill
     public void showTractorBeam() {
-        putOnTerminal("Choose an enemy to suspend");
+        boolean inRange = false;
+        boolean[][] valid = map.getAttackable(fighter);
+        for (int i = 0; i < valid.length; i++) {
+            for (int j = 0; j < valid[i].length; j++) {
+                if (valid[i][j]) {
+                    inRange = true;
+                    StackPane pane = map.getMapTile(j, i).getStackPane();
+                    pane.getChildren().add(new ImageView(Graphic.ATTACKSLCT.imagePath()));
+                    pane.setOnMouseClicked(this::doTractorBeam);
+                }
+            }
+        }
+        if (inRange) {
+            buttonsToCancelTractorBeam();
+            putOnTerminal("Choose an enemy to suspend");
+        } else {
+            putOnTerminal("No enemies are in range");
+        }
+    }
+
+    public void doTractorBeam(MouseEvent e) {
+        boolean[][] valid = map.getAttackable(fighter);
+        for (int i = 0; i < valid.length; i++) {
+            for (int j = 0; j < valid[i].length; j++) {
+                if (valid[i][j]) {
+                    StackPane pane = map.getMapTile(j, i).getStackPane();
+                    int idx = pane.getChildren().size() - 1;
+                    pane.getChildren().remove(idx);
+                    pane.setOnMouseClicked(this::fighterStats);
+                }
+            }
+        }
+        StackPane pane = (StackPane) e.getSource();
+        pane.getChildren().add(new ImageView(Graphic.TRACTORBEAM.imagePath()));
+        buttonsToDefault();
+        Fighter x = paneToTile.get(pane).getFighter();
+        putOnTerminal(fighter.getName() + " suspended " + x.getName() + " in his tractor beam! ");
+    }
+
+    public void buttonsToCancelTractorBeam() {
+        moveBtn.setOnAction(this::cancelTractorBeam);
+        moveBtn.setOnMouseEntered(null);
+        moveBtn.setOnMouseExited(null);
+        atkBtn.setOnAction(this::cancelTractorBeam);
+        atkBtn.setOnMouseEntered(null);
+        atkBtn.setOnMouseExited(null);
+        skillBtn.setOnAction(this::cancelTractorBeam);
+        nextBtn.setOnAction(this::cancelTractorBeam);
+        prevBtn.setOnAction(this::cancelTractorBeam);
+    }
+
+    public void cancelTractorBeam(ActionEvent e) {
+        boolean[][] valid = map.getAttackable(fighter);
+        for (int i = 0; i < valid.length; i++) {
+            for (int j = 0; j < valid[i].length; j++) {
+                if (valid[i][j]) {
+                    StackPane pane = map.getMapTile(j, i).getStackPane();
+                    int idx = pane.getChildren().size() - 1;
+                    pane.getChildren().remove(idx);
+                    pane.setOnMouseClicked(this::fighterStats);
+                }
+            }
+        }
     }
 
     //Chaos's skill
@@ -533,6 +595,7 @@ public class MapController {
         buttonsToDefault();
     }
 
+    //CONTROLS
     private void setNextBtn(ActionEvent e) {
         StackPane oldPane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
         oldPane.getChildren().remove(2);
@@ -578,7 +641,6 @@ public class MapController {
         putOnTerminal(s, true);
     }
 
-    //puts string on terminal
     private void putOnTerminal(String s, boolean newLine) {
         if (s.length() > 38) {
             int cut = 38;
@@ -610,7 +672,6 @@ public class MapController {
         }
     }
 
-    //used to navigate the map
     private void setRectClicked(MouseEvent e) {
         double y = gridPane.getTranslateY();
         double x = gridPane.getTranslateX();
@@ -633,7 +694,7 @@ public class MapController {
         }
     }
 
-    //initializes the map buttons
+    //INITIALIZER
     public void initialize() {
         upRect.setOnMouseClicked(this::setRectClicked);
         downRect.setOnMouseClicked(this::setRectClicked);

@@ -7,7 +7,7 @@ import java.util.HashMap;
  * Created by William on 11/10/2015.
  */
 public enum Graphic {
-    MOVESLCT, ATTACKSLCT, FIGHTERSLCT;
+    MOVESLCT, ATTACKSLCT, FIGHTERSLCT, TRACTORBEAM;
 
     private Map<String, String> imagePath;
 
@@ -16,6 +16,7 @@ public enum Graphic {
         imagePath.put("MOVESLCT", "/View/Graphics/Tile/moveSelect.png");
         imagePath.put("ATTACKSLCT", "/View/Graphics/Tile/attackSelect.png");
         imagePath.put("FIGHTERSLCT", "/View/Graphics/Tile/fighterSelect.gif");
+        imagePath.put("TRACTORBEAM", "/View/Graphics/Tile/tractorBeam.gif");
     }
 
     public String imagePath() {return imagePath.get(this.name());}

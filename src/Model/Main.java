@@ -6,11 +6,10 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    public static Game myGame;
+    public static Game myGame = new Game();
 
     @Override
     public void start(Stage stage) throws Exception{
-        myGame = new Game();
         MasterController controller = MasterController.getInstance();
         controller.setStage(stage);
         controller.setStartScene();

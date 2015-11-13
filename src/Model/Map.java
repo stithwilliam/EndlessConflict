@@ -27,6 +27,31 @@ public class Map {
         }
     }
 
+    public boolean hasPathBetween(int x1, int y1, int x2, int y2) {
+        boolean foundPath = false;
+        MapTile startingTile = getMapTile(x1, y1);
+        HashSet<MapTile> visited = new HashSet<>();
+        Queue<MapTile> queue = new LinkedList<>();
+        for (MapTile x : getMoves(startingTile)) {
+            queue.add(x);
+        }
+        while (!queue.isEmpty()) {
+            MapTile tile = queue.poll();
+            if (tile.getxPos() == x2 && tile.getyPos() == y2) {
+                foundPath = true;
+                queue = new LinkedList<>();
+            } else {
+                for (MapTile x : getMoves(tile)) {
+                    if (!visited.contains(x)) {
+                        queue.add(x);
+                        visited.add(x);
+                    }
+                }
+            }
+        }
+        return foundPath;
+    }
+
     //Uses a BFS to find all of the valid moves for a fighter f
     public boolean[][] getValidMoves(Fighter f) {
         boolean[][] valid = new boolean[height][width];

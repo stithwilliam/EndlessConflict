@@ -14,17 +14,18 @@ public enum MapType {
         Tile F = Tile.FOREST;
         Tile P = Tile.PLAIN;
         Tile R = Tile.ROCK;
+        Game game = Main.myGame;
         switch (this) {
             case TUTORIAL:
-                Commander commander = Main.myGame.getCommander();
+                Commander commander = game.getCommander();
                 int h = 6;
                 int w = 15;
                 Tile[] tiles = {P, F, R};
-                int[] probs = {70, 10, 20};
+                int[] probs = {65, 15, 20};
                 board = new MapTile[h][w];
                 for (int i = 0; i < h; i++) {
                     for (int j = 0; j < w; j++) {
-                        if ((i <= 4 && j <= 2) || ((i == 3 || i == 2 || i == 4) && (j == 8 || j == 7 || j == 9 || j >= 13))) {
+                        if (((i <= 4 && i >= 1) && j <= 2) || ((i == 3 || i == 2 || i == 4) && (j == 8 || j == 7 || j == 9 || j >= 13))) {
                             board[i][j] = new MapTile(P, j, i);
                             Fighter f = null;
                             if (i == 2 && j == 1) {

@@ -32,6 +32,15 @@ public class Game {
     public void startGame() {
         MasterController.getInstance().setMapScene();
         map = new Map(MapType.TUTORIAL);
+        int startX = 1;
+        int startY = 2;
+        int obj1X = 8;
+        int obj1Y = 3;
+        int obj2X = 14;
+        int obj2Y = 3;
+        while (!map.hasPathBetween(startX, startY, obj1X, obj1Y) || !map.hasPathBetween(startX, startY, obj2X, obj2Y)) {
+            map = new Map(MapType.TUTORIAL);
+        }
         fighters = map.getFighters();
         for (Fighter f: fighters) {
             if (f.isEnemy()) {
@@ -58,10 +67,12 @@ public class Game {
         int damage = (attack * 2 - defense) + r.nextInt(10);
         if (damage < 0) { damage = 0;}
         f.setHp(f.getHp() - damage);
-        String s = (fighter.getName() + " dealt " + damage + " damage to " + f.getName() + ". (" + f.getHp() + "/" + f.getMaxHP() + ") health remaining");
+        String s = (fighter.getName() + " dealt " + damage + " damage to " + f.getName());
         if (f.getHp() <= 0) {
             s += (" and killed " + f.getName() + "!");
             killedFighter(f);
+        } else {
+            s += (". (" + f.getHp() + "/" + f.getMaxHP() + ") health remaining");
         }
         return s;
     }
@@ -106,6 +117,7 @@ public class Game {
     //Getters
     public Difficulty getDifficulty() {return difficulty;}
     public Mode getMode() {return mode;}
+    public Map getMap() {return map;}
     public Commander getCommander() {return commander;}
     public ArrayList<Fighter> getAllies() {return allies;}
     public ArrayList<Fighter> getEnemies() {return enemies;}

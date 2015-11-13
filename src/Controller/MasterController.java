@@ -31,13 +31,13 @@ public class MasterController {
     public MasterController() {
         Parent root;
         try {
-            root = loader.load(getClass().getResource("/View/Start.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/View/Start.fxml"));
             startScene = new Scene(root);
 
-            root = loader.load(getClass().getResource("/View/Config1.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/View/Config1.fxml"));
             config1Scene = new Scene(root);
 
-            root = loader.load(getClass().getResource("/View/Config2.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/View/Config2.fxml"));
             config2Scene = new Scene(root);
 
             loader = new FXMLLoader(getClass().getResource("/View/Map.fxml"));
@@ -45,7 +45,7 @@ public class MasterController {
             mapScene = new Scene(root);
             mapController = loader.getController();
 
-            root = loader.load(getClass().getResource("/View/Headquarters.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/View/Headquarters.fxml"));
             headquartersScene = new Scene(root);
 
         } catch (IOException e) {

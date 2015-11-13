@@ -659,6 +659,7 @@ public class MapController {
     }
 
     private void setEndTurnBtn(ActionEvent e) {
+        putOnTerminal("You ended your turn");
         game.endTurn();
     }
 

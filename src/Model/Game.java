@@ -44,6 +44,13 @@ public class Game {
         MasterController.getInstance().getMapController().constructMap(map);
     }
 
+    public void endTurn() {
+        for (Fighter f : allies) {
+            f.setHasAttacked(false);
+            f.setHasMoved(false);
+        }
+    }
+
     public String attackFighter(Fighter f) {
         Random r = new Random();
         int attack = fighter.getAtt();
@@ -51,7 +58,7 @@ public class Game {
         int damage = (attack * 2 - defense) + r.nextInt(10);
         if (damage < 0) { damage = 0;}
         f.setHp(f.getHp() - damage);
-        String s = (fighter.getName() + " dealt " + damage + " damage to " + f.getName());
+        String s = (fighter.getName() + " dealt " + damage + " damage to " + f.getName() + ". (" + f.getHp() + "/" + f.getMaxHP() + ") health remaining");
         if (f.getHp() <= 0) {
             s += (" and killed " + f.getName() + "!");
             killedFighter(f);

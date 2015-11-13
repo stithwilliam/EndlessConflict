@@ -46,6 +46,8 @@ public class MapController {
     @FXML
     private Button nextBtn;
     @FXML
+    private Button endTurnBtn;
+    @FXML
     private VBox terminal;
 
     //Global vars
@@ -126,17 +128,19 @@ public class MapController {
 
     //MOVE
     private void showMoves(MouseEvent e) {
-        boolean[][] valid = map.getValidMoves(fighter);
-        for (int i = 0; i < valid.length; i++) {
-            for (int j = 0; j < valid[0].length; j++) {
-                if (valid[i][j]) {
-                    ImageView move = new ImageView(Graphic.MOVESLCT.imagePath());
-                    StackPane pane = map.getMapTile(j, i).getStackPane();
-                    pane.getChildren().add(move);
+        if (!fighter.hasMoved()) {
+            boolean[][] valid = map.getValidMoves(fighter);
+            for (int i = 0; i < valid.length; i++) {
+                for (int j = 0; j < valid[0].length; j++) {
+                    if (valid[i][j]) {
+                        ImageView move = new ImageView(Graphic.MOVESLCT.imagePath());
+                        StackPane pane = map.getMapTile(j, i).getStackPane();
+                        pane.getChildren().add(move);
+                    }
                 }
             }
+            moveBtn.setOnMouseExited(this::noShowMoves);
         }
-        moveBtn.setOnMouseExited(this::noShowMoves);
     }
 
     private void noShowMoves(MouseEvent e) {
@@ -153,16 +157,20 @@ public class MapController {
     }
 
     private void setMoveBtn(ActionEvent e) {
-        buttonsToCancelMove();
         putInFocus(fighter.getxPos(), fighter.getyPos());
-        boolean[][] valid = map.getValidMoves(fighter);
-        for (int i = 0; i < valid[0].length; i++) {
-            for (int j = 0; j < valid.length; j++) {
-                if (valid[j][i]) {
-                    StackPane pane = map.getMapTile(i, j).getStackPane();
-                    pane.setOnMouseClicked(this::moveHere);
+        if (!fighter.hasMoved()) {
+            buttonsToCancelMove();
+            boolean[][] valid = map.getValidMoves(fighter);
+            for (int i = 0; i < valid[0].length; i++) {
+                for (int j = 0; j < valid.length; j++) {
+                    if (valid[j][i]) {
+                        StackPane pane = map.getMapTile(i, j).getStackPane();
+                        pane.setOnMouseClicked(this::moveHere);
+                    }
                 }
             }
+        } else {
+            putOnTerminal(fighter.getName() + " has already moved");
         }
     }
 
@@ -179,17 +187,21 @@ public class MapController {
             }
         }
         //remove old fighter
-        StackPane oldPane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
+        MapTile oldTile =  map.getMapTile(fighter.getxPos(), fighter.getyPos());
+        oldTile.setFighter(null);
+        StackPane oldPane = oldTile.getStackPane();
         oldPane.getChildren().remove(2);
         oldPane.getChildren().remove(1);
         oldPane.setOnMouseClicked(null);
         //move fighter
         StackPane pane = (StackPane) e.getSource();
         MapTile tile = paneToTile.get(pane);
+        tile.setFighter(fighter);
         int x = tile.getxPos();
         int y = tile.getyPos();
         fighter.setxPos(x);
         fighter.setyPos(y);
+        fighter.setHasMoved(true);
         pane.getChildren().add(new ImageView(fighter.imagePath()));
         pane.getChildren().add(new ImageView(Graphic.FIGHTERSLCT.imagePath()));
         pane.setOnMouseClicked(this::fighterStats);
@@ -227,17 +239,19 @@ public class MapController {
 
     //ATTACK
     private void showAttacks(MouseEvent e) {
-        boolean[][] valid = map.getValidAttacks(fighter);
-        for (int i = 0; i < valid.length; i++) {
-            for (int j = 0; j < valid[0].length; j++) {
-                if (valid[i][j]) {
-                    ImageView move = new ImageView(Graphic.ATTACKSLCT.imagePath());
-                    StackPane pane = map.getMapTile(j, i).getStackPane();
-                    pane.getChildren().add(move);
+        if (!fighter.hasAttacked()) {
+            boolean[][] valid = map.getValidAttacks(fighter);
+            for (int i = 0; i < valid.length; i++) {
+                for (int j = 0; j < valid[0].length; j++) {
+                    if (valid[i][j]) {
+                        ImageView move = new ImageView(Graphic.ATTACKSLCT.imagePath());
+                        StackPane pane = map.getMapTile(j, i).getStackPane();
+                        pane.getChildren().add(move);
+                    }
                 }
             }
+            atkBtn.setOnMouseExited(this::noShowAttacks);
         }
-        atkBtn.setOnMouseExited(this::noShowAttacks);
     }
 
     private void noShowAttacks(MouseEvent e) {
@@ -255,29 +269,35 @@ public class MapController {
 
     private void setAtkBtn(ActionEvent e) {
         putInFocus(fighter.getxPos(), fighter.getyPos());
-        noShowAttacks(null);
-        boolean[][] valid = map.getAttackable(fighter);
-        for (int i = 0; i < valid[0].length; i++) {
-            for (int j = 0; j < valid.length; j++) {
-                if (valid[j][i]) {
-                    ImageView atk = new ImageView(Graphic.ATTACKSLCT.imagePath());
-                    StackPane pane = map.getMapTile(i, j).getStackPane();
-                    pane.getChildren().add(atk);
-                    pane.setOnMouseClicked(this::attackHere);
+        if (!fighter.hasAttacked()) {
+            noShowAttacks(null);
+            boolean[][] valid = map.getAttackable(fighter);
+            for (int i = 0; i < valid[0].length; i++) {
+                for (int j = 0; j < valid.length; j++) {
+                    if (valid[j][i]) {
+                        ImageView atk = new ImageView(Graphic.ATTACKSLCT.imagePath());
+                        StackPane pane = map.getMapTile(i, j).getStackPane();
+                        pane.getChildren().add(atk);
+                        pane.setOnMouseClicked(this::attackHere);
+                    }
                 }
             }
-        }
-        boolean hasAttack = false;
-        for (int i = 0; i < valid[0].length; i++) {
-            for (int j = 0; j < valid.length; j++) {
-                if (valid[j][i]) { hasAttack = true;}
+            boolean hasAttack = false;
+            for (int i = 0; i < valid[0].length; i++) {
+                for (int j = 0; j < valid.length; j++) {
+                    if (valid[j][i]) {
+                        hasAttack = true;
+                    }
+                }
             }
-        }
-        if (!hasAttack) {
-            atkBtn.setOnMouseExited(null);
-            putOnTerminal(fighter.getName() + " has no valid targets");
+            if (!hasAttack) {
+                atkBtn.setOnMouseExited(null);
+                putOnTerminal(fighter.getName() + " has no valid targets");
+            } else {
+                buttonsToCancelAttack();
+            }
         } else {
-            buttonsToCancelAttack();
+            putOnTerminal(fighter.getName() + " has already attacked");
         }
     }
 
@@ -294,6 +314,7 @@ public class MapController {
                 }
             }
         }
+        fighter.setHasAttacked(true);
         StackPane pane = (StackPane) e.getSource();
         MapTile tile = paneToTile.get(pane);
         Fighter attacked = map.getFighter(tile.getxPos(), tile.getyPos());
@@ -341,19 +362,23 @@ public class MapController {
     //SKILLS
     //LizardKing's skill
     public void showLizardJump() {
-        buttonsToCancelLizardJump();
         putInFocus(fighter.getxPos(), fighter.getyPos());
-        boolean[][] valid = map.getTilesWithin(fighter.getxPos(), fighter.getyPos(), fighter.getMov() + 2);
-        for (int i = 0; i < valid.length; i++) {
-            for (int j = 0; j < valid[i].length; j++) {
-                if (valid[i][j] && map.getMapTile(j, i).isMoveable() && !map.getMapTile(j, i).hasFighter()) {
-                    StackPane stackPane = map.getMapTile(j, i).getStackPane();
-                    stackPane.getChildren().add(new ImageView(Graphic.MOVESLCT.imagePath()));
-                    stackPane.setOnMouseClicked(this::doLizardJump);
+        if (!fighter.hasMoved()) {
+            buttonsToCancelLizardJump();
+            boolean[][] valid = map.getTilesWithin(fighter.getxPos(), fighter.getyPos(), fighter.getMov() + 2);
+            for (int i = 0; i < valid.length; i++) {
+                for (int j = 0; j < valid[i].length; j++) {
+                    if (valid[i][j] && map.getMapTile(j, i).isMoveable() && !map.getMapTile(j, i).hasFighter()) {
+                        StackPane stackPane = map.getMapTile(j, i).getStackPane();
+                        stackPane.getChildren().add(new ImageView(Graphic.MOVESLCT.imagePath()));
+                        stackPane.setOnMouseClicked(this::doLizardJump);
+                    }
                 }
             }
+            putOnTerminal("Choose a location to jump to");
+        } else {
+            putOnTerminal(fighter.getName() + " has used his move already");
         }
-        putOnTerminal("Choose a location to jump to");
     }
 
     public void doLizardJump(MouseEvent e) {
@@ -368,17 +393,21 @@ public class MapController {
             }
         }
         //remove old fighter
-        StackPane oldPane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
+        MapTile oldTile = map.getMapTile(fighter.getxPos(), fighter.getyPos());
+        oldTile.setFighter(null);
+        StackPane oldPane = oldTile.getStackPane();
         oldPane.getChildren().remove(2);
         oldPane.getChildren().remove(1);
         oldPane.setOnMouseClicked(null);
         //move fighter
         StackPane pane = (StackPane) e.getSource();
         MapTile tile = paneToTile.get(pane);
+        tile.setFighter(fighter);
         int x = tile.getxPos();
         int y = tile.getyPos();
         fighter.setxPos(x);
         fighter.setyPos(y);
+        fighter.setHasMoved(true);
         pane.getChildren().add(new ImageView(fighter.imagePath()));
         pane.getChildren().add(new ImageView(Graphic.FIGHTERSLCT.imagePath()));
         pane.setOnMouseClicked(this::fighterStats);
@@ -417,23 +446,28 @@ public class MapController {
 
     //modelX's skill
     public void showTractorBeam() {
-        boolean inRange = false;
-        boolean[][] valid = map.getAttackable(fighter);
-        for (int i = 0; i < valid.length; i++) {
-            for (int j = 0; j < valid[i].length; j++) {
-                if (valid[i][j]) {
-                    inRange = true;
-                    StackPane pane = map.getMapTile(j, i).getStackPane();
-                    pane.getChildren().add(new ImageView(Graphic.ATTACKSLCT.imagePath()));
-                    pane.setOnMouseClicked(this::doTractorBeam);
+        putInFocus(fighter.getxPos(), fighter.getyPos());
+        if (!fighter.hasAttacked()) {
+            boolean inRange = false;
+            boolean[][] valid = map.getAttackable(fighter);
+            for (int i = 0; i < valid.length; i++) {
+                for (int j = 0; j < valid[i].length; j++) {
+                    if (valid[i][j]) {
+                        inRange = true;
+                        StackPane pane = map.getMapTile(j, i).getStackPane();
+                        pane.getChildren().add(new ImageView(Graphic.ATTACKSLCT.imagePath()));
+                        pane.setOnMouseClicked(this::doTractorBeam);
+                    }
                 }
             }
-        }
-        if (inRange) {
-            buttonsToCancelTractorBeam();
-            putOnTerminal("Choose an enemy to suspend");
+            if (inRange) {
+                buttonsToCancelTractorBeam();
+                putOnTerminal("Choose an enemy to suspend");
+            } else {
+                putOnTerminal("No enemies are in range");
+            }
         } else {
-            putOnTerminal("No enemies are in range");
+            putOnTerminal(fighter.getName() + " has already used his attack");
         }
     }
 
@@ -449,6 +483,7 @@ public class MapController {
                 }
             }
         }
+        fighter.setHasAttacked(true);
         StackPane pane = (StackPane) e.getSource();
         pane.getChildren().add(new ImageView(Graphic.TRACTORBEAM.imagePath()));
         buttonsToDefault();
@@ -484,17 +519,22 @@ public class MapController {
 
     //Chaos's skill
     public void showGrenade() {
-        buttonsToCancelGrenade();
-        boolean[][] valid = map.getValidAttacks(fighter);
-        for (int i = 0; i < valid.length; i++) {
-            for (int j = 0; j < valid[i].length; j++) {
-                if (valid[i][j]) {
-                    StackPane pane = map.getMapTile(j, i).getStackPane();
-                    pane.setOnMouseEntered(this::mouseOverGrenade);
+        putInFocus(fighter.getxPos(), fighter.getyPos());
+        if (!fighter.hasAttacked()) {
+            buttonsToCancelGrenade();
+            boolean[][] valid = map.getValidAttacks(fighter);
+            for (int i = 0; i < valid.length; i++) {
+                for (int j = 0; j < valid[i].length; j++) {
+                    if (valid[i][j]) {
+                        StackPane pane = map.getMapTile(j, i).getStackPane();
+                        pane.setOnMouseEntered(this::mouseOverGrenade);
+                    }
                 }
             }
+            putOnTerminal("Choose a location to throw a grenade");
+        } else {
+            putOnTerminal(fighter.getName() + " has already used his attack");
         }
-        putOnTerminal("Choose a location to throw a grenade");
     }
 
     public void mouseOverGrenade(MouseEvent e) {
@@ -542,6 +582,7 @@ public class MapController {
             }
         }
         //grenade logic
+        fighter.setHasAttacked(true);
         boolean hit = false;
         ArrayList<MapTile> tiles = new ArrayList<>();
         StackPane pane = (StackPane) e.getSource();
@@ -604,7 +645,7 @@ public class MapController {
         StackPane newPane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
         newPane.getChildren().add(new ImageView("/View/Graphics/Tile/fighterSelect.gif"));
         putInFocus(fighter.getxPos(), fighter.getyPos());
-        putOnTerminal("Next fighter is " + fighter.getName());
+        putOnTerminal("Next fighter is " + fighter.getName() + " (" + fighter.getHp() + "/" + fighter.getMaxHP() + ")");
     }
 
     private void setPrevBtn(ActionEvent e) {
@@ -614,7 +655,11 @@ public class MapController {
         StackPane newPane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
         newPane.getChildren().add(new ImageView(Graphic.FIGHTERSLCT.imagePath()));
         putInFocus(fighter.getxPos(), fighter.getyPos());
-        putOnTerminal("Previous fighter is " + fighter.getName());
+        putOnTerminal("Previous fighter is " + fighter.getName() + " (" + fighter.getHp() + "/" + fighter.getMaxHP() + ")");
+    }
+
+    private void setEndTurnBtn(ActionEvent e) {
+        game.endTurn();
     }
 
     private void buttonsToDefault() {
@@ -708,6 +753,7 @@ public class MapController {
         skillBtn.setOnAction(this::setSkillBtn);
         nextBtn.setOnAction(this::setNextBtn);
         prevBtn.setOnAction(this::setPrevBtn);
+        endTurnBtn.setOnAction(this::setEndTurnBtn);
     }
 
 

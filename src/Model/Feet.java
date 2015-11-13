@@ -3,7 +3,7 @@ package Model;
 /**
  * Created by William on 11/12/2015.
  */
-public enum Feet implements Equipable{
+public enum Feet implements Equipment {
     WEBBEDTOES(0,0,0,0,1,0), HIKINGBOOTS(0,0,0,0,1,0), IMPROVEDEMITTOR(0,0,0,0,1,0);  //first footwear for heroes
 
     int attack;

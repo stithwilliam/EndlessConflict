@@ -7,7 +7,9 @@ import java.util.HashMap;
  * Created by William on 11/10/2015.
  */
 public enum Graphic {
-    MOVESLCT, ATTACKSLCT, FIGHTERSLCT, TRACTORBEAM;
+    MOVESLCT, ATTACKSLCT, FIGHTERSLCT, //map selectors
+    WPNDROP, ARMDROP, HEADDROP, FEETDROP, //dropped equipment
+    TRACTORBEAM; //misc
 
     private Map<String, String> imagePath;
 

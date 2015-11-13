@@ -3,7 +3,7 @@ package Model;
 /**
  * Created by William on 11/12/2015.
  */
-public enum Head implements Equipable {
+public enum Head implements Equipment {
     RAZORTEETH(2,0,0,0,0,0), GOGGLES(0,2,0,0,0,0), TARGETINGCHIP(0,0,0,0,0,1);  //first headgear for Heroes
 
     int attack;

@@ -8,9 +8,9 @@ public class Fighter {
     String name;
     private Placeable model;
     private int xPos, yPos;
-    private boolean melee, enemy;
+    private boolean melee, enemy, hasMoved, hasAttacked;
     private int attack, defense, maxHP, hp, speed, movement, vision, range;
-    private Equipable weapon, armor, head, feet;
+    private Equipment weapon, armor, head, feet;
 
     public Fighter(Placeable p, int x, int y, boolean e) {
         model = p;
@@ -26,6 +26,8 @@ public class Fighter {
         xPos = x;
         yPos = y;
         enemy = e;
+        hasAttacked = false;
+        hasMoved = false;
         if (melee) {
             range = 1;
         } else {
@@ -33,7 +35,7 @@ public class Fighter {
         }
     }
 
-    private void changeStats(Equipable e, boolean equipping) {
+    private void changeStats(Equipment e, boolean equipping) {
         int mod;
         if (equipping) {
             mod = 1;
@@ -67,12 +69,15 @@ public class Fighter {
     public int getAtt() {return attack;}
     public int getDef() {return defense;}
     public int getHp() {return hp;}
+    public int getMaxHP() {return maxHP;}
     public int getSpd() {return speed;}
     public int getMov() {return movement;}
     public int getVis() {return vision;}
     public int getRange() {return range;}
     public boolean isMelee() {return melee;}
     public boolean isEnemy() {return enemy;}
+    public boolean hasMoved() {return hasMoved;}
+    public boolean hasAttacked() {return hasAttacked;}
     public Weapon getWeapon() {return (Weapon) weapon;}
     public Armor getArmor() {return (Armor) armor;}
     public Head getHead() {return (Head) head;}
@@ -88,8 +93,9 @@ public class Fighter {
     public void setMov(int movement) {this.movement = movement;}
     public void setVis(int vision) {this.vision = vision;}
     public void setRange(int range) {this.range = range;}
-    public void setMelee(boolean melee) {this.melee = melee;}
     public void setEnemy(boolean enemy) {this.enemy = enemy;}
+    public void setHasMoved(boolean h) {hasMoved = h;}
+    public void setHasAttacked(boolean h) {hasAttacked = h;}
     public void setWeapon(Weapon weapon) {
         if (this.weapon != null) {
             changeStats(this.weapon, false);

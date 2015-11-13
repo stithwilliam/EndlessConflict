@@ -3,7 +3,7 @@ package Model;
 /**
  * Created by William on 11/12/2015.
  */
-public enum Weapon implements Equipable{
+public enum Weapon implements Equipment {
     DIRTYCLAW, LASERPISTOL, LIGHTMACHINEGUN,  //hero starting weapons
     DIRTYOOZE, SHODDYLASERRIFLE,SMALLTURRET;  //unit starting weapons
 

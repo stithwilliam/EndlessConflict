@@ -3,7 +3,7 @@ package Model;
 /**
  * Created by William on 11/12/2015.
  */
-public interface Equipable {
+public interface Equipment {
 
     //Getters
     int getAttMod();

@@ -10,16 +10,16 @@ import java.util.Map;
  * Created by William on 10/27/2015.
  */
 public enum Hero implements Placeable {
-    LIZARDKING(30, 30, 100, 20, 4, 4, true, false, "Lizard King"), MODELX(20, 40, 100, 20, 4, 4, false, false, "Model X"),
-    CHAOS(40, 20, 100, 20, 4, 4, false, true, "Commander Chaos");
+    LIZARDKING(15,15,60,20,4,4, true, "Lizard King"), MODELX(12,18,40,20,4,4, false, "Model X"),
+    CHAOS(18,12,40,20,4,4, false, "Commander Chaos");
 
     private String name;
     private int attack, defense, hp, speed, movement, vision, level;
-    private boolean melee, flying;
+    private boolean melee;
     private Map<String, String> imagePath = new HashMap<>();
 
     //Constructor
-    Hero(int a, int d, int h, int s, int m, int v, boolean me, boolean f, String n) {
+    Hero(int a, int d, int h, int s, int m, int v, boolean me, String n) {
         name = n;
         attack = a;
         defense = d;
@@ -29,7 +29,6 @@ public enum Hero implements Placeable {
         vision = v;
         level = 1;
         melee = me;
-        flying = f;
         imagePath.put("LIZARDKING", "/View/Graphics/Placeable/lizardKing.png");
         imagePath.put("MODELX", "/View/Graphics/Placeable/modelXresting.gif");
         imagePath.put("CHAOS", "/View/Graphics/Placeable/commanderChaos.png");
@@ -83,5 +82,4 @@ public enum Hero implements Placeable {
     public int getVis() {return vision;}
     public int getLevel() {return level;}
     public boolean isMelee() {return melee;}
-    public boolean isFlying() {return flying;}
 }

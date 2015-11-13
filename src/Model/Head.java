@@ -3,9 +3,24 @@ package Model;
 /**
  * Created by William on 11/12/2015.
  */
-public enum Equipment implements Equipable{
-    DAMAGEDSCALES, DAMAGEDKEVLAR, DAMAGEDFRAME,  //hero starting armors
-    SQUISHYOOZE, DAMAGEDUNIFORM, DAMAGEDHULL;    //unit starting armors
+public enum Head implements Equipable {
+    RAZORTEETH(2,0,0,0,0,0), GOGGLES(0,2,0,0,0,0), TARGETINGCHIP(0,0,0,0,0,1);  //first headgear for Heroes
+
+    int attack;
+    int defense;
+    int hp;
+    int speed;
+    int movement;
+    int vision;
+
+    Head(int a, int d, int h, int s, int m, int v) {
+        attack = a;
+        defense = d;
+        hp = h;
+        speed = s;
+        movement = m;
+        vision = v;
+    }
 
     @Override
     public int getAttMod() {

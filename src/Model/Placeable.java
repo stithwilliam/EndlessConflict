@@ -13,7 +13,6 @@ public interface Placeable {
     int getAtt();
     int getDef();
     int getHp();
-    int getSpd();
     int getMov();
     int getVis();
 

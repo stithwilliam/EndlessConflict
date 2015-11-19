@@ -9,7 +9,6 @@ public interface Equipment {
     int getAttMod();
     int getDefMod();
     int getHpMod();
-    int getSpdMod();
     int getMovMod();
     int getVisMod();
 

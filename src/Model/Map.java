@@ -566,8 +566,8 @@ public class Map {
         return list;
     }
 
-    //Adders
-    public void addFighter(Fighter f) {fighters.add(f);}
+    //Set
+    public void setFighter(Fighter f) {fighter = f;}
 
     //Removers
     public void removeFighter(Fighter f) {fighters.remove(f);}

@@ -701,6 +701,7 @@ public class MapController {
                 tractorBeam = null;
             }
             Fighter fighter = map.getAllies().get(0);
+            map.setFighter(fighter);
             int x = fighter.getxPos();
             int y = fighter.getyPos();
             map.getMapTile(x, y).getStackPane().getChildren().add(new ImageView(Graphic.FIGHTERSLCT.imagePath()));

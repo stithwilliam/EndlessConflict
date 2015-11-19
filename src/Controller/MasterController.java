@@ -13,8 +13,8 @@ import java.io.IOException;
 public class MasterController {
 
     private Stage stage;
-    private Scene startScene, config1Scene, config2Scene, mapScene, headquartersScene;
-    private FXMLLoader loader;
+    private Scene startScene, config1Scene, config2Scene, mapScene, headquartersScene,
+            commQuartersScene, armsDealerScene, barracksScene, mercCampScene;
     private MapController mapController;
 
     //create a singleton
@@ -40,13 +40,25 @@ public class MasterController {
             root = FXMLLoader.load(getClass().getResource("/View/Config2.fxml"));
             config2Scene = new Scene(root);
 
-            loader = new FXMLLoader(getClass().getResource("/View/Map.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Map.fxml"));
             root = loader.load();
             mapScene = new Scene(root);
             mapController = loader.getController();
 
             root = FXMLLoader.load(getClass().getResource("/View/Headquarters.fxml"));
             headquartersScene = new Scene(root);
+
+            root = FXMLLoader.load(getClass().getResource("/View/ArmsDealer.fxml"));
+            armsDealerScene = new Scene(root);
+
+            root = FXMLLoader.load(getClass().getResource("/View/Barracks.fxml"));
+            barracksScene = new Scene(root);
+
+            root = FXMLLoader.load(getClass().getResource("/View/CommandersQuarters.fxml"));
+            commQuartersScene = new Scene(root);
+
+            root = FXMLLoader.load(getClass().getResource("/View/MercenaryCamp.fxml"));
+            mercCampScene = new Scene(root);
 
         } catch (IOException e) {
             System.out.println("Shit's broke: " + e);
@@ -59,6 +71,10 @@ public class MasterController {
     public void setConfig2Scene() { stage.setScene(config2Scene);}
     public void setMapScene() { stage.setScene(mapScene);}
     public void setHeadquartersScene() { stage.setScene(headquartersScene);}
+    public void setArmsDealerScene() { stage.setScene(armsDealerScene);}
+    public void setBarracksScene() { stage.setScene(barracksScene);}
+    public void setCommQuartersScene() { stage.setScene(commQuartersScene);}
+    public void setMercCampScene() { stage.setScene(mercCampScene);}
     //Scene loaders
 
     //Getters

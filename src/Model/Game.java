@@ -73,6 +73,9 @@ public class Game {
 
     public void killedFighter(Fighter f) {
         mapController.removeFighter(f);
+        if (map.getEnemies().size() == 0) {
+            MasterController.getInstance().setHeadquartersScene();
+        }
     }
 
 

@@ -9,7 +9,7 @@ public class Fighter {
     private Placeable model;
     private int xPos, yPos;
     private boolean melee, enemy, hasMoved, hasAttacked;
-    private int attack, defense, maxHP, hp, speed, movement, vision, range;
+    private int attack, defense, maxHP, hp, movement, vision, range;
     private Equipment weapon, armor, head, feet;
 
     public Fighter(Placeable p, int x, int y, boolean e) {
@@ -20,7 +20,6 @@ public class Fighter {
         defense = model.getDef();
         maxHP = model.getHp();
         hp = maxHP;
-        speed = model.getSpd();
         movement = model.getMov();
         vision = model.getVis();
         xPos = x;
@@ -47,7 +46,6 @@ public class Fighter {
         defense += e.getDefMod() * mod;
         maxHP += e.getHpMod() * mod;
         hp += e.getHpMod() * mod;
-        speed += e.getSpdMod() * mod;
         movement += e.getMovMod() * mod;
         vision += e.getVisMod() * mod;
     }
@@ -72,10 +70,10 @@ public class Fighter {
     public String getStats() {
         if (enemy) {
             return "Enemy " + name + ": HP - " + hp + "/" + maxHP + ". Atk - " + attack + ". Def - " + defense +
-                    ". Spd - " + speed + ". Mov - " + movement;
+                    ". Mov - " + movement + ". Range - " + range;
         } else {
             return "Ally " + name + ": HP - " + hp + "/" + maxHP + ". Atk - " + attack + ". Def - " + defense +
-                    ". Spd - " + speed + ". Mov - " + movement;
+                    ". Mov - " + movement + ". Range - " + range;
         }
     }
     public String toString() { return (name);}
@@ -88,7 +86,6 @@ public class Fighter {
     public int getDef() {return defense;}
     public int getHp() {return hp;}
     public int getMaxHP() {return maxHP;}
-    public int getSpd() {return speed;}
     public int getMov() {return movement;}
     public int getVis() {return vision;}
     public int getRange() {return range;}
@@ -107,7 +104,6 @@ public class Fighter {
     public void setAtt(int attack) {this.attack = attack;}
     public void setDef(int defense) {this.defense = defense;}
     public void setHp(int hp) {this.hp = hp;}
-    public void setSpd(int speed) {this.speed = speed;}
     public void setMov(int movement) {this.movement = movement;}
     public void setVis(int vision) {this.vision = vision;}
     public void setRange(int range) {this.range = range;}

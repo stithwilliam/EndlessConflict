@@ -10,21 +10,20 @@ import java.util.Map;
  * Created by William on 10/27/2015.
  */
 public enum Hero implements Placeable {
-    LIZARDKING(15,15,50,20,4,4, true, "Lizard King"), MODELX(12,18,40,20,4,4, false, "Model X"),
-    CHAOS(18,12,40,20,4,4, false, "Commander Chaos");
+    LIZARDKING(15,15,50,4,4, true, "Lizard King"), MODELX(12,18,40,4,4, false, "Model X"),
+    CHAOS(18,12,40,4,4, false, "Commander Chaos");
 
     private String name;
-    private int attack, defense, hp, speed, movement, vision, level;
+    private int attack, defense, hp, movement, vision, level;
     private boolean melee;
     private Map<String, String> imagePath = new HashMap<>();
 
     //Constructor
-    Hero(int a, int d, int h, int s, int m, int v, boolean me, String n) {
+    Hero(int a, int d, int h, int m, int v, boolean me, String n) {
         name = n;
         attack = a;
         defense = d;
         hp = h;
-        speed = s;
         movement = m;
         vision = v;
         level = 1;
@@ -77,7 +76,6 @@ public enum Hero implements Placeable {
     public int getAtt() {return attack;}
     public int getDef() {return defense;}
     public int getHp() {return hp;}
-    public int getSpd() {return speed;}
     public int getMov() {return movement;}
     public int getVis() {return vision;}
     public int getLevel() {return level;}

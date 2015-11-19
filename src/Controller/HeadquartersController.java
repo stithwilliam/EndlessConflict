@@ -22,19 +22,19 @@ public class HeadquartersController {
     private Button commBtn;
 
     private void setMercBtn(ActionEvent e) {
-
+        MasterController.getInstance().setMercCampScene();
     }
 
     private void setArmsBtn(ActionEvent e) {
-
+        MasterController.getInstance().setArmsDealerScene();
     }
 
     private void setBarrBtn(ActionEvent e) {
-
+        MasterController.getInstance().setBarracksScene();
     }
 
     private void setCommBtn(ActionEvent e) {
-
+        MasterController.getInstance().setCommQuartersScene();
     }
 
     public void initialize() {

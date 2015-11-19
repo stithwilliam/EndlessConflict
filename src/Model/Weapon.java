@@ -5,7 +5,7 @@ package Model;
  */
 public enum Weapon implements Equipment {
     DIRTYCLAW, LASERPISTOL, LIGHTMACHINEGUN,  //hero starting weapons
-    DIRTYOOZE, SHODDYLASERRIFLE,SMALLTURRET;  //unit starting weapons
+    DIRTYOOZE, SHODDYLASERRIFLE, SMALLTURRET;  //unit starting weapons
 
     @Override
     public int getAttMod() {
@@ -17,10 +17,6 @@ public enum Weapon implements Equipment {
     }
     @Override
     public int getHpMod() {
-        return 0;
-    }
-    @Override
-    public int getSpdMod() {
         return 0;
     }
     @Override

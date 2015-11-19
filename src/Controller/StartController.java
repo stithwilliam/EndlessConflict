@@ -31,6 +31,6 @@ public class StartController {
     }
 
     private void setRulesBtn(ActionEvent e) {
-        System.out.println("Not implemented yet"); //TODO
+        MasterController.getInstance().setHeadquartersScene(); //TODO
     }
 }

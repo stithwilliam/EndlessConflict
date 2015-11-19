@@ -1,0 +1,101 @@
+MULTIPLE CHOICE
+
+1) interface segregation prefers focused interfaces
+    B - violates
+
+2) D - violates
+
+3) B - violates Liskov Substitution
+
+4) D - high cohesion, low coupling
+
+5) E - replace switch statement with polymorphism and create subclasses of Tile
+
+6) C - change model and view to interfaces to comply with dependency injection
+
+7) D - all are correct
+
+8) C - follow acyclic dependency principle
+
+9) D - both a and b
+
+10) A - factory (not on test)
+
+11) B - use strategy pattern
+
+12) D - b and c
+
+13) E - observer
+
+14) D - flyweight
+
+Heuristic Eval - G. Checking user interface
+
+Cognitive Walkthrough - F. Checking how easy your system is
+
+Think Aloud - H.
+
+Natural Mapping - A. Designed a rotating control
+
+False Affordance - D. Giving users a label that looks like a button
+
+Mental Model - B. An idea formed by the user
+
+Recognition - E. Putting a button on the screen
+
+Recall - C. Having a command prompt
+
+15) C - Mark 4 (not on test)
+
+16) D - need four test cases
+
+...
+
+17) D - model-view-presenter
+
+...
+
+18) B - -45, 18, 3432
+
+19) C - -1, 0, 1000, 1001
+
+
+FREE RESPONSE
+
+OO Design Principles
+
+1) Design only, not really applicable to OOA
+
+2) Law of Demeter controls who I can talk to, helps with low coupling
+
+3) supported in MVP: A, C, D, H
+
+4) A, B, C
+
+5) violates Tell Don't Ask
+
+OO Design Patterns
+
+1)
+
+2) adv: easy to get ref to class, one instance. disadv: data becomes global, low reuse
+
+3)
+
+4) B - command
+
+5) D - mediator
+
+6) D - observer
+
+User Interface Evaluation
+
+1) A - true
+
+2) C - heuristic
+
+3)
+
+Testing and Packaging
+
+1) test case on invalid side, and valid side ....

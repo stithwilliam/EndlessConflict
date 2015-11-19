@@ -2,6 +2,8 @@ package Model;
 
 import javafx.scene.layout.StackPane;
 
+import java.util.ArrayList;
+
 /**
  * Created by William on 10/27/2015.
  */
@@ -13,7 +15,6 @@ public class MapTile {
     private boolean moveable, blocking;
     private int moveCost;
     private StackPane stackPane;
-    private Fighter fighter;
 
     public MapTile(Tile t, int x, int y) {
         tile = t;
@@ -24,15 +25,28 @@ public class MapTile {
         moveCost = t.getMoveCost();
         blocking = t.isBlocking();
         stackPane = null;
-        fighter = null;
     }
 
     //Getters
     public String getName() {return name;}
     public int getxPos() {return xPos;}
     public int getyPos() {return yPos;}
-    public boolean hasFighter() {return (fighter != null);}
-    public Fighter getFighter() {return fighter;}
+    public boolean hasFighter() {
+        for (Fighter f : Main.myGame.getFighters()) {
+            if (f.getxPos() == xPos && f.getyPos() == yPos) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public Fighter getFighter() {
+        for (Fighter f : Main.myGame.getFighters()) {
+            if (f.getxPos() == xPos && f.getyPos() == yPos) {
+                return f;
+            }
+        }
+        return null;
+    }
     public boolean isMoveable() {return moveable;}
     public boolean isBlocking() {return blocking;}
     public int getMoveCost() {return moveCost;}
@@ -42,7 +56,6 @@ public class MapTile {
 
     //Setters
     public void setStackPane(StackPane s) {stackPane = s;}
-    public void setFighter(Fighter f) {fighter = f;}
 
     //test code
     public String toString() {

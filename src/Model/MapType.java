@@ -1,5 +1,6 @@
 package Model;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -17,7 +18,6 @@ public enum MapType {
         Game game = Main.myGame;
         switch (this) {
             case TUTORIAL:
-                Commander commander = game.getCommander();
                 int h = 6;
                 int w = 15;
                 Tile[] tiles = {P, F, R};
@@ -27,23 +27,6 @@ public enum MapType {
                     for (int j = 0; j < w; j++) {
                         if (((i <= 4 && i >= 1) && j <= 2) || ((i == 3 || i == 2 || i == 4) && (j == 8 || j == 7 || j == 9 || j >= 13))) {
                             board[i][j] = new MapTile(P, j, i);
-                            Fighter f = null;
-                            if (i == 2 && j == 1) {
-                                f = new Fighter(commander.getHero(), j, i, false);
-                            } else if (i == 1 && j == 0) {
-                                f = new Fighter(commander.getUnit(), j, i, false);
-                                f.setName(f.getName() + " 1");
-                            } else if (i == 3 && j == 0) {
-                                f = new Fighter(commander.getUnit(), j, i, false);
-                                f.setName(f.getName() + " 2");
-                            } else if (i == 3 && j == 8) {
-                                f = new Fighter(commander.getWeakCommander().getHero(), j, i, true);
-                            } else if (i == 3 && j == 14) {
-                                f = new Fighter(commander.getStrongCommander().getHero(), j, i, true);
-                            }
-                            if (f != null) {
-                                board[i][j].setFighter(f);
-                            }
                         } else {
                             board[i][j] = nextTile(board, tiles, probs, j, i);
                         }
@@ -53,6 +36,7 @@ public enum MapType {
         return board;
     }
 
+    //helper function for getBoard, chooses a tile type
     private MapTile nextTile(MapTile[][] board, Tile[] tiles, int[] probs, int x, int y) { //TODO make touching tiles more likely to appear
         Random r = new Random();
         int n = r.nextInt(100);
@@ -64,5 +48,26 @@ public enum MapType {
             }
         }
         return new MapTile(tiles[0], x, y);
+    }
+
+    public ArrayList<Fighter> getFighters() {
+        ArrayList<Fighter> fighters = new ArrayList<>();
+        Game game = Main.myGame;
+        Commander commander = game.getCommander();
+        switch (this) {
+            case TUTORIAL:
+                fighters.add(new Fighter(commander.getHero(), 1, 2, false));
+                fighters.add(new Fighter(commander.getUnit(), 0, 1, false));
+                fighters.add(new Fighter(commander.getUnit(), 0, 3, false));
+                Fighter w = new Fighter(commander.getWeakCommander().getHero(), 8, 3, true);
+                w.setAtt(w.getAtt() - 3);
+                w.setDef(w.getDef() - 3);
+                fighters.add(w);
+                Fighter s = new Fighter(commander.getStrongCommander().getHero(), 14, 3, true);
+                s.setAtt(s.getAtt() - 3);
+                s.setDef(s.getDef() - 3);
+                fighters.add(s);
+        }
+        return fighters;
     }
 }

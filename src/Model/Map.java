@@ -11,20 +11,14 @@ public class Map {
     private int  width, height;
     private MapTile[][] board;
     private ArrayList<Fighter> fighters;
+    private Fighter fighter;
 
     public Map(MapType type) {
         board = type.getBoard();
         height = board.length;
         width = board[0].length;
-        fighters = new ArrayList<>();
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                Fighter f = board[i][j].getFighter();
-                if (f != null) {
-                    fighters.add(f);
-                }
-            }
-        }
+        fighters = type.getFighters();
+        fighter = fighters.get(0);
     }
 
     public boolean hasPathBetween(int x1, int y1, int x2, int y2) {
@@ -50,6 +44,104 @@ public class Map {
             }
         }
         return foundPath;
+    }
+
+    public int[][] costArr(int x, int y, boolean moveCost) {
+        MapTile startingTile = getMapTile(x, y);
+        HashMap<MapTile, Integer> costMap = new HashMap<>();
+        Queue<MapTile> queue = new LinkedList<>();
+        for (MapTile t : getMoves(startingTile)) {
+            queue.add(t);
+            if (moveCost) {
+                costMap.put(t, t.getMoveCost());
+            } else {
+                costMap.put(t, 1);
+            }
+        }
+        while (!queue.isEmpty()) {
+            MapTile tile = queue.poll();
+            int currentCost = costMap.get(tile);
+            for (MapTile t : getMoves(tile)) {
+                if (!costMap.containsKey(t)) {
+                    queue.add(t);
+                    if (moveCost) {
+                        costMap.put(t, currentCost + t.getMoveCost());
+                    } else {
+                        costMap.put(t, currentCost + 1);
+                    }
+                } else {
+                    if (moveCost) {
+                        if (currentCost + t.getMoveCost() < costMap.get(t)) {
+                            queue.add(t);
+                            costMap.put(t, currentCost + t.getMoveCost());
+                        }
+                    } else {
+                        if (currentCost + 1 < costMap.get(t)) {
+                            queue.add(t);
+                            costMap.put(t, currentCost + 1);
+                        }
+                    }
+                }
+            }
+        }
+        int[][] costArr = new int[height][width];
+        for (int i = 0; i < costArr.length; i++) {
+            for (int j = 0; j < costArr[i].length; j++) {
+                costArr[i][j] = -1;
+            }
+        }
+        for (MapTile t : costMap.keySet()) {
+            int xPos = t.getxPos();
+            int yPos = t.getyPos();
+            costArr[yPos][xPos] = costMap.get(t);
+        }
+        return costArr;
+    }
+
+    public int costBetween(int x1, int y1, int x2, int y2, boolean moveCost) {
+        MapTile startingTile = getMapTile(x1, y1);
+        HashMap<MapTile, Integer> costMap = new HashMap<>();
+        Queue<MapTile> queue = new LinkedList<>();
+        for (MapTile x : getMoves(startingTile)) {
+            queue.add(x);
+            if (moveCost) {
+                costMap.put(x, x.getMoveCost());
+            } else {
+                costMap.put(x, 1);
+            }
+        }
+        while (!queue.isEmpty()) {
+            MapTile tile = queue.poll();
+            int currentCost = costMap.get(tile);
+            for (MapTile x : getMoves(tile)) {
+                if (!costMap.containsKey(x)) {
+                    queue.add(x);
+                    if (moveCost) {
+                        costMap.put(x, currentCost + x.getMoveCost());
+                    } else {
+                        costMap.put(x, currentCost + 1);
+                    }
+                } else {
+                    if (moveCost) {
+                        if (currentCost + x.getMoveCost() < costMap.get(x)) {
+                            queue.add(x);
+                            costMap.put(x, currentCost + x.getMoveCost());
+                        }
+                    } else {
+                        if (currentCost + 1 < costMap.get(x)) {
+                            queue.add(x);
+                            costMap.put(x, currentCost + 1);
+                        }
+                    }
+                }
+            }
+        }
+        MapTile target = getMapTile(x2, y2);
+        if (costMap.get(target) != null) {
+            return costMap.get(target);
+        } else {
+            return -1;
+        }
     }
 
     //Uses a BFS to find all of the valid moves for a fighter f
@@ -214,15 +306,25 @@ public class Map {
         return valid;
     }
 
-    public boolean[][] getAttackable(Fighter f) {
+    public boolean[][] getAttackable(Fighter f, boolean allyAttacking) {
         boolean[][] valid = getValidAttacks(f);
         boolean[][] inRange = new boolean[height][width];
         for (Fighter a : fighters) {
-            if (a.isEnemy()) {
-                int x = a.getxPos();
-                int y = a.getyPos();
-                if (valid[y][x]) {
-                    inRange[y][x] = true;
+            if (allyAttacking) {
+                if (a.isEnemy()) {
+                    int x = a.getxPos();
+                    int y = a.getyPos();
+                    if (valid[y][x]) {
+                        inRange[y][x] = true;
+                    }
+                }
+            } else {
+                if (!a.isEnemy()) {
+                    int x = a.getxPos();
+                    int y = a.getyPos();
+                    if (valid[y][x]) {
+                        inRange[y][x] = true;
+                    }
                 }
             }
         }
@@ -391,6 +493,38 @@ public class Map {
         return valid;
     }
 
+    //sets fighter to the next fighter on allies, and then returns fighter
+    public Fighter nextFighter() {
+        ArrayList<Fighter> allies = getAllies();
+        int idx = 0;
+        Fighter f = null;
+        while (f != fighter) {
+            f = allies.get(idx);
+            idx++;
+        }
+        if (idx == allies.size()) {
+            idx = 0;
+        }
+        fighter = allies.get(idx);
+        return fighter;
+    }
+
+    //sets fighter to the prev fighter on allies, and then returns fighter
+    public Fighter prevFighter() {
+        ArrayList<Fighter> allies = getAllies();
+        int idx = allies.size() - 1;
+        Fighter f = null;
+        while (f != fighter) {
+            f = allies.get(idx);
+            idx--;
+        }
+        if (idx == -1) {
+            idx = allies.size() - 1;
+        }
+        fighter = allies.get(idx);
+        return fighter;
+    }
+
     public MapTile getMapTile(int x, int y) {
         if (x >= width || y >= height || x < 0 || y < 0) {
             return null;
@@ -412,6 +546,25 @@ public class Map {
     public int getHeight() { return height;}
     public int getWidth() { return width;}
     public ArrayList<Fighter> getFighters() { return fighters;}
+    public Fighter getFighter() { return fighter;}
+    public ArrayList<Fighter> getAllies() {
+        ArrayList<Fighter> list = new ArrayList<>();
+        for (Fighter f : fighters) {
+            if (!f.isEnemy()) {
+                list.add(f);
+            }
+        }
+        return list;
+    }
+    public ArrayList<Fighter> getEnemies() {
+        ArrayList<Fighter> list = new ArrayList<>();
+        for (Fighter f : fighters) {
+            if (f.isEnemy()) {
+                list.add(f);
+            }
+        }
+        return list;
+    }
 
     //Adders
     public void addFighter(Fighter f) {fighters.add(f);}

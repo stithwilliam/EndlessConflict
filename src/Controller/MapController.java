@@ -53,8 +53,8 @@ public class MapController {
     //Global vars
     private Map map;
     private Game game;
-    private Fighter fighter;
     private HashMap<StackPane, MapTile> paneToTile;
+    private MapTile tractorBeam;
 
     //GENERAL
     public void constructMap(Map map) {
@@ -63,6 +63,7 @@ public class MapController {
         int width = map.getWidth();
         int height = map.getHeight();
         paneToTile = new HashMap<>();
+        tractorBeam = null;
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 MapTile tile = map.getMapTile(i, j);
@@ -76,7 +77,6 @@ public class MapController {
         }
         gridPane.setVgap(0);
         gridPane.setHgap(0);
-        fighter = game.getFighter();
         populateMap();
     }
 
@@ -93,11 +93,13 @@ public class MapController {
             pane.getChildren().add(image);
             pane.setOnMouseClicked(this::fighterStats);
         }
+        Fighter fighter = map.getFighter();
         StackPane pane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
         pane.getChildren().add(new ImageView("/View/Graphics/Tile/fighterSelect.gif"));
     }
 
     public void removeFighter(Fighter f) {
+        map.removeFighter(f);
         int x = f.getxPos();
         int y = f.getyPos();
         MapTile mapTile = map.getMapTile(x, y);
@@ -128,6 +130,7 @@ public class MapController {
 
     //MOVE
     private void showMoves(MouseEvent e) {
+        Fighter fighter = map.getFighter();
         if (!fighter.hasMoved()) {
             boolean[][] valid = map.getValidMoves(fighter);
             for (int i = 0; i < valid.length; i++) {
@@ -144,6 +147,7 @@ public class MapController {
     }
 
     private void noShowMoves(MouseEvent e) {
+        Fighter fighter = map.getFighter();
         boolean[][] valid = map.getValidMoves(fighter);
         for (int i = 0; i < valid.length; i++) {
             for (int j = 0; j < valid[0].length; j++) {
@@ -157,6 +161,7 @@ public class MapController {
     }
 
     private void setMoveBtn(ActionEvent e) {
+        Fighter fighter = map.getFighter();
         putInFocus(fighter.getxPos(), fighter.getyPos());
         if (!fighter.hasMoved()) {
             buttonsToCancelMove();
@@ -176,6 +181,7 @@ public class MapController {
 
     private void moveHere(MouseEvent e) {
         //removing valid tile image
+        Fighter fighter = map.getFighter();
         boolean[][] valid = map.getValidMoves(fighter);
         for (int i = 0; i < valid[0].length; i++) {
             for (int j = 0; j < valid.length; j++) {
@@ -188,7 +194,6 @@ public class MapController {
         }
         //remove old fighter
         MapTile oldTile =  map.getMapTile(fighter.getxPos(), fighter.getyPos());
-        oldTile.setFighter(null);
         StackPane oldPane = oldTile.getStackPane();
         oldPane.getChildren().remove(2);
         oldPane.getChildren().remove(1);
@@ -196,7 +201,6 @@ public class MapController {
         //move fighter
         StackPane pane = (StackPane) e.getSource();
         MapTile tile = paneToTile.get(pane);
-        tile.setFighter(fighter);
         int x = tile.getxPos();
         int y = tile.getyPos();
         fighter.setxPos(x);
@@ -223,6 +227,7 @@ public class MapController {
     }
 
     private void cancelMove(ActionEvent e) {
+        Fighter fighter = map.getFighter();
         boolean[][] valid = map.getValidMoves(fighter);
         for (int i = 0; i < valid[0].length; i++) {
             for (int j = 0; j < valid.length; j++) {
@@ -239,6 +244,7 @@ public class MapController {
 
     //ATTACK
     private void showAttacks(MouseEvent e) {
+        Fighter fighter = map.getFighter();
         if (!fighter.hasAttacked()) {
             boolean[][] valid = map.getValidAttacks(fighter);
             for (int i = 0; i < valid.length; i++) {
@@ -255,6 +261,7 @@ public class MapController {
     }
 
     private void noShowAttacks(MouseEvent e) {
+        Fighter fighter = map.getFighter();
         boolean[][] valid = map.getValidAttacks(fighter);
         for (int i = 0; i < valid.length; i++) {
             for (int j = 0; j < valid[0].length; j++) {
@@ -268,10 +275,11 @@ public class MapController {
     }
 
     private void setAtkBtn(ActionEvent e) {
+        Fighter fighter = map.getFighter();
         putInFocus(fighter.getxPos(), fighter.getyPos());
         if (!fighter.hasAttacked()) {
             noShowAttacks(null);
-            boolean[][] valid = map.getAttackable(fighter);
+            boolean[][] valid = map.getAttackable(fighter, true);
             for (int i = 0; i < valid[0].length; i++) {
                 for (int j = 0; j < valid.length; j++) {
                     if (valid[j][i]) {
@@ -302,8 +310,9 @@ public class MapController {
     }
 
     private void attackHere(MouseEvent e) {
+        Fighter fighter = map.getFighter();
         //removing valid tile image
-        boolean[][] valid = map.getAttackable(fighter);
+        boolean[][] valid = map.getAttackable(fighter, true);
         for (int i = 0; i < valid[0].length; i++) {
             for (int j = 0; j < valid.length; j++) {
                 if (valid[j][i]) {
@@ -317,8 +326,8 @@ public class MapController {
         fighter.setHasAttacked(true);
         StackPane pane = (StackPane) e.getSource();
         MapTile tile = paneToTile.get(pane);
-        Fighter attacked = map.getFighter(tile.getxPos(), tile.getyPos());
-        putOnTerminal(Main.myGame.attackFighter(attacked));
+        Fighter defender = map.getFighter(tile.getxPos(), tile.getyPos());
+        putOnTerminal(Main.myGame.attackFighter(fighter, defender));
         buttonsToDefault();
     }
 
@@ -335,7 +344,8 @@ public class MapController {
     }
 
     private void cancelAttack(ActionEvent e) {
-        boolean[][] valid = map.getAttackable(fighter);
+        Fighter fighter = map.getFighter();
+        boolean[][] valid = map.getAttackable(fighter, true);
         for (int i = 0; i < valid[0].length; i++) {
             for (int j = 0; j < valid.length; j++) {
                 if (valid[j][i]) {
@@ -351,6 +361,7 @@ public class MapController {
     }
 
     private void setSkillBtn(ActionEvent e) {
+        Fighter fighter = map.getFighter();
         putInFocus(fighter.getxPos(), fighter.getyPos());
         if (fighter.getModel() instanceof Hero) {
             ((Hero) fighter.getModel()).showSkill();
@@ -362,6 +373,7 @@ public class MapController {
     //SKILLS
     //LizardKing's skill
     public void showLizardJump() {
+        Fighter fighter = map.getFighter();
         putInFocus(fighter.getxPos(), fighter.getyPos());
         if (!fighter.hasMoved()) {
             buttonsToCancelLizardJump();
@@ -382,6 +394,7 @@ public class MapController {
     }
 
     public void doLizardJump(MouseEvent e) {
+        Fighter fighter = map.getFighter();
         boolean[][] valid = map.getTilesWithin(fighter.getxPos(), fighter.getyPos(), fighter.getMov() + 2);
         for (int i = 0; i < valid.length; i++) {
             for (int j = 0; j < valid[i].length; j++) {
@@ -394,7 +407,6 @@ public class MapController {
         }
         //remove old fighter
         MapTile oldTile = map.getMapTile(fighter.getxPos(), fighter.getyPos());
-        oldTile.setFighter(null);
         StackPane oldPane = oldTile.getStackPane();
         oldPane.getChildren().remove(2);
         oldPane.getChildren().remove(1);
@@ -402,7 +414,6 @@ public class MapController {
         //move fighter
         StackPane pane = (StackPane) e.getSource();
         MapTile tile = paneToTile.get(pane);
-        tile.setFighter(fighter);
         int x = tile.getxPos();
         int y = tile.getyPos();
         fighter.setxPos(x);
@@ -429,6 +440,7 @@ public class MapController {
     }
 
     public void cancelLizardJump(ActionEvent e) {
+        Fighter fighter = map.getFighter();
         boolean[][] valid = map.getTilesWithin(fighter.getxPos(), fighter.getyPos(), fighter.getMov() + 2);
         for (int i = 0; i < valid.length; i++) {
             for (int j = 0; j < valid[i].length; j++) {
@@ -446,10 +458,11 @@ public class MapController {
 
     //modelX's skill
     public void showTractorBeam() {
+        Fighter fighter = map.getFighter();
         putInFocus(fighter.getxPos(), fighter.getyPos());
         if (!fighter.hasAttacked()) {
             boolean inRange = false;
-            boolean[][] valid = map.getAttackable(fighter);
+            boolean[][] valid = map.getAttackable(fighter, true);
             for (int i = 0; i < valid.length; i++) {
                 for (int j = 0; j < valid[i].length; j++) {
                     if (valid[i][j]) {
@@ -472,7 +485,8 @@ public class MapController {
     }
 
     public void doTractorBeam(MouseEvent e) {
-        boolean[][] valid = map.getAttackable(fighter);
+        Fighter fighter = map.getFighter();
+        boolean[][] valid = map.getAttackable(fighter, true);
         for (int i = 0; i < valid.length; i++) {
             for (int j = 0; j < valid[i].length; j++) {
                 if (valid[i][j]) {
@@ -487,7 +501,11 @@ public class MapController {
         StackPane pane = (StackPane) e.getSource();
         pane.getChildren().add(new ImageView(Graphic.TRACTORBEAM.imagePath()));
         buttonsToDefault();
-        Fighter x = paneToTile.get(pane).getFighter();
+        MapTile tile = paneToTile.get(pane);
+        Fighter x = tile.getFighter();
+        x.setHasMoved(true);
+        x.setHasAttacked(true);
+        tractorBeam = tile;
         putOnTerminal(fighter.getName() + " suspended " + x.getName() + " in his tractor beam! ");
     }
 
@@ -504,7 +522,8 @@ public class MapController {
     }
 
     public void cancelTractorBeam(ActionEvent e) {
-        boolean[][] valid = map.getAttackable(fighter);
+        Fighter fighter = map.getFighter();
+        boolean[][] valid = map.getAttackable(fighter, true);
         for (int i = 0; i < valid.length; i++) {
             for (int j = 0; j < valid[i].length; j++) {
                 if (valid[i][j]) {
@@ -519,6 +538,7 @@ public class MapController {
 
     //Chaos's skill
     public void showGrenade() {
+        Fighter fighter = map.getFighter();
         putInFocus(fighter.getxPos(), fighter.getyPos());
         if (!fighter.hasAttacked()) {
             buttonsToCancelGrenade();
@@ -570,6 +590,7 @@ public class MapController {
     }
 
     public void doGrenade(MouseEvent e) {
+        Fighter fighter = map.getFighter();
         //remove mouseOvers
         boolean[][] valid = map.getValidAttacks(fighter);
         for (int i = 0; i < valid.length; i++) {
@@ -594,7 +615,7 @@ public class MapController {
         for (MapTile t : tiles) {
             if (t.getFighter() != null && t.getFighter().isEnemy()) {
                 hit = true;
-                s += (game.attackFighter(t.getFighter()));
+                s += (game.attackFighter(fighter, t.getFighter()));
                 if (t.getFighter().getHp() > 0) {
                     s += ".";
                 }
@@ -623,6 +644,7 @@ public class MapController {
     }
 
     public void cancelGrenade(ActionEvent e) {
+        Fighter fighter = map.getFighter();
         boolean[][] valid = map.getValidAttacks(fighter);
         for (int i = 0; i < valid.length; i++) {
             for (int j = 0; j < valid[i].length; j++) {
@@ -639,9 +661,10 @@ public class MapController {
 
     //CONTROLS
     private void setNextBtn(ActionEvent e) {
+        Fighter fighter = map.getFighter();
         StackPane oldPane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
         oldPane.getChildren().remove(2);
-        fighter = game.nextFighter();
+        fighter = map.nextFighter();
         StackPane newPane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
         newPane.getChildren().add(new ImageView("/View/Graphics/Tile/fighterSelect.gif"));
         putInFocus(fighter.getxPos(), fighter.getyPos());
@@ -649,9 +672,10 @@ public class MapController {
     }
 
     private void setPrevBtn(ActionEvent e) {
+        Fighter fighter = map.getFighter();
         StackPane oldPane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
         oldPane.getChildren().remove(2);
-        fighter = game.prevFighter();
+        fighter = map.prevFighter();
         StackPane newPane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
         newPane.getChildren().add(new ImageView(Graphic.FIGHTERSLCT.imagePath()));
         putInFocus(fighter.getxPos(), fighter.getyPos());
@@ -659,8 +683,28 @@ public class MapController {
     }
 
     private void setEndTurnBtn(ActionEvent e) {
+        Fighter fighter = map.getFighter();
         putOnTerminal("You ended your turn");
+        int x = fighter.getxPos();
+        int y = fighter.getyPos();
+        map.getMapTile(x, y).getStackPane().getChildren().remove(2);
         game.endTurn();
+    }
+
+    public void startTurn() {
+        if (map.getAllies().size() == 0) {
+            putOnTerminal("GAME OVER");
+        } else {
+            putOnTerminal("Your turn begins");
+            if (tractorBeam != null) {
+                tractorBeam.getStackPane().getChildren().remove(2);
+                tractorBeam = null;
+            }
+            Fighter fighter = map.getAllies().get(0);
+            int x = fighter.getxPos();
+            int y = fighter.getyPos();
+            map.getMapTile(x, y).getStackPane().getChildren().add(new ImageView(Graphic.FIGHTERSLCT.imagePath()));
+        }
     }
 
     private void buttonsToDefault() {
@@ -739,6 +783,24 @@ public class MapController {
                 gridPane.setTranslateX(x - 64);
             }
         }
+    }
+
+    public void enemyMove(Fighter f, MapTile tile) {
+        int curX = f.getxPos();
+        int curY = f.getyPos();
+        int nextX = tile.getxPos();
+        int nextY = tile.getyPos();
+        MapTile oldTile = map.getMapTile(curX, curY);
+        oldTile.getStackPane().getChildren().remove(1);
+        f.setxPos(nextX);
+        f.setyPos(nextY);
+        MapTile nextTile = map.getMapTile(nextX, nextY);
+        nextTile.getStackPane().getChildren().add(new ImageView(f.imagePath()));
+        putOnTerminal(f.getName() + " moved to (" + (nextX - 1) + ", " + (nextY - 1) + ").");
+    }
+
+    public void enemyAttack(Fighter attacker, Fighter defender) {
+        putOnTerminal(game.attackFighter(attacker, defender));
     }
 
     //INITIALIZER

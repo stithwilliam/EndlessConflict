@@ -10,7 +10,7 @@ import java.util.Map;
  * Created by William on 10/27/2015.
  */
 public enum Hero implements Placeable {
-    LIZARDKING(15,15,60,20,4,4, true, "Lizard King"), MODELX(12,18,40,20,4,4, false, "Model X"),
+    LIZARDKING(15,15,50,20,4,4, true, "Lizard King"), MODELX(12,18,40,20,4,4, false, "Model X"),
     CHAOS(18,12,40,20,4,4, false, "Commander Chaos");
 
     private String name;

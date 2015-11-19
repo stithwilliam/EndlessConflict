@@ -35,10 +35,11 @@ public class Fighter {
         }
     }
 
-    private void changeStats(Equipment e, boolean equipping) {
+    public void changeEquipment(Equipment e, boolean equipping) {
         int mod;
         if (equipping) {
             mod = 1;
+            equip(e, equipping);
         } else {
             mod = -1;
         }
@@ -51,6 +52,22 @@ public class Fighter {
         vision += e.getVisMod() * mod;
     }
 
+    private void equip(Equipment e, boolean equipping) {
+        Equipment x = e;
+        if (!equipping) {
+            x = null;
+        }
+        if (e instanceof Head) {
+            head = x;
+        } else if (e instanceof Armor) {
+            armor = x;
+        } else if (e instanceof Feet) {
+            feet = x;
+        } else if (e instanceof Weapon) {
+            weapon = x;
+        }
+    }
+
     //Getters
     public String getStats() {
         if (enemy) {
@@ -61,6 +78,7 @@ public class Fighter {
                     ". Spd - " + speed + ". Mov - " + movement;
         }
     }
+    public String toString() { return (name);}
     public String imagePath() {return model.imagePath();}
     public String getName() {return name;}
     public Placeable getModel() {return model;}
@@ -98,31 +116,31 @@ public class Fighter {
     public void setHasAttacked(boolean h) {hasAttacked = h;}
     public void setWeapon(Weapon weapon) {
         if (this.weapon != null) {
-            changeStats(this.weapon, false);
+            changeEquipment(this.weapon, false);
         }
         this.weapon = weapon;
-        changeStats(weapon, true);
+        changeEquipment(weapon, true);
     }
     public void setArmor(Armor armor) {
         if (this.armor != null) {
-            changeStats(this.armor, false);
+            changeEquipment(this.armor, false);
         }
         this.armor = armor;
-        changeStats(armor, true);
+        changeEquipment(armor, true);
     }
     public void setHead(Head head) {
         if (this.head != null) {
-            changeStats(this.head, false);
+            changeEquipment(this.head, false);
         }
         this.head = head;
-        changeStats(head, true);
+        changeEquipment(head, true);
     }
     public void setFeet(Feet feet) {
         if (this.feet != null) {
-            changeStats(this.feet, false);
+            changeEquipment(this.feet, false);
         }
         this.feet = feet;
-        changeStats(feet, true);
+        changeEquipment(feet, true);
     }
 }
 

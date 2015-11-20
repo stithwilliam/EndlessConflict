@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    /**Singleton of Game**/
     public static Game myGame = new Game();
 
     @Override
@@ -17,7 +18,6 @@ public class Main extends Application {
         stage.setResizable(false);
         stage.show();
     }
-
 
     public static void main(String[] args) {
         launch(args);

@@ -5,7 +5,7 @@ package Model;
  */
 public interface Equipment {
 
-    //Getters
+    /**Getters**/
     int getAttMod();
     int getDefMod();
     int getHpMod();

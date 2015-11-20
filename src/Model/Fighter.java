@@ -5,13 +5,31 @@ package Model;
  */
 public class Fighter {
 
+    /**Name of this Fighter**/
     String name;
+
+    /**model type of the fighter**/
     private Placeable model;
+
+    /**position**/
     private int xPos, yPos;
+
+    /**properties of the fighter**/
     private boolean melee, enemy, hasMoved, hasAttacked;
+
+    /**stats of the fighter**/
     private int attack, defense, maxHP, hp, movement, vision, range;
+
+    /**equipment of the fighter**/
     private Equipment weapon, armor, head, feet;
 
+    /**
+     * Constructor for Fighter
+     * @param p Placeable model that this uses
+     * @param x int x position
+     * @param y int y position
+     * @param e is enemy
+     */
     public Fighter(Placeable p, int x, int y, boolean e) {
         model = p;
         name = p.getName();
@@ -34,6 +52,11 @@ public class Fighter {
         }
     }
 
+    /**
+     * Changes the equipment on the player.
+     * @param e Equipment being equipped
+     * @param equipping if equipping or removing
+     */
     public void changeEquipment(Equipment e, boolean equipping) {
         int mod;
         if (equipping) {
@@ -50,6 +73,12 @@ public class Fighter {
         vision += e.getVisMod() * mod;
     }
 
+    /**
+     * Helper method for changeEquipment
+     * Equip/remove e to this
+     * @param e Equipment to equip or remove
+     * @param equipping if equipping or removing
+     */
     private void equip(Equipment e, boolean equipping) {
         Equipment x = e;
         if (!equipping) {
@@ -66,7 +95,7 @@ public class Fighter {
         }
     }
 
-    //Getters
+    /**Getters**/
     public String getStats() {
         if (enemy) {
             return "Enemy " + name + ": HP - " + hp + "/" + maxHP + ". Atk - " + attack + ". Def - " + defense +
@@ -97,7 +126,7 @@ public class Fighter {
     public Armor getArmor() {return (Armor) armor;}
     public Head getHead() {return (Head) head;}
     public Feet getFeet() {return (Feet) feet;}
-    //Setters
+    /**Setters**/
     public void setxPos(int xPos) {this.xPos = xPos;}
     public void setName(String name) {this.name = name;}
     public void setyPos(int yPos) {this.yPos = yPos;}

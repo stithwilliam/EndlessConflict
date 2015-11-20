@@ -25,38 +25,61 @@ public class Config2Controller {
     @FXML
     private HBox mutantBox;
 
+    /**If a commander has been selected**/
     private boolean selected;
+
+    /**The selected commander**/
     private Commander commander;
 
+    /**Initializer**/
     public void initialize() {
         okBtn.setOnAction(this::setOkBtn);
         backBtn.setOnAction(this::setBackBtn);
-        humanBox.setOnMouseClicked(this::boxClicked);
-        robotBox.setOnMouseClicked(this::boxClicked);
-        mutantBox.setOnMouseClicked(this::boxClicked);
+        humanBox.setOnMouseClicked(this::setHumanBox);
+        robotBox.setOnMouseClicked(this::setRobotBox);
+        mutantBox.setOnMouseClicked(this::setMutantBox);
     }
 
-    private void boxClicked(MouseEvent e) {
+    /**
+     * Called when the human box is clicked
+     * @param e humanBox
+     */
+    private void setHumanBox(MouseEvent e) {
         selected = true;
-        HBox source = (HBox) e.getSource();
-        if (source == humanBox) {
-            humanBox.setStyle("-fx-border-color: black; -fx-background-color: darkorange; -fx-border-width: 2;");
-            robotBox.setStyle("-fx-border-color: slateblue; -fx-background-color: royalblue; -fx-border-width: 2;");
-            mutantBox.setStyle("-fx-border-color: lawngreen; -fx-background-color: chartreuse; -fx-border-width: 2;");
-            commander = Commander.HUMAN;
-        } else if (source == robotBox) {
-            humanBox.setStyle("-fx-border-color: sandybrown; -fx-background-color: darkorange; -fx-border-width: 2;");
-            robotBox.setStyle("-fx-border-color: black; -fx-background-color: royalblue; -fx-border-width: 2;");
-            mutantBox.setStyle("-fx-border-color: lawngreen; -fx-background-color: chartreuse; -fx-border-width: 2;");
-            commander = Commander.ROBOT;
-        } else {
-            humanBox.setStyle("-fx-border-color: sandybrown; -fx-background-color: darkorange; -fx-border-width: 2;");
-            robotBox.setStyle("-fx-border-color: slateblue; -fx-background-color: royalblue; -fx-border-width: 2;");
-            mutantBox.setStyle("-fx-border-color: black; -fx-background-color: chartreuse; -fx-border-width: 2;");
-            commander = Commander.MUTANT;
-        }
+        humanBox.setStyle("-fx-border-color: black; -fx-background-color: darkorange; -fx-border-width: 2;");
+        robotBox.setStyle("-fx-border-color: slateblue; -fx-background-color: royalblue; -fx-border-width: 2;");
+        mutantBox.setStyle("-fx-border-color: lawngreen; -fx-background-color: chartreuse; -fx-border-width: 2;");
+        commander = Commander.HUMAN;
     }
 
+    /**
+     * Called when the robot box is clicked
+     * @param e robotBox
+     */
+    private void setRobotBox(MouseEvent e) {
+        selected = true;
+        humanBox.setStyle("-fx-border-color: sandybrown; -fx-background-color: darkorange; -fx-border-width: 2;");
+        robotBox.setStyle("-fx-border-color: black; -fx-background-color: royalblue; -fx-border-width: 2;");
+        mutantBox.setStyle("-fx-border-color: lawngreen; -fx-background-color: chartreuse; -fx-border-width: 2;");
+        commander = Commander.ROBOT;
+    }
+
+    /**
+     * Called when the mutant box is clicked
+     * @param e mutantBox
+     */
+    private void setMutantBox(MouseEvent e) {
+        selected = true;
+        humanBox.setStyle("-fx-border-color: sandybrown; -fx-background-color: darkorange; -fx-border-width: 2;");
+        robotBox.setStyle("-fx-border-color: slateblue; -fx-background-color: royalblue; -fx-border-width: 2;");
+        mutantBox.setStyle("-fx-border-color: black; -fx-background-color: chartreuse; -fx-border-width: 2;");
+        commander = Commander.MUTANT;
+    }
+
+    /**
+     * Called when the OK button is clicked
+     * @param e okBtn
+     */
     private void setOkBtn(ActionEvent e) {
         if (selected) {
             Game game = Main.myGame;
@@ -65,6 +88,10 @@ public class Config2Controller {
         }
     }
 
+    /**
+     * Called when the back button is clicked
+     * @param e backBtn
+     */
     private void setBackBtn(ActionEvent e) {
         MasterController.getInstance().setConfig1Scene();
     }

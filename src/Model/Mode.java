@@ -5,5 +5,6 @@ package Model;
  */
 public enum Mode {
 
+    /**Mode chosen by user**/
     SOFTCORE, HARDCORE
 }

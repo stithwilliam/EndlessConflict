@@ -5,9 +5,13 @@ package Model;
  */
 public enum Commander {
 
+    /**3 types of Commander**/
     HUMAN, ROBOT, MUTANT;
 
-    //returns the first hero of the commander
+    /**
+     * Gets the first hero for the Commander
+     * @return Hero first hero
+     */
     public Hero getHero() {
         switch (this) {
             case HUMAN:
@@ -20,7 +24,10 @@ public enum Commander {
         return null;
     }
 
-    //returns the basic unit of the commander
+    /**
+     * Gets the first unit for the Commander
+     * @return Unit first unit
+     */
     public Unit getUnit() {
         switch (this) {
             case HUMAN:
@@ -33,7 +40,10 @@ public enum Commander {
         return null;
     }
 
-    //returns the commander that is weak against this one
+    /**
+     * Gets the commander that is weak against this
+     * @return Commander weak against
+     */
     public Commander getWeakCommander() {
         switch (this) {
             case HUMAN:
@@ -46,7 +56,10 @@ public enum Commander {
         return null;
     }
 
-    //returns the Commander that is strong against this one
+    /**
+     * Gets the commander that is strong against this
+     * @return Commander strong against
+     */
     public Commander getStrongCommander() {
         switch (this) {
             case HUMAN:

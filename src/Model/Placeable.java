@@ -5,8 +5,7 @@ package Model;
  */
 public interface Placeable {
 
-
-    //Getters
+    /**Getters**/
     String imagePath();
     String getName();
     boolean isMelee();

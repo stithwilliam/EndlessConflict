@@ -12,22 +12,37 @@ import java.io.IOException;
  */
 public class MasterController {
 
+    /**Stage being displayed**/
     private Stage stage;
+
+    /**Different scenes in the game**/
     private Scene startScene, config1Scene, config2Scene, mapScene, headquartersScene,
             commQuartersScene, armsDealerScene, barracksScene, mercCampScene;
+
+    /**The singleton MapController**/
     private MapController mapController;
 
-    //create a singleton
+    /**Creates the singleton of MasterController**/
     private static MasterController masterController = new MasterController();
 
-    //returns the singleton within the entire scope of the project
+    /**
+     * Gets the singleton
+     * @return MasterController this
+     */
     public static MasterController getInstance() { return masterController; }
 
-    //called once
+    /**
+     * Called once to start the game
+     * @param stage Stage
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
+    /**
+     * Constructor for MasterController.
+     * Loads and sets all scenes in the game.
+     */
     public MasterController() {
         Parent root;
         try {
@@ -65,7 +80,7 @@ public class MasterController {
         }
     }
 
-    //Scene setters
+    /**Scene setters**/
     public void setStartScene() { stage.setScene(startScene);}
     public void setConfig1Scene() { stage.setScene(config1Scene);}
     public void setConfig2Scene() { stage.setScene(config2Scene);}
@@ -75,8 +90,7 @@ public class MasterController {
     public void setBarracksScene() { stage.setScene(barracksScene);}
     public void setCommQuartersScene() { stage.setScene(commQuartersScene);}
     public void setMercCampScene() { stage.setScene(mercCampScene);}
-    //Scene loaders
 
-    //Getters
+    /**Getters**/
     public MapController getMapController() { return mapController;}
 }

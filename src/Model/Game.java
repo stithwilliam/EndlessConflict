@@ -11,14 +11,27 @@ import java.util.Random;
  */
 public class Game {
 
+    //difficulty chosen by the user
     private Difficulty difficulty;
+
+    //mode chosen by the user
     private Mode mode;
+
+    //commander chosen by the user
     private Commander commander;
+
+    //the current map being played on
     private Map map;
+
+    //the AI object used by Game
     private AI comp;
+
+    //the MapController in charge of the map screen
     private MapController mapController;
 
-    //Constructor
+    /**
+     * Constructor for Game
+     */
     public Game() {
         difficulty = null;
         mode = null;
@@ -27,6 +40,10 @@ public class Game {
         comp = null;
     }
 
+    /**
+     * Called when the user makes it past the config screens
+     * Creates the Tutorial map and displays it on the screen
+     */
     public void startGame() {
         MasterController.getInstance().setMapScene();
         mapController = MasterController.getInstance().getMapController();
@@ -44,6 +61,10 @@ public class Game {
         mapController.constructMap(map);
     }
 
+    /**
+     * Called when a player's turn ends.
+     * Calls the AI to do it's turn.
+     */
     public void endTurn() {
         ArrayList<Fighter> allies = map.getAllies();
         for (Fighter f : allies) {
@@ -54,6 +75,13 @@ public class Game {
         MasterController.getInstance().getMapController().startTurn();
     }
 
+    /**
+     * Called when one fighter attacks another fighter.
+     * Damage = (att * 2 - def) + random(-5,5)
+     * @param attacker Fighter attacking
+     * @param defender Fighter defending
+     * @return String of attack summary to put on terminal
+     */
     public String attackFighter(Fighter attacker, Fighter defender) {
         Random r = new Random();
         int attack = attacker.getAtt();
@@ -71,6 +99,10 @@ public class Game {
         return s;
     }
 
+    /**
+     * Called if a fighter dies.
+     * @param f Fighter dying
+     */
     public void killedFighter(Fighter f) {
         mapController.removeFighter(f);
         if (map.getEnemies().size() == 0) {
@@ -78,18 +110,14 @@ public class Game {
         }
     }
 
-
-
-    //Getters
+    /**Getters**/
     public Difficulty getDifficulty() {return difficulty;}
     public Mode getMode() {return mode;}
     public Map getMap() {return map;}
     public Commander getCommander() {return commander;}
     public ArrayList<Fighter> getFighters() {return map.getFighters();}
-    //Setters
+    /**Setters**/
     public void setDifficulty(Difficulty d) {difficulty = d;}
     public void setMode(Mode m) {mode = m;}
     public void setCommander(Commander c) {commander = c;}
-    //Adders
-
 }

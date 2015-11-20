@@ -10,15 +10,32 @@ import java.util.Map;
  * Created by William on 10/27/2015.
  */
 public enum Hero implements Placeable {
+    /**First 3 heroes**/
     LIZARDKING(15,15,50,4,4, true, "Lizard King"), MODELX(12,18,40,4,4, false, "Model X"),
     CHAOS(18,12,40,4,4, false, "Commander Chaos");
 
+    /**Name of hero**/
     private String name;
+
+    /**Stats of hero**/
     private int attack, defense, hp, movement, vision, level;
+
+    /**If hero is melee**/
     private boolean melee;
+
+    /**Map of imagePaths of heroes**/
     private Map<String, String> imagePath = new HashMap<>();
 
-    //Constructor
+    /**
+     * Constructor for hero
+     * @param a int attack
+     * @param d int defense
+     * @param h int hp
+     * @param m int movement
+     * @param v int vision
+     * @param me boolean melee
+     * @param n String name
+     */
     Hero(int a, int d, int h, int m, int v, boolean me, String n) {
         name = n;
         attack = a;
@@ -33,6 +50,9 @@ public enum Hero implements Placeable {
         imagePath.put("CHAOS", "/View/Graphics/Placeable/commanderChaos.png");
     }
 
+    /**
+     * Shows the correct skill for this hero
+     */
     public void showSkill() {
         MapController mapCtr = MasterController.getInstance().getMapController();
         switch (this) {
@@ -48,11 +68,18 @@ public enum Hero implements Placeable {
         }
     }
 
+    /**
+     * TODO: implement this
+     */
     public void doSkill() {
 
     }
 
-    //Bio info for each hero.
+    /**
+     * Bio info for each hero.
+     * TODO: Use this in game somewhere
+     * @return
+     */
     public String getBio() {
         if (this == LIZARDKING) {
             return "Created by infusing human DNA with that of a T-Rex, the Lizard King is the undeniable ruler of " +
@@ -70,7 +97,7 @@ public enum Hero implements Placeable {
         return "";
     }
 
-    //Getters
+    /**Getters**/
     public String imagePath() {return imagePath.get(this.name());}
     public String getName() {return name;}
     public int getAtt() {return attack;}

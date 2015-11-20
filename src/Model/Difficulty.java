@@ -5,5 +5,6 @@ package Model;
  */
 public enum Difficulty {
 
+    /**3 difficulties in the game**/
     EASY, MEDIUM, HARD
 }

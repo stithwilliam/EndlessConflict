@@ -3,7 +3,6 @@ package Controller;
 import Model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -17,7 +16,6 @@ import javafx.scene.text.Font;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Stack;
 
 /**
  * Created by William on 10/26/2015.
@@ -52,11 +50,16 @@ public class MapController {
 
     //Global vars
     private Map map;
-    private Game game;
+    private Game game; // for convenience, game will never change
     private HashMap<StackPane, MapTile> paneToTile;
     private MapTile tractorBeam;
 
     //GENERAL
+
+    /**
+     * Builds the screen based on map
+     * @param map
+     */
     public void constructMap(Map map) {
         this.map = map;
         this.game = Main.myGame;
@@ -80,11 +83,18 @@ public class MapController {
         populateMap();
     }
 
-    public void populateMap() {
+    /**
+     * Default method. Populates the screen with the fighters from map.
+     */
+    private void populateMap() {
         populateMap(map.getFighters());
     }
 
-    public void populateMap(ArrayList<Fighter> fighters) {
+    /**
+     * Overloaded method. Populates the screen with the fighters
+     * @param fighters
+     */
+    private void populateMap(ArrayList<Fighter> fighters) {
         for (Fighter f : fighters) {
             int x = f.getxPos();
             int y = f.getyPos();
@@ -98,6 +108,10 @@ public class MapController {
         pane.getChildren().add(new ImageView("/View/Graphics/Tile/fighterSelect.gif"));
     }
 
+    /**
+     * Removes fighter f from the screen
+     * @param f
+     */
     public void removeFighter(Fighter f) {
         map.removeFighter(f);
         int x = f.getxPos();
@@ -107,6 +121,11 @@ public class MapController {
         mapTile.getStackPane().setOnMouseClicked(null);
     }
 
+    /**
+     * Puts the x and y coordinates in view of the user
+     * @param x
+     * @param y
+     */
     private void putInFocus(int x, int y) {
         double gridX = gridPane.getTranslateX();
         double gridY = gridPane.getTranslateY();
@@ -129,6 +148,12 @@ public class MapController {
     }
 
     //MOVE
+
+    /**
+     * Called when the user mouseOvers the move button.
+     * Shows the valid spots to move of the current fighter
+     * @param e moveBtn
+     */
     private void showMoves(MouseEvent e) {
         Fighter fighter = map.getFighter();
         if (!fighter.hasMoved()) {
@@ -146,6 +171,11 @@ public class MapController {
         }
     }
 
+    /**
+     * Called when the player exits the move button.
+     * Removes the display of possible moves.
+     * @param e moveBtn
+     */
     private void noShowMoves(MouseEvent e) {
         Fighter fighter = map.getFighter();
         boolean[][] valid = map.getValidMoves(fighter);
@@ -160,6 +190,12 @@ public class MapController {
         }
     }
 
+    /**
+     * Default state for the move button when pressed.
+     * Shows the available moves for the current fighter on the screen.
+     * Sets the valid tiles to moveHere().
+     * @param e moveBtn
+     */
     private void setMoveBtn(ActionEvent e) {
         Fighter fighter = map.getFighter();
         putInFocus(fighter.getxPos(), fighter.getyPos());
@@ -179,6 +215,11 @@ public class MapController {
         }
     }
 
+    /**
+     * Called when the user clicks on a valid tile.
+     * Move the fighter to the selected location
+     * @param e MapTile
+     */
     private void moveHere(MouseEvent e) {
         //removing valid tile image
         Fighter fighter = map.getFighter();
@@ -214,6 +255,10 @@ public class MapController {
         buttonsToDefault();
     }
 
+    /**
+     * Called when showMoves() is called.
+     * Sets all buttons to cancel the pending moves.
+     */
     private void buttonsToCancelMove() {
         moveBtn.setOnAction(this::cancelMove);
         moveBtn.setOnMouseEntered(null);
@@ -226,6 +271,11 @@ public class MapController {
         prevBtn.setOnAction(this::cancelMove);
     }
 
+    /**
+     * Called when the user presses another button after clicking move.
+     * Cancels the pending move.
+     * @param e
+     */
     private void cancelMove(ActionEvent e) {
         Fighter fighter = map.getFighter();
         boolean[][] valid = map.getValidMoves(fighter);
@@ -243,6 +293,12 @@ public class MapController {
     }
 
     //ATTACK
+
+    /**
+     * Called when the user mouseOvers the attack button.
+     * Shows the valid spots to attack of the current fighter
+     * @param e atkBtn
+     */
     private void showAttacks(MouseEvent e) {
         Fighter fighter = map.getFighter();
         if (!fighter.hasAttacked()) {
@@ -260,6 +316,11 @@ public class MapController {
         }
     }
 
+    /**
+     * Called when the player exits the attack button.
+     * Removes the display of possible attacks.
+     * @param e atkBtn
+     */
     private void noShowAttacks(MouseEvent e) {
         Fighter fighter = map.getFighter();
         boolean[][] valid = map.getValidAttacks(fighter);
@@ -274,12 +335,18 @@ public class MapController {
         }
     }
 
+    /**
+     * Default state for the attack button when pressed.
+     * Shows the available attacks for the current fighter on the screen, unless there are none.
+     * Sets the valid tiles to attackHere().
+     * @param e atkBtn
+     */
     private void setAtkBtn(ActionEvent e) {
         Fighter fighter = map.getFighter();
         putInFocus(fighter.getxPos(), fighter.getyPos());
         if (!fighter.hasAttacked()) {
             noShowAttacks(null);
-            boolean[][] valid = map.getAttackable(fighter, true);
+            boolean[][] valid = map.getAttackable(fighter);
             for (int i = 0; i < valid[0].length; i++) {
                 for (int j = 0; j < valid.length; j++) {
                     if (valid[j][i]) {
@@ -309,10 +376,15 @@ public class MapController {
         }
     }
 
+    /**
+     * Called when the user clicks on a valid tile.
+     * Attacks the fighter at the selected location
+     * @param e MapTile
+     */
     private void attackHere(MouseEvent e) {
         Fighter fighter = map.getFighter();
         //removing valid tile image
-        boolean[][] valid = map.getAttackable(fighter, true);
+        boolean[][] valid = map.getAttackable(fighter);
         for (int i = 0; i < valid[0].length; i++) {
             for (int j = 0; j < valid.length; j++) {
                 if (valid[j][i]) {
@@ -331,6 +403,10 @@ public class MapController {
         buttonsToDefault();
     }
 
+    /**
+     * Called when showAttacks() is called.
+     * Sets all buttons to cancel the pending attack.
+     */
     private void buttonsToCancelAttack() {
         moveBtn.setOnAction(this::cancelAttack);
         moveBtn.setOnMouseEntered(null);
@@ -343,9 +419,14 @@ public class MapController {
         prevBtn.setOnAction(this::cancelAttack);
     }
 
+    /**
+     * Called when the user presses another button after clicking attack.
+     * Cancels the pending attack.
+     * @param e
+     */
     private void cancelAttack(ActionEvent e) {
         Fighter fighter = map.getFighter();
-        boolean[][] valid = map.getAttackable(fighter, true);
+        boolean[][] valid = map.getAttackable(fighter);
         for (int i = 0; i < valid[0].length; i++) {
             for (int j = 0; j < valid.length; j++) {
                 if (valid[j][i]) {
@@ -360,6 +441,12 @@ public class MapController {
         buttonsToDefault();
     }
 
+    /**
+     * Default state for the attack button when pressed.
+     * Shows the available attacks for the current fighter on the screen, unless there are none.
+     * Sets the valid tiles to attackHere().
+     * @param e atkBtn
+     */
     private void setSkillBtn(ActionEvent e) {
         Fighter fighter = map.getFighter();
         putInFocus(fighter.getxPos(), fighter.getyPos());
@@ -462,7 +549,7 @@ public class MapController {
         putInFocus(fighter.getxPos(), fighter.getyPos());
         if (!fighter.hasAttacked()) {
             boolean inRange = false;
-            boolean[][] valid = map.getAttackable(fighter, true);
+            boolean[][] valid = map.getAttackable(fighter);
             for (int i = 0; i < valid.length; i++) {
                 for (int j = 0; j < valid[i].length; j++) {
                     if (valid[i][j]) {
@@ -486,7 +573,7 @@ public class MapController {
 
     public void doTractorBeam(MouseEvent e) {
         Fighter fighter = map.getFighter();
-        boolean[][] valid = map.getAttackable(fighter, true);
+        boolean[][] valid = map.getAttackable(fighter);
         for (int i = 0; i < valid.length; i++) {
             for (int j = 0; j < valid[i].length; j++) {
                 if (valid[i][j]) {
@@ -523,7 +610,7 @@ public class MapController {
 
     public void cancelTractorBeam(ActionEvent e) {
         Fighter fighter = map.getFighter();
-        boolean[][] valid = map.getAttackable(fighter, true);
+        boolean[][] valid = map.getAttackable(fighter);
         for (int i = 0; i < valid.length; i++) {
             for (int j = 0; j < valid[i].length; j++) {
                 if (valid[i][j]) {
@@ -566,7 +653,7 @@ public class MapController {
         for (MapTile t : map.getAdjacent(tile)) {
             t.getStackPane().getChildren().add(new ImageView(Graphic.ATTACKSLCT.imagePath()));
         }
-        for (MapTile t : map.getDiagAttacks(tile)) {
+        for (MapTile t : map.getDiagAdjacent(tile)) {
             t.getStackPane().getChildren().add(new ImageView(Graphic.ATTACKSLCT.imagePath()));
         }
     }
@@ -582,7 +669,7 @@ public class MapController {
             int i = p.getChildren().size() - 1;
             p.getChildren().remove(i);
         }
-        for (MapTile t : map.getDiagAttacks(tile)) {
+        for (MapTile t : map.getDiagAdjacent(tile)) {
             StackPane p = t.getStackPane();
             int i = p.getChildren().size() - 1;
             p.getChildren().remove(i);
@@ -609,8 +696,8 @@ public class MapController {
         StackPane pane = (StackPane) e.getSource();
         MapTile tile = paneToTile.get(pane);
         tiles.add(tile);
-        tiles.addAll(map.getAttacks(tile));
-        tiles.addAll(map.getDiagAttacks(tile));
+        tiles.addAll(map.getAdjacent(tile));
+        tiles.addAll(map.getDiagAdjacent(tile));
         String s = fighter.getName() + " lobbed a grenade! ";
         for (MapTile t : tiles) {
             if (t.getFighter() != null && t.getFighter().isEnemy()) {
@@ -643,6 +730,10 @@ public class MapController {
         prevBtn.setOnAction(this::cancelGrenade);
     }
 
+    /**
+     *
+     * @param e
+     */
     public void cancelGrenade(ActionEvent e) {
         Fighter fighter = map.getFighter();
         boolean[][] valid = map.getValidAttacks(fighter);
@@ -660,6 +751,11 @@ public class MapController {
     }
 
     //CONTROLS
+
+    /**
+     * Changes the user's selection to the next fighter
+     * @param e nxtBtn
+     */
     private void setNextBtn(ActionEvent e) {
         Fighter fighter = map.getFighter();
         StackPane oldPane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
@@ -671,6 +767,10 @@ public class MapController {
         putOnTerminal("Next fighter is " + fighter.getName() + " (" + fighter.getHp() + "/" + fighter.getMaxHP() + ")");
     }
 
+    /**
+     * Changes the user's selection to the previous fighter.
+     * @param e prevBtn
+     */
     private void setPrevBtn(ActionEvent e) {
         Fighter fighter = map.getFighter();
         StackPane oldPane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
@@ -682,6 +782,11 @@ public class MapController {
         putOnTerminal("Previous fighter is " + fighter.getName() + " (" + fighter.getHp() + "/" + fighter.getMaxHP() + ")");
     }
 
+    /**
+     * Called when the end turn button is pressed.
+     * Ends the player turn and begins the AI's turn.
+     * @param e
+     */
     private void setEndTurnBtn(ActionEvent e) {
         Fighter fighter = map.getFighter();
         putOnTerminal("You ended your turn");
@@ -691,6 +796,10 @@ public class MapController {
         game.endTurn();
     }
 
+    /**
+     * Called when the AI finishes its turn and the user begins their turn.
+     * Checks if the player has lost, otherwise start the user's turn.
+     */
     public void startTurn() {
         if (map.getAllies().size() == 0) {
             putOnTerminal("GAME OVER");
@@ -708,6 +817,9 @@ public class MapController {
         }
     }
 
+    /**
+     * Resets the buttons to their default setting.
+     */
     private void buttonsToDefault() {
         moveBtn.setOnAction(this::setMoveBtn);
         moveBtn.setOnMouseEntered(this::showMoves);
@@ -720,6 +832,11 @@ public class MapController {
         prevBtn.setOnAction(this::setPrevBtn);
     }
 
+    /**
+     * Called when a fighter on the map is clicked.
+     * Shows the stats of the fighter at Maptile e.
+     * @param e
+     */
     private void fighterStats(MouseEvent e) {
         StackPane pane = (StackPane) e.getSource();
         MapTile tile = paneToTile.get(pane);
@@ -729,11 +846,23 @@ public class MapController {
         putOnTerminal(f.getStats());
     }
 
+    //MAP COMPONENTS
+
+    /**
+     * Puts the given String s on the terminal
+     * @param s
+     */
     private void putOnTerminal(String s) {
         putOnTerminal(s, true);
     }
 
-    private void putOnTerminal(String s, boolean newLine) {
+    /**
+     * Helper function for putOnTerminal.
+     * Holds the logic for when to make new lines, and which labels to remove from the terminal.
+     * @param s String to put on terminal
+     * @param newEntry if this string begins the entry.
+     */
+    private void putOnTerminal(String s, boolean newEntry) {
         if (s.length() > 38) {
             int cut = 38;
             while (s.charAt(cut) != ' ') {
@@ -741,7 +870,7 @@ public class MapController {
             }
             String s1 = s.substring(0, cut);
             String s2 = s.substring(cut);
-            if (newLine) {
+            if (newEntry) {
                 putOnTerminal(s1, true);
             } else {
                 putOnTerminal(s1, false);
@@ -749,7 +878,7 @@ public class MapController {
             putOnTerminal(s2, false);
         } else {
             Label l;
-            if (newLine) {
+            if (newEntry) {
                 l = new Label(s + " >>");
             } else {
                 l = new Label(s + "      ");
@@ -764,28 +893,58 @@ public class MapController {
         }
     }
 
-    private void setRectClicked(MouseEvent e) {
+    /**
+     * Moves the screen down
+     * @param e
+     */
+    private void setDownRect(MouseEvent e) {
         double y = gridPane.getTranslateY();
-        double x = gridPane.getTranslateX();
-        if (e.getSource() == downRect) {
-            if (y > -map.getHeight() * 64 + 64*6) {
-                gridPane.setTranslateY(y - 64);
-            }
-        } else if (e.getSource() == upRect) {
-            if (y < 0) {
-                gridPane.setTranslateY(y + 64);
-            }
-        } else if (e.getSource() == leftRect) {
-            if (x < 0) {
-                gridPane.setTranslateX(x + 64);
-            }
-        } else if (e.getSource() == rightRect){
-            if (x > -map.getWidth() * 64 + 64*10) {
-                gridPane.setTranslateX(x - 64);
-            }
+        if (y > -map.getHeight() * 64 + 64*6) {
+            gridPane.setTranslateY(y - 64);
         }
     }
 
+    /**
+     * Moves the screen up
+     * @param e
+     */
+    private void setUpRect(MouseEvent e) {
+        double y = gridPane.getTranslateY();
+        if (y < 0) {
+            gridPane.setTranslateY(y + 64);
+        }
+    }
+
+    /**
+     * Moves the screen right
+     * @param e
+     */
+    private void setRightRect(MouseEvent e) {
+        double x = gridPane.getTranslateX();
+        if (x > -map.getWidth() * 64 + 64*10) {
+            gridPane.setTranslateX(x - 64);
+        }
+    }
+
+    /**
+     * Moves the screen left
+     * @param e
+     */
+    private void setLeftRect(MouseEvent e) {
+        double x = gridPane.getTranslateX();
+        if (x < 0) {
+            gridPane.setTranslateX(x + 64);
+        }
+    }
+
+    //AI
+
+    /**
+     * Called by the AI
+     * Fighter f moves to Maptile tile
+     * @param f
+     * @param tile
+     */
     public void enemyMove(Fighter f, MapTile tile) {
         int curX = f.getxPos();
         int curY = f.getyPos();
@@ -800,16 +959,22 @@ public class MapController {
         putOnTerminal(f.getName() + " moved to (" + (nextX - 1) + ", " + (nextY - 1) + ").");
     }
 
+    /**
+     * Called by the AI
+     * Fighter attacker attacks Fighter defender
+     * @param attacker
+     * @param defender
+     */
     public void enemyAttack(Fighter attacker, Fighter defender) {
         putOnTerminal(game.attackFighter(attacker, defender));
     }
 
     //INITIALIZER
     public void initialize() {
-        upRect.setOnMouseClicked(this::setRectClicked);
-        downRect.setOnMouseClicked(this::setRectClicked);
-        rightRect.setOnMouseClicked(this::setRectClicked);
-        leftRect.setOnMouseClicked(this::setRectClicked);
+        upRect.setOnMouseClicked(this::setUpRect);
+        downRect.setOnMouseClicked(this::setDownRect);
+        rightRect.setOnMouseClicked(this::setRightRect);
+        leftRect.setOnMouseClicked(this::setLeftRect);
         moveBtn.setOnAction(this::setMoveBtn);
         moveBtn.setOnMouseEntered(this::showMoves);
         atkBtn.setOnAction(this::setAtkBtn);
@@ -819,6 +984,4 @@ public class MapController {
         prevBtn.setOnAction(this::setPrevBtn);
         endTurnBtn.setOnAction(this::setEndTurnBtn);
     }
-
-
 }

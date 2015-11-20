@@ -31,8 +31,10 @@ public class Config1Controller {
     @FXML
     private RadioButton hardcoreRadio;
 
+    /**Groups for the toggles on screen**/
     private ToggleGroup difficultyToggle, modeToggle;
 
+    /**Initializer**/
     public void initialize() {
         okBtn.setOnAction(this::setOkBtn);
         backBtn.setOnAction(this::setBackBtn);
@@ -45,6 +47,10 @@ public class Config1Controller {
         hardcoreRadio.setToggleGroup(modeToggle);
     }
 
+    /**
+     * Called when OK button is pressed
+     * @param e okBtn
+     */
     private void setOkBtn(ActionEvent e) {
         Game game = Main.myGame;
         boolean toggles[] = {false, false};
@@ -76,6 +82,10 @@ public class Config1Controller {
         }
     }
 
+    /**
+     * Called when back button is pressed
+     * @param e backBtn
+     */
     private void setBackBtn(ActionEvent e) {
         MasterController.getInstance().setStartScene();
     }

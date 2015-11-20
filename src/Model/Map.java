@@ -8,11 +8,23 @@ import java.util.*;
  */
 public class Map {
 
-    private int  width, height;
+    /**The board of MapTiles that backs the map**/
     private MapTile[][] board;
+
+    /**The list of fighters on the current map**/
     private ArrayList<Fighter> fighters;
+
+    /**The current fighter that is selected on the map**/
     private Fighter fighter;
 
+    /**convenience vars for height and with of the map**/
+    private int  width, height;
+
+
+    /**
+     * Constructor for Map.
+     * @param type the MapType that the new Map is based off of.
+     */
     public Map(MapType type) {
         board = type.getBoard();
         height = board.length;
@@ -21,6 +33,15 @@ public class Map {
         fighter = fighters.get(0);
     }
 
+    /**
+     * Utility function.
+     * Returns whether the two positions, (x1, y1) and (x2, y2), have a valid path between them.
+     * @param x1 int x1 position
+     * @param y1 int y1 position
+     * @param x2 int x2 position
+     * @param y2 int y2 position
+     * @return boolean if path between the positions
+     */
     public boolean hasPathBetween(int x1, int y1, int x2, int y2) {
         boolean foundPath = false;
         MapTile startingTile = getMapTile(x1, y1);
@@ -46,6 +67,13 @@ public class Map {
         return foundPath;
     }
 
+    /**
+     * Returns an array of costs, centered at (x, y).
+     * @param x int x position
+     * @param y int y position
+     * @param moveCost boolean to take the moveCost of the tile in to account, or build the cost arr after the raw distance.
+     * @return int[][] cost
+     */
     public int[][] costArr(int x, int y, boolean moveCost) {
         MapTile startingTile = getMapTile(x, y);
         HashMap<MapTile, Integer> costMap = new HashMap<>();
@@ -98,6 +126,8 @@ public class Map {
         return costArr;
     }
 
+    /*
+    Not sure if I'll need this
     public int costBetween(int x1, int y1, int x2, int y2, boolean moveCost) {
         MapTile startingTile = getMapTile(x1, y1);
         HashMap<MapTile, Integer> costMap = new HashMap<>();
@@ -143,8 +173,13 @@ public class Map {
             return -1;
         }
     }
+    */
 
-    //Uses a BFS to find all of the valid moves for a fighter f
+    /**
+     * Returns an array of the valid moves for Fighter f.
+     * @param f Fighter looking at
+     * @return boolean[][] valid moves
+     */
     public boolean[][] getValidMoves(Fighter f) {
         boolean[][] valid = new boolean[height][width];
 
@@ -192,8 +227,11 @@ public class Map {
         return valid;
     }
 
-    //helper function for getValidMoves
-    //gets the adjacent, moveable tiles of tile.
+    /**
+     * Helper function for getValidMoves
+     * @param tile Tile looking at
+     * @return List<MapTile> of adjacent, moveable tiles of tile
+     */
     public List<MapTile> getMoves(MapTile tile) {
         int x = tile.getxPos();
         int y = tile.getyPos();
@@ -217,6 +255,13 @@ public class Map {
         return list;
     }
 
+    /**
+     * Returns an array of tiles that are located within int range from position (x, y).
+     * @param x int x position
+     * @param y int y position
+     * @param range boolean[][] tiles in range
+     * @return
+     */
     public boolean[][] getTilesWithin(int x, int y, int range) {
         boolean[][] valid = new boolean[height][width];
         Queue<MapTile> queue = new LinkedList<>();
@@ -242,6 +287,11 @@ public class Map {
         return valid;
     }
 
+    /**
+     * Returns the adjacent tiles to tile
+     * @param tile Tile looking at
+     * @return List<MapTile> adjacent tiles
+     */
     public List<MapTile> getAdjacent(MapTile tile) {
         int x = tile.getxPos();
         int y = tile.getyPos();
@@ -265,96 +315,12 @@ public class Map {
         return list;
     }
 
-    //uses a BFS to find the valid attacks of f
-    public boolean[][] getValidAttacks(Fighter f) { //TODO implement terrain blocking
-        //finds the valid squares
-        boolean[][] valid = new boolean[height][width];
-        Queue<MapTile> queue = new LinkedList<>();
-        MapTile startingTile = getMapTile(f.getxPos(), f.getyPos());
-        HashMap<MapTile, Integer> rangeMap = new HashMap<>();
-        for (MapTile x : getAttacks(startingTile)) {
-            queue.add(x);
-            rangeMap.put(x, 1);
-        }
-        if (f.isMelee()) {
-            for (MapTile x : getDiagAttacks(startingTile)) {
-                queue.add(x);
-                rangeMap.put(x, 1);
-            }
-        }
-        while (!queue.isEmpty()) {
-            MapTile tile = queue.poll();
-            valid[tile.getyPos()][tile.getxPos()] = true;
-            int currentRange = rangeMap.get(tile);
-            if (currentRange < f.getRange()) {
-                for (MapTile x : getAttacks(tile)) {
-                    queue.add(x);
-                    rangeMap.put(x, currentRange + 1);
-                }
-            }
-        }
-        //removes positions behind rocks
-        for (int i = 0; i < valid.length; i++) {
-            for (int j = 0; j < valid[0].length; j++) {
-                if (valid[i][j]) {
-                    if (getMapTile(j, i).isBlocking()) {
-                        valid = fixObstacle(valid, j, i, f);
-                    }
-                }
-            }
-        }
-        return valid;
-    }
-
-    public boolean[][] getAttackable(Fighter f, boolean allyAttacking) {
-        boolean[][] valid = getValidAttacks(f);
-        boolean[][] inRange = new boolean[height][width];
-        for (Fighter a : fighters) {
-            if (allyAttacking) {
-                if (a.isEnemy()) {
-                    int x = a.getxPos();
-                    int y = a.getyPos();
-                    if (valid[y][x]) {
-                        inRange[y][x] = true;
-                    }
-                }
-            } else {
-                if (!a.isEnemy()) {
-                    int x = a.getxPos();
-                    int y = a.getyPos();
-                    if (valid[y][x]) {
-                        inRange[y][x] = true;
-                    }
-                }
-            }
-        }
-        return inRange;
-    }
-
-    public List<MapTile> getAttacks(MapTile tile) {
-        int x = tile.getxPos();
-        int y = tile.getyPos();
-        List<MapTile> list = new ArrayList<>();
-        MapTile left = getMapTile(x - 1, y);
-        if (left != null) {
-            list.add(left);
-        }
-        MapTile right = getMapTile(x + 1, y);
-        if (right != null) {
-            list.add(right);
-        }
-        MapTile up = getMapTile(x, y-1);
-        if (up != null) {
-            list.add(up);
-        }
-        MapTile down = getMapTile(x, y+1);
-        if (down != null) {
-            list.add(down);
-        }
-        return list;
-    }
-
-    public List<MapTile> getDiagAttacks(MapTile tile) {
+    /**
+     * Gets the MapTiles at diagonally adjacent to tile
+     * @param tile MapTile looking at
+     * @return List<MapTile> diagonally adjecent to tile
+     */
+    public List<MapTile> getDiagAdjacent(MapTile tile) {
         int x = tile.getxPos();
         int y = tile.getyPos();
         List<MapTile> list = new ArrayList<>();
@@ -377,6 +343,91 @@ public class Map {
         return list;
     }
 
+    /**
+     * Returns the valid attacks of Fighter f
+     * @param f Fighter looking at
+     * @return boolean[][] valid attacks
+     */
+    //uses a BFS to find the valid attacks of f
+    public boolean[][] getValidAttacks(Fighter f) {
+        //finds the valid squares
+        boolean[][] valid = new boolean[height][width];
+        Queue<MapTile> queue = new LinkedList<>();
+        MapTile startingTile = getMapTile(f.getxPos(), f.getyPos());
+        HashMap<MapTile, Integer> rangeMap = new HashMap<>();
+        for (MapTile x : getAdjacent(startingTile)) {
+            queue.add(x);
+            rangeMap.put(x, 1);
+        }
+        if (f.isMelee()) {
+            for (MapTile x : getDiagAdjacent(startingTile)) {
+                queue.add(x);
+                rangeMap.put(x, 1);
+            }
+        }
+        while (!queue.isEmpty()) {
+            MapTile tile = queue.poll();
+            valid[tile.getyPos()][tile.getxPos()] = true;
+            int currentRange = rangeMap.get(tile);
+            if (currentRange < f.getRange()) {
+                for (MapTile x : getAdjacent(tile)) {
+                    queue.add(x);
+                    rangeMap.put(x, currentRange + 1);
+                }
+            }
+        }
+        //removes positions behind rocks
+        for (int i = 0; i < valid.length; i++) {
+            for (int j = 0; j < valid[0].length; j++) {
+                if (valid[i][j]) {
+                    if (getMapTile(j, i).isBlocking()) {
+                        valid = fixObstacle(valid, j, i, f);
+                    }
+                }
+            }
+        }
+        return valid;
+    }
+
+    /**
+     * Gets the fighters that are attackable by f
+     * @param f Fighter looking at
+     * @return boolean[][] array of attackable positions
+     */
+    public boolean[][] getAttackable(Fighter f) {
+        boolean[][] valid = getValidAttacks(f);
+        boolean[][] inRange = new boolean[height][width];
+        boolean allyAttacking = !f.isEnemy();
+        for (Fighter a : fighters) {
+            if (allyAttacking) {
+                if (a.isEnemy()) {
+                    int x = a.getxPos();
+                    int y = a.getyPos();
+                    if (valid[y][x]) {
+                        inRange[y][x] = true;
+                    }
+                }
+            } else {
+                if (!a.isEnemy()) {
+                    int x = a.getxPos();
+                    int y = a.getyPos();
+                    if (valid[y][x]) {
+                        inRange[y][x] = true;
+                    }
+                }
+            }
+        }
+        return inRange;
+    }
+
+    /**
+     * Gross code that fixes the valid attacks array for Fighter f based on an obstacle at x, y
+     * @param valid boolean[][] the valid attacks array
+     * @param x int x position of obstacle
+     * @param y int y position of obstacle
+     * @param f Fighter f that is attacking
+     * @return boolean[][] the fixed valid attacks array
+     */
     public boolean[][] fixObstacle(boolean[][] valid, int x, int y, Fighter f) {
         valid[y][x] = false;
         int posX = f.getxPos();
@@ -385,7 +436,9 @@ public class Map {
         int width = valid[0].length;
         int difX = x - posX;
         int difY = y - posY;
-        if (difX == 0 && difY > 0) { // directly down
+
+        // directly down
+        if (difX == 0 && difY > 0) {
             double count = 0;
             for (int i = y; i < height; i++) {
                 for (int j = (int) count; j >= 0; j--) {
@@ -398,7 +451,9 @@ public class Map {
                 }
                 count += 0.5;
             }
-        } else if (difX == 0 && difY < 0) { // directly up
+        }
+        // directly up
+        else if (difX == 0 && difY < 0) {
             double count = 0;
             for (int i = y; i >= 0; i--) {
                 for (int j = (int) count; j >= 0; j--) {
@@ -411,7 +466,9 @@ public class Map {
                 }
                 count += 0.5;
             }
-        } else if (difY == 0 && difX > 0) { // directly right
+        }
+        // directly right
+        else if (difY == 0 && difX > 0) {
             double count = 0;
             for (int i = x; i < width; i++) {
                 for (int j = (int) count; j >= 0; j--) {
@@ -424,7 +481,9 @@ public class Map {
                 }
                 count += 0.5;
             }
-        } else if (difY == 0 && difX < 0){ //directly left
+        }
+        //directly left
+        else if (difY == 0 && difX < 0){
             double count = 0;
             for (int i = x; i >= 0; i--) {
                 for (int j = (int) count; j>= 0; j--) {
@@ -437,7 +496,9 @@ public class Map {
                 }
                 count += 0.5;
             }
-        } else if (difX > 0 && difY > 0) { // bottom right
+        }
+        // bottom right
+        else if (difX > 0 && difY > 0) {
             double count = 0.5;
             for (int i = 0; i < Math.max(width, height); i++) {
                 for (int j = (int) count; j >= 0; j--) {
@@ -450,7 +511,9 @@ public class Map {
                 }
                 count += 0.5;
             }
-        } else if (difX < 0 && difY > 0) { //bottom left
+        }
+        //bottom left
+        else if (difX < 0 && difY > 0) {
             double count = 0.5;
             for (int i = 0; i < Math.max(width, height); i++) {
                 for (int j = (int) count; j >= 0; j--) {
@@ -463,7 +526,9 @@ public class Map {
                 }
                 count += 0.5;
             }
-        } else if (difX > 0 && difY < 0) { //top right
+        }
+        //top right
+        else if (difX > 0 && difY < 0) {
             double count = 0.5;
             for (int i = 0; i < Math.max(width, height); i++) {
                 for (int j = (int) count; j >= 0; j--) {
@@ -476,7 +541,9 @@ public class Map {
                 }
                 count += 0.5;
             }
-        } else if (difX < 0 && difY < 0) { //top left
+        }
+        //top left
+        else if (difX < 0 && difY < 0) {
             double count = 0.5;
             for (int i = 0; i < Math.max(width, height); i++) {
                 for (int j = (int) count; j >= 0; j--) {
@@ -493,7 +560,10 @@ public class Map {
         return valid;
     }
 
-    //sets fighter to the next fighter on allies, and then returns fighter
+    /**
+     * gets the next fighter in allies
+     * @return Fighter the next Fighter
+     */
     public Fighter nextFighter() {
         ArrayList<Fighter> allies = getAllies();
         int idx = 0;
@@ -509,7 +579,10 @@ public class Map {
         return fighter;
     }
 
-    //sets fighter to the prev fighter on allies, and then returns fighter
+    /**
+     * gets the previous fighter in allies
+     * @return Fighter the previous fighter
+     */
     public Fighter prevFighter() {
         ArrayList<Fighter> allies = getAllies();
         int idx = allies.size() - 1;
@@ -525,6 +598,12 @@ public class Map {
         return fighter;
     }
 
+    /**
+     * gets the MapTile at location (x, y)
+     * @param x int x position
+     * @param y int y position
+     * @return MapTile located at position
+     */
     public MapTile getMapTile(int x, int y) {
         if (x >= width || y >= height || x < 0 || y < 0) {
             return null;
@@ -533,6 +612,12 @@ public class Map {
         }
     }
 
+    /**
+     * Gets the fighter located at position (x, y)
+     * @param x int x position
+     * @param y int y position
+     * @return Fighter located at position
+     */
     public Fighter getFighter(int x, int y) {
         for (Fighter f : fighters) {
             if (f.getxPos() == x && f.getyPos() == y) {
@@ -542,7 +627,7 @@ public class Map {
         return null;
     }
 
-    //Getters
+    /**Getters**/
     public int getHeight() { return height;}
     public int getWidth() { return width;}
     public ArrayList<Fighter> getFighters() { return fighters;}
@@ -566,9 +651,9 @@ public class Map {
         return list;
     }
 
-    //Set
+    /**Setters**/
     public void setFighter(Fighter f) {fighter = f;}
 
-    //Removers
+    /**Removers**/
     public void removeFighter(Fighter f) {fighters.remove(f);}
 }

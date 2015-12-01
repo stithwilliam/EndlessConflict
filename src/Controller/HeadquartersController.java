@@ -30,7 +30,7 @@ public class HeadquartersController {
     }
 
     private void setBarrBtn(ActionEvent e) {
-        MasterController.getInstance().setBarracksScene();
+        MasterController.getInstance().loadBarracksScene();
     }
 
     private void setCommBtn(ActionEvent e) {

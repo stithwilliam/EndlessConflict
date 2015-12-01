@@ -909,10 +909,13 @@ public class MapController {
      * @param e
      */
     private void setUpRect(MouseEvent e) {
+        //TEST TODO
+        MasterController.getInstance().loadBarracksScene();
+        /*
         double y = gridPane.getTranslateY();
         if (y < 0) {
             gridPane.setTranslateY(y + 64);
-        }
+        } */
     }
 
     /**

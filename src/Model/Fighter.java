@@ -50,6 +50,10 @@ public class Fighter {
         } else {
             range = vision;
         }
+        weapon = Weapon.NONE;
+        head = Head.NONE;
+        armor = Armor.NONE;
+        feet = Feet.NONE;
     }
 
     /**
@@ -120,12 +124,14 @@ public class Fighter {
     public int getRange() {return range;}
     public boolean isMelee() {return melee;}
     public boolean isEnemy() {return enemy;}
+    public boolean isHero() {return model.isHero();}
     public boolean hasMoved() {return hasMoved;}
     public boolean hasAttacked() {return hasAttacked;}
     public Weapon getWeapon() {return (Weapon) weapon;}
     public Armor getArmor() {return (Armor) armor;}
     public Head getHead() {return (Head) head;}
     public Feet getFeet() {return (Feet) feet;}
+    public String getSkillName() {return model.getSkillName();}
     /**Setters**/
     public void setxPos(int xPos) {this.xPos = xPos;}
     public void setName(String name) {this.name = name;}

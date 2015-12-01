@@ -4,18 +4,24 @@ package Model;
  * Created by William on 11/12/2015.
  */
 public enum Armor implements Equipment {
+    /**Null Armor**/
+    NONE(0,0,0,0,0,0,"None"),
+
     /**Hero Starting Armors**/
-    DAMAGEDSCALES(0,3,0,0,0), DAMAGEDKEVLAR(0,3,0,0,0), DAMAGEDFRAME(0,3,0,0,0),
+    DAMAGEDSCALES(0,3,0,0,0,0,"Damaged Scales"), DAMAGEDKEVLAR(0,3,0,0,0,0,"Damaged Kevlar"), DAMAGEDFRAME(0,3,0,0,0,0,"Damaged Frame"),
 
     /**Unit Starting Armors**/
-    SQUISHYOOZE(0,2,0,0,0), DAMAGEDUNIFORM(0,2,0,0,0), DAMAGEDHULL(0,2,0,0,0);
+    SQUISHYOOZE(0,2,0,0,0,0,"Squishy Ooze"), DAMAGEDUNIFORM(0,2,0,0,0,0,"Damaged Uniform"), DAMAGEDHULL(0,2,0,0,0,0,"Damaged Hull");
+
 
     /**Armor stats**/
-    int attack;
-    int defense;
-    int hp;
-    int movement;
-    int vision;
+    private int attMod;
+    private int defMod;
+    private int hpMod;
+    private int movMod;
+    private int visMod;
+    private int range;
+    private String name;
 
     /**
      * Constructor for armor
@@ -25,33 +31,41 @@ public enum Armor implements Equipment {
      * @param m int movement
      * @param v int vision
      */
-    Armor(int a, int d, int h, int m, int v) {
-        attack = a;
-        defense = d;
-        hp = h;
-        movement = m;
-        vision = v;
+    Armor(int a, int d, int h, int m, int v, int r, String n) {
+        attMod = a;
+        defMod = d;
+        hpMod = h;
+        movMod = m;
+        visMod = v;
+        range = r;
+        name = n;
     }
 
     /**Getters**/
     @Override
+    public String toString() {
+        return name;
+    }
+    @Override
     public int getAttMod() {
-        return 0;
+        return attMod;
     }
     @Override
     public int getDefMod() {
-        return 0;
+        return defMod;
     }
     @Override
     public int getHpMod() {
-        return 0;
+        return hpMod;
     }
     @Override
     public int getMovMod() {
-        return 0;
+        return movMod;
     }
     @Override
     public int getVisMod() {
-        return 0;
+        return visMod;
     }
+    @Override
+    public int getRange() { return range;}
 }

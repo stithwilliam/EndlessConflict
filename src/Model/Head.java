@@ -4,15 +4,22 @@ package Model;
  * Created by William on 11/12/2015.
  */
 public enum Head implements Equipment {
-    /**First headgear for Heroes**/
-    RAZORTEETH(2,0,0,0,0), GOGGLES(0,2,0,0,0), TARGETINGCHIP(0,0,0,0,1);
+    /**Null Headgear**/
+    NONE(0,0,0,0,0,0,"None"),
 
-    /**Stats for this Head**/
-    int attack;
-    int defense;
-    int hp;
-    int movement;
-    int vision;
+    /**First headgear for Heroes**/
+    RAZORTEETH(2,0,0,0,0,0,"Razorteeth"), GOGGLES(0,2,0,0,0,0,"Goggles"), TARGETINGCHIP(0,0,0,0,1,0,"Targeting Chip");
+
+    /**Name of this Headgear**/
+    private String name;
+
+    /**Stats for this Headgear**/
+    private int attMod;
+    private int defMod;
+    private int hpMod;
+    private int movMod;
+    private int visMod;
+    private int range;
 
     /**
      * Constructor for Head
@@ -22,33 +29,43 @@ public enum Head implements Equipment {
      * @param m int movement
      * @param v int vision
      */
-    Head(int a, int d, int h, int m, int v) {
-        attack = a;
-        defense = d;
-        hp = h;
-        movement = m;
-        vision = v;
+    Head(int a, int d, int h, int m, int v, int r, String n) {
+        attMod = a;
+        defMod = d;
+        hpMod = h;
+        movMod = m;
+        visMod = v;
+        range = r;
+        name = n;
     }
 
     /**Getters**/
+    @Override
+    public String toString() {
+        return name;
+    }
     @Override
     public int getAttMod() {
         return 0;
     }
     @Override
     public int getDefMod() {
-        return 0;
+        return defMod;
     }
     @Override
     public int getHpMod() {
-        return 0;
+        return hpMod;
     }
     @Override
     public int getMovMod() {
-        return 0;
+        return movMod;
     }
     @Override
     public int getVisMod() {
-        return 0;
+        return visMod;
+    }
+    @Override
+    public int getRange() {
+        return range;
     }
 }

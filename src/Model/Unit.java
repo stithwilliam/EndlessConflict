@@ -55,4 +55,6 @@ public enum Unit implements Placeable {
     public int getMov() {return movement;}
     public int getVis() {return vision;}
     public boolean isMelee() {return melee;}
+    public boolean isHero() {return false;}
+    public String getSkillName() {return "None";}
 }

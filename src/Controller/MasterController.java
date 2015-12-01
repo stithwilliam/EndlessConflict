@@ -17,7 +17,7 @@ public class MasterController {
 
     /**Different scenes in the game**/
     private Scene startScene, config1Scene, config2Scene, mapScene, headquartersScene,
-            commQuartersScene, armsDealerScene, barracksScene, mercCampScene;
+            commQuartersScene, armsDealerScene, mercCampScene;
 
     /**The singleton MapController**/
     private MapController mapController;
@@ -66,9 +66,6 @@ public class MasterController {
             root = FXMLLoader.load(getClass().getResource("/View/ArmsDealer.fxml"));
             armsDealerScene = new Scene(root);
 
-            root = FXMLLoader.load(getClass().getResource("/View/Barracks.fxml"));
-            barracksScene = new Scene(root);
-
             root = FXMLLoader.load(getClass().getResource("/View/CommandersQuarters.fxml"));
             commQuartersScene = new Scene(root);
 
@@ -87,9 +84,18 @@ public class MasterController {
     public void setMapScene() { stage.setScene(mapScene);}
     public void setHeadquartersScene() { stage.setScene(headquartersScene);}
     public void setArmsDealerScene() { stage.setScene(armsDealerScene);}
-    public void setBarracksScene() { stage.setScene(barracksScene);}
     public void setCommQuartersScene() { stage.setScene(commQuartersScene);}
     public void setMercCampScene() { stage.setScene(mercCampScene);}
+
+    /**Scene loaders**/
+    public void loadBarracksScene() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/View/Barracks.fxml"));
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            System.out.println("Shit's broke: " + e);
+        }
+    }
 
     /**Getters**/
     public MapController getMapController() { return mapController;}

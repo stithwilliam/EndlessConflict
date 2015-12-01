@@ -4,15 +4,20 @@ package Model;
  * Created by William on 11/12/2015.
  */
 public enum Feet implements Equipment {
+    /**Null Feet**/
+    NONE(0,0,0,0,0,0,"None"),
+
     /**First footwear for heroes**/
-    WEBBEDTOES(0,0,0,1,0), HIKINGBOOTS(0,0,0,1,0), IMPROVEDEMITTOR(0,0,0,1,0);
+    WEBBEDTOES(0,0,0,1,0,0,"Webbed Toes"), HIKINGBOOTS(0,0,0,1,0,0,"Hiking Boots"), BASICEMITTOR(0,0,0,1,0,0,"Basic Emittor");
 
     /**Stats for this Feet**/
-    int attack;
-    int defense;
-    int hp;
-    int movement;
-    int vision;
+    private int attMod;
+    private int defMod;
+    private int hpMod;
+    private int movMod;
+    private int visMod;
+    private int range;
+    private String name;
 
     /**
      * Constructor for Feet
@@ -22,33 +27,43 @@ public enum Feet implements Equipment {
      * @param m int movement
      * @param v int vision
      */
-    Feet(int a, int d, int h, int m, int v) {
-        attack = a;
-        defense = d;
-        hp = h;
-        movement = m;
-        vision = v;
+    Feet(int a, int d, int h, int m, int v, int r, String n) {
+        attMod = a;
+        defMod = d;
+        hpMod = h;
+        movMod = m;
+        visMod = v;
+        range = r;
+        name = n;
     }
 
     /**Getters**/
     @Override
+    public String toString() {
+        return name;
+    }
+    @Override
     public int getAttMod() {
-        return attack;
+        return attMod;
     }
     @Override
     public int getDefMod() {
-        return defense;
+        return defMod;
     }
     @Override
     public int getHpMod() {
-        return hp;
+        return hpMod;
     }
     @Override
     public int getMovMod() {
-        return movement;
+        return movMod;
     }
     @Override
     public int getVisMod() {
-        return vision;
+        return visMod;
+    }
+    @Override
+    public int getRange() {
+        return range;
     }
 }

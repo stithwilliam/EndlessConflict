@@ -3,6 +3,7 @@ package Model;
 import Controller.MapController;
 import Controller.MasterController;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -11,22 +12,31 @@ import java.util.Random;
  */
 public class Game {
 
-    //difficulty chosen by the user
+    /**Difficulty chosen by the user**/
     private Difficulty difficulty;
 
-    //mode chosen by the user
+    /**Mode chosen by the user**/
     private Mode mode;
 
-    //commander chosen by the user
+    /**Commander chosen by the user**/
     private Commander commander;
 
-    //the current map being played on
+    /**Fighters in the user's army**/
+    private ArrayList<Fighter> army;
+
+    /**Fighters residing in the barracks**/
+    private ArrayList<Fighter> fightersInBarracks;
+
+    /**All fighters owned by the user**/
+    private ArrayList<Fighter> allFighters; //TODO
+
+    /**The current map being played on**/
     private Map map;
 
-    //the AI object used by Game
+    /**the AI object used by Game**/
     private AI comp;
 
-    //the MapController in charge of the map screen
+    /**the MapController in charge of the map screen**/
     private MapController mapController;
 
     /**
@@ -59,6 +69,8 @@ public class Game {
         }
         comp = new AI(this, map);
         mapController.constructMap(map);
+        army = map.getAllies();
+        fightersInBarracks = new ArrayList<>();
     }
 
     /**
@@ -110,14 +122,72 @@ public class Game {
         }
     }
 
+    /**
+     * gets the next fighter in army after f
+     * @param fighter The current Fighter
+     * @return Fighter the next Fighter
+     */
+    public Fighter nextFighter(Fighter fighter) {
+        int idx = 0;
+        Fighter f = null;
+        while (f != fighter) {
+            f = army.get(idx);
+            idx++;
+        }
+        if (idx == army.size()) {
+            idx = 0;
+        }
+        fighter = army.get(idx);
+        return fighter;
+    }
+
+    /**
+     * gets the previous fighter in army before fighter
+     * @param fighter The current Fighter
+     * @return Fighter the previous fighter
+     */
+    public Fighter prevFighter(Fighter fighter) {
+        int idx = army.size() - 1;
+        Fighter f = null;
+        while (f != fighter) {
+            f = army.get(idx);
+            idx--;
+        }
+        if (idx == -1) {
+            idx = army.size() - 1;
+        }
+        fighter = army.get(idx);
+        return fighter;
+    }
+
     /**Getters**/
-    public Difficulty getDifficulty() {return difficulty;}
-    public Mode getMode() {return mode;}
-    public Map getMap() {return map;}
-    public Commander getCommander() {return commander;}
-    public ArrayList<Fighter> getFighters() {return map.getFighters();}
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+    public Mode getMode() {
+        return mode;
+    }
+    public Map getMap() {
+        return map;
+    }
+    public Commander getCommander() {
+        return commander;
+    }
+    public ArrayList<Fighter> getArmy() {
+        return army;
+    }
+    public ArrayList<Fighter> getFightersInBarracks() {
+        return fightersInBarracks;
+    }
+    
     /**Setters**/
-    public void setDifficulty(Difficulty d) {difficulty = d;}
-    public void setMode(Mode m) {mode = m;}
-    public void setCommander(Commander c) {commander = c;}
+    public void setDifficulty(Difficulty d) {
+        difficulty = d;
+    }
+    public void setMode(Mode m) {
+        mode = m;
+    }
+    public void setCommander(Commander c) {
+        commander = c;
+    }
 }

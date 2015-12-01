@@ -11,5 +11,7 @@ public interface Equipment {
     int getHpMod();
     int getMovMod();
     int getVisMod();
-
+    int getRange();
+    @Override
+    String toString();
 }

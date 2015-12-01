@@ -8,8 +8,13 @@ import java.util.Random;
  */
 public enum MapType {
 
+    /**Types of Map**/
     TUTORIAL;
 
+    /**
+     * Generates a board based on the type of map.
+     * @return MapTile[][] board
+     */
     public MapTile[][] getBoard() {
         MapTile[][] board = new MapTile[0][0];
         Tile F = Tile.FOREST;
@@ -56,9 +61,14 @@ public enum MapType {
         Commander commander = game.getCommander();
         switch (this) {
             case TUTORIAL:
-                fighters.add(new Fighter(commander.getHero(), 1, 2, false));
-                fighters.add(new Fighter(commander.getUnit(), 0, 1, false));
-                fighters.add(new Fighter(commander.getUnit(), 0, 3, false));
+                Fighter hero = new Fighter(commander.getHero(), 1, 2, false);
+                fighters.add(hero);
+                Fighter unit1 = new Fighter (commander.getUnit(), 0, 1, false);
+                unit1.setName(unit1.getName() + " 1");
+                fighters.add(unit1);
+                Fighter unit2 = new Fighter(commander.getUnit(), 0, 3, false);
+                unit2.setName(unit2.getName() + " 2");
+                fighters.add(unit2);
                 Fighter w = new Fighter(commander.getWeakCommander().getHero(), 8, 3, true);
                 w.setAtt(w.getAtt() - 3);
                 w.setDef(w.getDef() - 3);

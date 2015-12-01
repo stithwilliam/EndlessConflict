@@ -49,7 +49,7 @@ public class MapTile {
     public int getxPos() {return xPos;}
     public int getyPos() {return yPos;}
     public boolean hasFighter() {
-        for (Fighter f : Main.myGame.getFighters()) {
+        for (Fighter f : Main.myGame.getMap().getFighters()) {
             if (f.getxPos() == xPos && f.getyPos() == yPos) {
                 return true;
             }
@@ -57,7 +57,7 @@ public class MapTile {
         return false;
     }
     public Fighter getFighter() {
-        for (Fighter f : Main.myGame.getFighters()) {
+        for (Fighter f : Main.myGame.getMap().getFighters()) {
             if (f.getxPos() == xPos && f.getyPos() == yPos) {
                 return f;
             }

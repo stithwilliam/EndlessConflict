@@ -107,4 +107,16 @@ public enum Hero implements Placeable {
     public int getVis() {return vision;}
     public int getLevel() {return level;}
     public boolean isMelee() {return melee;}
+    public boolean isHero() {return true;}
+    public String getSkillName() {
+        switch (this) {
+            case LIZARDKING:
+                return "Lizard jump";
+            case MODELX:
+                return "Tractor beam";
+            case CHAOS:
+                return "Grenade";
+        }
+        return "None";
+    }
 }

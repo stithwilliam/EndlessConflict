@@ -27,9 +27,6 @@ public class Game {
     /**Fighters residing in the barracks**/
     private ArrayList<Fighter> fightersInBarracks;
 
-    /**All fighters owned by the user**/
-    private ArrayList<Fighter> allFighters; //TODO
-
     /**The current map being played on**/
     private Map map;
 
@@ -117,6 +114,9 @@ public class Game {
      */
     public void killedFighter(Fighter f) {
         mapController.removeFighter(f);
+        if (!f.isEnemy() && mode == Mode.HARDCORE) {
+            army.remove(f);
+        }
         if (map.getEnemies().size() == 0) {
             MasterController.getInstance().setHeadquartersScene();
         }
@@ -127,7 +127,7 @@ public class Game {
      * @param fighter The current Fighter
      * @return Fighter the next Fighter
      */
-    public Fighter nextFighter(Fighter fighter) {
+    public Fighter nextFighterInArmy(Fighter fighter) {
         int idx = 0;
         Fighter f = null;
         while (f != fighter) {
@@ -146,7 +146,7 @@ public class Game {
      * @param fighter The current Fighter
      * @return Fighter the previous fighter
      */
-    public Fighter prevFighter(Fighter fighter) {
+    public Fighter prevFighterInArmy(Fighter fighter) {
         int idx = army.size() - 1;
         Fighter f = null;
         while (f != fighter) {
@@ -179,7 +179,7 @@ public class Game {
     public ArrayList<Fighter> getFightersInBarracks() {
         return fightersInBarracks;
     }
-    
+
     /**Setters**/
     public void setDifficulty(Difficulty d) {
         difficulty = d;

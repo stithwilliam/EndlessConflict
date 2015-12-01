@@ -2,7 +2,6 @@ package Controller;
 
 import Model.Fighter;
 import Model.Game;
-import Model.Hero;
 import Model.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -144,7 +143,7 @@ public class BarracksController {
      */
     @FXML
     public void setPrevBtn(ActionEvent e) {
-        fighter = Main.myGame.prevFighter(fighter);
+        fighter = Main.myGame.prevFighterInArmy(fighter);
         if (statsShowing) {
             showStats();
         } else {
@@ -159,7 +158,7 @@ public class BarracksController {
      */
     @FXML
     public void setNextBtn(ActionEvent e) {
-        fighter = Main.myGame.nextFighter(fighter);
+        fighter = Main.myGame.nextFighterInArmy(fighter);
         if (statsShowing) {
             showStats();
         } else {

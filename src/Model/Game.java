@@ -25,7 +25,7 @@ public class Game {
     private ArrayList<Fighter> army;
 
     /**Fighters residing in the barracks**/
-    private ArrayList<Fighter> fightersInBarracks;
+    private ArrayList<Fighter> barracks;
 
     /**The current map being played on**/
     private Map map;
@@ -67,7 +67,8 @@ public class Game {
         comp = new AI(this, map);
         mapController.constructMap(map);
         army = map.getAllies();
-        fightersInBarracks = new ArrayList<>();
+        barracks = new ArrayList<>();
+        barracks.add(new Fighter(Hero.LIZARDKING));
     }
 
     /**
@@ -127,17 +128,20 @@ public class Game {
      * @param fighter The current Fighter
      * @return Fighter the next Fighter
      */
-    public Fighter nextFighterInArmy(Fighter fighter) {
+    public Fighter nextFighter(Fighter fighter) {
+        ArrayList<Fighter> fighters = new ArrayList<>();
+        fighters.addAll(army);
+        fighters.addAll(barracks);
         int idx = 0;
         Fighter f = null;
         while (f != fighter) {
-            f = army.get(idx);
+            f = fighters.get(idx);
             idx++;
         }
-        if (idx == army.size()) {
+        if (idx == fighters.size()) {
             idx = 0;
         }
-        fighter = army.get(idx);
+        fighter = fighters.get(idx);
         return fighter;
     }
 
@@ -146,17 +150,20 @@ public class Game {
      * @param fighter The current Fighter
      * @return Fighter the previous fighter
      */
-    public Fighter prevFighterInArmy(Fighter fighter) {
-        int idx = army.size() - 1;
+    public Fighter prevFighter(Fighter fighter) {
+        ArrayList<Fighter> fighters = new ArrayList<>();
+        fighters.addAll(army);
+        fighters.addAll(barracks);
+        int idx = fighters.size() - 1;
         Fighter f = null;
         while (f != fighter) {
-            f = army.get(idx);
+            f = fighters.get(idx);
             idx--;
         }
         if (idx == -1) {
-            idx = army.size() - 1;
+            idx = fighters.size() - 1;
         }
-        fighter = army.get(idx);
+        fighter = fighters.get(idx);
         return fighter;
     }
 
@@ -176,8 +183,8 @@ public class Game {
     public ArrayList<Fighter> getArmy() {
         return army;
     }
-    public ArrayList<Fighter> getFightersInBarracks() {
-        return fightersInBarracks;
+    public ArrayList<Fighter> getBarracks() {
+        return barracks;
     }
 
     /**Setters**/
@@ -189,5 +196,21 @@ public class Game {
     }
     public void setCommander(Commander c) {
         commander = c;
+    }
+
+    /**Adders**/
+    public void addToArmy(Fighter f) {
+        army.add(f);
+    }
+    public void addToBarracks(Fighter f) {
+        barracks.add(f);
+    }
+
+    /**Removers**/
+    public void removeFromArmy(Fighter f) {
+        army.remove(f);
+    }
+    public void removeFromBarracks(Fighter f) {
+        barracks.remove(f);
     }
 }

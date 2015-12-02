@@ -69,13 +69,9 @@ public enum MapType {
                 Fighter unit2 = new Fighter(commander.getUnit(), 0, 3, false);
                 unit2.setName(unit2.getName() + " 2");
                 fighters.add(unit2);
-                Fighter w = new Fighter(commander.getWeakCommander().getHero(), 8, 3, true);
-                w.setAtt(w.getAtt() - 3);
-                w.setDef(w.getDef() - 3);
+                Fighter w = new Fighter(commander.getWeakCommander().getUnit(), 8, 3, true);
                 fighters.add(w);
-                Fighter s = new Fighter(commander.getStrongCommander().getHero(), 14, 3, true);
-                s.setAtt(s.getAtt() - 3);
-                s.setDef(s.getDef() - 3);
+                Fighter s = new Fighter(commander.getStrongCommander().getUnit(), 14, 3, true);
                 fighters.add(s);
         }
         return fighters;

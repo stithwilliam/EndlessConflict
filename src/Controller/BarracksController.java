@@ -137,36 +137,6 @@ public class BarracksController {
     }
 
     /**
-     * Called when the previous button is pressed
-     * Shows the user the previous fighter in the army
-     * @param e Button prevBtn
-     */
-    @FXML
-    public void setPrevBtn(ActionEvent e) {
-        fighter = Main.myGame.prevFighterInArmy(fighter);
-        if (statsShowing) {
-            showStats();
-        } else {
-            showEquipment();
-        }
-    }
-
-    /**
-     * Called when the next button is pressed.
-     * Shows the next fighter in the user's army
-     * @param e Button nextBtn
-     */
-    @FXML
-    public void setNextBtn(ActionEvent e) {
-        fighter = Main.myGame.nextFighterInArmy(fighter);
-        if (statsShowing) {
-            showStats();
-        } else {
-            showEquipment();
-        }
-    }
-
-    /**
      * Called when the Add to Army button is pressed
      * Adds the current fighter to the user's army
      * @param e Button addBtn
@@ -183,6 +153,8 @@ public class BarracksController {
                     barracksBox.getChildren().remove(i + 1);
                 }
             }
+            Main.myGame.addToArmy(fighter);
+            Main.myGame.removeFromBarracks(fighter);
         } else {
             System.out.println("Already in army box");
         }
@@ -205,8 +177,40 @@ public class BarracksController {
                     armyBox.getChildren().remove(i + 1);
                 }
             }
+            Main.myGame.removeFromArmy(fighter);
+            Main.myGame.addToBarracks(fighter);
         } else {
             System.out.println("Already in barracks box");
+        }
+    }
+
+    /**
+     * Called when the previous button is pressed
+     * Shows the user the previous fighter in the army
+     * @param e Button prevBtn
+     */
+    @FXML
+    public void setPrevBtn(ActionEvent e) {
+        fighter = Main.myGame.prevFighter(fighter);
+        if (statsShowing) {
+            showStats();
+        } else {
+            showEquipment();
+        }
+    }
+
+    /**
+     * Called when the next button is pressed.
+     * Shows the next fighter in the user's army
+     * @param e Button nextBtn
+     */
+    @FXML
+    public void setNextBtn(ActionEvent e) {
+        fighter = Main.myGame.nextFighter(fighter);
+        if (statsShowing) {
+            showStats();
+        } else {
+            showEquipment();
         }
     }
 
@@ -252,8 +256,8 @@ public class BarracksController {
             armyBox.getChildren().add(createLabel(f.getName()));
             inArmyBox.add(f);
         }
-        for (int i = 0; i < game.getFightersInBarracks().size(); i++) {
-            Fighter f = game.getFightersInBarracks().get(i);
+        for (int i = 0; i < game.getBarracks().size(); i++) {
+            Fighter f = game.getBarracks().get(i);
             barracksBox.getChildren().add(createLabel(f.getName()));
             inBarracksBox.add(f);
         }

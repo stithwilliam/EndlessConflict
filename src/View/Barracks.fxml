@@ -167,7 +167,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <VBox fx:id="barracksBox" layoutX="600.0" layoutY="25.0" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: tomato; -fx-border-width: 1; -fx-border-color: black;">
+      <VBox fx:id="barracksBox" layoutX="600.0" layoutY="25.0" maxHeight="500.0" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: tomato; -fx-border-width: 1; -fx-border-color: black;">
          <children>
             <Label alignment="CENTER" prefHeight="24.0" prefWidth="200.0" text="In Barracks">
                <font>

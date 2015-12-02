@@ -23,6 +23,10 @@ public class Fighter {
     /**equipment of the fighter**/
     private Equipment weapon, armor, head, feet;
 
+    public Fighter(Placeable p) {
+        this(p, 0, 0, false);
+    }
+
     /**
      * Constructor for Fighter
      * @param p Placeable model that this uses

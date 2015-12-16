@@ -1,8 +1,20 @@
 package Controller;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -99,4 +111,38 @@ public class MasterController {
 
     /**Getters**/
     public MapController getMapController() { return mapController;}
+
+    /**
+     * Shows a popup with text and an OK button that closes the popup
+     * @param text String of text to be shown
+     */
+    public void textPopup(String text) {
+
+        //Create VBox and Popup
+        Popup popup = new Popup();
+        VBox vBox = new VBox();
+        vBox.setPrefWidth(300);
+        vBox.setPrefHeight(200);
+        vBox.setStyle("-fx-background-color: SKYBLUE; -fx-border-width: 1; -fx-border-color: BLACK;");
+        vBox.setAlignment(Pos.CENTER);
+
+        //Create and add the text label
+        Label label = new Label(text);
+        label.setFont(Font.font("Britannic Bold", 18));
+        label.setWrapText(true);
+        label.setPadding(new Insets(20, 20, 20, 20));
+        vBox.getChildren().add(label);
+
+        //Create and add the OK button
+        Button button = new Button();
+        button.setText("OK");
+        button.setFont(Font.font("Britannic Bold", 18));
+        button.setOnAction(event -> popup.hide());
+        button.setPadding(new Insets(20, 20, 20, 20));
+        vBox.getChildren().add(button);
+
+        //Show popup
+        popup.getContent().add(vBox);
+        popup.show(stage);
+    }
 }

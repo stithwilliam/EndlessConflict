@@ -13,7 +13,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -910,7 +909,7 @@ public class MapController {
      */
     private void setUpRect(MouseEvent e) {
         //TEST TODO
-        MasterController.getInstance().loadBarracksScene();
+        MasterController.getInstance().textPopup("I am a popup hear me roar.");
         /*
         double y = gridPane.getTranslateY();
         if (y < 0) {

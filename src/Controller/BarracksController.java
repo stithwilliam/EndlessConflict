@@ -79,9 +79,9 @@ public class BarracksController {
     private LinkedList<Fighter> inBarracksBox;
 
     /**
-     * Helper function called when you want to show the current fighter's stats to the user
+     * Helper function that shows the image, name, and hero designation of the current fighter
      */
-    private void showStats() {
+    private void showFighter() {
         fighterImage.setImage(new Image(fighter.imagePath()));
         nameLabel.setText(fighter.getName());
         if (fighter.isHero()) {
@@ -89,6 +89,12 @@ public class BarracksController {
         } else {
             heroLabel.setText("Unit");
         }
+    }
+
+    /**
+     * Helper function called when you want to show the current fighter's stats to the user
+     */
+    private void showStats() {
         label00.setText("HP");
         label10.setText("Attack");
         label20.setText("Defense");
@@ -192,6 +198,7 @@ public class BarracksController {
     @FXML
     public void setPrevBtn(ActionEvent e) {
         fighter = Main.myGame.prevFighter(fighter);
+        showFighter();
         if (statsShowing) {
             showStats();
         } else {
@@ -207,6 +214,7 @@ public class BarracksController {
     @FXML
     public void setNextBtn(ActionEvent e) {
         fighter = Main.myGame.nextFighter(fighter);
+        showFighter();
         if (statsShowing) {
             showStats();
         } else {

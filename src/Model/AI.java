@@ -1,6 +1,6 @@
 package Model;
 
-import Controller.MapController;
+import Controller.BattleController;
 import Controller.MasterController;
 
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ public class AI {
       * Handles the enemy fighters' moves. The fighters will move to the closest enemy and attack if possible.
      **/
     public void doTurn() {
-        MapController mapController = MasterController.getInstance().getMapController();
+        BattleController battleController = MasterController.getInstance().getBattleController();
         for (Fighter f : map.getEnemies()) { // loops through all enemies
             if (f.hasAttacked() && f.hasMoved()) {
                 continue;
@@ -64,7 +64,7 @@ public class AI {
                 }
             }
             MapTile tile = tileToAttack(f, closestFighter);
-            mapController.enemyMove(f, tile);
+            battleController.enemyMove(f, tile);
 
             // all(y/ies) in range, choose which to attack
             ArrayList<Fighter> alliesInRange = alliesInRange(f);
@@ -73,7 +73,7 @@ public class AI {
                 for (Fighter a : alliesInRange) {
                     toAttack = fighterToAttack(toAttack, a);
                 }
-                mapController.enemyAttack(f, toAttack);
+                battleController.enemyAttack(f, toAttack);
             }
             //TODO Add an animation timer so the AI doesn't move all at once
         }

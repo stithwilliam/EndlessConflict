@@ -1,7 +1,5 @@
 package Controller;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -10,9 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
@@ -31,8 +26,8 @@ public class MasterController {
     private Scene startScene, config1Scene, config2Scene, mapScene, headquartersScene,
             commQuartersScene, armsDealerScene, mercCampScene;
 
-    /**The singleton MapController**/
-    private MapController mapController;
+    /**The singleton BattleController**/
+    private BattleController battleController;
 
     /**Creates the singleton of MasterController**/
     private static MasterController masterController = new MasterController();
@@ -70,7 +65,7 @@ public class MasterController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Map.fxml"));
             root = loader.load();
             mapScene = new Scene(root);
-            mapController = loader.getController();
+            battleController = loader.getController();
 
             root = FXMLLoader.load(getClass().getResource("/View/Headquarters.fxml"));
             headquartersScene = new Scene(root);
@@ -110,7 +105,7 @@ public class MasterController {
     }
 
     /**Getters**/
-    public MapController getMapController() { return mapController;}
+    public BattleController getBattleController() { return battleController;}
 
     /**
      * Shows a popup with text and an OK button that closes the popup

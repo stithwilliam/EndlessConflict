@@ -19,7 +19,7 @@ import java.util.HashMap;
 /**
  * Created by William on 10/26/2015.
  */
-public class MapController {
+public class BattleController {
 
     //FXML injections
     @FXML

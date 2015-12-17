@@ -42,7 +42,7 @@
                   <Font name="Britannic Bold" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="attackBtn" blendMode="HARD_LIGHT" layoutX="20.0" layoutY="77.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="96.0" text="ATTACK">
+            <Button fx:id="atkBtn" blendMode="HARD_LIGHT" layoutX="20.0" layoutY="77.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="96.0" text="ATTACK">
                <font>
                   <Font name="Britannic Bold" size="18.0" />
                </font>
@@ -99,7 +99,7 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Label fx:id="AllyDef" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" text="DEF: 20" wrapText="true">
+            <Label fx:id="allyDef" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" text="DEF: 20" wrapText="true">
                <font>
                   <Font name="Britannic Bold" size="14.0" />
                </font>

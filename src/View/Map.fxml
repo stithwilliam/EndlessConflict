@@ -82,7 +82,7 @@
             <Font name="Britannic Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="skillBtn" layoutX="552.0" layoutY="561.0" mnemonicParsing="false" text="SKILL">
+      <Button fx:id="skillsBtn" layoutX="552.0" layoutY="561.0" mnemonicParsing="false" text="SKILL">
          <font>
             <Font name="Britannic Bold" size="18.0" />
          </font>

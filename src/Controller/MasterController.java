@@ -13,6 +13,7 @@ import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * Created by William on 10/26/2015.
@@ -23,7 +24,7 @@ public class MasterController {
     private Stage stage;
 
     /**Different scenes in the game**/
-    private Scene startScene, config1Scene, config2Scene, mapScene, headquartersScene,
+    private Scene startScene, config1Scene, config2Scene, battleScene, headquartersScene,
             commQuartersScene, armsDealerScene, mercCampScene;
 
     /**The singleton BattleController**/
@@ -62,9 +63,9 @@ public class MasterController {
             root = FXMLLoader.load(getClass().getResource("/View/Config2.fxml"));
             config2Scene = new Scene(root);
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Map.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Battle.fxml"));
             root = loader.load();
-            mapScene = new Scene(root);
+            battleScene = new Scene(root);
             battleController = loader.getController();
 
             root = FXMLLoader.load(getClass().getResource("/View/Headquarters.fxml"));
@@ -81,6 +82,7 @@ public class MasterController {
 
         } catch (IOException e) {
             System.out.println("Shit's broke: " + e);
+            System.out.println("\n" + Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -88,7 +90,7 @@ public class MasterController {
     public void setStartScene() { stage.setScene(startScene);}
     public void setConfig1Scene() { stage.setScene(config1Scene);}
     public void setConfig2Scene() { stage.setScene(config2Scene);}
-    public void setMapScene() { stage.setScene(mapScene);}
+    public void setBattleScene() { stage.setScene(battleScene);}
     public void setHeadquartersScene() { stage.setScene(headquartersScene);}
     public void setArmsDealerScene() { stage.setScene(armsDealerScene);}
     public void setCommQuartersScene() { stage.setScene(commQuartersScene);}
@@ -101,6 +103,7 @@ public class MasterController {
             stage.setScene(new Scene(root));
         } catch (IOException e) {
             System.out.println("Shit's broke: " + e);
+
         }
     }
 

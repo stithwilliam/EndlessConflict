@@ -11,7 +11,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,29 +20,51 @@ import java.util.HashMap;
  */
 public class BattleController {
 
-    //FXML injections
+    /**FXML injections**/
     @FXML
     private GridPane gridPane;
-    @FXML
-    private Rectangle upRect;
-    @FXML
-    private Rectangle downRect;
-    @FXML
-    private Rectangle rightRect;
-    @FXML
-    private Rectangle leftRect;
     @FXML
     private Button moveBtn;
     @FXML
     private Button atkBtn;
     @FXML
-    private Button skillBtn;
+    private Button skillsBtn;
     @FXML
-    private Button prevBtn;
-    @FXML
-    private Button nextBtn;
+    private Button itemsBtn;
     @FXML
     private Button endTurnBtn;
+    @FXML
+    private ImageView allySprite;
+    @FXML
+    private ImageView allyHealthWheel;
+    @FXML
+    private ImageView enemySprite;
+    @FXML
+    private ImageView enemyHealthWheel;
+    @FXML
+    private Label allyName;
+    @FXML
+    private Label allyAtk;
+    @FXML
+    private Label allyDef;
+    @FXML
+    private Label allyRange;
+    @FXML
+    private Label allyType;
+    @FXML
+    private Label allyHP;
+    @FXML
+    private Label enemyName;
+    @FXML
+    private Label enemyAtk;
+    @FXML
+    private Label enemyDef;
+    @FXML
+    private Label enemyRange;
+    @FXML
+    private Label enemyType;
+    @FXML
+    private Label enemyHP;
     @FXML
     private VBox terminal;
 
@@ -119,6 +140,7 @@ public class BattleController {
         mapTile.getStackPane().getChildren().remove(1);
         mapTile.getStackPane().setOnMouseClicked(null);
     }
+
 
     /**
      * Puts the x and y coordinates in view of the user
@@ -265,9 +287,9 @@ public class BattleController {
         atkBtn.setOnAction(this::cancelMove);
         atkBtn.setOnMouseEntered(null);
         atkBtn.setOnMouseExited(null);
-        skillBtn.setOnAction(this::cancelMove);
-        nextBtn.setOnAction(this::cancelMove);
-        prevBtn.setOnAction(this::cancelMove);
+        skillsBtn.setOnAction(this::cancelMove);
+        itemsBtn.setOnAction(this::cancelMove);
+        endTurnBtn.setOnAction(this::cancelMove);
     }
 
     /**
@@ -413,9 +435,9 @@ public class BattleController {
         atkBtn.setOnAction(this::cancelAttack);
         atkBtn.setOnMouseEntered(null);
         atkBtn.setOnMouseExited(null);
-        skillBtn.setOnAction(this::cancelAttack);
-        nextBtn.setOnAction(this::cancelAttack);
-        prevBtn.setOnAction(this::cancelAttack);
+        skillsBtn.setOnAction(this::cancelAttack);
+        atkBtn.setOnAction(this::cancelAttack);
+        endTurnBtn.setOnAction(this::cancelAttack);
     }
 
     /**
@@ -446,7 +468,7 @@ public class BattleController {
      * Sets the valid tiles to attackHere().
      * @param e atkBtn
      */
-    private void setSkillBtn(ActionEvent e) {
+    private void setSkillsBtn(ActionEvent e) {
         Fighter fighter = map.getFighter();
         putInFocus(fighter.getxPos(), fighter.getyPos());
         if (fighter.getModel() instanceof Hero) {
@@ -520,9 +542,9 @@ public class BattleController {
         atkBtn.setOnAction(this::cancelLizardJump);
         atkBtn.setOnMouseEntered(null);
         atkBtn.setOnMouseExited(null);
-        skillBtn.setOnAction(this::cancelLizardJump);
-        nextBtn.setOnAction(this::cancelLizardJump);
-        prevBtn.setOnAction(this::cancelLizardJump);
+        skillsBtn.setOnAction(this::cancelLizardJump);
+        itemsBtn.setOnAction(this::cancelLizardJump);
+        endTurnBtn.setOnAction(this::cancelLizardJump);
     }
 
     public void cancelLizardJump(ActionEvent e) {
@@ -602,9 +624,9 @@ public class BattleController {
         atkBtn.setOnAction(this::cancelTractorBeam);
         atkBtn.setOnMouseEntered(null);
         atkBtn.setOnMouseExited(null);
-        skillBtn.setOnAction(this::cancelTractorBeam);
-        nextBtn.setOnAction(this::cancelTractorBeam);
-        prevBtn.setOnAction(this::cancelTractorBeam);
+        skillsBtn.setOnAction(this::cancelTractorBeam);
+        itemsBtn.setOnAction(this::cancelTractorBeam);
+        endTurnBtn.setOnAction(this::cancelTractorBeam);
     }
 
     public void cancelTractorBeam(ActionEvent e) {
@@ -724,9 +746,9 @@ public class BattleController {
         atkBtn.setOnAction(this::cancelGrenade);
         atkBtn.setOnMouseEntered(null);
         atkBtn.setOnMouseExited(null);
-        skillBtn.setOnAction(this::cancelGrenade);
-        nextBtn.setOnAction(this::cancelGrenade);
-        prevBtn.setOnAction(this::cancelGrenade);
+        skillsBtn.setOnAction(this::cancelGrenade);
+        itemsBtn.setOnAction(this::cancelGrenade);
+        endTurnBtn.setOnAction(this::cancelGrenade);
     }
 
     /**
@@ -750,6 +772,10 @@ public class BattleController {
     }
 
     //CONTROLS
+
+    private void setItemsBtn(ActionEvent e) {
+        putOnTerminal("I don't work yet." );
+    }
 
     /**
      * Changes the user's selection to the next fighter
@@ -826,9 +852,9 @@ public class BattleController {
         atkBtn.setOnAction(this::setAtkBtn);
         atkBtn.setOnMouseEntered(this::showAttacks);
         atkBtn.setOnMouseExited(null);
-        skillBtn.setOnAction(this::setSkillBtn);
-        nextBtn.setOnAction(this::setNextBtn);
-        prevBtn.setOnAction(this::setPrevBtn);
+        skillsBtn.setOnAction(this::setSkillsBtn);
+        itemsBtn.setOnAction(this::setItemsBtn);
+        endTurnBtn.setOnAction(this::setEndTurnBtn);
     }
 
     /**
@@ -973,17 +999,13 @@ public class BattleController {
 
     //INITIALIZER
     public void initialize() {
-        upRect.setOnMouseClicked(this::setUpRect);
-        downRect.setOnMouseClicked(this::setDownRect);
-        rightRect.setOnMouseClicked(this::setRightRect);
-        leftRect.setOnMouseClicked(this::setLeftRect);
+        System.out.println("Initialization !_!");
         moveBtn.setOnAction(this::setMoveBtn);
         moveBtn.setOnMouseEntered(this::showMoves);
         atkBtn.setOnAction(this::setAtkBtn);
         atkBtn.setOnMouseEntered(this::showAttacks);
-        skillBtn.setOnAction(this::setSkillBtn);
-        nextBtn.setOnAction(this::setNextBtn);
-        prevBtn.setOnAction(this::setPrevBtn);
+        skillsBtn.setOnAction(this::setSkillsBtn);
+        itemsBtn.setOnAction(this::setItemsBtn);
         endTurnBtn.setOnAction(this::setEndTurnBtn);
     }
 }

@@ -51,8 +51,7 @@ public class Game {
      * Creates the Tutorial map and displays it on the screen
      */
     public void startGame() {
-        MasterController.getInstance().setMapScene();
-        battleController = MasterController.getInstance().getBattleController();
+        MasterController.getInstance().setBattleScene();
         map = new Map(MapType.TUTORIAL);
         int startX = 1;
         int startY = 2;
@@ -64,6 +63,8 @@ public class Game {
             map = new Map(MapType.TUTORIAL);
         }
         comp = new AI(this, map);
+        battleController = MasterController.getInstance().getBattleController();
+        System.out.println("battleController: " + battleController);
         battleController.constructMap(map);
         army = map.getAllies();
         barracks = new ArrayList<>();

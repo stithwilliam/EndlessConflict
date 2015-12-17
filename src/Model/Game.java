@@ -64,11 +64,11 @@ public class Game {
         }
         comp = new AI(this, map);
         battleController = MasterController.getInstance().getBattleController();
-        System.out.println("battleController: " + battleController);
         battleController.constructMap(map);
+        battleController.showAlly(map.getFighter());
+        battleController.showEnemy(map.getEnemies().get(0));
         army = map.getAllies();
         barracks = new ArrayList<>();
-        barracks.add(new Fighter(Hero.LIZARDKING));
     }
 
     /**

@@ -107,6 +107,16 @@ public class MasterController {
         }
     }
 
+    public void loadBattleScene() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/View/Battle.fxml"));
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            System.out.println("Shit's broke: " + e);
+
+        }
+    }
+
     /**Getters**/
     public BattleController getBattleController() { return battleController;}
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.canvas.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.paint.*?>
@@ -49,7 +50,7 @@
             </Button>
          </children>
       </Pane>
-      <Pane layoutX="112.0" layoutY="6.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="448.0" prefWidth="576.0" style="-fx-background-color: yellow;">
+      <Pane layoutX="112.0" layoutY="6.0" maxHeight="448.0" maxWidth="576.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="448.0" prefWidth="576.0" style="-fx-background-color: yellow;">
          <children>
             <GridPane fx:id="gridPane" style="-: GREEN;">
                <columnConstraints>
@@ -60,10 +61,9 @@
                </rowConstraints>
             </GridPane>
          </children>
-         <padding>
-            <Insets right="5.0" />
-         </padding>
       </Pane>
+      <Pane prefHeight="460.0" prefWidth="112.0" style="-fx-background-color: white;" />
+      <Pane layoutX="688.0" prefHeight="460.0" prefWidth="112.0" style="-fx-background-color: white;" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="140.0" layoutY="460.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: grey;" width="400.0" />
       <VBox fx:id="terminal" alignment="BOTTOM_RIGHT" layoutX="6.0" layoutY="466.0" maxHeight="128.0" maxWidth="388.0" minHeight="128.0" minWidth="388.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="128.0" prefWidth="388.0" style="-fx-background-color: BLACK;">
          <padding>
@@ -230,5 +230,7 @@
             </Label>
          </children>
       </VBox>
+      <Pane layoutX="112.0" prefHeight="6.0" prefWidth="576.0" style="-fx-background-color: white;" />
+      <Pane layoutX="112.0" layoutY="454.0" prefHeight="6.0" prefWidth="576.0" style="-fx-background-color: white;" />
    </children>
 </AnchorPane>

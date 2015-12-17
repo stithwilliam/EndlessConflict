@@ -12,6 +12,22 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BattleController">
    <children>
+      <Pane layoutX="112.0" layoutY="6.0" maxHeight="448.0" maxWidth="576.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="448.0" prefWidth="576.0" style="-fx-background-color: yellow;">
+         <children>
+            <GridPane fx:id="gridPane" style="-: GREEN;">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="NEVER" maxWidth="64.0" minWidth="64.0" percentWidth="0.0" prefWidth="64.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="64.0" minHeight="64.0" percentHeight="0.0" prefHeight="64.0" valignment="BASELINE" vgrow="NEVER" />
+               </rowConstraints>
+            </GridPane>
+            <Button fx:id="rightBtn" layoutX="512.0" mnemonicParsing="false" opacity="0.0" prefHeight="448.0" prefWidth="64.0" text="Right" />
+            <Button fx:id="leftBtn" mnemonicParsing="false" opacity="0.0" prefHeight="448.0" prefWidth="64.0" text="Left" />
+            <Button fx:id="upBtn" layoutX="64.0" mnemonicParsing="false" opacity="0.0" prefHeight="64.0" prefWidth="448.0" text="Up" />
+            <Button fx:id="downBtn" layoutX="64.0" layoutY="384.0" mnemonicParsing="false" opacity="0.0" prefHeight="64.0" prefWidth="448.0" text="Down" />
+         </children>
+      </Pane>
       <Pane layoutX="400.0" layoutY="460.0" prefHeight="140.0" prefWidth="400.0" style="-fx-background-color: midnightblue; -fx-border-width: 3; -fx-border-color: deepskyblue;">
          <children>
             <Button fx:id="endTurnBtn" blendMode="HARD_LIGHT" contentDisplay="TOP" layoutX="313.0" layoutY="33.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="64.0" text=" END TURN" textAlignment="CENTER" wrapText="true">
@@ -48,18 +64,6 @@
                   <Font name="Britannic Bold" size="18.0" />
                </font>
             </Button>
-         </children>
-      </Pane>
-      <Pane layoutX="112.0" layoutY="6.0" maxHeight="448.0" maxWidth="576.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="448.0" prefWidth="576.0" style="-fx-background-color: yellow;">
-         <children>
-            <GridPane fx:id="gridPane" style="-: GREEN;">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="NEVER" maxWidth="64.0" minWidth="64.0" percentWidth="0.0" prefWidth="64.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints maxHeight="64.0" minHeight="64.0" percentHeight="0.0" prefHeight="64.0" valignment="BASELINE" vgrow="NEVER" />
-               </rowConstraints>
-            </GridPane>
          </children>
       </Pane>
       <Pane prefHeight="460.0" prefWidth="112.0" style="-fx-background-color: white;" />

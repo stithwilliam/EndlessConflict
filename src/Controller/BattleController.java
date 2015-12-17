@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.*;
+import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -24,6 +25,14 @@ public class BattleController {
     /**FXML injections**/
     @FXML
     private GridPane gridPane;
+    @FXML
+    private Button rightBtn;
+    @FXML
+    private Button leftBtn;
+    @FXML
+    private Button upBtn;
+    @FXML
+    private Button downBtn;
     @FXML
     private Button moveBtn;
     @FXML
@@ -74,6 +83,8 @@ public class BattleController {
     private Game game; // for convenience, game will never change
     private HashMap<StackPane, MapTile> paneToTile;
     private MapTile tractorBeam;
+    private AnimationTimer scroller;
+    private int deltX, deltY;
 
     //GENERAL
 
@@ -102,6 +113,9 @@ public class BattleController {
         gridPane.setVgap(0);
         gridPane.setHgap(0);
         populateMap();
+        deltX = 0;
+        deltY = 0;
+        scroller.start();
     }
 
     /**
@@ -961,51 +975,25 @@ public class BattleController {
         }
     }
 
-    /**
-     * Moves the screen down
-     * @param e
-     */
-    private void setDownRect(MouseEvent e) {
-        double y = gridPane.getTranslateY();
-        if (y > -map.getHeight() * 64 + 64*6) {
-            gridPane.setTranslateY(y - 64);
-        }
+    private void moveRight(MouseEvent e) {
+        deltX = 20;
     }
 
-    /**
-     * Moves the screen up
-     * @param e
-     */
-    private void setUpRect(MouseEvent e) {
-        //TEST TODO
-        MasterController.getInstance().textPopup("I am a popup hear me roar.");
-        /*
-        double y = gridPane.getTranslateY();
-        if (y < 0) {
-            gridPane.setTranslateY(y + 64);
-        } */
+    private void moveLeft(MouseEvent e) {
+        deltX = -20;
     }
 
-    /**
-     * Moves the screen right
-     * @param e
-     */
-    private void setRightRect(MouseEvent e) {
-        double x = gridPane.getTranslateX();
-        if (x > -map.getWidth() * 64 + 64*10) {
-            gridPane.setTranslateX(x - 64);
-        }
+    private void moveUp(MouseEvent e) {
+        deltY = 20;
     }
 
-    /**
-     * Moves the screen left
-     * @param e
-     */
-    private void setLeftRect(MouseEvent e) {
-        double x = gridPane.getTranslateX();
-        if (x < 0) {
-            gridPane.setTranslateX(x + 64);
-        }
+    private void moveDown(MouseEvent e) {
+        deltY = -20;
+    }
+
+    private void stopScroll(MouseEvent e) {
+        deltX = 0;
+        deltY = 0;
     }
 
     //AI
@@ -1051,5 +1039,34 @@ public class BattleController {
         skillsBtn.setOnAction(this::setSkillsBtn);
         itemsBtn.setOnAction(this::setItemsBtn);
         endTurnBtn.setOnAction(this::setEndTurnBtn);
+        rightBtn.setOnMouseEntered(this::moveRight);
+        rightBtn.setOnMouseExited(this::stopScroll);
+        leftBtn.setOnMouseEntered(this::moveLeft);
+        leftBtn.setOnMouseExited(this::stopScroll);
+        upBtn.setOnMouseEntered(this::moveUp);
+        upBtn.setOnMouseExited(this::stopScroll);
+        downBtn.setOnMouseEntered(this::moveDown);
+        downBtn.setOnMouseExited(this::stopScroll);
+        scroller = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                if (deltX != 0) {
+                    if (deltX > 0) {
+                        deltX++;
+                    } else {
+                        deltX--;
+                    }
+                }
+                if (deltY != 0) {
+                    if (deltY > 0) {
+                        deltY++;
+                    } else {
+                        deltY--;
+                    }
+                }
+                gridPane.setTranslateX(gridPane.getTranslateX() - deltX / 10);
+                gridPane.setTranslateY(gridPane.getTranslateY() + deltY / 10);
+            }
+        };
     }
 }

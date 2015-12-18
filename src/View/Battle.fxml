@@ -22,10 +22,10 @@
                   <RowConstraints maxHeight="64.0" minHeight="64.0" percentHeight="0.0" prefHeight="64.0" valignment="BASELINE" vgrow="NEVER" />
                </rowConstraints>
             </GridPane>
-            <Button fx:id="rightBtn" layoutX="512.0" mnemonicParsing="false" opacity="0.0" prefHeight="448.0" prefWidth="64.0" text="Right" />
-            <Button fx:id="leftBtn" mnemonicParsing="false" opacity="0.0" prefHeight="448.0" prefWidth="64.0" text="Left" />
-            <Button fx:id="upBtn" layoutX="64.0" mnemonicParsing="false" opacity="0.0" prefHeight="64.0" prefWidth="448.0" text="Up" />
-            <Button fx:id="downBtn" layoutX="64.0" layoutY="384.0" mnemonicParsing="false" opacity="0.0" prefHeight="64.0" prefWidth="448.0" text="Down" />
+            <Button fx:id="rightBtn" layoutX="544.0" mnemonicParsing="false" opacity="0.0" prefHeight="448.0" prefWidth="32.0" text="Right" />
+            <Button fx:id="leftBtn" mnemonicParsing="false" opacity="0.0" prefHeight="448.0" prefWidth="32.0" text="Left" />
+            <Button fx:id="upBtn" layoutX="32.0" mnemonicParsing="false" opacity="0.0" prefHeight="32.0" prefWidth="512.0" text="Up" />
+            <Button fx:id="downBtn" layoutX="32.0" layoutY="416.0" mnemonicParsing="false" opacity="0.0" prefHeight="32.0" prefWidth="512.0" text="Down" />
          </children>
       </Pane>
       <Pane layoutX="400.0" layoutY="460.0" prefHeight="140.0" prefWidth="400.0" style="-fx-background-color: midnightblue; -fx-border-width: 3; -fx-border-color: deepskyblue;">

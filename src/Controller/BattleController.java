@@ -163,7 +163,24 @@ public class BattleController {
      * @param y
      */
     private void putInFocus(int x, int y) {
-        double gridX = gridPane.getTranslateX();
+        double targetX = 0; //gridPane.getTranslateX();
+        double targetY = 0; //gridPane.getTranslateY();
+        AnimationTimer scrollUntil = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                double gridX = gridPane.getTranslateX();
+                double gridY = gridPane.getTranslateY();
+                if (gridX == targetX && gridY == targetY) {
+                    this.stop();
+                }
+                gridPane.setTranslateX(gridX + (int)((targetX - gridX) / 10) );
+                gridPane.setTranslateY(gridY + (int)((targetY - gridY) / 10) );
+
+            }
+        };
+        scrollUntil.start();
+
+        /*double gridX = gridPane.getTranslateX();
         double gridY = gridPane.getTranslateY();
         while ((-1*gridX/64) > x) {
             gridPane.setTranslateX(gridX + 64);
@@ -181,6 +198,8 @@ public class BattleController {
             gridPane.setTranslateY(gridY - 64);
             gridY = gridPane.getTranslateY();
         }
+        deltX = 0;
+        deltY = 0;*/
     }
 
     //MOVE
@@ -1065,7 +1084,23 @@ public class BattleController {
                     }
                 }
                 gridPane.setTranslateX(gridPane.getTranslateX() - deltX / 10);
+                if (gridPane.getTranslateX() > 0) {
+                    gridPane.setTranslateX(0);
+                    deltX = 0;
+                }
+                if (gridPane.getTranslateX() < -map.getWidth() * 64 + 64 * 9) {
+                    gridPane.setTranslateX(-map.getWidth() * 64 + 64 * 9);
+                    deltX = 0;
+                }
                 gridPane.setTranslateY(gridPane.getTranslateY() + deltY / 10);
+                if (gridPane.getTranslateY() > 0) {
+                    gridPane.setTranslateY(0);
+                    deltY = 0;
+                }
+                if (gridPane.getTranslateY() < -map.getHeight() * 64 + 64*7) {
+                    gridPane.setTranslateY(-map.getHeight() * 64 + 64*7);
+                    deltY = 0;
+                }
             }
         };
     }

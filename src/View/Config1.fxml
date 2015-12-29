@@ -8,34 +8,35 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Config1Controller">
    <children>
-      <Label layoutX="154.0" layoutY="60.0" text="Choose Your Difficulty" textFill="#478ba1">
+      <Pane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: gray;" />
+      <Label layoutX="154.0" layoutY="60.0" text="Choose Your Difficulty" textFill="#23ccff">
          <font>
             <Font name="Haettenschweiler" size="72.0" />
          </font>
       </Label>
-      <Label layoutX="220.0" layoutY="300.0" text="Choose Your Mode" textFill="#478ba1">
+      <Label layoutX="220.0" layoutY="300.0" text="Choose Your Mode" textFill="#23ccff">
          <font>
             <Font name="Haettenschweiler" size="64.0" />
          </font>
       </Label>
-      <Button fx:id="backBtn" layoutX="20.0" layoutY="541.0" mnemonicParsing="false" text="Back">
+      <Button fx:id="backBtn" blendMode="HARD_LIGHT" layoutX="25.0" layoutY="525.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: dimgrey;" text="Back" textFill="#23ccff">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="Britannic Bold" size="18.0" />
          </font></Button>
-      <Button fx:id="okBtn" layoutX="730.0" layoutY="541.0" mnemonicParsing="false" text="OK">
+      <Button fx:id="okBtn" blendMode="HARD_LIGHT" layoutX="675.0" layoutY="525.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: dimgrey;" text="OK" textFill="#23ccff">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="Britannic Bold" size="18.0" />
          </font>
       </Button>
-      <RadioButton fx:id="easyRadio" layoutX="260.0" layoutY="187.0" mnemonicParsing="false" style="-fx-text-fill: green;" text="Easy">
+      <RadioButton fx:id="easyRadio" blendMode="HARD_LIGHT" layoutX="200.0" layoutY="187.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-text-fill: lightgreen;" text="Easy">
          <font>
             <Font name="Britannic Bold" size="18.0" />
          </font></RadioButton>
-      <RadioButton fx:id="mediumRadio" layoutX="349.0" layoutY="187.0" mnemonicParsing="false" style="-fx-text-fill: yellowgreen;" text="Medium">
+      <RadioButton fx:id="mediumRadio" layoutX="340.0" layoutY="187.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-text-fill: yellow;" text="Medium">
          <font>
             <Font name="Britannic Bold" size="18.0" />
          </font></RadioButton>
-      <RadioButton fx:id="hardRadio" layoutX="472.0" layoutY="187.0" mnemonicParsing="false" style="-fx-text-fill: red;" text="Hard">
+      <RadioButton fx:id="hardRadio" layoutX="500.0" layoutY="187.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-text-fill: salmon;" text="Hard">
          <font>
             <Font name="Britannic Bold" size="18.0" />
          </font></RadioButton>
@@ -44,12 +45,12 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <RadioButton fx:id="softcoreRadio" layoutX="286.0" layoutY="460.0" mnemonicParsing="false" style="-fx-text-fill: green;" text="Softcore">
+      <RadioButton fx:id="softcoreRadio" layoutX="255.0" layoutY="420.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-text-fill: lightgreen;" text="Softcore">
          <font>
             <Font name="Britannic Bold" size="18.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="hardcoreRadio" layoutX="410.0" layoutY="460.0" mnemonicParsing="false" style="-fx-text-fill: red;" text="Hardcore">
+      <RadioButton fx:id="hardcoreRadio" layoutX="425.0" layoutY="420.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-text-fill: salmon;" text="Hardcore">
          <font>
             <Font name="Britannic Bold" size="18.0" />
          </font>

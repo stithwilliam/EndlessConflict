@@ -7,25 +7,25 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Config2Controller">
    <children>
-      <Label layoutX="126.0" layoutY="35.0" text="Choose Your Commander" textFill="#478ba1">
+      <Pane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: grey;" />
+      <Label layoutX="126.0" layoutY="35.0" text="Choose Your Commander" textFill="#23ccff">
          <font>
             <Font name="Haettenschweiler" size="72.0" />
          </font>
       </Label>
-      <Button fx:id="backBtn" layoutX="17.0" layoutY="335.0" mnemonicParsing="false" text="Back">
+      <Button fx:id="backBtn" layoutX="12.0" layoutY="325.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: dimgrey;" text="Back" textFill="#23ccff">
          <font>
             <Font name="Britannic Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="okBtn" layoutX="725.0" layoutY="335.0" mnemonicParsing="false" text="OK">
+      <Button fx:id="okBtn" layoutX="688.0" layoutY="325.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: dimgrey;" text="OK" textFill="#23ccff">
          <font>
             <Font name="Britannic Bold" size="18.0" />
          </font>
       </Button>
-      <HBox fx:id="humanBox" alignment="CENTER_LEFT" layoutX="100.0" layoutY="150.0" prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: darkorange; -fx-border-width: 2; -fx-border-color: sandybrown;">
+      <HBox fx:id="humanBox" alignment="CENTER_LEFT" layoutX="125.0" layoutY="150.0" prefHeight="106.0" prefWidth="550.0" style="-fx-background-color: orange; -fx-border-width: 4; -fx-border-color: sandybrown;">
          <children>
             <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
             <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
@@ -34,16 +34,16 @@
                </image>
             </ImageView>
             <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
-            <VBox prefHeight="100.0" prefWidth="200.0">
+            <VBox prefHeight="100.0" prefWidth="150.0">
                <children>
-                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" text="Commander in Chief">
+                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" text="The President">
                      <font>
                         <Font name="Britannic Bold" size="18.0" />
                      </font>
                   </Label>
                   <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" text="HUMANS">
                      <font>
-                        <Font name="Britannic Bold" size="18.0" />
+                        <Font name="Britannic Bold" size="24.0" />
                      </font>
                   </Label>
                </children>
@@ -64,7 +64,7 @@
             </VBox>
          </children>
       </HBox>
-      <HBox fx:id="robotBox" alignment="CENTER_LEFT" layoutX="100.0" layoutY="300.0" prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: royalblue; -fx-border-width: 2; -fx-border-color: slateblue;">
+      <HBox fx:id="robotBox" alignment="CENTER_LEFT" layoutX="125.0" layoutY="300.0" prefHeight="106.0" prefWidth="550.0" style="-fx-background-color: royalblue; -fx-border-width: 4; -fx-border-color: slateblue;">
          <children>
             <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
             <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
@@ -73,7 +73,7 @@
                </image>
             </ImageView>
             <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
-            <VBox prefHeight="100.0" prefWidth="200.0">
+            <VBox prefHeight="100.0" prefWidth="150.0">
                <children>
                   <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" text="The Singularity">
                      <font>
@@ -82,7 +82,7 @@
                   </Label>
                   <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" text="ROBOTS">
                      <font>
-                        <Font name="Britannic Bold" size="18.0" />
+                        <Font name="Britannic Bold" size="24.0" />
                      </font>
                   </Label>
                </children>
@@ -103,7 +103,7 @@
             </VBox>
          </children>
       </HBox>
-      <HBox fx:id="mutantBox" alignment="CENTER_LEFT" layoutX="100.0" layoutY="450.0" prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: chartreuse; -fx-border-width: 2; -fx-border-color: lawngreen;">
+      <HBox fx:id="mutantBox" alignment="CENTER_LEFT" layoutX="125.0" layoutY="450.0" prefHeight="106.0" prefWidth="550.0" style="-fx-background-color: chartreuse; -fx-border-width: 4; -fx-border-color: lawngreen;">
          <children>
             <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
             <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
@@ -112,16 +112,16 @@
                </image>
             </ImageView>
             <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
-            <VBox prefHeight="100.0" prefWidth="200.0">
+            <VBox prefHeight="100.0" prefWidth="150.0">
                <children>
-                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" text="The Genespinner">
+                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" prefWidth="150.0" text="The Genespinner">
                      <font>
                         <Font name="Britannic Bold" size="18.0" />
                      </font>
                   </Label>
                   <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" text="MUTANTS">
                      <font>
-                        <Font name="Britannic Bold" size="18.0" />
+                        <Font name="Britannic Bold" size="24.0" />
                      </font>
                   </Label>
                </children>

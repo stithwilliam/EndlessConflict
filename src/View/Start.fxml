@@ -10,21 +10,23 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.StartController">
    <children>
-      <Label layoutX="64.0" layoutY="80.0" text="Endless Conflict" textFill="#478ba1">
+      <Pane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: gray;" />
+      <Label layoutX="64.0" layoutY="80.0" maxWidth="700.0" style="-fx-font-family: Haettenschweiler;" text="Endless Conflict" textFill="#23ccff">
          <font>
             <Font name="Haettenschweiler" size="140.0" />
          </font>
       </Label>
-      <Button fx:id="newGameBtn" layoutX="259.0" layoutY="440.0" mnemonicParsing="false" text="New Game">
-         <font>
-            <Font name="Britannic Bold" size="18.0" />
-         </font></Button>
-      <Button fx:id="loadGameBtn" layoutX="434.0" layoutY="440.0" mnemonicParsing="false" text="Load Game">
+      <Button fx:id="newGameBtn" layoutX="225.0" layoutY="400.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: salmon;" text="New Game">
          <font>
             <Font name="Britannic Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="rulesBtn" layoutX="365.0" layoutY="520.0" mnemonicParsing="false" text="Rules">
+      <Button fx:id="loadGameBtn" layoutX="425.0" layoutY="400.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: lightgreen;" text="Load Game">
+         <font>
+            <Font name="Britannic Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="rulesBtn" layoutX="325.0" layoutY="500.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: yellow;" text="Rules">
          <font>
             <Font name="Britannic Bold" size="18.0" />
          </font>

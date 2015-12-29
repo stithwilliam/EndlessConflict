@@ -87,7 +87,7 @@ public class MasterController {
     }
 
     /**Scene setters**/
-    public void setStartScene() { stage.setScene(startScene);}
+    public void setStartScene() {stage.setScene(startScene);}
     public void setConfig1Scene() { stage.setScene(config1Scene);}
     public void setConfig2Scene() { stage.setScene(config2Scene);}
     public void setBattleScene() { stage.setScene(battleScene);}

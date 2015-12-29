@@ -1,6 +1,6 @@
 package Model;
 
-import Controller.MapController;
+import Controller.BattleController;
 import Controller.MasterController;
 
 import java.util.HashMap;
@@ -54,7 +54,7 @@ public enum Hero implements Placeable {
      * Shows the correct skill for this hero
      */
     public void showSkill() {
-        MapController mapCtr = MasterController.getInstance().getMapController();
+        BattleController mapCtr = MasterController.getInstance().getBattleController();
         switch (this) {
             case LIZARDKING:
                 mapCtr.showLizardJump();

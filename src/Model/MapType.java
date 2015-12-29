@@ -23,14 +23,14 @@ public enum MapType {
         Game game = Main.myGame;
         switch (this) {
             case TUTORIAL:
-                int h = 6;
+                int h = 7;
                 int w = 15;
                 Tile[] tiles = {P, F, R};
                 int[] probs = {65, 15, 20};
                 board = new MapTile[h][w];
                 for (int i = 0; i < h; i++) {
                     for (int j = 0; j < w; j++) {
-                        if (((i <= 4 && i >= 1) && j <= 2) || ((i == 3 || i == 2 || i == 4) && (j == 8 || j == 7 || j == 9 || j >= 13))) {
+                        if (((i <= 5 && i >= 2) && j <= 2) || ((i == 2 || i == 3 || i == 4) && (j == 8 || j == 7 || j == 9 || j >= 13))) {
                             board[i][j] = new MapTile(P, j, i);
                         } else {
                             board[i][j] = nextTile(board, tiles, probs, j, i);
@@ -61,12 +61,12 @@ public enum MapType {
         Commander commander = game.getCommander();
         switch (this) {
             case TUTORIAL:
-                Fighter hero = new Fighter(commander.getHero(), 1, 2, false);
+                Fighter hero = new Fighter(commander.getHero(), 1, 3, false);
                 fighters.add(hero);
-                Fighter unit1 = new Fighter (commander.getUnit(), 0, 1, false);
+                Fighter unit1 = new Fighter (commander.getUnit(), 0, 2, false);
                 unit1.setName(unit1.getName() + " 1");
                 fighters.add(unit1);
-                Fighter unit2 = new Fighter(commander.getUnit(), 0, 3, false);
+                Fighter unit2 = new Fighter(commander.getUnit(), 0, 4, false);
                 unit2.setName(unit2.getName() + " 2");
                 fighters.add(unit2);
                 Fighter w = new Fighter(commander.getWeakCommander().getUnit(), 8, 3, true);

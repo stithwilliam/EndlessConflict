@@ -1,7 +1,5 @@
 package Controller;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -10,14 +8,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * Created by William on 10/26/2015.
@@ -28,11 +24,11 @@ public class MasterController {
     private Stage stage;
 
     /**Different scenes in the game**/
-    private Scene startScene, config1Scene, config2Scene, mapScene, headquartersScene,
+    private Scene startScene, config1Scene, config2Scene, battleScene, headquartersScene,
             commQuartersScene, armsDealerScene, mercCampScene;
 
-    /**The singleton MapController**/
-    private MapController mapController;
+    /**The singleton BattleController**/
+    private BattleController battleController;
 
     /**Creates the singleton of MasterController**/
     private static MasterController masterController = new MasterController();
@@ -67,10 +63,10 @@ public class MasterController {
             root = FXMLLoader.load(getClass().getResource("/View/Config2.fxml"));
             config2Scene = new Scene(root);
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Map.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Battle.fxml"));
             root = loader.load();
-            mapScene = new Scene(root);
-            mapController = loader.getController();
+            battleScene = new Scene(root);
+            battleController = loader.getController();
 
             root = FXMLLoader.load(getClass().getResource("/View/Headquarters.fxml"));
             headquartersScene = new Scene(root);
@@ -86,6 +82,7 @@ public class MasterController {
 
         } catch (IOException e) {
             System.out.println("Shit's broke: " + e);
+            System.out.println("\n" + Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -93,7 +90,7 @@ public class MasterController {
     public void setStartScene() { stage.setScene(startScene);}
     public void setConfig1Scene() { stage.setScene(config1Scene);}
     public void setConfig2Scene() { stage.setScene(config2Scene);}
-    public void setMapScene() { stage.setScene(mapScene);}
+    public void setBattleScene() { stage.setScene(battleScene);}
     public void setHeadquartersScene() { stage.setScene(headquartersScene);}
     public void setArmsDealerScene() { stage.setScene(armsDealerScene);}
     public void setCommQuartersScene() { stage.setScene(commQuartersScene);}
@@ -106,11 +103,22 @@ public class MasterController {
             stage.setScene(new Scene(root));
         } catch (IOException e) {
             System.out.println("Shit's broke: " + e);
+
+        }
+    }
+
+    public void loadBattleScene() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/View/Battle.fxml"));
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            System.out.println("Shit's broke: " + e);
+
         }
     }
 
     /**Getters**/
-    public MapController getMapController() { return mapController;}
+    public BattleController getBattleController() { return battleController;}
 
     /**
      * Shows a popup with text and an OK button that closes the popup

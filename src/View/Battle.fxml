@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BattleController">
+   <children>
+      <Pane layoutX="112.0" layoutY="6.0" maxHeight="448.0" maxWidth="576.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="448.0" prefWidth="576.0" style="-fx-background-color: yellow;">
+         <children>
+            <GridPane fx:id="gridPane" style="-: GREEN;">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="NEVER" maxWidth="64.0" minWidth="64.0" percentWidth="0.0" prefWidth="64.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="64.0" minHeight="64.0" percentHeight="0.0" prefHeight="64.0" valignment="BASELINE" vgrow="NEVER" />
+               </rowConstraints>
+            </GridPane>
+            <Button fx:id="rightBtn" layoutX="544.0" mnemonicParsing="false" opacity="0.0" prefHeight="448.0" prefWidth="32.0" text="Right" />
+            <Button fx:id="leftBtn" mnemonicParsing="false" opacity="0.0" prefHeight="448.0" prefWidth="32.0" text="Left" />
+            <Button fx:id="upBtn" layoutX="32.0" mnemonicParsing="false" opacity="0.0" prefHeight="32.0" prefWidth="512.0" text="Up" />
+            <Button fx:id="downBtn" layoutX="32.0" layoutY="416.0" mnemonicParsing="false" opacity="0.0" prefHeight="32.0" prefWidth="512.0" text="Down" />
+         </children>
+      </Pane>
+      <Pane layoutX="400.0" layoutY="460.0" prefHeight="140.0" prefWidth="400.0" style="-fx-background-color: midnightblue; -fx-border-width: 3; -fx-border-color: deepskyblue;">
+         <children>
+            <Button fx:id="endTurnBtn" blendMode="HARD_LIGHT" contentDisplay="TOP" layoutX="313.0" layoutY="33.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="64.0" text=" END TURN" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Britannic Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="itemsBtn" blendMode="HARD_LIGHT" contentDisplay="TOP" graphicTextGap="0.0" layoutX="226.0" layoutY="33.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="64.0" text="ITEMS" textAlignment="CENTER" textOverrun="CLIP">
+               <font>
+                  <Font name="Britannic Bold" size="16.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets right="1.0" />
+               </padding>
+            </Button>
+            <Button fx:id="skillsBtn" blendMode="HARD_LIGHT" contentDisplay="TOP" layoutX="137.0" layoutY="33.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="64.0" text="SKILLS" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Britannic Bold" size="16.0" />
+               </font>
+               <padding>
+                  <Insets right="1.0" />
+               </padding>
+            </Button>
+            <Button fx:id="moveBtn" blendMode="HARD_LIGHT" layoutX="20.0" layoutY="15.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="96.0" text="MOVE">
+               <font>
+                  <Font name="Britannic Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="atkBtn" blendMode="HARD_LIGHT" layoutX="20.0" layoutY="77.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="96.0" text="ATTACK">
+               <font>
+                  <Font name="Britannic Bold" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <Pane prefHeight="460.0" prefWidth="112.0" style="-fx-background-color: white;" />
+      <Pane layoutX="688.0" prefHeight="460.0" prefWidth="112.0" style="-fx-background-color: white;" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="140.0" layoutY="460.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: grey;" width="400.0" />
+      <VBox fx:id="terminal" alignment="BOTTOM_RIGHT" layoutX="6.0" layoutY="466.0" maxHeight="128.0" maxWidth="388.0" minHeight="128.0" minWidth="388.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="128.0" prefWidth="388.0" style="-fx-background-color: BLACK;">
+         <padding>
+            <Insets right="5.0" />
+         </padding>
+      </VBox>
+      <VBox alignment="TOP_CENTER" layoutX="9.0" layoutY="37.0" prefHeight="386.0" prefWidth="96.0" style="-fx-background-color: lightgreen; -fx-border-width: 1; -fx-border-color: black;">
+         <children>
+            <Label fx:id="allyName" ellipsisString=".." graphicTextGap="0.0" prefHeight="32.0" prefWidth="94.0" text="Sentry Drone" wrapText="true">
+               <font>
+                  <Font name="Britannic Bold" size="14.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <ImageView fx:id="allySprite" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Graphics/Placeable/sentryDroneResting.gif" />
+               </image>
+            </ImageView>
+            <Label fx:id="allyAtk" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" text="ATK: 20" wrapText="true">
+               <font>
+                  <Font name="Britannic Bold" size="14.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <Label fx:id="allyDef" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" text="DEF: 20" wrapText="true">
+               <font>
+                  <Font name="Britannic Bold" size="14.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <Label fx:id="allyRange" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" text="RANGE: 3" wrapText="true">
+               <font>
+                  <Font name="Britannic Bold" size="14.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <Label fx:id="allyType" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" text="TYPE: Robot" wrapText="true">
+               <font>
+                  <Font name="Britannic Bold" size="14.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <ImageView fx:id="allyHealthWheel" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Graphics/HealthWheel/healthWheel12.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="allyHP" alignment="CENTER" ellipsisString=".." graphicTextGap="0.0" prefHeight="32.0" prefWidth="94.0" text="12/40" wrapText="true">
+               <font>
+                  <Font name="Britannic Bold" size="14.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+            </Label>
+         </children>
+      </VBox>
+      <VBox alignment="TOP_CENTER" layoutX="697.0" layoutY="37.0" prefHeight="386.0" prefWidth="96.0" style="-fx-background-color: tomato; -fx-border-width: 1; -fx-border-color: black;">
+         <children>
+            <Label fx:id="enemyName" ellipsisString=".." graphicTextGap="0.0" prefHeight="32.0" prefWidth="94.0" text="Lizard King" wrapText="true">
+               <font>
+                  <Font name="Britannic Bold" size="14.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <ImageView fx:id="enemySprite" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Graphics/Placeable/lizardKing.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="enemyAtk" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" text="ATK: 20" wrapText="true">
+               <font>
+                  <Font name="Britannic Bold" size="14.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <Label fx:id="enemyDef" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" text="DEF: 20" wrapText="true">
+               <font>
+                  <Font name="Britannic Bold" size="14.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <Label fx:id="enemyRange" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" text="RANGE: 20" wrapText="true">
+               <font>
+                  <Font name="Britannic Bold" size="14.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <Label fx:id="enemyType" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" text="TYPE: Mutant" wrapText="true">
+               <font>
+                  <Font name="Britannic Bold" size="14.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <ImageView fx:id="enemyHealthWheel" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Graphics/HealthWheel/healthWheel2.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="enemyHP" alignment="CENTER" ellipsisString=".." graphicTextGap="0.0" prefHeight="32.0" prefWidth="94.0" text="42/50" wrapText="true">
+               <font>
+                  <Font name="Britannic Bold" size="14.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+            </Label>
+         </children>
+      </VBox>
+      <Pane layoutX="112.0" prefHeight="6.0" prefWidth="576.0" style="-fx-background-color: white;" />
+      <Pane layoutX="112.0" layoutY="454.0" prefHeight="6.0" prefWidth="576.0" style="-fx-background-color: white;" />
+   </children>
+</AnchorPane>

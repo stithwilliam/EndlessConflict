@@ -1,17 +1,18 @@
 package Controller;
 
 import Model.*;
+import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,31 +20,61 @@ import java.util.HashMap;
 /**
  * Created by William on 10/26/2015.
  */
-public class MapController {
+public class BattleController {
 
-    //FXML injections
+    /**FXML injections**/
     @FXML
     private GridPane gridPane;
     @FXML
-    private Rectangle upRect;
+    private Button rightBtn;
     @FXML
-    private Rectangle downRect;
+    private Button leftBtn;
     @FXML
-    private Rectangle rightRect;
+    private Button upBtn;
     @FXML
-    private Rectangle leftRect;
+    private Button downBtn;
     @FXML
     private Button moveBtn;
     @FXML
     private Button atkBtn;
     @FXML
-    private Button skillBtn;
+    private Button skillsBtn;
     @FXML
-    private Button prevBtn;
-    @FXML
-    private Button nextBtn;
+    private Button itemsBtn;
     @FXML
     private Button endTurnBtn;
+    @FXML
+    private ImageView allySprite;
+    @FXML
+    private ImageView allyHealthWheel;
+    @FXML
+    private ImageView enemySprite;
+    @FXML
+    private ImageView enemyHealthWheel;
+    @FXML
+    private Label allyName;
+    @FXML
+    private Label allyAtk;
+    @FXML
+    private Label allyDef;
+    @FXML
+    private Label allyRange;
+    @FXML
+    private Label allyType;
+    @FXML
+    private Label allyHP;
+    @FXML
+    private Label enemyName;
+    @FXML
+    private Label enemyAtk;
+    @FXML
+    private Label enemyDef;
+    @FXML
+    private Label enemyRange;
+    @FXML
+    private Label enemyType;
+    @FXML
+    private Label enemyHP;
     @FXML
     private VBox terminal;
 
@@ -52,6 +83,8 @@ public class MapController {
     private Game game; // for convenience, game will never change
     private HashMap<StackPane, MapTile> paneToTile;
     private MapTile tractorBeam;
+    private AnimationTimer scroller;
+    private int deltX, deltY;
 
     //GENERAL
 
@@ -80,6 +113,9 @@ public class MapController {
         gridPane.setVgap(0);
         gridPane.setHgap(0);
         populateMap();
+        deltX = 0;
+        deltY = 0;
+        scroller.start();
     }
 
     /**
@@ -100,7 +136,7 @@ public class MapController {
             ImageView image = new ImageView(f.imagePath());
             StackPane pane = map.getMapTile(x, y).getStackPane();
             pane.getChildren().add(image);
-            pane.setOnMouseClicked(this::fighterStats);
+            pane.setOnMouseClicked(this::fighterClicked);
         }
         Fighter fighter = map.getFighter();
         StackPane pane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
@@ -120,13 +156,31 @@ public class MapController {
         mapTile.getStackPane().setOnMouseClicked(null);
     }
 
+
     /**
      * Puts the x and y coordinates in view of the user
      * @param x
      * @param y
      */
     private void putInFocus(int x, int y) {
-        double gridX = gridPane.getTranslateX();
+        double targetX = 0; //gridPane.getTranslateX();
+        double targetY = 0; //gridPane.getTranslateY();
+        AnimationTimer scrollUntil = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                double gridX = gridPane.getTranslateX();
+                double gridY = gridPane.getTranslateY();
+                if (gridX == targetX && gridY == targetY) {
+                    this.stop();
+                }
+                gridPane.setTranslateX(gridX + (int)((targetX - gridX) / 10) );
+                gridPane.setTranslateY(gridY + (int)((targetY - gridY) / 10) );
+
+            }
+        };
+        scrollUntil.start();
+
+        /*double gridX = gridPane.getTranslateX();
         double gridY = gridPane.getTranslateY();
         while ((-1*gridX/64) > x) {
             gridPane.setTranslateX(gridX + 64);
@@ -144,6 +198,8 @@ public class MapController {
             gridPane.setTranslateY(gridY - 64);
             gridY = gridPane.getTranslateY();
         }
+        deltX = 0;
+        deltY = 0;*/
     }
 
     //MOVE
@@ -248,7 +304,7 @@ public class MapController {
         fighter.setHasMoved(true);
         pane.getChildren().add(new ImageView(fighter.imagePath()));
         pane.getChildren().add(new ImageView(Graphic.FIGHTERSLCT.imagePath()));
-        pane.setOnMouseClicked(this::fighterStats);
+        pane.setOnMouseClicked(this::fighterClicked);
         //print to terminal
         putOnTerminal(fighter.getName() + " moved to " + tile.getName() + " at " + (x + 1) + ", " + (y + 1));
         buttonsToDefault();
@@ -265,9 +321,9 @@ public class MapController {
         atkBtn.setOnAction(this::cancelMove);
         atkBtn.setOnMouseEntered(null);
         atkBtn.setOnMouseExited(null);
-        skillBtn.setOnAction(this::cancelMove);
-        nextBtn.setOnAction(this::cancelMove);
-        prevBtn.setOnAction(this::cancelMove);
+        skillsBtn.setOnAction(this::cancelMove);
+        itemsBtn.setOnAction(this::cancelMove);
+        endTurnBtn.setOnAction(this::cancelMove);
     }
 
     /**
@@ -390,7 +446,7 @@ public class MapController {
                     StackPane pane = map.getMapTile(i, j).getStackPane();
                     int idx = pane.getChildren().size() - 1;
                     pane.getChildren().remove(idx);
-                    pane.setOnMouseClicked(this::fighterStats);
+                    pane.setOnMouseClicked(this::fighterClicked);
                 }
             }
         }
@@ -400,6 +456,7 @@ public class MapController {
         Fighter defender = map.getFighter(tile.getxPos(), tile.getyPos());
         putOnTerminal(Main.myGame.attackFighter(fighter, defender));
         buttonsToDefault();
+        showEnemy(defender);
     }
 
     /**
@@ -413,9 +470,9 @@ public class MapController {
         atkBtn.setOnAction(this::cancelAttack);
         atkBtn.setOnMouseEntered(null);
         atkBtn.setOnMouseExited(null);
-        skillBtn.setOnAction(this::cancelAttack);
-        nextBtn.setOnAction(this::cancelAttack);
-        prevBtn.setOnAction(this::cancelAttack);
+        skillsBtn.setOnAction(this::cancelAttack);
+        atkBtn.setOnAction(this::cancelAttack);
+        endTurnBtn.setOnAction(this::cancelAttack);
     }
 
     /**
@@ -446,7 +503,7 @@ public class MapController {
      * Sets the valid tiles to attackHere().
      * @param e atkBtn
      */
-    private void setSkillBtn(ActionEvent e) {
+    private void setSkillsBtn(ActionEvent e) {
         Fighter fighter = map.getFighter();
         putInFocus(fighter.getxPos(), fighter.getyPos());
         if (fighter.getModel() instanceof Hero) {
@@ -507,7 +564,7 @@ public class MapController {
         fighter.setHasMoved(true);
         pane.getChildren().add(new ImageView(fighter.imagePath()));
         pane.getChildren().add(new ImageView(Graphic.FIGHTERSLCT.imagePath()));
-        pane.setOnMouseClicked(this::fighterStats);
+        pane.setOnMouseClicked(this::fighterClicked);
         //print to terminal
         putOnTerminal(fighter.getName() + " jumped to " + tile.getName() + " at " + (x + 1) + ", " + (y + 1));
         buttonsToDefault();
@@ -520,9 +577,9 @@ public class MapController {
         atkBtn.setOnAction(this::cancelLizardJump);
         atkBtn.setOnMouseEntered(null);
         atkBtn.setOnMouseExited(null);
-        skillBtn.setOnAction(this::cancelLizardJump);
-        nextBtn.setOnAction(this::cancelLizardJump);
-        prevBtn.setOnAction(this::cancelLizardJump);
+        skillsBtn.setOnAction(this::cancelLizardJump);
+        itemsBtn.setOnAction(this::cancelLizardJump);
+        endTurnBtn.setOnAction(this::cancelLizardJump);
     }
 
     public void cancelLizardJump(ActionEvent e) {
@@ -579,7 +636,7 @@ public class MapController {
                     StackPane pane = map.getMapTile(j, i).getStackPane();
                     int idx = pane.getChildren().size() - 1;
                     pane.getChildren().remove(idx);
-                    pane.setOnMouseClicked(this::fighterStats);
+                    pane.setOnMouseClicked(this::fighterClicked);
                 }
             }
         }
@@ -602,9 +659,9 @@ public class MapController {
         atkBtn.setOnAction(this::cancelTractorBeam);
         atkBtn.setOnMouseEntered(null);
         atkBtn.setOnMouseExited(null);
-        skillBtn.setOnAction(this::cancelTractorBeam);
-        nextBtn.setOnAction(this::cancelTractorBeam);
-        prevBtn.setOnAction(this::cancelTractorBeam);
+        skillsBtn.setOnAction(this::cancelTractorBeam);
+        itemsBtn.setOnAction(this::cancelTractorBeam);
+        endTurnBtn.setOnAction(this::cancelTractorBeam);
     }
 
     public void cancelTractorBeam(ActionEvent e) {
@@ -616,7 +673,7 @@ public class MapController {
                     StackPane pane = map.getMapTile(j, i).getStackPane();
                     int idx = pane.getChildren().size() - 1;
                     pane.getChildren().remove(idx);
-                    pane.setOnMouseClicked(this::fighterStats);
+                    pane.setOnMouseClicked(this::fighterClicked);
                 }
             }
         }
@@ -724,9 +781,9 @@ public class MapController {
         atkBtn.setOnAction(this::cancelGrenade);
         atkBtn.setOnMouseEntered(null);
         atkBtn.setOnMouseExited(null);
-        skillBtn.setOnAction(this::cancelGrenade);
-        nextBtn.setOnAction(this::cancelGrenade);
-        prevBtn.setOnAction(this::cancelGrenade);
+        skillsBtn.setOnAction(this::cancelGrenade);
+        itemsBtn.setOnAction(this::cancelGrenade);
+        endTurnBtn.setOnAction(this::cancelGrenade);
     }
 
     /**
@@ -751,34 +808,8 @@ public class MapController {
 
     //CONTROLS
 
-    /**
-     * Changes the user's selection to the next fighter
-     * @param e nxtBtn
-     */
-    private void setNextBtn(ActionEvent e) {
-        Fighter fighter = map.getFighter();
-        StackPane oldPane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
-        oldPane.getChildren().remove(2);
-        fighter = map.nextFighter();
-        StackPane newPane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
-        newPane.getChildren().add(new ImageView("/View/Graphics/Tile/fighterSelect.gif"));
-        putInFocus(fighter.getxPos(), fighter.getyPos());
-        putOnTerminal("Next fighter is " + fighter.getName() + " (" + fighter.getHp() + "/" + fighter.getMaxHP() + ")");
-    }
-
-    /**
-     * Changes the user's selection to the previous fighter.
-     * @param e prevBtn
-     */
-    private void setPrevBtn(ActionEvent e) {
-        Fighter fighter = map.getFighter();
-        StackPane oldPane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
-        oldPane.getChildren().remove(2);
-        fighter = map.prevFighter();
-        StackPane newPane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
-        newPane.getChildren().add(new ImageView(Graphic.FIGHTERSLCT.imagePath()));
-        putInFocus(fighter.getxPos(), fighter.getyPos());
-        putOnTerminal("Previous fighter is " + fighter.getName() + " (" + fighter.getHp() + "/" + fighter.getMaxHP() + ")");
+    private void setItemsBtn(ActionEvent e) {
+        putOnTerminal("I don't work yet.");
     }
 
     /**
@@ -826,9 +857,9 @@ public class MapController {
         atkBtn.setOnAction(this::setAtkBtn);
         atkBtn.setOnMouseEntered(this::showAttacks);
         atkBtn.setOnMouseExited(null);
-        skillBtn.setOnAction(this::setSkillBtn);
-        nextBtn.setOnAction(this::setNextBtn);
-        prevBtn.setOnAction(this::setPrevBtn);
+        skillsBtn.setOnAction(this::setSkillsBtn);
+        itemsBtn.setOnAction(this::setItemsBtn);
+        endTurnBtn.setOnAction(this::setEndTurnBtn);
     }
 
     /**
@@ -836,13 +867,84 @@ public class MapController {
      * Shows the stats of the fighter at Maptile e.
      * @param e
      */
-    private void fighterStats(MouseEvent e) {
+    private void fighterClicked(MouseEvent e) {
         StackPane pane = (StackPane) e.getSource();
         MapTile tile = paneToTile.get(pane);
         int x = tile.getxPos();
         int y = tile.getyPos();
-        Fighter f = map.getFighter(x, y);
-        putOnTerminal(f.getStats());
+        Fighter c = map.getFighter(x, y);
+        if (!c.isEnemy()) {
+            Fighter fighter = map.getFighter();
+            StackPane oldPane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
+            oldPane.getChildren().remove(2);
+            map.setFighter(c);
+            StackPane newPane = map.getMapTile(x, y).getStackPane();
+            newPane.getChildren().add(new ImageView(Graphic.FIGHTERSLCT.imagePath()));
+            showAlly(c);
+        } else {
+            showEnemy(c);
+        }
+    }
+
+    public void showAlly(Fighter f) {
+        allyName.setText(f.getName());
+        allyAtk.setText("ATT: " + f.getAtt());
+        allyDef.setText("DEF: " + f.getDef());
+        allyRange.setText("RANGE: " + f.getRange());
+        allyHP.setText(f.getHp() + "/" + f.getMaxHP());
+        allySprite.setImage(new Image(f.getModel().imagePath()));
+        allyHealthWheel.setImage(healthWheel(f));
+    }
+
+    public void showEnemy(Fighter f) {
+        enemyName.setText(f.getName());
+        enemyAtk.setText("ATT: " + f.getAtt());
+        enemyDef.setText("DEF: " + f.getDef());
+        enemyRange.setText("RANGE: " + f.getRange());
+        enemyHP.setText(f.getHp() + "/" + f.getMaxHP());
+        enemySprite.setImage(new Image(f.getModel().imagePath()));
+        enemyHealthWheel.setImage(healthWheel(f));
+    }
+
+    private Image healthWheel(Fighter f) {
+        int n = (f.getHp() * 100) / f.getMaxHP();
+        String s = "";
+        if (n > 94) {
+            s = "/View/Graphics/HealthWheel/healthWheel1.png";
+        } else if (n > 88) {
+            s = "/View/Graphics/HealthWheel/healthWheel2.png";
+        } else if (n > 82) {
+            s = "/View/Graphics/HealthWheel/healthWheel3.png";
+        } else if (n > 75) {
+            s = "/View/Graphics/HealthWheel/healthWheel4.png";
+        } else if (n > 69) {
+            s = "/View/Graphics/HealthWheel/healthWheel5.png";
+        } else if (n > 63) {
+            s = "/View/Graphics/HealthWheel/healthWheel6.png";
+        } else if (n > 57) {
+            s = "/View/Graphics/HealthWheel/healthWheel7.png";
+        } else if (n > 50) {
+            s = "/View/Graphics/HealthWheel/healthWheel8.png";
+        } else if (n > 44) {
+            s = "/View/Graphics/HealthWheel/healthWheel9.png";
+        } else if (n > 38) {
+            s = "/View/Graphics/HealthWheel/healthWheel10.png";
+        } else if (n > 32) {
+            s = "/View/Graphics/HealthWheel/healthWheel11.png";
+        } else if (n > 25) {
+            s = "/View/Graphics/HealthWheel/healthWheel12.png";
+        } else if (n > 19) {
+            s = "/View/Graphics/HealthWheel/healthWheel13.png";
+        } else if (n > 13) {
+            s = "/View/Graphics/HealthWheel/healthWheel14.png";
+        } else if (n > 7) {
+            s = "/View/Graphics/HealthWheel/healthWheel15.png";
+        } else if (n > 0) {
+            s = "/View/Graphics/HealthWheel/healthWheel16.png";
+        } else {
+            s = "/View/Graphics/HealthWheel/healthWheel17.png";
+        }
+        return new Image(s);
     }
 
     //MAP COMPONENTS
@@ -892,51 +994,25 @@ public class MapController {
         }
     }
 
-    /**
-     * Moves the screen down
-     * @param e
-     */
-    private void setDownRect(MouseEvent e) {
-        double y = gridPane.getTranslateY();
-        if (y > -map.getHeight() * 64 + 64*6) {
-            gridPane.setTranslateY(y - 64);
-        }
+    private void moveRight(MouseEvent e) {
+        deltX = 20;
     }
 
-    /**
-     * Moves the screen up
-     * @param e
-     */
-    private void setUpRect(MouseEvent e) {
-        //TEST TODO
-        MasterController.getInstance().textPopup("I am a popup hear me roar.");
-        /*
-        double y = gridPane.getTranslateY();
-        if (y < 0) {
-            gridPane.setTranslateY(y + 64);
-        } */
+    private void moveLeft(MouseEvent e) {
+        deltX = -20;
     }
 
-    /**
-     * Moves the screen right
-     * @param e
-     */
-    private void setRightRect(MouseEvent e) {
-        double x = gridPane.getTranslateX();
-        if (x > -map.getWidth() * 64 + 64*10) {
-            gridPane.setTranslateX(x - 64);
-        }
+    private void moveUp(MouseEvent e) {
+        deltY = 20;
     }
 
-    /**
-     * Moves the screen left
-     * @param e
-     */
-    private void setLeftRect(MouseEvent e) {
-        double x = gridPane.getTranslateX();
-        if (x < 0) {
-            gridPane.setTranslateX(x + 64);
-        }
+    private void moveDown(MouseEvent e) {
+        deltY = -20;
+    }
+
+    private void stopScroll(MouseEvent e) {
+        deltX = 0;
+        deltY = 0;
     }
 
     //AI
@@ -969,21 +1045,63 @@ public class MapController {
      */
     public void enemyAttack(Fighter attacker, Fighter defender) {
         putOnTerminal(game.attackFighter(attacker, defender));
+        showAlly(map.getFighter());
     }
 
     //INITIALIZER
     public void initialize() {
-        upRect.setOnMouseClicked(this::setUpRect);
-        downRect.setOnMouseClicked(this::setDownRect);
-        rightRect.setOnMouseClicked(this::setRightRect);
-        leftRect.setOnMouseClicked(this::setLeftRect);
+        System.out.println("Initialization !_!");
         moveBtn.setOnAction(this::setMoveBtn);
         moveBtn.setOnMouseEntered(this::showMoves);
         atkBtn.setOnAction(this::setAtkBtn);
         atkBtn.setOnMouseEntered(this::showAttacks);
-        skillBtn.setOnAction(this::setSkillBtn);
-        nextBtn.setOnAction(this::setNextBtn);
-        prevBtn.setOnAction(this::setPrevBtn);
+        skillsBtn.setOnAction(this::setSkillsBtn);
+        itemsBtn.setOnAction(this::setItemsBtn);
         endTurnBtn.setOnAction(this::setEndTurnBtn);
+        rightBtn.setOnMouseEntered(this::moveRight);
+        rightBtn.setOnMouseExited(this::stopScroll);
+        leftBtn.setOnMouseEntered(this::moveLeft);
+        leftBtn.setOnMouseExited(this::stopScroll);
+        upBtn.setOnMouseEntered(this::moveUp);
+        upBtn.setOnMouseExited(this::stopScroll);
+        downBtn.setOnMouseEntered(this::moveDown);
+        downBtn.setOnMouseExited(this::stopScroll);
+        scroller = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                if (deltX != 0) {
+                    if (deltX > 0) {
+                        deltX++;
+                    } else {
+                        deltX--;
+                    }
+                }
+                if (deltY != 0) {
+                    if (deltY > 0) {
+                        deltY++;
+                    } else {
+                        deltY--;
+                    }
+                }
+                gridPane.setTranslateX(gridPane.getTranslateX() - deltX / 10);
+                if (gridPane.getTranslateX() > 0) {
+                    gridPane.setTranslateX(0);
+                    deltX = 0;
+                }
+                if (gridPane.getTranslateX() < -map.getWidth() * 64 + 64 * 9) {
+                    gridPane.setTranslateX(-map.getWidth() * 64 + 64 * 9);
+                    deltX = 0;
+                }
+                gridPane.setTranslateY(gridPane.getTranslateY() + deltY / 10);
+                if (gridPane.getTranslateY() > 0) {
+                    gridPane.setTranslateY(0);
+                    deltY = 0;
+                }
+                if (gridPane.getTranslateY() < -map.getHeight() * 64 + 64*7) {
+                    gridPane.setTranslateY(-map.getHeight() * 64 + 64*7);
+                    deltY = 0;
+                }
+            }
+        };
     }
 }

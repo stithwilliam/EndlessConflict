@@ -1,9 +1,8 @@
 package Model;
 
-import Controller.MapController;
+import Controller.BattleController;
 import Controller.MasterController;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -33,8 +32,8 @@ public class Game {
     /**the AI object used by Game**/
     private AI comp;
 
-    /**the MapController in charge of the map screen**/
-    private MapController mapController;
+    /**the BattleController in charge of the map screen**/
+    private BattleController battleController;
 
     /**
      * Constructor for Game
@@ -52,8 +51,7 @@ public class Game {
      * Creates the Tutorial map and displays it on the screen
      */
     public void startGame() {
-        MasterController.getInstance().setMapScene();
-        mapController = MasterController.getInstance().getMapController();
+        MasterController.getInstance().setBattleScene();
         map = new Map(MapType.TUTORIAL);
         int startX = 1;
         int startY = 2;
@@ -65,10 +63,12 @@ public class Game {
             map = new Map(MapType.TUTORIAL);
         }
         comp = new AI(this, map);
-        mapController.constructMap(map);
+        battleController = MasterController.getInstance().getBattleController();
+        battleController.constructMap(map);
+        battleController.showAlly(map.getFighter());
+        battleController.showEnemy(map.getEnemies().get(0));
         army = map.getAllies();
         barracks = new ArrayList<>();
-        barracks.add(new Fighter(Hero.LIZARDKING));
     }
 
     /**
@@ -82,7 +82,7 @@ public class Game {
             f.setHasMoved(false);
         }
         comp.doTurn();
-        MasterController.getInstance().getMapController().startTurn();
+        MasterController.getInstance().getBattleController().startTurn();
     }
 
     /**
@@ -114,7 +114,7 @@ public class Game {
      * @param f Fighter dying
      */
     public void killedFighter(Fighter f) {
-        mapController.removeFighter(f);
+        battleController.removeFighter(f);
         if (!f.isEnemy() && mode == Mode.HARDCORE) {
             army.remove(f);
         }

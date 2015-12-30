@@ -113,9 +113,10 @@ public class Config1Controller {
         MasterController.getInstance().setStartScene();
     }
 
+    /**Mouse Hovering**/
 
     private void okEnter(MouseEvent e) {
-        okBtn.setStyle("-fx-border-color: cyan; -fx-background-color: dimgrey; -fx-border-width: 1;");
+        okBtn.setStyle("-fx-border-color: cyan; -fx-background-color: dimgrey; -fx-border-width: 3; -fx-border-radius: 3;");
         okBtn.setFont(Font.font("Britannic Bold", 22));
     }
     private void okExit(MouseEvent e) {
@@ -123,7 +124,7 @@ public class Config1Controller {
         okBtn.setFont(Font.font("Britannic Bold", 18));
     }
     private void backEnter(MouseEvent e) {
-        backBtn.setStyle("-fx-border-color: cyan; -fx-background-color: dimgrey; -fx-border-width: 1;");
+        backBtn.setStyle("-fx-border-color: cyan; -fx-background-color: dimgrey; -fx-border-width: 3; -fx-border-radius: 3;");
         backBtn.setFont(Font.font("Britannic Bold", 22));
     }
     private void backExit(MouseEvent e) {

@@ -60,7 +60,7 @@ public class StartController {
 
     /**MOUSE HOVERING**/
     private void loadGameEnter(MouseEvent e) {
-        loadGameBtn.setStyle("-fx-border-color: cyan; -fx-background-color: lightgreen; -fx-border-width: 1;");
+        loadGameBtn.setStyle("-fx-border-color: cyan; -fx-background-color: lightgreen; -fx-border-width: 3; -fx-border-radius: 3;");
         loadGameBtn.setFont(Font.font("Britannic Bold", 22));
     }
     private void loadGameExit(MouseEvent e) {
@@ -68,7 +68,7 @@ public class StartController {
         loadGameBtn.setFont(Font.font("Britannic Bold", 18));
     }
     private void newGameEnter(MouseEvent e) {
-        newGameBtn.setStyle("-fx-border-color: cyan; -fx-background-color: salmon; -fx-border-width: 1;");
+        newGameBtn.setStyle("-fx-border-color: cyan; -fx-background-color: salmon; -fx-border-width: 3; -fx-border-radius: 3;");
         newGameBtn.setFont(Font.font("Britannic Bold", 22));
     }
     private void newGameExit(MouseEvent e) {
@@ -76,7 +76,7 @@ public class StartController {
         newGameBtn.setFont(Font.font("Britannic Bold", 18));
     }
     private void rulesEnter(MouseEvent e) {
-        rulesBtn.setStyle("-fx-border-color: cyan; -fx-background-color: yellow; -fx-border-width: 1;");
+        rulesBtn.setStyle("-fx-border-color: cyan; -fx-background-color: yellow; -fx-border-width: 3; -fx-border-radius: 3;");
         rulesBtn.setFont(Font.font("Britannic Bold", 22));
     }
     private void rulesExit(MouseEvent e) {

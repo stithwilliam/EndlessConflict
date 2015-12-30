@@ -28,7 +28,7 @@
             <Button fx:id="downBtn" layoutX="32.0" layoutY="416.0" mnemonicParsing="false" opacity="0.0" prefHeight="32.0" prefWidth="512.0" text="Down" />
          </children>
       </Pane>
-      <Pane layoutX="400.0" layoutY="460.0" prefHeight="140.0" prefWidth="400.0" style="-fx-background-color: midnightblue; -fx-border-width: 3; -fx-border-color: deepskyblue;">
+      <Pane layoutX="400.0" layoutY="460.0" prefHeight="140.0" prefWidth="400.0" style="-fx-background-color: midnightblue; -fx-border-width: 3; -fx-border-color: deepskyblue; -fx-border-radius: 3;">
          <children>
             <Button fx:id="endTurnBtn" blendMode="HARD_LIGHT" contentDisplay="TOP" layoutX="313.0" layoutY="33.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="64.0" text=" END TURN" textAlignment="CENTER" wrapText="true">
                <font>
@@ -66,9 +66,9 @@
             </Button>
          </children>
       </Pane>
-      <Pane prefHeight="460.0" prefWidth="112.0" style="-fx-background-color: tan;" />
-      <Pane layoutX="688.0" prefHeight="460.0" prefWidth="112.0" style="-fx-background-color: tan;" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="140.0" layoutY="460.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: grey;" width="400.0" />
+      <Pane prefHeight="460.0" prefWidth="112.0" style="-fx-background-color: darkgrey;" />
+      <Pane layoutX="688.0" prefHeight="460.0" prefWidth="112.0" style="-fx-background-color: darkgrey;" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="140.0" layoutY="460.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: dimgrey;" width="400.0" />
       <VBox fx:id="terminal" alignment="BOTTOM_RIGHT" layoutX="6.0" layoutY="466.0" maxHeight="128.0" maxWidth="388.0" minHeight="128.0" minWidth="388.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="128.0" prefWidth="388.0" style="-fx-background-color: BLACK;">
          <padding>
             <Insets right="5.0" />
@@ -234,7 +234,7 @@
             </Label>
          </children>
       </VBox>
-      <Pane layoutX="112.0" prefHeight="6.0" prefWidth="576.0" style="-fx-background-color: tan;" />
-      <Pane layoutX="112.0" layoutY="454.0" prefHeight="6.0" prefWidth="576.0" style="-fx-background-color: tan;" />
+      <Pane layoutX="112.0" prefHeight="6.0" prefWidth="576.0" style="-fx-background-color: darkgrey;" />
+      <Pane layoutX="112.0" layoutY="454.0" prefHeight="6.0" prefWidth="576.0" style="-fx-background-color: darkgrey;" />
    </children>
 </AnchorPane>

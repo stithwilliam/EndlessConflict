@@ -25,7 +25,7 @@
             <Font name="Britannic Bold" size="18.0" />
          </font>
       </Button>
-      <HBox fx:id="humanBox" alignment="CENTER_LEFT" layoutX="125.0" layoutY="150.0" prefHeight="106.0" prefWidth="550.0" style="-fx-background-color: orange; -fx-border-width: 4; -fx-border-color: sandybrown;">
+      <HBox fx:id="humanBox" alignment="CENTER_LEFT" layoutX="125.0" layoutY="150.0" prefHeight="106.0" prefWidth="550.0" style="-fx-background-color: orange; -fx-border-width: 4; -fx-border-color: sandybrown; -fx-border-radius: 4;">
          <children>
             <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
             <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
@@ -64,7 +64,7 @@
             </VBox>
          </children>
       </HBox>
-      <HBox fx:id="robotBox" alignment="CENTER_LEFT" layoutX="125.0" layoutY="300.0" prefHeight="106.0" prefWidth="550.0" style="-fx-background-color: royalblue; -fx-border-width: 4; -fx-border-color: slateblue;">
+      <HBox fx:id="robotBox" alignment="CENTER_LEFT" layoutX="125.0" layoutY="300.0" prefHeight="106.0" prefWidth="550.0" style="-fx-background-color: royalblue; -fx-border-width: 4; -fx-border-color: slateblue; -fx-border-radius: 4;">
          <children>
             <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
             <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
@@ -103,7 +103,7 @@
             </VBox>
          </children>
       </HBox>
-      <HBox fx:id="mutantBox" alignment="CENTER_LEFT" layoutX="125.0" layoutY="450.0" prefHeight="106.0" prefWidth="550.0" style="-fx-background-color: chartreuse; -fx-border-width: 4; -fx-border-color: lawngreen;">
+      <HBox fx:id="mutantBox" alignment="CENTER_LEFT" layoutX="125.0" layoutY="450.0" prefHeight="106.0" prefWidth="550.0" style="-fx-background-color: chartreuse; -fx-border-width: 4; -fx-border-color: lawngreen; -fx-border-radius: 4;">
          <children>
             <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
             <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">

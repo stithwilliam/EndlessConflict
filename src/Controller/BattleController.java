@@ -84,7 +84,7 @@ public class BattleController {
     private HashMap<StackPane, MapTile> paneToTile;
     private MapTile tractorBeam;
     private AnimationTimer scroller;
-    private int deltX, deltY;
+    private double deltX, deltY;
 
     //GENERAL
 
@@ -995,19 +995,19 @@ public class BattleController {
     }
 
     private void moveRight(MouseEvent e) {
-        deltX = 20;
+        deltX = 2;
     }
 
     private void moveLeft(MouseEvent e) {
-        deltX = -20;
+        deltX = -2;
     }
 
     private void moveUp(MouseEvent e) {
-        deltY = 20;
+        deltY = 2;
     }
 
     private void moveDown(MouseEvent e) {
-        deltY = -20;
+        deltY = -2;
     }
 
     private void stopScroll(MouseEvent e) {
@@ -1015,7 +1015,7 @@ public class BattleController {
         deltY = 0;
     }
 
-    //AI
+    /**AI**/
 
     /**
      * Called by the AI
@@ -1048,7 +1048,9 @@ public class BattleController {
         showAlly(map.getFighter());
     }
 
-    //INITIALIZER
+    /**
+     * Initializer
+     */
     public void initialize() {
         System.out.println("Initialization !_!");
         moveBtn.setOnAction(this::setMoveBtn);
@@ -1066,24 +1068,26 @@ public class BattleController {
         upBtn.setOnMouseExited(this::stopScroll);
         downBtn.setOnMouseEntered(this::moveDown);
         downBtn.setOnMouseExited(this::stopScroll);
+
+        //create the scroller that handles moving around the map
         scroller = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 if (deltX != 0) {
                     if (deltX > 0) {
-                        deltX++;
+                        deltX += 0.1;
                     } else {
-                        deltX--;
+                        deltX -= 0.1;
                     }
                 }
                 if (deltY != 0) {
                     if (deltY > 0) {
-                        deltY++;
+                        deltY += 0.1;
                     } else {
-                        deltY--;
+                        deltY -= 0.1;
                     }
                 }
-                gridPane.setTranslateX(gridPane.getTranslateX() - deltX / 10);
+                gridPane.setTranslateX(gridPane.getTranslateX() - (int) deltX);
                 if (gridPane.getTranslateX() > 0) {
                     gridPane.setTranslateX(0);
                     deltX = 0;
@@ -1092,7 +1096,7 @@ public class BattleController {
                     gridPane.setTranslateX(-map.getWidth() * 64 + 64 * 9);
                     deltX = 0;
                 }
-                gridPane.setTranslateY(gridPane.getTranslateY() + deltY / 10);
+                gridPane.setTranslateY(gridPane.getTranslateY() + (int) deltY);
                 if (gridPane.getTranslateY() > 0) {
                     gridPane.setTranslateY(0);
                     deltY = 0;

@@ -13,10 +13,11 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception{
         MasterController controller = MasterController.getInstance();
         controller.setStage(stage);
-        controller.setStartScene();
         stage.setTitle("Endless Conflict");
         stage.setResizable(false);
+        controller.setConfig1Scene();
         stage.show();
+        controller.setStartScene();
     }
 
     public static void main(String[] args) {

@@ -36,12 +36,12 @@
             <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
             <VBox prefHeight="100.0" prefWidth="150.0">
                <children>
-                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" text="The President">
+                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" style="-fx-text-fill: black;" text="The President">
                      <font>
                         <Font name="Britannic Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" text="HUMANS">
+                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" style="-fx-text-fill: black;" text="HUMANS">
                      <font>
                         <Font name="Britannic Bold" size="24.0" />
                      </font>
@@ -50,12 +50,12 @@
             </VBox>
             <VBox prefHeight="100.0" prefWidth="300.0">
                <children>
-                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" text="Leader of The Stronghold, the last civilized group of human fighters dedicated to winning back their planet and destroying all machines." textAlignment="CENTER" wrapText="true">
+                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" style="-fx-text-fill: black;" text="Leader of The Stronghold, the last civilized group of human fighters dedicated to winning back their planet and destroying all machines." textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font name="Britannic Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" text="Fights primarily with Humans. They excel at killing Robots but fall easily to Mutants" textAlignment="CENTER" wrapText="true">
+                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" style="-fx-text-fill: black;" text="Fights primarily with Humans. They excel at killing Robots but fall easily to Mutants" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font name="Britannic Bold" size="14.0" />
                      </font>
@@ -75,12 +75,12 @@
             <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
             <VBox prefHeight="100.0" prefWidth="150.0">
                <children>
-                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" text="The Singularity">
+                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" style="-fx-text-fill: black;" text="The Singularity">
                      <font>
                         <Font name="Britannic Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" text="ROBOTS">
+                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" style="-fx-text-fill: black;" text="ROBOTS">
                      <font>
                         <Font name="Britannic Bold" size="24.0" />
                      </font>
@@ -89,12 +89,12 @@
             </VBox>
             <VBox prefHeight="100.0" prefWidth="300.0">
                <children>
-                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" text="This superintelligent AI has surpassed human intelligence and now leads the most dangerous threat to the human race, the robot rebellion" textAlignment="CENTER" wrapText="true">
+                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" style="-fx-text-fill: black;" text="This superintelligent AI has surpassed human intelligence and now leads the most dangerous threat to the human race, the robot rebellion" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font name="Britannic Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" text="Fights primarily with Robots. They excel at killing Mutants but fall easily to Humans" textAlignment="CENTER" wrapText="true">
+                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" style="-fx-text-fill: black;" text="Fights primarily with Robots. They excel at killing Mutants but fall easily to Humans" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font name="Britannic Bold" size="14.0" />
                      </font>
@@ -114,12 +114,12 @@
             <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
             <VBox prefHeight="100.0" prefWidth="150.0">
                <children>
-                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" prefWidth="150.0" text="The Genespinner">
+                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" prefWidth="150.0" style="-fx-text-fill: black;" text="The Genespinner">
                      <font>
                         <Font name="Britannic Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" text="MUTANTS">
+                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" style="-fx-text-fill: black;" text="MUTANTS">
                      <font>
                         <Font name="Britannic Bold" size="24.0" />
                      </font>
@@ -128,12 +128,12 @@
             </VBox>
             <VBox prefHeight="100.0" prefWidth="300.0">
                <children>
-                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" text="Capable of creating any biological horror imaginable, the Singularity's rogue creation leads The Swarm in it's attempt at domination " textAlignment="CENTER" wrapText="true">
+                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" style="-fx-text-fill: black;" text="Capable of creating any biological horror imaginable, the Singularity's rogue creation leads The Swarm in it's attempt at domination " textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font name="Britannic Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" text="Fights primarily with Mutants. They excel at killing Humans but fall easily to Robots" textAlignment="CENTER" wrapText="true">
+                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" style="-fx-text-fill: black;" text="Fights primarily with Mutants. They excel at killing Humans but fall easily to Robots" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font name="Britannic Bold" size="14.0" />
                      </font>

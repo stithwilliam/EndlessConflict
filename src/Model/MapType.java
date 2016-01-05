@@ -17,15 +17,15 @@ public enum MapType {
      */
     public MapTile[][] getBoard() {
         MapTile[][] board = new MapTile[0][0];
-        Tile F = Tile.FOREST;
-        Tile P = Tile.PLAIN;
-        Tile R = Tile.ROCK;
+        TileBase F = TileBase.FOREST;
+        TileBase P = TileBase.PLAIN;
+        TileBase R = TileBase.ROCK;
         Game game = Main.myGame;
         switch (this) {
             case TUTORIAL:
                 int h = 7;
                 int w = 15;
-                Tile[] tiles = {P, F, R};
+                TileBase[] tileBases = {P, F, R};
                 int[] probs = {65, 15, 20};
                 board = new MapTile[h][w];
                 for (int i = 0; i < h; i++) {
@@ -33,7 +33,7 @@ public enum MapType {
                         if (((i <= 5 && i >= 2) && j <= 2) || ((i == 2 || i == 3 || i == 4) && (j == 8 || j == 7 || j == 9 || j >= 13))) {
                             board[i][j] = new MapTile(P, j, i);
                         } else {
-                            board[i][j] = nextTile(board, tiles, probs, j, i);
+                            board[i][j] = nextTile(board, tileBases, probs, j, i);
                         }
                     }
                 }
@@ -42,17 +42,17 @@ public enum MapType {
     }
 
     //helper function for getBoard, chooses a tile type
-    private MapTile nextTile(MapTile[][] board, Tile[] tiles, int[] probs, int x, int y) { //TODO make touching tiles more likely to appear
+    private MapTile nextTile(MapTile[][] board, TileBase[] tileBases, int[] probs, int x, int y) { //TODO make touching tileBases more likely to appear
         Random r = new Random();
         int n = r.nextInt(100);
         int p = 0;
         for (int i = 0; i < probs.length; i++) {
             p += probs[i];
             if (n < p) {
-                return new MapTile(tiles[i], x, y);
+                return new MapTile(tileBases[i], x, y);
             }
         }
-        return new MapTile(tiles[0], x, y);
+        return new MapTile(tileBases[0], x, y);
     }
 
     public ArrayList<Fighter> getFighters() {

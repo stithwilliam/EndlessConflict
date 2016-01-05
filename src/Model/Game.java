@@ -26,6 +26,9 @@ public class Game {
     /**Fighters residing in the barracks**/
     private ArrayList<Fighter> barracks;
 
+    /**Inventory holding the equipment**/
+    private ArrayList<Equipment> equipmentInv;
+
     /**The current map being played on**/
     private Map map;
 
@@ -69,6 +72,14 @@ public class Game {
         battleController.showEnemy(map.getEnemies().get(0));
         army = map.getAllies();
         barracks = new ArrayList<>();
+
+        //Test code TODO
+        equipmentInv = new ArrayList<>();
+        equipmentInv.add(Weapon.LASERPISTOL);
+        equipmentInv.add(Helmet.TARGETINGCHIP);
+        equipmentInv.add(Armor.DAMAGEDHULL);
+        equipmentInv.add(Boots.BASICEMITTOR);
+
     }
 
     /**
@@ -185,6 +196,9 @@ public class Game {
     }
     public ArrayList<Fighter> getBarracks() {
         return barracks;
+    }
+    public ArrayList<Equipment> getEquipmentInv() {
+        return equipmentInv;
     }
 
     /**Setters**/

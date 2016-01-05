@@ -216,14 +216,67 @@ public class BattleController {
             for (int i = 0; i < valid.length; i++) {
                 for (int j = 0; j < valid[0].length; j++) {
                     if (valid[i][j]) {
-                        ImageView move = new ImageView(Graphic.MOVESLCT.imagePath());
+                        //ImageView move = getMoveSelect(i, j, valid);
+                        ImageView move = new ImageView("/View/Graphics/Tile/moveSelect.png");
                         StackPane pane = map.getMapTile(j, i).getStackPane();
-                        pane.getChildren().add(move);
+                        if (move.getImage() != null) {
+                            pane.getChildren().add(move);
+                        }
                     }
                 }
             }
             moveBtn.setOnMouseExited(this::noShowMoves);
         }
+    }
+
+    private ImageView getMoveSelect(int i, int j, boolean[][] valid) {
+        Fighter fighter = map.getFighter();
+        valid[fighter.getyPos()][fighter.getxPos()] = true;
+        boolean left, right, up, down;
+        Image image = null;
+        up = (i > 0 && !valid[i - 1][j]);
+        down = (i < valid.length - 1 && !valid[i + 1][j]);
+        left = (j > 0 && !valid[i][j - 1]);
+        right = (j < valid[0].length - 1 && !valid[i][j + 1]);
+        if (up && down && left && right) {
+            image = new Image("/View/Graphics/Tile/moveSelect1111.png");
+        }
+
+        else if (right && down && left && !up) {
+            image = new Image("/View/Graphics/Tile/moveSelect1110.png");
+        } else if (right && down && !left && up) {
+            image = new Image("/View/Graphics/Tile/moveSelect1101.png");
+        } else if (right && !down && left && up) {
+            image = new Image("/View/Graphics/Tile/moveSelect1011.png");
+        } else if (!right && down && left && up) {
+            image = new Image("/View/Graphics/Tile/moveSelect0111.png");
+        }
+
+        else if (right && down && !left && !up) {
+            image = new Image("/View/Graphics/Tile/moveSelect1100.png");
+        } else if (right && !down && left && !up) {
+            image = new Image("/View/Graphics/Tile/moveSelect1010.png");
+        } else if (!right && down && left && !up) {
+            image = new Image("/View/Graphics/Tile/moveSelect0110.png");
+        } else if (right && !down && !left && up) {
+            image = new Image("/View/Graphics/Tile/moveSelect1001.png");
+        } else if (!right && down && !left && up) {
+            image = new Image("/View/Graphics/Tile/moveSelect0101.png");
+        } else if (!right && !down && left && up) {
+            image = new Image("/View/Graphics/Tile/moveSelect0011.png");
+        }
+
+        else if (right && !down && !left && !up) {
+            image = new Image("/View/Graphics/Tile/moveSelect1000.png");
+        } else if (!right && down && !left && !up) {
+            image = new Image("/View/Graphics/Tile/moveSelect0100.png");
+        } else if (!right && !down && left && !up) {
+            image = new Image("/View/Graphics/Tile/moveSelect0010.png");
+        } else if (!right && !down && !left && up) {
+            image = new Image("/View/Graphics/Tile/moveSelect0001.png");
+        }
+
+        return new ImageView(image);
     }
 
     /**
@@ -810,6 +863,7 @@ public class BattleController {
 
     private void setItemsBtn(ActionEvent e) {
         putOnTerminal("I don't work yet.");
+        MasterController.getInstance().setHeadquartersScene();
     }
 
     /**
@@ -1052,7 +1106,6 @@ public class BattleController {
      * Initializer
      */
     public void initialize() {
-        System.out.println("Initialization !_!");
         moveBtn.setOnAction(this::setMoveBtn);
         moveBtn.setOnMouseEntered(this::showMoves);
         atkBtn.setOnAction(this::setAtkBtn);

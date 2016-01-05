@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.EquipController">
+   <children>
+      <Pane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: gray;">
+         <children>
+            <Label alignment="CENTER" layoutX="425.0" layoutY="5.0" prefHeight="34.0" prefWidth="300.0" style="-fx-text-fill: black;" text="Inventory">
+               <font>
+                  <Font name="Britannic Bold" size="32.0" />
+               </font>
+               <padding>
+                  <Insets bottom="5.0" top="5.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER" layoutX="75.0" layoutY="5.0" prefHeight="34.0" prefWidth="300.0" style="-fx-text-fill: black;" text="Fighter">
+               <font>
+                  <Font name="Britannic Bold" size="32.0" />
+               </font>
+               <padding>
+                  <Insets bottom="5.0" top="5.0" />
+               </padding>
+            </Label>
+            <Button fx:id="previewBtn" layoutX="285.0" layoutY="555.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" style="-fx-text-fill: black;" text="Preview">
+               <font>
+                  <Font name="Britannic Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="equipBtn" layoutX="425.0" layoutY="555.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" style="-fx-text-fill: black;" text="Equip">
+               <font>
+                  <Font name="Britannic Bold" size="18.0" />
+               </font>
+            </Button>
+         </children></Pane>
+      <VBox fx:id="inventoryBox" layoutX="425.0" layoutY="50.0" maxHeight="500.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="500.0" prefWidth="300.0" style="-fx-background-color: paleturquoise; -fx-border-width: 1; -fx-border-color: black;">
+         <children>
+            <Label fx:id="invTypeLabel" alignment="CENTER" prefHeight="34.0" prefWidth="300.0" style="-fx-text-fill: black;" text="Weapons">
+               <font>
+                  <Font name="Britannic Bold" size="24.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="noneLabel" prefHeight="34.0" prefWidth="300.0" style="-fx-text-fill: black;" text="[None]">
+               <font>
+                  <Font name="Britannic Bold" size="18.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Label>
+         </children>
+      </VBox>
+      <Button fx:id="changeBtn" layoutX="257.0" layoutY="289.0" mnemonicParsing="false" opacity="0.0" text="Change">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <VBox fx:id="fighterBox" alignment="TOP_CENTER" layoutX="75.0" layoutY="50.0" maxHeight="500.0" prefHeight="500.0" prefWidth="300.0" style="-fx-background-color: royalblue; -fx-border-width: 1; -fx-border-color: black;">
+         <children>
+            <Label fx:id="nameLabel" alignment="CENTER" prefHeight="24.0" prefWidth="300.0" style="-fx-text-fill: black;" text="MODEL X">
+               <font>
+                  <Font name="Britannic Bold" size="24.0" />
+               </font>
+               <padding>
+                  <Insets bottom="5.0" top="5.0" />
+               </padding>
+            </Label>
+            <ImageView fx:id="fighterImage" fitHeight="192.0" fitWidth="192.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Graphics/Placeable/modelXresting.gif" />
+               </image>
+            </ImageView>
+            <Label fx:id="heroLabel" alignment="CENTER" prefHeight="24.0" prefWidth="300.0" style="-fx-text-fill: black;" text="Hero">
+               <font>
+                  <Font name="Britannic Bold" size="24.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" top="5.0" />
+               </padding>
+            </Label>
+            <GridPane fx:id="gridPane" gridLinesVisible="true" prefHeight="214.0" prefWidth="286.0" style="-fx-background-color: deepskyblue;">
+               <children>
+                  <Label fx:id="weaponLbl" onMouseClicked="#setWeapon" prefHeight="40.0" prefWidth="300.0" style="-fx-text-fill: black;" text="Weapon">
+                     <font>
+                        <Font name="Britannic Bold" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="helmetLbl" onMouseClicked="#setHelmet" prefHeight="40.0" prefWidth="300.0" style="-fx-text-fill: black;" text="Helmet" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Britannic Bold" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="armorLbl" onMouseClicked="#setArmor" prefHeight="40.0" prefWidth="300.0" style="-fx-text-fill: black;" text="Armor" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Britannic Bold" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="bootsLbl" onMouseClicked="#setBoots" prefHeight="40.0" prefWidth="300.0" style="-fx-text-fill: black;" text="Boots" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Britannic Bold" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="skillLbl" onMouseClicked="#setSkill" prefHeight="40.0" prefWidth="300.0" style="-fx-text-fill: black;" text="Skill" GridPane.rowIndex="4">
+                     <font>
+                        <Font name="Britannic Bold" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="label0" alignment="CENTER_RIGHT" onMouseClicked="#setWeapon" prefHeight="40.0" prefWidth="300.0" style="-fx-text-fill: black;" text="None" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="Britannic Bold" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="label1" alignment="CENTER_RIGHT" onMouseClicked="#setHelmet" prefHeight="40.0" prefWidth="300.0" style="-fx-text-fill: black;" text="None" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Britannic Bold" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="label2" alignment="CENTER_RIGHT" onMouseClicked="#setArmor" prefHeight="40.0" prefWidth="300.0" style="-fx-text-fill: black;" text="None" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Britannic Bold" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="label3" alignment="CENTER_RIGHT" onMouseClicked="#setBoots" prefHeight="40.0" prefWidth="300.0" style="-fx-text-fill: black;" text="None" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Britannic Bold" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="label4" alignment="CENTER_RIGHT" onMouseClicked="#setSkill" prefHeight="40.0" prefWidth="300.0" style="-fx-text-fill: black;" text="None" textOverrun="CLIP" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <font>
+                        <Font name="Britannic Bold" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+         </children>
+      </VBox>
+      <Button fx:id="backBtn" blendMode="HARD_LIGHT" layoutX="5.0" layoutY="555.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="70.0" style="-fx-text-fill: black;" text="Back">
+         <font>
+            <Font name="Britannic Bold" size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

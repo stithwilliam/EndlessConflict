@@ -5,7 +5,7 @@ package Model;
  */
 public enum Weapon implements Equipment {
     /**Null Weapon**/
-    NONE(0,0,0,0,0,0,"None"),
+    NONE(0,0,0,0,0,0,"[None]"),
 
     /**Hero starting weapons**/
     DIRTYCLAW(3,0,0,0,0,1,"Dirty Claw"), LASERPISTOL(3,0,0,0,0,4,"Laser Pistol"), LIGHTMACHINEGUN(3,0,0,0,0,4,"Light Machine Gun"),

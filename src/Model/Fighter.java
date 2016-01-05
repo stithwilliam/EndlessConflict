@@ -55,9 +55,9 @@ public class Fighter {
             range = vision;
         }
         weapon = Weapon.NONE;
-        head = Head.NONE;
+        head = Helmet.NONE;
         armor = Armor.NONE;
-        feet = Feet.NONE;
+        feet = Boots.NONE;
     }
 
     /**
@@ -92,11 +92,11 @@ public class Fighter {
         if (!equipping) {
             x = null;
         }
-        if (e instanceof Head) {
+        if (e instanceof Helmet) {
             head = x;
         } else if (e instanceof Armor) {
             armor = x;
-        } else if (e instanceof Feet) {
+        } else if (e instanceof Boots) {
             feet = x;
         } else if (e instanceof Weapon) {
             weapon = x;
@@ -133,8 +133,8 @@ public class Fighter {
     public boolean hasAttacked() {return hasAttacked;}
     public Weapon getWeapon() {return (Weapon) weapon;}
     public Armor getArmor() {return (Armor) armor;}
-    public Head getHead() {return (Head) head;}
-    public Feet getFeet() {return (Feet) feet;}
+    public Helmet getHead() {return (Helmet) head;}
+    public Boots getFeet() {return (Boots) feet;}
     public String getSkillName() {return model.getSkillName();}
     /**Setters**/
     public void setxPos(int xPos) {this.xPos = xPos;}
@@ -163,19 +163,19 @@ public class Fighter {
         this.armor = armor;
         changeEquipment(armor, true);
     }
-    public void setHead(Head head) {
+    public void setHead(Helmet helmet) {
         if (this.head != null) {
             changeEquipment(this.head, false);
         }
-        this.head = head;
-        changeEquipment(head, true);
+        this.head = helmet;
+        changeEquipment(helmet, true);
     }
-    public void setFeet(Feet feet) {
+    public void setFeet(Boots boots) {
         if (this.feet != null) {
             changeEquipment(this.feet, false);
         }
-        this.feet = feet;
-        changeEquipment(feet, true);
+        this.feet = boots;
+        changeEquipment(boots, true);
     }
 }
 

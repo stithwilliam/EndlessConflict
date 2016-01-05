@@ -11,8 +11,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 
 /**
@@ -20,51 +22,71 @@ import java.util.LinkedList;
  */
 public class BarracksController {
 
-    /**
-     * The various components in the fxml file
-     */
     @FXML
-    Button backBtn;
+    private Button prevBtn;
+
     @FXML
-    Button toggleBtn;
+    private Button toggleBtn;
+
     @FXML
-    Button nextBtn;
+    private Button changeBtn;
+
     @FXML
-    Button prevBtn;
+    private VBox barracksBox;
+
     @FXML
-    Button addBtn;
+    private Label label10;
+
     @FXML
-    Button removeBtn;
+    private Label label21;
+
     @FXML
-    ImageView fighterImage;
+    private Label label20;
+
     @FXML
-    VBox armyBox;
+    private Label label31;
+
     @FXML
-    VBox barracksBox;
+    private Label heroLabel;
+
     @FXML
-    Label nameLabel;
+    private Label label30;
+
     @FXML
-    Label heroLabel;
+    private Label label41;
+
     @FXML
-    Label label00;
+    private Label label40;
+
     @FXML
-    Label label01;
+    private Label label01;
+
     @FXML
-    Label label10;
+    private Button addBtn;
+
     @FXML
-    Label label11;
+    private Label label00;
+
     @FXML
-    Label label20;
+    private Label label11;
+
     @FXML
-    Label label21;
+    private VBox armyBox;
+
     @FXML
-    Label label30;
+    private ImageView fighterImage;
+
     @FXML
-    Label label31;
+    private Button removeBtn;
+
     @FXML
-    Label label40;
+    private Button backBtn;
+
     @FXML
-    Label label41;
+    private Button nextBtn;
+
+    @FXML
+    private Label nameLabel;
 
     /**Current fighter showing**/
     private Fighter fighter;
@@ -77,6 +99,11 @@ public class BarracksController {
 
     /**List of fighters in barracksBox**/
     private LinkedList<Fighter> inBarracksBox;
+
+    /**Hashmap that maps Fighters to their labels**/
+    private HashMap<Fighter, Label> fighterLabelHashMap;
+
+    private boolean firstLabel;
 
     /**
      * Helper function that shows the image, name, and hero designation of the current fighter
@@ -101,10 +128,15 @@ public class BarracksController {
         label30.setText("Movement");
         label40.setText("Range");
         label01.setText("" + fighter.getMaxHP());
+        label01.setFont(Font.font("Britannic Bold", 24));
         label11.setText("" + fighter.getAtt());
+        label11.setFont(Font.font("Britannic Bold", 24));
         label21.setText("" + fighter.getDef());
+        label21.setFont(Font.font("Britannic Bold", 24));
         label31.setText("" + fighter.getMov());
+        label31.setFont(Font.font("Britannic Bold", 24));
         label41.setText("" + fighter.getRange());
+        label41.setFont(Font.font("Britannic Bold", 24));
     }
 
     /**
@@ -112,16 +144,20 @@ public class BarracksController {
      */
     private void showEquipment() {
         label00.setText("Weapon");
-        label10.setText("Head");
+        label10.setText("Helmet");
         label20.setText("Armor");
-        label30.setText("Feet");
+        label30.setText("Boots");
         label40.setText("Skill");
         label01.setText("" + fighter.getWeapon());
+        label01.setFont(Font.font("Britannic Bold", 18));
         label11.setText("" + fighter.getHead());
+        label11.setFont(Font.font("Britannic Bold", 18));
         label21.setText("" + fighter.getArmor());
+        label21.setFont(Font.font("Britannic Bold", 18));
         label31.setText("" + fighter.getFeet());
+        label31.setFont(Font.font("Britannic Bold", 18));
         label41.setText("" + fighter.getSkillName());
-
+        label41.setFont(Font.font("Britannic Bold", 18));
     }
 
     /**
@@ -129,14 +165,17 @@ public class BarracksController {
      * Switches between showing the stats and the equipment of the current fighter
      * @param e Button toggleBtn
      */
-    @FXML
-    public void setToggleBtn(ActionEvent e) {
+    private void setToggleBtn(ActionEvent e) {
         if (statsShowing) {
             showEquipment();
+            changeBtn.setOpacity(1);
+            changeBtn.setOnAction(this::setChangeBtn);
             statsShowing = false;
             toggleBtn.setText("S");
         } else {
             showStats();
+            changeBtn.setOpacity(0);
+            changeBtn.setOnAction(null);
             statsShowing = true;
             toggleBtn.setText("E");
         }
@@ -147,11 +186,12 @@ public class BarracksController {
      * Adds the current fighter to the user's army
      * @param e Button addBtn
      */
-    @FXML
-    public void setAddBtn(ActionEvent e) {
+    private void setAddBtn(ActionEvent e) {
         boolean inBox = inArmyBox.contains(fighter);
         if (!inBox) {
-            armyBox.getChildren().add(createLabel(fighter.getName()));
+            Label l = createLabel(fighter);
+            l.setTextFill(Color.YELLOW);
+            armyBox.getChildren().add(l);
             inArmyBox.add(fighter);
             for (int i = 0; i < inBarracksBox.size(); i++) {
                 if (inBarracksBox.get(i) == fighter) {
@@ -171,11 +211,12 @@ public class BarracksController {
      * Puts the current fighter in to the user's barracks
      * @param e Button removeBtn
      */
-    @FXML
-    public void setRemoveBtn(ActionEvent e) {
+    private void setRemoveBtn(ActionEvent e) {
         boolean inBox = inBarracksBox.contains(fighter);
         if (!inBox) {
-            barracksBox.getChildren().add(createLabel(fighter.getName()));
+            Label l = createLabel(fighter);
+            l.setTextFill(Color.YELLOW);
+            barracksBox.getChildren().add(l);
             inBarracksBox.add(fighter);
             for (int i = 0; i < inArmyBox.size(); i++) {
                 if (inArmyBox.get(i) == fighter) {
@@ -195,9 +236,12 @@ public class BarracksController {
      * Shows the user the previous fighter in the army
      * @param e Button prevBtn
      */
-    @FXML
-    public void setPrevBtn(ActionEvent e) {
+    private void setPrevBtn(ActionEvent e) {
+        Label label = fighterLabelHashMap.get(fighter);
+        label.setTextFill(Color.BLACK);
         fighter = Main.myGame.prevFighter(fighter);
+        Label label2 = fighterLabelHashMap.get(fighter);
+        label2.setTextFill(Color.YELLOW);
         showFighter();
         if (statsShowing) {
             showStats();
@@ -211,9 +255,12 @@ public class BarracksController {
      * Shows the next fighter in the user's army
      * @param e Button nextBtn
      */
-    @FXML
-    public void setNextBtn(ActionEvent e) {
+    private void setNextBtn(ActionEvent e) {
+        Label label = fighterLabelHashMap.get(fighter);
+        label.setTextFill(Color.BLACK);
         fighter = Main.myGame.nextFighter(fighter);
+        Label label2 = fighterLabelHashMap.get(fighter);
+        label2.setTextFill(Color.YELLOW);
         showFighter();
         if (statsShowing) {
             showStats();
@@ -227,17 +274,17 @@ public class BarracksController {
      * Returns the user to the headquarters screen
      * @param e Button backBtn
      */
-    @FXML
-    public void setBackBtn(ActionEvent e) {
+    private void setBackBtn(ActionEvent e) {
         MasterController.getInstance().setHeadquartersScene();
     }
 
     /**
-     * Helper function to create a formatted label for the army and barracks boxes
-     * @param s String text for the label
+     * Helper function to create a formatted label of the fighter's name for the army and barracks boxes
+     * @param f Fighter to make the label of
      * @return Label that is formatted
      */
-    private Label createLabel(String s) {
+    private Label createLabel(Fighter f) {
+        String s = f.getName();
         Label label = new Label();
         label.setText(s);
         label.setPadding(new Insets(5, 10, 5, 10));
@@ -245,7 +292,16 @@ public class BarracksController {
         label.setPrefWidth(200);
         label.setFont(new Font("Britannic Bold", 18));
         label.setWrapText(true);
+        fighterLabelHashMap.put(f, label);
+        if (!firstLabel) {
+            label.setTextFill(Color.YELLOW);
+            firstLabel = true;
+        }
         return label;
+    }
+
+    private void setChangeBtn(ActionEvent e) {
+        MasterController.getInstance().loadEquipScene(fighter);
     }
 
     /**
@@ -253,21 +309,36 @@ public class BarracksController {
      * Populates armyBox and barracksBox, and shows the current fighter
      */
     public void initialize() {
+        System.out.println("Initialize !_!");
+
+        nextBtn.setOnAction(this::setNextBtn);
+        prevBtn.setOnAction(this::setPrevBtn);
+        backBtn.setOnAction(this::setBackBtn);
+        addBtn.setOnAction(this::setAddBtn);
+        removeBtn.setOnAction(this::setRemoveBtn);
+        toggleBtn.setOnAction(this::setToggleBtn);
+
+        fighterLabelHashMap = new HashMap<>();
+        firstLabel = false;
         Game game = Main.myGame;
         fighter = game.getArmy().get(0);
         statsShowing = true;
+        showFighter();
         showStats();
         inArmyBox = new LinkedList<>();
         inBarracksBox = new LinkedList<>();
         for (int i = 0; i < game.getArmy().size(); i++) {
             Fighter f = game.getArmy().get(i);
-            armyBox.getChildren().add(createLabel(f.getName()));
+            Label l = createLabel(f);
+            armyBox.getChildren().add(l);
             inArmyBox.add(f);
         }
         for (int i = 0; i < game.getBarracks().size(); i++) {
             Fighter f = game.getBarracks().get(i);
-            barracksBox.getChildren().add(createLabel(f.getName()));
+            barracksBox.getChildren().add(createLabel(f));
             inBarracksBox.add(f);
         }
     }
+
+    public Fighter getFighter() {return fighter;}
 }

@@ -3,14 +3,14 @@ package Model;
 /**
  * Created by William on 11/12/2015.
  */
-public enum Feet implements Equipment {
-    /**Null Feet**/
-    NONE(0,0,0,0,0,0,"None"),
+public enum Boots implements Equipment {
+    /**Null Boots**/
+    NONE(0,0,0,0,0,0,"[None]"),
 
     /**First footwear for heroes**/
     WEBBEDTOES(0,0,0,1,0,0,"Webbed Toes"), HIKINGBOOTS(0,0,0,1,0,0,"Hiking Boots"), BASICEMITTOR(0,0,0,1,0,0,"Basic Emittor");
 
-    /**Stats for this Feet**/
+    /**Stats for this Boots**/
     private int attMod;
     private int defMod;
     private int hpMod;
@@ -20,14 +20,14 @@ public enum Feet implements Equipment {
     private String name;
 
     /**
-     * Constructor for Feet
+     * Constructor for Boots
      * @param a int attack
      * @param d int defense
      * @param h int hp
      * @param m int movement
      * @param v int vision
      */
-    Feet(int a, int d, int h, int m, int v, int r, String n) {
+    Boots(int a, int d, int h, int m, int v, int r, String n) {
         attMod = a;
         defMod = d;
         hpMod = h;

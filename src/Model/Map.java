@@ -229,7 +229,7 @@ public class Map {
 
     /**
      * Helper function for getValidMoves
-     * @param tile Tile looking at
+     * @param tile TileBase looking at
      * @return List<MapTile> of adjacent, moveable tiles of tile
      */
     public List<MapTile> getMoves(MapTile tile) {
@@ -289,7 +289,7 @@ public class Map {
 
     /**
      * Returns the adjacent tiles to tile
-     * @param tile Tile looking at
+     * @param tile TileBase looking at
      * @return List<MapTile> adjacent tiles
      */
     public List<MapTile> getAdjacent(MapTile tile) {

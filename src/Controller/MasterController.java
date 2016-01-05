@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Fighter;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -103,7 +104,6 @@ public class MasterController {
             stage.setScene(new Scene(root));
         } catch (IOException e) {
             System.out.println("Shit's broke: " + e);
-
         }
     }
 
@@ -114,6 +114,18 @@ public class MasterController {
         } catch (IOException e) {
             System.out.println("Shit's broke: " + e);
 
+        }
+    }
+
+    public void loadEquipScene(Fighter f) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/EquipmentChanger.fxml"));
+            Parent root = loader.load();
+            EquipController controller = loader.getController();
+            stage.setScene(new Scene(root));
+            controller.setFighter(f);
+        } catch (IOException e) {
+            System.out.println("Shit's broke: " + e);
         }
     }
 

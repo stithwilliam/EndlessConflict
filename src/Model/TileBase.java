@@ -6,7 +6,7 @@ import java.util.HashMap;
 /**
  * Created by William on 10/26/2015.
  */
-public enum Tile {
+public enum TileBase {
     /**Types of Tiles in Tutorial Map**/
     PLAIN(true, false, 1, "Plains"), FOREST(true, false, 2, "Forest"), ROCK(false, true, 1, "Rock");
 
@@ -16,20 +16,20 @@ public enum Tile {
     /**Map of all imagePaths**/
     private Map<String, String> imagePath;
 
-    /**Attributes of this Tile**/
+    /**Attributes of this TileBase**/
     private boolean moveable, blocking;
 
-    /**Cost to move across this Tile**/
+    /**Cost to move across this TileBase**/
     private int moveCost;
 
     /**
-     * Constructor for Tile
+     * Constructor for TileBase
      * @param m boolean isMoveable
      * @param b boolean isBlocking
      * @param i int moveCost
      * @param n String name
      */
-    Tile(boolean m, boolean b, int i, String n) {
+    TileBase(boolean m, boolean b, int i, String n) {
         name = n;
         moveable = m;
         blocking = b;

@@ -10,9 +10,10 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BarracksController">
    <children>
+      <Pane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: gray;" />
       <VBox fx:id="armyBox" layoutY="25.0" maxHeight="500.0" maxWidth="200.0" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: lightgreen; -fx-border-width: 1; -fx-border-color: black;">
          <children>
-            <Label alignment="CENTER" prefHeight="24.0" prefWidth="200.0" text="In Army">
+            <Label alignment="CENTER" prefHeight="24.0" prefWidth="200.0" style="-fx-text-fill: black;" text="In Army">
                <font>
                   <Font name="Britannic Bold" size="24.0" />
                </font>
@@ -25,18 +26,18 @@
             </Label>
          </children>
       </VBox>
-      <Button fx:id="backBtn" layoutX="15.0" layoutY="551.0" mnemonicParsing="false" onAction="#setBackBtn" text="Back">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="500.0" layoutX="250.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" width="300.0" />
-      <Button fx:id="prevBtn" layoutX="201.0" layoutY="270.0" mnemonicParsing="false" onAction="#setPrevBtn" prefHeight="60.0" prefWidth="48.0" text="&lt;&lt;&lt;">
+      <Button fx:id="backBtn" blendMode="HARD_LIGHT" layoutX="5.0" layoutY="555.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="70.0" style="-fx-text-fill: black;" text="Back">
          <font>
             <Font name="Britannic Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="nextBtn" layoutX="551.0" layoutY="270.0" mnemonicParsing="false" onAction="#setNextBtn" prefHeight="60.0" prefWidth="48.0" text="&gt;&gt;&gt;">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="500.0" layoutX="250.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" width="300.0" />
+      <Button fx:id="prevBtn" layoutX="201.0" layoutY="270.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="48.0" style="-fx-text-fill: black;" text="&lt;&lt;&lt;">
+         <font>
+            <Font name="Britannic Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="nextBtn" layoutX="551.0" layoutY="270.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="48.0" style="-fx-text-fill: black;" text="&gt;&gt;&gt;">
          <font>
             <Font name="Britannic Bold" size="18.0" />
          </font>
@@ -46,12 +47,12 @@
             <Image url="@Graphics/Placeable/modelXresting.gif" />
          </image>
       </ImageView>
-      <Label fx:id="nameLabel" alignment="CENTER" layoutX="250.0" layoutY="54.0" prefHeight="24.0" prefWidth="300.0" text="MODEL X">
+      <Label fx:id="nameLabel" alignment="CENTER" layoutX="250.0" layoutY="54.0" prefHeight="24.0" prefWidth="300.0" style="-fx-text-fill: black;" text="MODEL X">
          <font>
             <Font name="Britannic Bold" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="heroLabel" alignment="CENTER" layoutX="250.0" layoutY="288.0" prefHeight="24.0" prefWidth="300.0" text="Hero">
+      <Label fx:id="heroLabel" alignment="CENTER" layoutX="250.0" layoutY="288.0" prefHeight="24.0" prefWidth="300.0" style="-fx-text-fill: black;" text="Hero">
          <font>
             <Font name="Britannic Bold" size="24.0" />
          </font>
@@ -70,7 +71,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label fx:id="label00" prefHeight="24.0" prefWidth="300.0" text="HP">
+            <Label fx:id="label00" prefHeight="24.0" prefWidth="300.0" style="-fx-text-fill: black;" text="HP">
                <font>
                   <Font name="Britannic Bold" size="24.0" />
                </font>
@@ -78,7 +79,7 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Label fx:id="label10" prefHeight="24.0" prefWidth="300.0" text="Attack" GridPane.rowIndex="1">
+            <Label fx:id="label10" prefHeight="24.0" prefWidth="300.0" style="-fx-text-fill: black;" text="Attack" GridPane.rowIndex="1">
                <font>
                   <Font name="Britannic Bold" size="24.0" />
                </font>
@@ -86,7 +87,7 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Label fx:id="label20" prefHeight="24.0" prefWidth="300.0" text="Defense" GridPane.rowIndex="2">
+            <Label fx:id="label20" prefHeight="24.0" prefWidth="300.0" style="-fx-text-fill: black;" text="Defense" GridPane.rowIndex="2">
                <font>
                   <Font name="Britannic Bold" size="24.0" />
                </font>
@@ -94,7 +95,7 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Label fx:id="label30" prefHeight="24.0" prefWidth="300.0" text="Movement" GridPane.rowIndex="3">
+            <Label fx:id="label30" prefHeight="24.0" prefWidth="300.0" style="-fx-text-fill: black;" text="Movement" GridPane.rowIndex="3">
                <font>
                   <Font name="Britannic Bold" size="24.0" />
                </font>
@@ -102,7 +103,7 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Label fx:id="label40" prefHeight="24.0" prefWidth="300.0" text="Range" GridPane.rowIndex="4">
+            <Label fx:id="label40" prefHeight="24.0" prefWidth="300.0" style="-fx-text-fill: black;" text="Range" GridPane.rowIndex="4">
                <font>
                   <Font name="Britannic Bold" size="24.0" />
                </font>
@@ -110,7 +111,7 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Label fx:id="label01" alignment="CENTER_RIGHT" prefHeight="24.0" prefWidth="300.0" text="40" GridPane.columnIndex="1">
+            <Label fx:id="label01" alignment="CENTER_RIGHT" prefHeight="24.0" prefWidth="300.0" style="-fx-text-fill: black;" text="40" GridPane.columnIndex="1">
                <font>
                   <Font name="Britannic Bold" size="24.0" />
                </font>
@@ -118,7 +119,7 @@
                   <Insets right="10.0" />
                </padding>
             </Label>
-            <Label fx:id="label11" alignment="CENTER_RIGHT" prefHeight="24.0" prefWidth="300.0" text="40" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label fx:id="label11" alignment="CENTER_RIGHT" prefHeight="24.0" prefWidth="300.0" style="-fx-text-fill: black;" text="40" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font name="Britannic Bold" size="24.0" />
                </font>
@@ -126,7 +127,7 @@
                   <Insets right="10.0" />
                </padding>
             </Label>
-            <Label fx:id="label21" alignment="CENTER_RIGHT" prefHeight="24.0" prefWidth="300.0" text="40" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label fx:id="label21" alignment="CENTER_RIGHT" prefHeight="24.0" prefWidth="300.0" style="-fx-text-fill: black;" text="40" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font name="Britannic Bold" size="24.0" />
                </font>
@@ -134,7 +135,7 @@
                   <Insets right="10.0" />
                </padding>
             </Label>
-            <Label fx:id="label31" alignment="CENTER_RIGHT" prefHeight="24.0" prefWidth="300.0" text="40" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <Label fx:id="label31" alignment="CENTER_RIGHT" prefHeight="24.0" prefWidth="300.0" style="-fx-text-fill: black;" text="40" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <font>
                   <Font name="Britannic Bold" size="24.0" />
                </font>
@@ -142,7 +143,7 @@
                   <Insets right="10.0" />
                </padding>
             </Label>
-            <Label fx:id="label41" alignment="CENTER_RIGHT" prefHeight="24.0" prefWidth="300.0" text="40" textOverrun="CLIP" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <Label fx:id="label41" alignment="CENTER_RIGHT" prefHeight="24.0" prefWidth="300.0" style="-fx-text-fill: black;" text="40" textOverrun="CLIP" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <font>
                   <Font name="Britannic Bold" size="24.0" />
                </font>
@@ -152,24 +153,24 @@
             </Label>
          </children>
       </GridPane>
-      <Button fx:id="toggleBtn" layoutX="507.0" layoutY="284.0" mnemonicParsing="false" onAction="#setToggleBtn" text="E">
+      <Button fx:id="toggleBtn" layoutX="507.0" layoutY="284.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="35.0" style="-fx-text-fill: black;" text="E">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="Britannic Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="addBtn" layoutX="253.0" layoutY="555.0" mnemonicParsing="false" onAction="#setAddBtn" text="Add to Army">
+      <Button fx:id="addBtn" layoutX="250.0" layoutY="555.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-text-fill: black;" text="Add to Army">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="Britannic Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="removeBtn" layoutX="397.0" layoutY="555.0" mnemonicParsing="false" onAction="#setRemoveBtn" text="Put in Barracks">
+      <Button fx:id="removeBtn" layoutX="390.0" layoutY="555.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="160.0" style="-fx-text-fill: black;" text="Put in Barracks">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="Britannic Bold" size="18.0" />
          </font>
       </Button>
       <VBox fx:id="barracksBox" layoutX="600.0" layoutY="25.0" maxHeight="500.0" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: tomato; -fx-border-width: 1; -fx-border-color: black;">
          <children>
-            <Label alignment="CENTER" prefHeight="24.0" prefWidth="200.0" text="In Barracks">
+            <Label alignment="CENTER" prefHeight="24.0" prefWidth="200.0" style="-fx-text-fill: black;" text="In Barracks">
                <font>
                   <Font name="Britannic Bold" size="24.0" />
                </font>
@@ -182,5 +183,10 @@
             </Label>
          </children>
       </VBox>
+      <Button fx:id="changeBtn" layoutX="257.0" layoutY="289.0" mnemonicParsing="false" opacity="0.0" text="Change">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

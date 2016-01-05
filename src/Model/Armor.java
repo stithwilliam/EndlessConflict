@@ -5,7 +5,7 @@ package Model;
  */
 public enum Armor implements Equipment {
     /**Null Armor**/
-    NONE(0,0,0,0,0,0,"None"),
+    NONE(0,0,0,0,0,0,"[None]"),
 
     /**Hero Starting Armors**/
     DAMAGEDSCALES(0,3,0,0,0,0,"Damaged Scales"), DAMAGEDKEVLAR(0,3,0,0,0,0,"Damaged Kevlar"), DAMAGEDFRAME(0,3,0,0,0,0,"Damaged Frame"),

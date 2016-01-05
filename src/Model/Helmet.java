@@ -3,9 +3,9 @@ package Model;
 /**
  * Created by William on 11/12/2015.
  */
-public enum Head implements Equipment {
+public enum Helmet implements Equipment {
     /**Null Headgear**/
-    NONE(0,0,0,0,0,0,"None"),
+    NONE(0,0,0,0,0,0,"[None]"),
 
     /**First headgear for Heroes**/
     RAZORTEETH(2,0,0,0,0,0,"Razorteeth"), GOGGLES(0,2,0,0,0,0,"Goggles"), TARGETINGCHIP(0,0,0,0,1,0,"Targeting Chip");
@@ -22,14 +22,14 @@ public enum Head implements Equipment {
     private int range;
 
     /**
-     * Constructor for Head
+     * Constructor for Helmet
      * @param a int attack
      * @param d int defense
      * @param h int hp
      * @param m int movement
      * @param v int vision
      */
-    Head(int a, int d, int h, int m, int v, int r, String n) {
+    Helmet(int a, int d, int h, int m, int v, int r, String n) {
         attMod = a;
         defMod = d;
         hpMod = h;

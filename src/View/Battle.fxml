@@ -76,7 +76,7 @@
       </VBox>
       <VBox alignment="TOP_CENTER" layoutX="9.0" layoutY="37.0" prefHeight="386.0" prefWidth="96.0" style="-fx-background-color: lightgreen; -fx-border-width: 1; -fx-border-color: black;">
          <children>
-            <Label fx:id="allyName" ellipsisString=".." graphicTextGap="0.0" prefHeight="32.0" prefWidth="94.0" text="Sentry Drone" wrapText="true">
+            <Label fx:id="allyName" ellipsisString=".." graphicTextGap="0.0" prefHeight="32.0" prefWidth="94.0" style="-fx-text-fill: black;" text="Sentry Drone" wrapText="true">
                <font>
                   <Font name="Britannic Bold" size="14.0" />
                </font>
@@ -92,7 +92,7 @@
                   <Image url="@Graphics/Placeable/sentryDroneResting.gif" />
                </image>
             </ImageView>
-            <Label fx:id="allyAtk" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" text="ATK: 20" wrapText="true">
+            <Label fx:id="allyAtk" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" style="-fx-text-fill: black;" text="ATK: 20" wrapText="true">
                <font>
                   <Font name="Britannic Bold" size="14.0" />
                </font>
@@ -103,7 +103,7 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Label fx:id="allyDef" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" text="DEF: 20" wrapText="true">
+            <Label fx:id="allyDef" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" style="-fx-text-fill: black;" text="DEF: 20" wrapText="true">
                <font>
                   <Font name="Britannic Bold" size="14.0" />
                </font>
@@ -114,7 +114,7 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Label fx:id="allyRange" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" text="RANGE: 3" wrapText="true">
+            <Label fx:id="allyRange" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" style="-fx-text-fill: black;" text="RANGE: 3" wrapText="true">
                <font>
                   <Font name="Britannic Bold" size="14.0" />
                </font>
@@ -125,7 +125,7 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Label fx:id="allyType" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" text="TYPE: Robot" wrapText="true">
+            <Label fx:id="allyType" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" style="-fx-text-fill: black;" text="TYPE: Robot" wrapText="true">
                <font>
                   <Font name="Britannic Bold" size="14.0" />
                </font>
@@ -141,7 +141,7 @@
                   <Image url="@Graphics/HealthWheel/healthWheel12.png" />
                </image>
             </ImageView>
-            <Label fx:id="allyHP" alignment="CENTER" ellipsisString=".." graphicTextGap="0.0" prefHeight="32.0" prefWidth="94.0" text="12/40" wrapText="true">
+            <Label fx:id="allyHP" alignment="CENTER" ellipsisString=".." graphicTextGap="0.0" prefHeight="32.0" prefWidth="94.0" style="-fx-text-fill: black;" text="12/40" wrapText="true">
                <font>
                   <Font name="Britannic Bold" size="14.0" />
                </font>
@@ -156,7 +156,7 @@
       </VBox>
       <VBox alignment="TOP_CENTER" layoutX="697.0" layoutY="37.0" prefHeight="386.0" prefWidth="96.0" style="-fx-background-color: tomato; -fx-border-width: 1; -fx-border-color: black;">
          <children>
-            <Label fx:id="enemyName" ellipsisString=".." graphicTextGap="0.0" prefHeight="32.0" prefWidth="94.0" text="Lizard King" wrapText="true">
+            <Label fx:id="enemyName" ellipsisString=".." graphicTextGap="0.0" prefHeight="32.0" prefWidth="94.0" style="-fx-text-fill: black;" text="Lizard King" wrapText="true">
                <font>
                   <Font name="Britannic Bold" size="14.0" />
                </font>
@@ -172,7 +172,7 @@
                   <Image url="@Graphics/Placeable/lizardKing.png" />
                </image>
             </ImageView>
-            <Label fx:id="enemyAtk" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" text="ATK: 20" wrapText="true">
+            <Label fx:id="enemyAtk" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" style="-fx-text-fill: black;" text="ATK: 20" wrapText="true">
                <font>
                   <Font name="Britannic Bold" size="14.0" />
                </font>
@@ -183,7 +183,7 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Label fx:id="enemyDef" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" text="DEF: 20" wrapText="true">
+            <Label fx:id="enemyDef" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" style="-fx-text-fill: black;" text="DEF: 20" wrapText="true">
                <font>
                   <Font name="Britannic Bold" size="14.0" />
                </font>
@@ -194,7 +194,7 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Label fx:id="enemyRange" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" text="RANGE: 20" wrapText="true">
+            <Label fx:id="enemyRange" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" style="-fx-text-fill: black;" text="RANGE: 20" wrapText="true">
                <font>
                   <Font name="Britannic Bold" size="14.0" />
                </font>
@@ -205,7 +205,7 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Label fx:id="enemyType" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" text="TYPE: Mutant" wrapText="true">
+            <Label fx:id="enemyType" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" style="-fx-text-fill: black;" text="TYPE: Mutant" wrapText="true">
                <font>
                   <Font name="Britannic Bold" size="14.0" />
                </font>
@@ -221,7 +221,7 @@
                   <Image url="@Graphics/HealthWheel/healthWheel2.png" />
                </image>
             </ImageView>
-            <Label fx:id="enemyHP" alignment="CENTER" ellipsisString=".." graphicTextGap="0.0" prefHeight="32.0" prefWidth="94.0" text="42/50" wrapText="true">
+            <Label fx:id="enemyHP" alignment="CENTER" ellipsisString=".." graphicTextGap="0.0" prefHeight="32.0" prefWidth="94.0" style="-fx-text-fill: black;" text="42/50" wrapText="true">
                <font>
                   <Font name="Britannic Bold" size="14.0" />
                </font>

@@ -65,19 +65,20 @@ public class StartController {
                 }
                 if (Math.abs(focusDist) >= .6) {
                     pos = !pos;
+                    focusMod = 0.005;
                 }
-                if (focusDist > 0.4) {
+                if (focusDist > 0.2) {
                     if (pos) {
-                        focusMod -= 0.001;
+                        focusMod -= 0.0005;
                     } else {
-                        focusMod += 0.001;
+                        focusMod += 0.0005;
                     }
                 }
-                if (focusDist < -0.4) {
+                if (focusDist < -0.2) {
                     if (pos) {
-                        focusMod += 0.001;
+                        focusMod += 0.0005;
                     } else {
-                        focusMod -= 0.001;
+                        focusMod -= 0.0005;
                     }
                 }
             }

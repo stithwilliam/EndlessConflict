@@ -11,7 +11,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BarracksController">
    <children>
       <Pane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: gray;" />
-      <VBox fx:id="armyBox" layoutY="25.0" maxHeight="500.0" maxWidth="200.0" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: lightgreen; -fx-border-width: 1; -fx-border-color: black;">
+      <VBox fx:id="armyBox" layoutY="25.0" maxHeight="500.0" maxWidth="200.0" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: paleturquoise; -fx-border-width: 1; -fx-border-color: black;">
          <children>
             <Label alignment="CENTER" prefHeight="24.0" prefWidth="200.0" style="-fx-text-fill: black;" text="In Army">
                <font>
@@ -31,7 +31,7 @@
             <Font name="Britannic Bold" size="18.0" />
          </font>
       </Button>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="500.0" layoutX="250.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" width="300.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="500.0" layoutX="250.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: royalblue;" width="300.0" />
       <Button fx:id="prevBtn" layoutX="201.0" layoutY="270.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="48.0" style="-fx-text-fill: black;" text="&lt;&lt;&lt;">
          <font>
             <Font name="Britannic Bold" size="18.0" />
@@ -57,7 +57,7 @@
             <Font name="Britannic Bold" size="24.0" />
          </font>
       </Label>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="214.0" layoutX="257.0" layoutY="330.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: yellow;" width="286.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="214.0" layoutX="257.0" layoutY="330.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: gold;" width="286.0" />
       <GridPane gridLinesVisible="true" layoutX="257.0" layoutY="330.0" prefHeight="214.0" prefWidth="286.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -168,7 +168,7 @@
             <Font name="Britannic Bold" size="18.0" />
          </font>
       </Button>
-      <VBox fx:id="barracksBox" layoutX="600.0" layoutY="25.0" maxHeight="500.0" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: tomato; -fx-border-width: 1; -fx-border-color: black;">
+      <VBox fx:id="barracksBox" layoutX="600.0" layoutY="25.0" maxHeight="500.0" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: paleturquoise; -fx-border-width: 1; -fx-border-color: black;">
          <children>
             <Label alignment="CENTER" prefHeight="24.0" prefWidth="200.0" style="-fx-text-fill: black;" text="In Barracks">
                <font>
@@ -188,5 +188,13 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
+      <Label fx:id="armyLabel" alignment="CENTER" layoutY="480.0" prefHeight="24.0" prefWidth="200.0" style="-fx-text-fill: black;" text="2/5">
+         <font>
+            <Font name="Britannic Bold" size="24.0" />
+         </font>
+         <padding>
+            <Insets bottom="10.0" top="10.0" />
+         </padding>
+      </Label>
    </children>
 </AnchorPane>

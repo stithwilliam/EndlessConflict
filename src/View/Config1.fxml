@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
@@ -8,52 +10,104 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Config1Controller">
    <children>
-      <Pane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: gray;" />
-      <Label layoutX="154.0" layoutY="60.0" text="Choose Your Difficulty" textFill="#23ccff">
-         <font>
-            <Font name="Haettenschweiler" size="72.0" />
-         </font>
-      </Label>
-      <Label layoutX="220.0" layoutY="300.0" text="Choose Your Mode" textFill="#23ccff">
-         <font>
-            <Font name="Haettenschweiler" size="64.0" />
-         </font>
-      </Label>
-      <Button fx:id="backBtn" blendMode="HARD_LIGHT" layoutX="25.0" layoutY="525.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: dimgrey;" text="Back" textFill="#23ccff">
+      <Pane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: gray;">
+         <children>
+            <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true">
+               <image>
+                  <Image url="@Graphics/config1.jpg" />
+               </image>
+            </ImageView>
+            <Label layoutX="264.0" layoutY="50.0" maxWidth="700.0" text="Difficulty" textAlignment="CENTER">
+               <font>
+                  <Font name="Haettenschweiler" size="96.0" />
+               </font>
+               <textFill>
+                  <RadialGradient centerX="0.48888888888888893" centerY="0.5142857142857142" radius="1.0">
+                     <stops>
+                        <Stop color="#00fff2" />
+                        <Stop color="AQUA" offset="0.007662835249042145" />
+                        <Stop color="#00d3d3" offset="0.2" />
+                        <Stop color="#00a1a1" offset="0.4" />
+                        <Stop color="#006464" offset="0.6" />
+                        <Stop color="#002b2b" offset="0.8" />
+                        <Stop color="#778380" offset="0.9961685823754789" />
+                        <Stop color="#110226" offset="1.0" />
+                     </stops>
+                  </RadialGradient>
+               </textFill>
+            </Label>
+            <Label layoutX="322.0" layoutY="300.0" maxWidth="700.0" text="Mode" textAlignment="CENTER">
+               <font>
+                  <Font name="Haettenschweiler" size="96.0" />
+               </font>
+               <textFill>
+                  <RadialGradient centerX="0.48888888888888893" centerY="0.5142857142857142" radius="1.0">
+                     <stops>
+                        <Stop color="#00fff2" />
+                        <Stop color="AQUA" offset="0.007662835249042145" />
+                        <Stop color="#00d3d3" offset="0.2" />
+                        <Stop color="#00a1a1" offset="0.4" />
+                        <Stop color="#006464" offset="0.6" />
+                        <Stop color="#002b2b" offset="0.8" />
+                        <Stop color="#778380" offset="0.9961685823754789" />
+                        <Stop color="#110226" offset="1.0" />
+                     </stops>
+                  </RadialGradient>
+               </textFill>
+            </Label>
+         </children></Pane>
+      <Button fx:id="backBtn" blendMode="SCREEN" layoutX="25.0" layoutY="525.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: dimgrey;" text="Back" textFill="AQUA">
          <font>
             <Font name="Britannic Bold" size="18.0" />
-         </font></Button>
-      <Button fx:id="okBtn" blendMode="HARD_LIGHT" layoutX="675.0" layoutY="525.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: dimgrey;" text="OK" textFill="#23ccff">
-         <font>
-            <Font name="Britannic Bold" size="18.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
-      <RadioButton fx:id="easyRadio" blendMode="HARD_LIGHT" layoutX="200.0" layoutY="187.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-text-fill: lightgreen;" text="Easy">
-         <font>
-            <Font name="Britannic Bold" size="18.0" />
-         </font></RadioButton>
-      <RadioButton fx:id="mediumRadio" layoutX="340.0" layoutY="187.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-text-fill: yellow;" text="Medium">
-         <font>
-            <Font name="Britannic Bold" size="18.0" />
-         </font></RadioButton>
-      <RadioButton fx:id="hardRadio" layoutX="500.0" layoutY="187.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-text-fill: salmon;" text="Hard">
-         <font>
-            <Font name="Britannic Bold" size="18.0" />
-         </font></RadioButton>
-      <Label fx:id="errorLabel" layoutX="181.0" layoutY="126.0" text="Must select difficulty and map" textFill="RED" visible="false">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <RadioButton fx:id="softcoreRadio" layoutX="255.0" layoutY="420.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-text-fill: lightgreen;" text="Softcore">
+      <Button fx:id="okBtn" blendMode="SCREEN" layoutX="675.0" layoutY="525.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: dimgrey;" text="OK" textFill="AQUA">
          <font>
             <Font name="Britannic Bold" size="18.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <RadioButton fx:id="easyRadio" layoutX="200.0" layoutY="200.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-text-fill: green;" text="Easy">
+         <font>
+            <Font name="Britannic Bold" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></RadioButton>
+      <RadioButton fx:id="mediumRadio" layoutX="340.0" layoutY="200.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-text-fill: yellow;" text="Medium">
+         <font>
+            <Font name="Britannic Bold" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></RadioButton>
+      <RadioButton fx:id="hardRadio" layoutX="500.0" layoutY="200.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-text-fill: red;" text="Hard">
+         <font>
+            <Font name="Britannic Bold" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></RadioButton>
+      <RadioButton fx:id="softcoreRadio" layoutX="255.0" layoutY="450.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-text-fill: green;" text="Softcore">
+         <font>
+            <Font name="Britannic Bold" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </RadioButton>
-      <RadioButton fx:id="hardcoreRadio" layoutX="425.0" layoutY="420.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-text-fill: salmon;" text="Hardcore">
+      <RadioButton fx:id="hardcoreRadio" layoutX="425.0" layoutY="450.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-text-fill: red;" text="Hardcore">
          <font>
             <Font name="Britannic Bold" size="18.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </RadioButton>
    </children>
 </AnchorPane>

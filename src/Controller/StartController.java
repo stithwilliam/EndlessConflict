@@ -27,10 +27,10 @@ public class StartController {
     @FXML
     private Label titleLbl;
 
+    AnimationTimer timer;
     private double focusDist;
     private double focusMod;
     private boolean pos;
-
     private List<Stop> stops;
 
 
@@ -52,7 +52,7 @@ public class StartController {
         pos = true;
         RadialGradient grad = (RadialGradient) titleLbl.getTextFill();
         stops = grad.getStops();
-        AnimationTimer timer = new AnimationTimer() {
+        timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 RadialGradient gradient;
@@ -63,7 +63,7 @@ public class StartController {
                 } else {
                     focusDist += -focusMod;
                 }
-                if (Math.abs(focusDist) >= .6) {
+                if (Math.abs(focusDist) >= .8) {
                     pos = !pos;
                     focusMod = 0.005;
                 }
@@ -107,32 +107,32 @@ public class StartController {
      * @param e rulesBtn
      */
     private void setRulesBtn(ActionEvent e) {
-        MasterController.getInstance().setHeadquartersScene(); //TODO
+        System.out.println("Not implemented yet"); //TODO
     }
 
     /**MOUSE HOVERING**/
     private void loadGameEnter(MouseEvent e) {
-        loadGameBtn.setStyle("-fx-border-color: cyan; -fx-background-color: lightgreen; -fx-border-width: 3; -fx-border-radius: 3;");
+        loadGameBtn.setStyle("-fx-border-color: #ff7700; -fx-background-color: cyan; -fx-border-width: 3; -fx-border-radius: 3;");
         loadGameBtn.setFont(Font.font("Britannic Bold", 22));
     }
     private void loadGameExit(MouseEvent e) {
-        loadGameBtn.setStyle("-fx-border-color: black; -fx-background-color: lightgreen; -fx-border-width: 1; -fx-border-radius: 1;");
+        loadGameBtn.setStyle("-fx-border-color: black; -fx-background-color: cyan; -fx-border-width: 1; -fx-border-radius: 1;");
         loadGameBtn.setFont(Font.font("Britannic Bold", 18));
     }
     private void newGameEnter(MouseEvent e) {
-        newGameBtn.setStyle("-fx-border-color: cyan; -fx-background-color: salmon; -fx-border-width: 3; -fx-border-radius: 3;");
+        newGameBtn.setStyle("-fx-border-color: #ff7700; -fx-background-color: cyan; -fx-border-width: 3; -fx-border-radius: 3;");
         newGameBtn.setFont(Font.font("Britannic Bold", 22));
     }
     private void newGameExit(MouseEvent e) {
-        newGameBtn.setStyle("-fx-border-color: black; -fx-background-color: salmon; -fx-border-width: 1; -fx-border-radius: 1;");
+        newGameBtn.setStyle("-fx-border-color: black; -fx-background-color: cyan; -fx-border-width: 1; -fx-border-radius: 1;");
         newGameBtn.setFont(Font.font("Britannic Bold", 18));
     }
     private void rulesEnter(MouseEvent e) {
-        rulesBtn.setStyle("-fx-border-color: cyan; -fx-background-color: yellow; -fx-border-width: 3; -fx-border-radius: 3;");
-        rulesBtn.setFont(Font.font("Britannic Bold", 22));
+        rulesBtn.setStyle("-fx-border-color: #ff7700; -fx-background-color: lightgrey; -fx-border-width: 3; -fx-border-radius: 3;");
+        rulesBtn.setFont(Font.font("Britannic Bold", 18));
     }
     private void rulesExit(MouseEvent e) {
-        rulesBtn.setStyle("-fx-border-color: black; -fx-background-color: yellow; -fx-border-width: 1; -fx-border-radius: 1;");
+        rulesBtn.setStyle("-fx-border-color: black; -fx-background-color: lightgrey; -fx-border-width: 1; -fx-border-radius: 1;");
         rulesBtn.setFont(Font.font("Britannic Bold", 18));
     }
 }

@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -163,7 +164,7 @@ public class BattleController {
      * @param y
      */
     private void putInFocus(int x, int y) {
-        double targetX = 0; //gridPane.getTranslateX();
+        double targetX = 0; //gridPane.getTranslateX(); //TODO
         double targetY = 0; //gridPane.getTranslateY();
         AnimationTimer scrollUntil = new AnimationTimer() {
             @Override
@@ -209,7 +210,12 @@ public class BattleController {
      * Shows the valid spots to move of the current fighter
      * @param e moveBtn
      */
-    private void showMoves(MouseEvent e) {
+    private void moveBtnEnter(MouseEvent e) {
+        showMoves();
+        moveBtn.setStyle("-fx-border-color: cyan; -fx-border-width: 2");
+    }
+
+    private void showMoves() {
         Fighter fighter = map.getFighter();
         if (!fighter.hasMoved()) {
             boolean[][] valid = map.getValidMoves(fighter);
@@ -229,6 +235,7 @@ public class BattleController {
         }
     }
 
+    /*
     private ImageView getMoveSelect(int i, int j, boolean[][] valid) {
         Fighter fighter = map.getFighter();
         valid[fighter.getyPos()][fighter.getxPos()] = true;
@@ -278,6 +285,7 @@ public class BattleController {
 
         return new ImageView(image);
     }
+    */
 
     /**
      * Called when the player exits the move button.
@@ -364,7 +372,7 @@ public class BattleController {
     }
 
     /**
-     * Called when showMoves() is called.
+     * Called when moveBtnEnter() is called.
      * Sets all buttons to cancel the pending moves.
      */
     private void buttonsToCancelMove() {
@@ -407,7 +415,13 @@ public class BattleController {
      * Shows the valid spots to attack of the current fighter
      * @param e atkBtn
      */
-    private void showAttacks(MouseEvent e) {
+    private void attackBtnEnter(MouseEvent e) {
+        showAttacks();
+        atkBtn.setStyle("-fx-border-color: cyan; -fx-border-width: 2");
+        atkBtn.setBlendMode(BlendMode.HARD_LIGHT);
+    }
+
+    private void showAttacks() {
         Fighter fighter = map.getFighter();
         if (!fighter.hasAttacked()) {
             boolean[][] valid = map.getValidAttacks(fighter);
@@ -420,7 +434,7 @@ public class BattleController {
                     }
                 }
             }
-            atkBtn.setOnMouseExited(this::noShowAttacks);
+            atkBtn.setOnMouseExited(this::attackBtnExit);
         }
     }
 
@@ -429,7 +443,12 @@ public class BattleController {
      * Removes the display of possible attacks.
      * @param e atkBtn
      */
-    private void noShowAttacks(MouseEvent e) {
+    private void attackBtnExit(MouseEvent e) {
+        noShowAttacks();
+        atkBtn.setStyle("");
+    }
+
+    private void noShowAttacks() {
         Fighter fighter = map.getFighter();
         boolean[][] valid = map.getValidAttacks(fighter);
         for (int i = 0; i < valid.length; i++) {
@@ -453,7 +472,7 @@ public class BattleController {
         Fighter fighter = map.getFighter();
         putInFocus(fighter.getxPos(), fighter.getyPos());
         if (!fighter.hasAttacked()) {
-            noShowAttacks(null);
+            attackBtnExit(null);
             boolean[][] valid = map.getAttackable(fighter);
             for (int i = 0; i < valid[0].length; i++) {
                 for (int j = 0; j < valid.length; j++) {
@@ -513,7 +532,7 @@ public class BattleController {
     }
 
     /**
-     * Called when showAttacks() is called.
+     * Called when attackBtnEnter() is called.
      * Sets all buttons to cancel the pending attack.
      */
     private void buttonsToCancelAttack() {
@@ -863,7 +882,7 @@ public class BattleController {
 
     private void setItemsBtn(ActionEvent e) {
         putOnTerminal("I don't work yet.");
-        MasterController.getInstance().setHeadquartersScene();
+        MasterController.getInstance().loadBarracksScene();
     }
 
     /**
@@ -906,10 +925,10 @@ public class BattleController {
      */
     private void buttonsToDefault() {
         moveBtn.setOnAction(this::setMoveBtn);
-        moveBtn.setOnMouseEntered(this::showMoves);
+        moveBtn.setOnMouseEntered(this::moveBtnEnter);
         moveBtn.setOnMouseExited(null);
         atkBtn.setOnAction(this::setAtkBtn);
-        atkBtn.setOnMouseEntered(this::showAttacks);
+        atkBtn.setOnMouseEntered(this::attackBtnEnter);
         atkBtn.setOnMouseExited(null);
         skillsBtn.setOnAction(this::setSkillsBtn);
         itemsBtn.setOnAction(this::setItemsBtn);
@@ -1107,9 +1126,9 @@ public class BattleController {
      */
     public void initialize() {
         moveBtn.setOnAction(this::setMoveBtn);
-        moveBtn.setOnMouseEntered(this::showMoves);
+        moveBtn.setOnMouseEntered(this::moveBtnEnter);
         atkBtn.setOnAction(this::setAtkBtn);
-        atkBtn.setOnMouseEntered(this::showAttacks);
+        atkBtn.setOnMouseEntered(this::attackBtnEnter);
         skillsBtn.setOnAction(this::setSkillsBtn);
         itemsBtn.setOnAction(this::setItemsBtn);
         endTurnBtn.setOnAction(this::setEndTurnBtn);

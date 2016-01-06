@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.media.*?>
@@ -16,40 +17,48 @@
             <Image url="@Graphics/titleScreen.jpg" />
          </image>
       </ImageView>
-      <Label fx:id="titleLbl" layoutX="64.0" layoutY="80.0" maxWidth="700.0" style="-fx-font-family: Haettenschweiler;" text="Endless Conflict">
+      <Label fx:id="titleLbl" blendMode="SCREEN" layoutX="64.0" layoutY="80.0" maxWidth="700.0" style="-fx-font-family: Haettenschweiler;" text="Endless Conflict">
          <font>
             <Font name="Haettenschweiler" size="140.0" />
          </font>
          <textFill>
-            <RadialGradient centerX="0.48888888888888893" centerY="0.5142857142857142" focusDistance="0.5813953488372094" radius="1.0">
+            <RadialGradient centerX="0.48888888888888893" centerY="0.5142857142857142" focusDistance="0.6" radius="1.0">
                <stops>
                   <Stop color="#00fff2" />
-                  <Stop color="#00fff2" offset="0.007662835249042145" />
-                  <Stop color="#41d0c9" offset="0.11991942173243271" />
-                  <Stop color="#1cc6c0" offset="0.22956906426511808" />
-                  <Stop color="#127c77" offset="0.37220049768929897" />
-                  <Stop color="#0d514c" offset="0.5460757593711734" />
-                  <Stop color="#012524" offset="0.7318007662835244" />
+                  <Stop color="AQUA" offset="0.007662835249042145" />
+                  <Stop color="#01d3d3" offset="0.2" />
+                  <Stop color="#00a1a1" offset="0.4" />
+                  <Stop color="#016565" offset="0.6" />
+                  <Stop color="#002c2c" offset="0.8" />
                   <Stop color="#778380" offset="0.9961685823754789" />
                   <Stop color="BLACK" offset="1.0" />
                </stops>
             </RadialGradient>
          </textFill>
       </Label>
-      <Button fx:id="newGameBtn" layoutX="225.0" layoutY="400.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: cyan; -fx-border-color: black; -fx-border-radius: 1; -fx-border-width: 1;" text="New Game">
+      <Button fx:id="newGameBtn" layoutX="225.0" layoutY="400.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #00ffff; -fx-border-color: black; -fx-border-radius: 1; -fx-border-width: 1;" text="New Game">
          <font>
             <Font name="Britannic Bold" size="18.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
-      <Button fx:id="loadGameBtn" layoutX="425.0" layoutY="400.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: cyan; -fx-border-color: black; -fx-border-radius: 1; -fx-border-width: 1;" text="Load Game">
+      <Button fx:id="loadGameBtn" layoutX="425.0" layoutY="400.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #00ffff; -fx-border-color: black; -fx-border-radius: 1; -fx-border-width: 1;" text="Load Game">
          <font>
             <Font name="Britannic Bold" size="18.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
-      <Button fx:id="rulesBtn" layoutX="340.0" layoutY="500.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: lightgrey; -fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 1;" text="Rules">
+      <Button fx:id="rulesBtn" layoutX="340.0" layoutY="500.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: lightgrey; -fx-border-color: black; -fx-border-width: 1;" text="Rules">
          <font>
             <Font name="Britannic Bold" size="18.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
    </children>
 </AnchorPane>

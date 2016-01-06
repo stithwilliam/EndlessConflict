@@ -90,7 +90,7 @@
                   <Insets bottom="10.0" top="5.0" />
                </padding>
             </Label>
-            <GridPane fx:id="gridPane" gridLinesVisible="true" prefHeight="214.0" prefWidth="286.0" style="-fx-background-color: deepskyblue;">
+            <GridPane fx:id="gridPane" gridLinesVisible="true" maxHeight="214.0" maxWidth="286.0" prefHeight="214.0" prefWidth="286.0" style="-fx-background-color: gold;">
                <children>
                   <Label fx:id="weaponLbl" onMouseClicked="#setWeapon" prefHeight="40.0" prefWidth="300.0" style="-fx-text-fill: black;" text="Weapon">
                      <font>

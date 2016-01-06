@@ -67,9 +67,9 @@ public class Config2Controller {
      */
     private void setHumanBox(MouseEvent e) {
         selected = true;
-        humanBox.setStyle("-fx-border-color: yellow; -fx-background-color: darkorange; -fx-border-width: 4;  -fx-border-radius: 4;");
-        robotBox.setStyle("-fx-border-color: slateblue; -fx-background-color: royalblue; -fx-border-width: 4; -fx-border-radius: 4;");
-        mutantBox.setStyle("-fx-border-color: lawngreen; -fx-background-color: chartreuse; -fx-border-width: 4;  -fx-border-radius: 4;");
+        humanBox.setStyle("-fx-border-color: yellow; -fx-background-color: darkorange; -fx-border-width: 4; ");
+        robotBox.setStyle("-fx-border-color: royalblue; -fx-background-color: royalblue; -fx-border-width: 4;");
+        mutantBox.setStyle("-fx-border-color: chartreuse; -fx-background-color: chartreuse; -fx-border-width: 4; ");
         commander = Commander.HUMAN;
 
         boxesToDefault();
@@ -83,9 +83,9 @@ public class Config2Controller {
      */
     private void setRobotBox(MouseEvent e) {
         selected = true;
-        humanBox.setStyle("-fx-border-color: sandybrown; -fx-background-color: darkorange; -fx-border-width: 4; -fx-border-radius: 4;");
-        robotBox.setStyle("-fx-border-color: yellow; -fx-background-color: royalblue; -fx-border-width: 4; -fx-border-radius: 4;");
-        mutantBox.setStyle("-fx-border-color: lawngreen; -fx-background-color: chartreuse; -fx-border-width: 4; -fx-border-radius: 4;");
+        humanBox.setStyle("-fx-border-color: darkorange; -fx-background-color: darkorange; -fx-border-width: 4;");
+        robotBox.setStyle("-fx-border-color: yellow; -fx-background-color: royalblue; -fx-border-width: 4;");
+        mutantBox.setStyle("-fx-border-color: chartreuse; -fx-background-color: chartreuse; -fx-border-width: 4;");
         commander = Commander.ROBOT;
 
         boxesToDefault();
@@ -99,9 +99,9 @@ public class Config2Controller {
      */
     private void setMutantBox(MouseEvent e) {
         selected = true;
-        humanBox.setStyle("-fx-border-color: sandybrown; -fx-background-color: darkorange; -fx-border-width: 4;  -fx-border-radius: 4;");
-        robotBox.setStyle("-fx-border-color: slateblue; -fx-background-color: royalblue; -fx-border-width: 4; -fx-border-radius: 4;");
-        mutantBox.setStyle("-fx-border-color: yellow; -fx-background-color: chartreuse; -fx-border-width: 4; -fx-border-radius: 4;");
+        humanBox.setStyle("-fx-border-color: darkorange; -fx-background-color: darkorange; -fx-border-width: 4; ");
+        robotBox.setStyle("-fx-border-color: royalblue; -fx-background-color: royalblue; -fx-border-width: 4;");
+        mutantBox.setStyle("-fx-border-color: yellow; -fx-background-color: chartreuse; -fx-border-width: 4;");
         commander = Commander.MUTANT;
 
         boxesToDefault();
@@ -149,23 +149,23 @@ public class Config2Controller {
     }
 
     private void humanEnter(MouseEvent e) {
-        humanBox.setStyle("-fx-border-color: cyan; -fx-background-color: darkorange; -fx-border-width: 4; -fx-border-radius: 4;");
+        humanBox.setStyle("-fx-border-color: cyan; -fx-background-color: darkorange; -fx-border-width: 4;");
     }
     private void humanExit(MouseEvent e) {
-        humanBox.setStyle("-fx-border-color: sandybrown; -fx-background-color: darkorange; -fx-border-width: 4; -fx-border-radius: 4;");
+        humanBox.setStyle("-fx-border-color: darkorange; -fx-background-color: darkorange; -fx-border-width: 4;");
     }
 
     private void robotEnter(MouseEvent e) {
-        robotBox.setStyle("-fx-border-color: cyan; -fx-background-color: royalblue; -fx-border-width: 4; -fx-border-radius: 4;");
+        robotBox.setStyle("-fx-border-color: cyan; -fx-background-color: royalblue; -fx-border-width: 4;");
     }
     private void robotExit(MouseEvent e) {
-        robotBox.setStyle("-fx-border-color: slateblue; -fx-background-color: royalblue; -fx-border-width: 4; -fx-border-radius: 4;");
+        robotBox.setStyle("-fx-border-color: royalblue; -fx-background-color: royalblue; -fx-border-width: 4;");
     }
 
     private void mutantEnter(MouseEvent e) {
-        mutantBox.setStyle("-fx-border-color: cyan; -fx-background-color: chartreuse; -fx-border-width: 4; -fx-border-radius: 4;");
+        mutantBox.setStyle("-fx-border-color: cyan; -fx-background-color: chartreuse; -fx-border-width: 4;");
     }
     private void mutantExit(MouseEvent e) {
-        mutantBox.setStyle("-fx-border-color: lawngreen; -fx-background-color: chartreuse; -fx-border-width: 4; -fx-border-radius: 4;");
+        mutantBox.setStyle("-fx-border-color: chartreuse; -fx-background-color: chartreuse; -fx-border-width: 4;");
     }
 }

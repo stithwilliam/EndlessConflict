@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
@@ -9,23 +13,50 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Config2Controller">
    <children>
-      <Pane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: grey;" />
-      <Label layoutX="126.0" layoutY="35.0" text="Choose Your Commander" textFill="#23ccff">
-         <font>
-            <Font name="Haettenschweiler" size="72.0" />
-         </font>
-      </Label>
-      <Button fx:id="backBtn" layoutX="12.0" layoutY="325.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: dimgrey;" text="Back" textFill="#23ccff">
+      <Pane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: grey;">
+         <children>
+            <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true">
+               <image>
+                  <Image url="@Graphics/config2.jpg" />
+               </image>
+            </ImageView>
+            <Label layoutX="227.0" layoutY="25.0" maxWidth="700.0" text="Commander" textAlignment="CENTER">
+               <font>
+                  <Font name="Haettenschweiler" size="96.0" />
+               </font>
+               <textFill>
+                  <RadialGradient centerX="0.48888888888888893" centerY="0.5142857142857142" radius="1.0">
+                     <stops>
+                        <Stop color="#00fff2" />
+                        <Stop color="AQUA" offset="0.007662835249042145" />
+                        <Stop color="#00d3d3" offset="0.2" />
+                        <Stop color="#00a1a1" offset="0.4" />
+                        <Stop color="#006464" offset="0.6" />
+                        <Stop color="#002b2b" offset="0.8" />
+                        <Stop color="#778380" offset="0.9961685823754789" />
+                        <Stop color="#110226" offset="1.0" />
+                     </stops>
+                  </RadialGradient>
+               </textFill>
+            </Label>
+         </children></Pane>
+      <Button fx:id="backBtn" blendMode="SCREEN" layoutX="12.0" layoutY="325.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: dimgrey;" text="Back" textFill="AQUA">
          <font>
             <Font name="Britannic Bold" size="18.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
-      <Button fx:id="okBtn" layoutX="688.0" layoutY="325.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: dimgrey;" text="OK" textFill="#23ccff">
+      <Button fx:id="okBtn" blendMode="SCREEN" layoutX="688.0" layoutY="325.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: dimgrey;" text="OK" textFill="AQUA">
          <font>
             <Font name="Britannic Bold" size="18.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
-      <HBox fx:id="humanBox" alignment="CENTER_LEFT" layoutX="125.0" layoutY="150.0" prefHeight="106.0" prefWidth="550.0" style="-fx-background-color: orange; -fx-border-width: 4; -fx-border-color: sandybrown; -fx-border-radius: 4;">
+      <HBox fx:id="humanBox" alignment="CENTER_LEFT" layoutX="125.0" layoutY="150.0" prefHeight="106.0" prefWidth="550.0" style="-fx-background-color: darkorange; -fx-border-width: 4; -fx-border-color: darkorange;">
          <children>
             <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
             <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
@@ -36,12 +67,12 @@
             <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
             <VBox prefHeight="100.0" prefWidth="150.0">
                <children>
-                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" style="-fx-text-fill: black;" text="The President">
+                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" style="-fx-text-fill: #000000;" text="The President">
                      <font>
                         <Font name="Britannic Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" style="-fx-text-fill: black;" text="HUMANS">
+                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" style="-fx-text-fill: #000000;" text="HUMANS">
                      <font>
                         <Font name="Britannic Bold" size="24.0" />
                      </font>
@@ -55,16 +86,19 @@
                         <Font name="Britannic Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" style="-fx-text-fill: black;" text="Fights primarily with Humans. They excel at killing Robots but fall easily to Mutants" textAlignment="CENTER" wrapText="true">
+                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" style="-fx-text-fill: #ffffff;" text="Excel at killing Robots and fall easily to Mutants" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                      <font>
-                        <Font name="Britannic Bold" size="14.0" />
+                        <Font name="Britannic Bold" size="18.0" />
                      </font>
                   </Label>
                </children>
             </VBox>
          </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </HBox>
-      <HBox fx:id="robotBox" alignment="CENTER_LEFT" layoutX="125.0" layoutY="300.0" prefHeight="106.0" prefWidth="550.0" style="-fx-background-color: royalblue; -fx-border-width: 4; -fx-border-color: slateblue; -fx-border-radius: 4;">
+      <HBox fx:id="robotBox" alignment="CENTER_LEFT" layoutX="125.0" layoutY="300.0" prefHeight="106.0" prefWidth="550.0" style="-fx-background-color: royalblue; -fx-border-width: 4; -fx-border-color: royalblue;">
          <children>
             <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
             <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
@@ -80,30 +114,42 @@
                         <Font name="Britannic Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" style="-fx-text-fill: black;" text="ROBOTS">
+                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" style="-fx-text-fill: #000000;" text="ROBOTS">
                      <font>
                         <Font name="Britannic Bold" size="24.0" />
                      </font>
+                     <textFill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="#11668f" />
+                              <Stop color="#07435e" offset="0.007662835249042145" />
+                              <Stop color="#061724" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </textFill>
                   </Label>
                </children>
             </VBox>
             <VBox prefHeight="100.0" prefWidth="300.0">
                <children>
-                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" style="-fx-text-fill: black;" text="This superintelligent AI has surpassed human intelligence and now leads the most dangerous threat to the human race, the robot rebellion" textAlignment="CENTER" wrapText="true">
+                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" style="-fx-text-fill: black;" text="This superintelligent AI has surpassed human intelligence and now leads the most dangerous threat to the human race" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font name="Britannic Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" style="-fx-text-fill: black;" text="Fights primarily with Robots. They excel at killing Mutants but fall easily to Humans" textAlignment="CENTER" wrapText="true">
+                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" text="Excel at killing Mutants and fall easily to Humans" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                      <font>
-                        <Font name="Britannic Bold" size="14.0" />
+                        <Font name="Britannic Bold" size="18.0" />
                      </font>
                   </Label>
                </children>
             </VBox>
          </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </HBox>
-      <HBox fx:id="mutantBox" alignment="CENTER_LEFT" layoutX="125.0" layoutY="450.0" prefHeight="106.0" prefWidth="550.0" style="-fx-background-color: chartreuse; -fx-border-width: 4; -fx-border-color: lawngreen; -fx-border-radius: 4;">
+      <HBox fx:id="mutantBox" alignment="CENTER_LEFT" layoutX="125.0" layoutY="450.0" prefHeight="106.0" prefWidth="550.0" style="-fx-background-color: chartreuse; -fx-border-width: 4; -fx-border-color: chartreuse;">
          <children>
             <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
             <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
@@ -119,10 +165,19 @@
                         <Font name="Britannic Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" style="-fx-text-fill: black;" text="MUTANTS">
+                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" style="-fx-text-fill: #000000;" text="MUTANTS">
                      <font>
                         <Font name="Britannic Bold" size="24.0" />
                      </font>
+                     <textFill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="#2e9010" />
+                              <Stop color="#1c5708" offset="0.007662835249042145" />
+                              <Stop color="#092506" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </textFill>
                   </Label>
                </children>
             </VBox>
@@ -133,14 +188,17 @@
                         <Font name="Britannic Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" style="-fx-text-fill: black;" text="Fights primarily with Mutants. They excel at killing Humans but fall easily to Robots" textAlignment="CENTER" wrapText="true">
+                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" text="Excel at killing Humans and fall easily to Robotsts" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                      <font>
-                        <Font name="Britannic Bold" size="14.0" />
+                        <Font name="Britannic Bold" size="18.0" />
                      </font>
                   </Label>
                </children>
             </VBox>
          </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </HBox>
    </children>
 </AnchorPane>

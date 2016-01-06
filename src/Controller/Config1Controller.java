@@ -55,7 +55,7 @@ public class Config1Controller {
 
         mediumRadio.setToggleGroup(difficultyToggle);
         mediumRadio.setOnMouseEntered(this::mediumEnter);
-        mediumRadio.setOnMouseExited(this::mediumEnter);
+        mediumRadio.setOnMouseExited(this::mediumExit);
 
         hardRadio.setToggleGroup(difficultyToggle);
         hardRadio.setOnMouseEntered(this::hardEnter);
@@ -75,6 +75,12 @@ public class Config1Controller {
      * @param e okBtn
      */
     private void setOkBtn(ActionEvent e) {
+        if (checkToggles()) {
+            MasterController.getInstance().setConfig2Scene();
+        }
+    }
+
+    private boolean checkToggles() {
         Game game = Main.myGame;
         boolean toggles[] = {false, false};
         for (Toggle t : difficultyToggle.getToggles()) {
@@ -88,7 +94,8 @@ public class Config1Controller {
                     game.setDifficulty(Difficulty.HARD);
                 }
             }
-        } for (Toggle t: modeToggle.getToggles()) {
+        }
+        for (Toggle t : modeToggle.getToggles()) {
             if (t.isSelected()) {
                 toggles[1] = true;
                 if (softcoreRadio.isSelected()) {
@@ -97,11 +104,11 @@ public class Config1Controller {
                     game.setMode(Mode.HARDCORE);
                 }
             }
-        } if (toggles[0] && toggles[1]) {
-            MasterController.getInstance().setConfig2Scene();
+        }
+        if (toggles[0] && toggles[1]) {
+            return true;
         } else {
-            System.out.println("You dumb fuck");
-            //TODO make this better
+            return false;
         }
     }
 
@@ -116,11 +123,16 @@ public class Config1Controller {
     /**Mouse Hovering**/
 
     private void okEnter(MouseEvent e) {
-        okBtn.setStyle("-fx-border-color: cyan; -fx-background-color: dimgrey; -fx-border-width: 3; -fx-border-radius: 3;");
-        okBtn.setFont(Font.font("Britannic Bold", 22));
+        if (checkToggles()) {
+            okBtn.setStyle("-fx-border-color: cyan; -fx-background-color: dimgrey; -fx-border-width: 3; -fx-border-radius: 3;");
+            okBtn.setFont(Font.font("Britannic Bold", 22));
+        } else {
+            okBtn.setStyle("-fx-border-color: red; -fx-background-color: dimgrey; -fx-border-width: 3; -fx-border-radius: 3; -fx-text-fill: red");
+            okBtn.setFont(Font.font("Britannic Bold", 22));
+        }
     }
     private void okExit(MouseEvent e) {
-        okBtn.setStyle("-fx-background-color: dimgrey");
+        okBtn.setStyle("-fx-background-color: dimgrey; -fx-text-fill: cyan");
         okBtn.setFont(Font.font("Britannic Bold", 18));
     }
     private void backEnter(MouseEvent e) {

@@ -103,6 +103,8 @@ public class BarracksController {
     /**Hashmap that maps Fighters to their labels**/
     private HashMap<Fighter, Label> fighterLabelHashMap;
 
+    private int armyLimit;
+    private int numInArmy;
     private boolean firstLabel;
 
     /**

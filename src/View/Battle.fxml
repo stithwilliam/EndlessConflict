@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.canvas.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.shape.*?>
@@ -28,12 +29,15 @@
             <Button fx:id="downBtn" layoutX="32.0" layoutY="416.0" mnemonicParsing="false" opacity="0.0" prefHeight="32.0" prefWidth="512.0" text="Down" />
          </children>
       </Pane>
-      <Pane layoutX="400.0" layoutY="460.0" prefHeight="140.0" prefWidth="400.0" style="-fx-background-color: midnightblue; -fx-border-width: 3; -fx-border-color: deepskyblue; -fx-border-radius: 3;">
+      <Pane layoutX="400.0" layoutY="460.0" prefHeight="140.0" prefWidth="400.0" style="-fx-background-color: midnightblue; -fx-border-width: 3; -fx-border-color: deepskyblue;">
          <children>
             <Button fx:id="endTurnBtn" blendMode="HARD_LIGHT" contentDisplay="TOP" layoutX="313.0" layoutY="33.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="64.0" text=" END TURN" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="Britannic Bold" size="16.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button fx:id="itemsBtn" blendMode="HARD_LIGHT" contentDisplay="TOP" graphicTextGap="0.0" layoutX="226.0" layoutY="33.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="64.0" text="ITEMS" textAlignment="CENTER" textOverrun="CLIP">
                <font>
@@ -45,6 +49,9 @@
                <padding>
                   <Insets right="1.0" />
                </padding>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button fx:id="skillsBtn" blendMode="HARD_LIGHT" contentDisplay="TOP" layoutX="137.0" layoutY="33.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="64.0" text="SKILLS" textAlignment="CENTER" wrapText="true">
                <font>
@@ -53,16 +60,25 @@
                <padding>
                   <Insets right="1.0" />
                </padding>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button fx:id="moveBtn" blendMode="HARD_LIGHT" layoutX="20.0" layoutY="15.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="96.0" text="MOVE">
                <font>
                   <Font name="Britannic Bold" size="18.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button fx:id="atkBtn" blendMode="HARD_LIGHT" layoutX="20.0" layoutY="77.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="96.0" text="ATTACK">
                <font>
                   <Font name="Britannic Bold" size="18.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
          </children>
       </Pane>

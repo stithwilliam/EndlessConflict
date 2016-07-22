@@ -58,20 +58,20 @@ public enum MapType {
     public ArrayList<Fighter> getFighters() {
         ArrayList<Fighter> fighters = new ArrayList<>();
         Game game = Main.myGame;
-        Commander commander = game.getCommander();
+        Race race = game.getRace();
         switch (this) {
             case TUTORIAL:
-                Fighter hero = new Fighter(commander.getHero(), 1, 3, false);
+                Fighter hero = new Fighter(race.getHero(), 1, 3, false);
                 fighters.add(hero);
-                Fighter unit1 = new Fighter (commander.getUnit(), 0, 2, false);
+                Fighter unit1 = new Fighter (race.getUnit(), 0, 2, false);
                 unit1.setName(unit1.getName() + " 1");
                 fighters.add(unit1);
-                Fighter unit2 = new Fighter(commander.getUnit(), 0, 4, false);
+                Fighter unit2 = new Fighter(race.getUnit(), 0, 4, false);
                 unit2.setName(unit2.getName() + " 2");
                 fighters.add(unit2);
-                Fighter w = new Fighter(commander.getWeakCommander().getUnit(), 8, 3, true);
+                Fighter w = new Fighter(race.getWeakRace().getUnit(), 8, 3, true);
                 fighters.add(w);
-                Fighter s = new Fighter(commander.getStrongCommander().getUnit(), 14, 3, true);
+                Fighter s = new Fighter(race.getStrongRace().getUnit(), 14, 3, true);
                 fighters.add(s);
         }
         return fighters;

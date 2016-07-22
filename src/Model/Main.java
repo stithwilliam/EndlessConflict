@@ -15,7 +15,7 @@ public class Main extends Application {
         controller.setStage(stage);
         stage.setTitle("Endless Conflict");
         stage.setResizable(false);
-        controller.setConfig1Scene();
+        controller.setConfigScene();
         stage.show();
         controller.setStartScene();
     }

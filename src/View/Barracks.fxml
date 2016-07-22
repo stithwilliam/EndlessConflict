@@ -44,7 +44,7 @@
       </Button>
       <ImageView fx:id="fighterImage" fitHeight="192.0" fitWidth="192.0" layoutX="304.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Graphics/Placeable/modelXresting.gif" />
+            <Image url="@Graphics/Fighter/modelXresting.gif" />
          </image>
       </ImageView>
       <Label fx:id="nameLabel" alignment="CENTER" layoutX="250.0" layoutY="54.0" prefHeight="24.0" prefWidth="300.0" style="-fx-text-fill: black;" text="MODEL X">

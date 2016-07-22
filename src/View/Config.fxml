@@ -11,7 +11,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Config2Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ConfigController">
    <children>
       <Pane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: grey;">
          <children>
@@ -58,16 +58,14 @@
       </Button>
       <HBox fx:id="humanBox" alignment="CENTER_LEFT" layoutX="125.0" layoutY="150.0" prefHeight="106.0" prefWidth="550.0" style="-fx-background-color: darkorange; -fx-border-width: 4; -fx-border-color: darkorange;">
          <children>
-            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
-            <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Graphics/humanCommanderPortrait.png" />
+                  <Image url="@Graphics/Fighter/commanderChaos.png" />
                </image>
             </ImageView>
-            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
             <VBox prefHeight="100.0" prefWidth="150.0">
                <children>
-                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" style="-fx-text-fill: #000000;" text="The President">
+                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" style="-fx-text-fill: #000000;" text="Chaos">
                      <font>
                         <Font name="Britannic Bold" size="18.0" />
                      </font>
@@ -81,7 +79,7 @@
             </VBox>
             <VBox prefHeight="100.0" prefWidth="300.0">
                <children>
-                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" style="-fx-text-fill: black;" text="Leader of The Stronghold, the last civilized group of human fighters dedicated to winning back their planet and destroying all machines." textAlignment="CENTER" wrapText="true">
+                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" style="-fx-text-fill: black;" text="A rogue agent of U.N. special forces. Chaos excels at overwhelming his enemies with his overwhelming firepower." textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font name="Britannic Bold" size="14.0" />
                      </font>
@@ -100,16 +98,14 @@
       </HBox>
       <HBox fx:id="robotBox" alignment="CENTER_LEFT" layoutX="125.0" layoutY="300.0" prefHeight="106.0" prefWidth="550.0" style="-fx-background-color: royalblue; -fx-border-width: 4; -fx-border-color: royalblue;">
          <children>
-            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
-            <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Graphics/robotCommanderPortrait.png" />
+                  <Image url="@Graphics/Fighter/modelXresting.gif" />
                </image>
             </ImageView>
-            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
             <VBox prefHeight="100.0" prefWidth="150.0">
                <children>
-                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" style="-fx-text-fill: black;" text="The Singularity">
+                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" style="-fx-text-fill: black;" text="Model 0">
                      <font>
                         <Font name="Britannic Bold" size="18.0" />
                      </font>
@@ -132,7 +128,7 @@
             </VBox>
             <VBox prefHeight="100.0" prefWidth="300.0">
                <children>
-                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" style="-fx-text-fill: black;" text="This superintelligent AI has surpassed human intelligence and now leads the most dangerous threat to the human race" textAlignment="CENTER" wrapText="true">
+                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" style="-fx-text-fill: black;" text="The first &quot;successful&quot; attempt at Strong A.I. Model 0 possesses a nearly indestructible body capable of withstanding powerful attacks." textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font name="Britannic Bold" size="14.0" />
                      </font>
@@ -151,16 +147,14 @@
       </HBox>
       <HBox fx:id="mutantBox" alignment="CENTER_LEFT" layoutX="125.0" layoutY="450.0" prefHeight="106.0" prefWidth="550.0" style="-fx-background-color: chartreuse; -fx-border-width: 4; -fx-border-color: chartreuse;">
          <children>
-            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
-            <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Graphics/mutantCommanderPortrait.png" />
+                  <Image url="@Graphics/Fighter/lizardKing.png" />
                </image>
             </ImageView>
-            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="18.0" />
             <VBox prefHeight="100.0" prefWidth="150.0">
                <children>
-                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" prefWidth="150.0" style="-fx-text-fill: black;" text="The Genespinner">
+                  <Label alignment="CENTER" maxWidth="200.0" prefHeight="50.0" prefWidth="150.0" style="-fx-text-fill: black;" text="Lizard King">
                      <font>
                         <Font name="Britannic Bold" size="18.0" />
                      </font>
@@ -183,7 +177,7 @@
             </VBox>
             <VBox prefHeight="100.0" prefWidth="300.0">
                <children>
-                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" style="-fx-text-fill: black;" text="Capable of creating any biological horror imaginable, the Singularity's rogue creation leads The Swarm in it's attempt at domination " textAlignment="CENTER" wrapText="true">
+                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" style="-fx-text-fill: black;" text="A misunderstand creation, the Lizard King compels other mutants to join him through his impressive speed on the battlefield." textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font name="Britannic Bold" size="14.0" />
                      </font>

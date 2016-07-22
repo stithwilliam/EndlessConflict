@@ -3,13 +3,13 @@ package Model;
 /**
  * Created by William on 10/26/2015.
  */
-public enum Commander {
+public enum Race {
 
-    /**3 types of Commander**/
+    /**3 types of Races**/
     HUMAN, ROBOT, MUTANT;
 
     /**
-     * Gets the first hero for the Commander
+     * Gets the first hero for the Race
      * @return Hero first hero
      */
     public Hero getHero() {
@@ -25,7 +25,7 @@ public enum Commander {
     }
 
     /**
-     * Gets the first unit for the Commander
+     * Gets the first unit for the Race
      * @return Unit first unit
      */
     public Unit getUnit() {
@@ -41,10 +41,10 @@ public enum Commander {
     }
 
     /**
-     * Gets the commander that is weak against this
-     * @return Commander weak against
+     * Gets the race that is weak against this
+     * @return Race weak against
      */
-    public Commander getWeakCommander() {
+    public Race getWeakRace() {
         switch (this) {
             case HUMAN:
                 return ROBOT;
@@ -57,10 +57,10 @@ public enum Commander {
     }
 
     /**
-     * Gets the commander that is strong against this
-     * @return Commander strong against
+     * Gets the race that is strong against this
+     * @return Race strong against
      */
-    public Commander getStrongCommander() {
+    public Race getStrongRace() {
         switch (this) {
             case HUMAN:
                 return MUTANT;

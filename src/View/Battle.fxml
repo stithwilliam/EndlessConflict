@@ -105,7 +105,7 @@
             </Label>
             <ImageView fx:id="allySprite" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Graphics/Placeable/sentryDroneResting.gif" />
+                  <Image url="@Graphics/Fighter/sentryDroneResting.gif" />
                </image>
             </ImageView>
             <Label fx:id="allyAtk" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" style="-fx-text-fill: black;" text="ATK: 20" wrapText="true">
@@ -185,7 +185,7 @@
             </Label>
             <ImageView fx:id="enemySprite" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Graphics/Placeable/lizardKing.png" />
+                  <Image url="@Graphics/Fighter/lizardKing.png" />
                </image>
             </ImageView>
             <Label fx:id="enemyAtk" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" style="-fx-text-fill: black;" text="ATK: 20" wrapText="true">

@@ -7,17 +7,14 @@ import java.util.*;
  */
 public enum Unit implements Placeable {
     /**First Units**/
-    SENTRYDRONE(12,12,20,3,3, false, "Sentry Drone"), SLIMEBALL(12,12,20,3,3, false, "Slime Ball"),
-    RANGER(12,12,20,3,3, false, "Human Ranger");
+    SENTRYDRONE(4,8,3,3,"Sentry Drone"), SLIMEBALL(6,6,4,3,"Slime Ball"),
+    RANGER(8,4,3,3,"Human Ranger");
 
     /**Name of this Unit**/
     String name;
 
-    /**If this is melee**/
-    boolean melee;
-
     /**Stats of this Unit**/
-    int attack, defense, hp, speed, movement, vision;
+    int attack, hp, movement, range;
 
     /**Map of all imagePaths**/
     private java.util.Map<String, String> imagePath = new HashMap<>();
@@ -25,36 +22,29 @@ public enum Unit implements Placeable {
     /**
      * Constructor for unit
      * @param a int attack
-     * @param d int defense
      * @param h int hp
      * @param m int movement
-     * @param v int vision
-     * @param me boolean isMelee
+     * @param r int range
      * @param n String name
      */
-    Unit(int a, int d, int h, int m, int v, boolean me, String n) {
+    Unit(int a, int h, int m, int r, String n) {
         name = n;
         attack = a;
-        defense = d;
         hp = h;
         movement = m;
-        vision = v;
-        melee = me;
+        range = r;
         //images of Units
-        imagePath.put("SENTRYDRONE", "/View/Graphics/Placeable/sentryDroneResting.gif");
-        imagePath.put("SLIMEBALL", "/View/Graphics/Placeable/slimeBallResting.gif");
-        imagePath.put("RANGER", "/View/Graphics/Placeable/humanRanger.png");
+        imagePath.put("SENTRYDRONE", "/View/Graphics/Fighter/sentryDroneResting.gif");
+        imagePath.put("SLIMEBALL", "/View/Graphics/Fighter/slimeBallResting.gif");
+        imagePath.put("RANGER", "/View/Graphics/Fighter/humanRanger.png");
     }
 
     /**Getters**/
     public String imagePath() { return imagePath.get(this.name());}
     public String getName() {return name;}
     public int getAtt() {return attack;}
-    public int getDef() {return defense;}
     public int getHp() {return hp;}
     public int getMov() {return movement;}
-    public int getVis() {return vision;}
-    public boolean isMelee() {return melee;}
+    public int getRange() {return range;}
     public boolean isHero() {return false;}
-    public String getSkillName() {return "None";}
 }

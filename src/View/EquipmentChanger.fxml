@@ -79,7 +79,7 @@
             </Label>
             <ImageView fx:id="fighterImage" fitHeight="192.0" fitWidth="192.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Graphics/Placeable/modelXresting.gif" />
+                  <Image url="@Graphics/Fighter/modelXresting.gif" />
                </image>
             </ImageView>
             <Label fx:id="heroLabel" alignment="CENTER" prefHeight="24.0" prefWidth="300.0" style="-fx-text-fill: black;" text="Hero">

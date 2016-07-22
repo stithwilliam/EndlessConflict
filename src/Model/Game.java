@@ -11,23 +11,14 @@ import java.util.Random;
  */
 public class Game {
 
-    /**Difficulty chosen by the user**/
-    private Difficulty difficulty;
-
-    /**Mode chosen by the user**/
-    private Mode mode;
-
     /**Commander chosen by the user**/
-    private Commander commander;
+    private Race race;
 
     /**Fighters in the user's army**/
     private ArrayList<Fighter> army;
 
     /**Fighters residing in the barracks**/
     private ArrayList<Fighter> barracks;
-
-    /**Inventory holding the equipment**/
-    private ArrayList<Equipment> equipmentInv;
 
     /**The current map being played on**/
     private Map map;
@@ -42,9 +33,7 @@ public class Game {
      * Constructor for Game
      */
     public Game() {
-        difficulty = null;
-        mode = null;
-        commander = null;
+        race = null;
         map = null;
         comp = null;
     }
@@ -73,13 +62,6 @@ public class Game {
         army = map.getAllies();
         barracks = new ArrayList<>();
 
-        //Test code TODO
-        equipmentInv = new ArrayList<>();
-        equipmentInv.add(Weapon.LASERPISTOL);
-        equipmentInv.add(Helmet.TARGETINGCHIP);
-        equipmentInv.add(Armor.DAMAGEDHULL);
-        equipmentInv.add(Boots.BASICEMITTOR);
-
     }
 
     /**
@@ -105,10 +87,7 @@ public class Game {
      */
     public String attackFighter(Fighter attacker, Fighter defender) {
         Random r = new Random();
-        int attack = attacker.getAtt();
-        int defense = defender.getDef();
-        int damage = (attack * 2 - defense) + r.nextInt(10) - 5;
-        if (damage < 0) { damage = 0;}
+        int damage = attacker.getAtt();
         defender.setHp(defender.getHp() - damage);
         String s = (attacker.getName() + " dealt " + damage + " damage to " + defender.getName());
         if (defender.getHp() <= 0) {
@@ -126,11 +105,9 @@ public class Game {
      */
     public void killedFighter(Fighter f) {
         battleController.removeFighter(f);
-        if (!f.isEnemy() && mode == Mode.HARDCORE) {
-            army.remove(f);
-        }
         if (map.getEnemies().size() == 0) {
-            MasterController.getInstance().setHeadquartersScene();
+            //MasterController.getInstance().setHeadquartersScene();
+
         }
     }
 
@@ -179,17 +156,11 @@ public class Game {
     }
 
     /**Getters**/
-    public Difficulty getDifficulty() {
-        return difficulty;
-    }
-    public Mode getMode() {
-        return mode;
-    }
     public Map getMap() {
         return map;
     }
-    public Commander getCommander() {
-        return commander;
+    public Race getRace() {
+        return race;
     }
     public ArrayList<Fighter> getArmy() {
         return army;
@@ -197,19 +168,10 @@ public class Game {
     public ArrayList<Fighter> getBarracks() {
         return barracks;
     }
-    public ArrayList<Equipment> getEquipmentInv() {
-        return equipmentInv;
-    }
 
     /**Setters**/
-    public void setDifficulty(Difficulty d) {
-        difficulty = d;
-    }
-    public void setMode(Mode m) {
-        mode = m;
-    }
-    public void setCommander(Commander c) {
-        commander = c;
+    public void setRace(Race c) {
+        race = c;
     }
 
     /**Adders**/

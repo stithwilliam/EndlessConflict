@@ -126,15 +126,12 @@ public class BarracksController {
     private void showStats() {
         label00.setText("HP");
         label10.setText("Attack");
-        label20.setText("Defense");
         label30.setText("Movement");
         label40.setText("Range");
         label01.setText("" + fighter.getMaxHP());
         label01.setFont(Font.font("Britannic Bold", 24));
         label11.setText("" + fighter.getAtt());
         label11.setFont(Font.font("Britannic Bold", 24));
-        label21.setText("" + fighter.getDef());
-        label21.setFont(Font.font("Britannic Bold", 24));
         label31.setText("" + fighter.getMov());
         label31.setFont(Font.font("Britannic Bold", 24));
         label41.setText("" + fighter.getRange());
@@ -145,21 +142,7 @@ public class BarracksController {
      * Helper function called when you want to show the current fighter's equipment to the user
      */
     private void showEquipment() {
-        label00.setText("Weapon");
-        label10.setText("Helmet");
-        label20.setText("Armor");
-        label30.setText("Boots");
-        label40.setText("Skill");
-        label01.setText("" + fighter.getWeapon());
-        label01.setFont(Font.font("Britannic Bold", 18));
-        label11.setText("" + fighter.getHead());
-        label11.setFont(Font.font("Britannic Bold", 18));
-        label21.setText("" + fighter.getArmor());
-        label21.setFont(Font.font("Britannic Bold", 18));
-        label31.setText("" + fighter.getFeet());
-        label31.setFont(Font.font("Britannic Bold", 18));
-        label41.setText("" + fighter.getSkillName());
-        label41.setFont(Font.font("Britannic Bold", 18));
+
     }
 
     /**
@@ -277,7 +260,7 @@ public class BarracksController {
      * @param e Button backBtn
      */
     private void setBackBtn(ActionEvent e) {
-        MasterController.getInstance().setHeadquartersScene();
+        //MasterController.getInstance().setHeadquartersScene();
     }
 
     /**

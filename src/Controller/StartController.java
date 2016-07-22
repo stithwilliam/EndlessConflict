@@ -91,7 +91,7 @@ public class StartController {
      * @param e newGameBtn
      */
     private void setNewGameBtn(ActionEvent e) {
-        MasterController.getInstance().setConfig1Scene();
+        MasterController.getInstance().setConfigScene();
     }
 
     /**

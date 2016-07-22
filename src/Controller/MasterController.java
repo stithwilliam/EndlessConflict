@@ -25,8 +25,7 @@ public class MasterController {
     private Stage stage;
 
     /**Different scenes in the game**/
-    private Scene startScene, config1Scene, config2Scene, battleScene, headquartersScene,
-            commQuartersScene, armsDealerScene, mercCampScene;
+    private Scene startScene, configScene, battleScene;
 
     /**The singleton BattleController**/
     private BattleController battleController;
@@ -58,28 +57,13 @@ public class MasterController {
             root = FXMLLoader.load(getClass().getResource("/View/Start.fxml"));
             startScene = new Scene(root);
 
-            root = FXMLLoader.load(getClass().getResource("/View/Config1.fxml"));
-            config1Scene = new Scene(root);
-
-            root = FXMLLoader.load(getClass().getResource("/View/Config2.fxml"));
-            config2Scene = new Scene(root);
+            root = FXMLLoader.load(getClass().getResource("/View/Config.fxml"));
+            configScene = new Scene(root);
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Battle.fxml"));
             root = loader.load();
             battleScene = new Scene(root);
             battleController = loader.getController();
-
-            root = FXMLLoader.load(getClass().getResource("/View/Headquarters.fxml"));
-            headquartersScene = new Scene(root);
-
-            root = FXMLLoader.load(getClass().getResource("/View/ArmsDealer.fxml"));
-            armsDealerScene = new Scene(root);
-
-            root = FXMLLoader.load(getClass().getResource("/View/CommandersQuarters.fxml"));
-            commQuartersScene = new Scene(root);
-
-            root = FXMLLoader.load(getClass().getResource("/View/MercenaryCamp.fxml"));
-            mercCampScene = new Scene(root);
 
         } catch (IOException e) {
             System.out.println("Shit's broke: " + e);
@@ -89,13 +73,8 @@ public class MasterController {
 
     /**Scene setters**/
     public void setStartScene() {stage.setScene(startScene);}
-    public void setConfig1Scene() { stage.setScene(config1Scene);}
-    public void setConfig2Scene() { stage.setScene(config2Scene);}
+    public void setConfigScene() { stage.setScene(configScene);}
     public void setBattleScene() { stage.setScene(battleScene);}
-    public void setHeadquartersScene() { stage.setScene(headquartersScene);}
-    public void setArmsDealerScene() { stage.setScene(armsDealerScene);}
-    public void setCommQuartersScene() { stage.setScene(commQuartersScene);}
-    public void setMercCampScene() { stage.setScene(mercCampScene);}
 
     /**Scene loaders**/
     public void loadBarracksScene() {

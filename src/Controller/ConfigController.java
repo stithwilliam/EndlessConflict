@@ -1,12 +1,11 @@
 package Controller;
 
-import Model.Commander;
+import Model.Race;
 import Model.Game;
 import Model.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Labeled;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
@@ -14,7 +13,7 @@ import javafx.scene.text.Font;
 /**
  * Created by William on 10/26/2015.
  */
-public class Config2Controller {
+public class ConfigController {
 
     @FXML
     private Button okBtn;
@@ -31,7 +30,7 @@ public class Config2Controller {
     private boolean selected;
 
     /**The selected commander**/
-    private Commander commander;
+    private Race race;
 
     /**Initializer**/
     public void initialize() {
@@ -70,7 +69,7 @@ public class Config2Controller {
         humanBox.setStyle("-fx-border-color: yellow; -fx-background-color: darkorange; -fx-border-width: 4; ");
         robotBox.setStyle("-fx-border-color: royalblue; -fx-background-color: royalblue; -fx-border-width: 4;");
         mutantBox.setStyle("-fx-border-color: chartreuse; -fx-background-color: chartreuse; -fx-border-width: 4; ");
-        commander = Commander.HUMAN;
+        race = Race.HUMAN;
 
         boxesToDefault();
         humanBox.setOnMouseEntered(null);
@@ -86,7 +85,7 @@ public class Config2Controller {
         humanBox.setStyle("-fx-border-color: darkorange; -fx-background-color: darkorange; -fx-border-width: 4;");
         robotBox.setStyle("-fx-border-color: yellow; -fx-background-color: royalblue; -fx-border-width: 4;");
         mutantBox.setStyle("-fx-border-color: chartreuse; -fx-background-color: chartreuse; -fx-border-width: 4;");
-        commander = Commander.ROBOT;
+        race = Race.ROBOT;
 
         boxesToDefault();
         robotBox.setOnMouseEntered(null);
@@ -102,7 +101,7 @@ public class Config2Controller {
         humanBox.setStyle("-fx-border-color: darkorange; -fx-background-color: darkorange; -fx-border-width: 4; ");
         robotBox.setStyle("-fx-border-color: royalblue; -fx-background-color: royalblue; -fx-border-width: 4;");
         mutantBox.setStyle("-fx-border-color: yellow; -fx-background-color: chartreuse; -fx-border-width: 4;");
-        commander = Commander.MUTANT;
+        race = Race.MUTANT;
 
         boxesToDefault();
         mutantBox.setOnMouseEntered(null);
@@ -116,7 +115,7 @@ public class Config2Controller {
     private void setOkBtn(ActionEvent e) {
         if (selected) {
             Game game = Main.myGame;
-            game.setCommander(commander);
+            game.setRace(race);
             game.startGame();
         }
     }
@@ -126,7 +125,7 @@ public class Config2Controller {
      * @param e backBtn
      */
     private void setBackBtn(ActionEvent e) {
-        MasterController.getInstance().setConfig1Scene();
+        MasterController.getInstance().setStartScene();
     }
 
     /**Mouse hovering**/

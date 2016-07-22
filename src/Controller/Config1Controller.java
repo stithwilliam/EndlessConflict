@@ -75,42 +75,42 @@ public class Config1Controller {
      * @param e okBtn
      */
     private void setOkBtn(ActionEvent e) {
-        if (checkToggles()) {
-            MasterController.getInstance().setConfig2Scene();
-        }
+//        if (checkToggles()) {
+            //MasterController.getInstance().setConfig2Scene();
+
     }
 
-    private boolean checkToggles() {
-        Game game = Main.myGame;
-        boolean toggles[] = {false, false};
-        for (Toggle t : difficultyToggle.getToggles()) {
-            if (t.isSelected()) {
-                toggles[0] = true;
-                if (easyRadio.isSelected()) {
-                    game.setDifficulty(Difficulty.EASY);
-                } else if (mediumRadio.isSelected()) {
-                    game.setDifficulty(Difficulty.MEDIUM);
-                } else {
-                    game.setDifficulty(Difficulty.HARD);
-                }
-            }
-        }
-        for (Toggle t : modeToggle.getToggles()) {
-            if (t.isSelected()) {
-                toggles[1] = true;
-                if (softcoreRadio.isSelected()) {
-                    game.setMode(Mode.SOFTCORE);
-                } else {
-                    game.setMode(Mode.HARDCORE);
-                }
-            }
-        }
-        if (toggles[0] && toggles[1]) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+//    private boolean checkToggles() {
+//        Game game = Main.myGame;
+//        boolean toggles[] = {false, false};
+//        for (Toggle t : difficultyToggle.getToggles()) {
+//            if (t.isSelected()) {
+//                toggles[0] = true;
+//                if (easyRadio.isSelected()) {
+//                    game.setDifficulty(Difficulty.EASY);
+//                } else if (mediumRadio.isSelected()) {
+//                    game.setDifficulty(Difficulty.MEDIUM);
+//                } else {
+//                    game.setDifficulty(Difficulty.HARD);
+//                }
+//            }
+//        }
+//        for (Toggle t : modeToggle.getToggles()) {
+//            if (t.isSelected()) {
+//                toggles[1] = true;
+//                if (softcoreRadio.isSelected()) {
+//                    game.setMode(Mode.SOFTCORE);
+//                } else {
+//                    game.setMode(Mode.HARDCORE);
+//                }
+//            }
+//        }
+//        if (toggles[0] && toggles[1]) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
 
     /**
      * Called when back button is pressed
@@ -123,13 +123,13 @@ public class Config1Controller {
     /**Mouse Hovering**/
 
     private void okEnter(MouseEvent e) {
-        if (checkToggles()) {
-            okBtn.setStyle("-fx-border-color: cyan; -fx-background-color: dimgrey; -fx-border-width: 3; -fx-border-radius: 3;");
-            okBtn.setFont(Font.font("Britannic Bold", 22));
-        } else {
-            okBtn.setStyle("-fx-border-color: red; -fx-background-color: dimgrey; -fx-border-width: 3; -fx-border-radius: 3; -fx-text-fill: red");
-            okBtn.setFont(Font.font("Britannic Bold", 22));
-        }
+//        if (checkToggles()) {
+//            okBtn.setStyle("-fx-border-color: cyan; -fx-background-color: dimgrey; -fx-border-width: 3; -fx-border-radius: 3;");
+//            okBtn.setFont(Font.font("Britannic Bold", 22));
+//        } else {
+//            okBtn.setStyle("-fx-border-color: red; -fx-background-color: dimgrey; -fx-border-width: 3; -fx-border-radius: 3; -fx-text-fill: red");
+//            okBtn.setFont(Font.font("Britannic Bold", 22));
+//        }
     }
     private void okExit(MouseEvent e) {
         okBtn.setStyle("-fx-background-color: dimgrey; -fx-text-fill: cyan");

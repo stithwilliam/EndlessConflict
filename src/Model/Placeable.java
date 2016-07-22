@@ -8,14 +8,10 @@ public interface Placeable {
     /**Getters**/
     String imagePath();
     String getName();
-    boolean isMelee();
     boolean isHero();
     int getAtt();
-    int getDef();
     int getHp();
     int getMov();
-    int getVis();
-    String getSkillName();
-
+    int getRange();
 
 }

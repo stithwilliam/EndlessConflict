@@ -83,6 +83,7 @@ public class AI {
         }
     }
 
+    //TODO: make this smarter
     /**
      * Helper function to determine which fighter the AI should choose to attack.
      * Looks at game's difficulty to make a decision.
@@ -94,28 +95,11 @@ public class AI {
      * @return The fighter chosen to attack.
      */
     private Fighter fighterToAttack(Fighter a, Fighter b) {
-        Difficulty dif = Main.myGame.getDifficulty();
-        if (dif == Difficulty.EASY) {
-            if (a.getDef() > b.getDef()) {
-                return a;
-            } else {
-                return b;
-            }
-        } else if (dif == Difficulty.MEDIUM) {
-            if (a.getDef() < b.getDef()) {
-                return a;
-            } else {
-                return b;
-            }
-        } else if (dif == Difficulty.HARD) {
-            if ((a.getDef() + a.getAtt() * -2) < (b.getDef() + b.getAtt() * -2)) {
-                return a;
-            } else {
-                return b;
-            }
+        if ((a.getAtt() - a.getHp()) > (b.getAtt() - b.getHp())) {
+            return a;
+        } else {
+            return b;
         }
-        System.out.println("Your difficulty is weird - AI.fighterToAttack(a, b)");
-        return null;
     }
 
     /**

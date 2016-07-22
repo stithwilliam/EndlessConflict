@@ -136,16 +136,16 @@ public class EquipController {
         equipSelected = label;
     }
 
-    private void createLabel(Equipment e) {
-        Label label = new Label(e.toString());
-        label.setFont(Font.font("Britannic Bold", 18));
-        label.setText(e.toString());
-        label.setPadding(new Insets(10, 10, 10, 10));
-        label.setOnMouseClicked(this::setEquipLabel);
-        inventoryBox.getChildren().add(label);
-
-
-    }
+//    private void createLabel(Equipment e) {
+//        Label label = new Label(e.toString());
+//        label.setFont(Font.font("Britannic Bold", 18));
+//        label.setText(e.toString());
+//        label.setPadding(new Insets(10, 10, 10, 10));
+//        label.setOnMouseClicked(this::setEquipLabel);
+//        inventoryBox.getChildren().add(label);
+//
+//
+//    }
 
     private void clearInv() {
         int size = inventoryBox.getChildren().size();
@@ -155,81 +155,81 @@ public class EquipController {
         //inventoryBox.getChildren().add(noneLabel);
     }
 
-    @FXML
-    public void setWeapon(MouseEvent e) {
-        unselectType();
-        typeSelected = Type.WEAPON;
-        weaponLbl.setTextFill(Color.ORANGERED);
-        label0.setTextFill(Color.ORANGERED);
-        invTypeLabel.setText("Weapons");
-        clearInv();
-        ArrayList<Equipment> inv = Main.myGame.getEquipmentInv();
-        for (Equipment equipment : inv) {
-            if (equipment instanceof Weapon) {
-                createLabel(equipment);
-            }
-        }
-    }
+//    @FXML
+//    public void setWeapon(MouseEvent e) {
+//        unselectType();
+//        typeSelected = Type.WEAPON;
+//        weaponLbl.setTextFill(Color.ORANGERED);
+//        label0.setTextFill(Color.ORANGERED);
+//        invTypeLabel.setText("Weapons");
+//        clearInv();
+//        ArrayList<Equipment> inv = Main.myGame.getEquipmentInv();
+//        for (Equipment equipment : inv) {
+//            if (equipment instanceof Weapon) {
+//                createLabel(equipment);
+//            }
+//        }
+//    }
 
-    @FXML
-    public void setHelmet(MouseEvent e) {
-        unselectType();
-        typeSelected = Type.HELMET;
-        helmetLbl.setTextFill(Color.ORANGERED);
-        label1.setTextFill(Color.ORANGERED);
-        invTypeLabel.setText("Helmets");
-        clearInv();
-        ArrayList<Equipment> inv = Main.myGame.getEquipmentInv();
-        for (Equipment equipment : inv) {
-            if (equipment instanceof Helmet) {
-                createLabel(equipment);
-            }
-        }
-    }
+//    @FXML
+//    public void setHelmet(MouseEvent e) {
+//        unselectType();
+//        typeSelected = Type.HELMET;
+//        helmetLbl.setTextFill(Color.ORANGERED);
+//        label1.setTextFill(Color.ORANGERED);
+//        invTypeLabel.setText("Helmets");
+//        clearInv();
+//        ArrayList<Equipment> inv = Main.myGame.getEquipmentInv();
+//        for (Equipment equipment : inv) {
+//            if (equipment instanceof Helmet) {
+//                createLabel(equipment);
+//            }
+//        }
+//    }
 
-    @FXML
-    public void setArmor(MouseEvent e) {
-        unselectType();
-        typeSelected = Type.ARMOR;
-        armorLbl.setTextFill(Color.ORANGERED);
-        label2.setTextFill(Color.ORANGERED);
-        invTypeLabel.setText("Armor");
-        clearInv();
-        ArrayList<Equipment> inv = Main.myGame.getEquipmentInv();
-        for (Equipment equipment : inv) {
-            if (equipment instanceof Armor) {
-                createLabel(equipment);
-            }
-        }
-    }
+//    @FXML
+//    public void setArmor(MouseEvent e) {
+//        unselectType();
+//        typeSelected = Type.ARMOR;
+//        armorLbl.setTextFill(Color.ORANGERED);
+//        label2.setTextFill(Color.ORANGERED);
+//        invTypeLabel.setText("Armor");
+//        clearInv();
+//        ArrayList<Equipment> inv = Main.myGame.getEquipmentInv();
+//        for (Equipment equipment : inv) {
+//            if (equipment instanceof Armor) {
+//                createLabel(equipment);
+//            }
+//        }
+//    }
 
-    @FXML
-    public void setBoots(MouseEvent e) {
-        unselectType();
-        typeSelected = Type.BOOTS;
-        bootsLbl.setTextFill(Color.ORANGERED);
-        label3.setTextFill(Color.ORANGERED);
-        invTypeLabel.setText("Boots");
-        clearInv();
-        ArrayList<Equipment> inv = Main.myGame.getEquipmentInv();
-        for (Equipment equipment : inv) {
-            if (equipment instanceof Boots) {
-                createLabel(equipment);
-            }
-        }
-    }
+//    @FXML
+//    public void setBoots(MouseEvent e) {
+//        unselectType();
+//        typeSelected = Type.BOOTS;
+//        bootsLbl.setTextFill(Color.ORANGERED);
+//        label3.setTextFill(Color.ORANGERED);
+//        invTypeLabel.setText("Boots");
+//        clearInv();
+//        ArrayList<Equipment> inv = Main.myGame.getEquipmentInv();
+//        for (Equipment equipment : inv) {
+//            if (equipment instanceof Boots) {
+//                createLabel(equipment);
+//            }
+//        }
+//    }
 
-    @FXML
-    public void setSkill(MouseEvent e) {
-        unselectType();
-        typeSelected = Type.SKILL;
-        skillLbl.setTextFill(Color.ORANGERED);
-        label4.setTextFill(Color.ORANGERED);
-        invTypeLabel.setText("Skills");
-        clearInv();
-        ArrayList<Equipment> inv = Main.myGame.getEquipmentInv();
-        //TODO
-    }
+//    @FXML
+//    public void setSkill(MouseEvent e) {
+//        unselectType();
+//        typeSelected = Type.SKILL;
+//        skillLbl.setTextFill(Color.ORANGERED);
+//        label4.setTextFill(Color.ORANGERED);
+//        invTypeLabel.setText("Skills");
+//        clearInv();
+//        ArrayList<Equipment> inv = Main.myGame.getEquipmentInv();
+//        //TODO
+//    }
 
     private void unselectType() {
         if (typeSelected == Type.WEAPON) {
@@ -276,12 +276,6 @@ public class EquipController {
             heroLabel.setText("Unit");
         }
         fighterImage.setImage(new Image(f.imagePath()));
-        label0.setText(f.getWeapon().toString());
-        label1.setText(f.getHead().toString());
-        label2.setText(f.getArmor().toString());
-        label3.setText(f.getFeet().toString());
-        label4.setText(f.getSkillName());
-        setWeapon(null);
     }
 
 }

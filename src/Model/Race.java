@@ -10,16 +10,16 @@ public enum Race {
 
     /**
      * Gets the first hero for the Race
-     * @return Hero first hero
+     * @return Commander first hero
      */
-    public Hero getHero() {
+    public Commander getHero() {
         switch (this) {
             case HUMAN:
-                return Hero.CHAOS;
+                return Commander.CHAOS;
             case ROBOT:
-                return Hero.MODELX;
+                return Commander.MODELX;
             case MUTANT:
-                return Hero.LIZARDKING;
+                return Commander.LIZARDKING;
         }
         return null;
     }

@@ -359,7 +359,7 @@ public class Map {
             queue.add(x);
             rangeMap.put(x, 1);
         }
-        if (f.isMelee()) {
+        if (f.getRange() == 1) {
             for (MapTile x : getDiagAdjacent(startingTile)) {
                 queue.add(x);
                 rangeMap.put(x, 1);

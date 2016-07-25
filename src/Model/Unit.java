@@ -46,5 +46,5 @@ public enum Unit implements Placeable {
     public int getHp() {return hp;}
     public int getMov() {return movement;}
     public int getRange() {return range;}
-    public boolean isHero() {return false;}
+    public boolean isCommander() {return false;}
 }

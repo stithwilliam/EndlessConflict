@@ -578,8 +578,8 @@ public class BattleController {
     private void setSkillsBtn(ActionEvent e) {
 //        Fighter fighter = map.getFighter();
 //        putInFocus(fighter.getxPos(), fighter.getyPos());
-//        if (fighter.getModel() instanceof Hero) {
-//            ((Hero) fighter.getModel()).showSkill();
+//        if (fighter.getModel() instanceof Commander) {
+//            ((Commander) fighter.getModel()).showSkill();
 //        } else {
 //            putOnTerminal("I have no skills ");
 //        }
@@ -590,7 +590,7 @@ public class BattleController {
 
     private void setItemsBtn(ActionEvent e) {
         putOnTerminal("I don't work yet.");
-        MasterController.getInstance().loadBarracksScene();
+        MasterController.getInstance().loadPrebattleScene();
     }
 
     /**

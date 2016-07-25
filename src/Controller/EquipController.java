@@ -3,8 +3,6 @@ package Controller;
 import Model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -13,9 +11,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-
-import java.util.ArrayList;
 
 public class EquipController {
 
@@ -94,7 +89,7 @@ public class EquipController {
     }
 
     private void setBackBtn(ActionEvent e) {
-        MasterController.getInstance().loadBarracksScene();
+        MasterController.getInstance().loadPrebattleScene();
     }
 
     private void setEquipBtn(ActionEvent e) {
@@ -270,8 +265,8 @@ public class EquipController {
 
     public void setFighter(Fighter f) {
         nameLabel.setText(f.getName());
-        if (f.isHero()) {
-            heroLabel.setText("Hero");
+        if (f.isCommander()) {
+            heroLabel.setText("Commander");
         } else {
             heroLabel.setText("Unit");
         }

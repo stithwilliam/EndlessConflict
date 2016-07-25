@@ -113,8 +113,8 @@ public class BarracksController {
     private void showFighter() {
         fighterImage.setImage(new Image(fighter.imagePath()));
         nameLabel.setText(fighter.getName());
-        if (fighter.isHero()) {
-            heroLabel.setText("Hero");
+        if (fighter.isCommander()) {
+            heroLabel.setText("Commander");
         } else {
             heroLabel.setText("Unit");
         }
@@ -185,7 +185,7 @@ public class BarracksController {
                 }
             }
             Main.myGame.addToArmy(fighter);
-            Main.myGame.removeFromBarracks(fighter);
+            Main.myGame.removeFromCollection(fighter);
         } else {
             System.out.println("Already in army box");
         }
@@ -210,7 +210,7 @@ public class BarracksController {
                 }
             }
             Main.myGame.removeFromArmy(fighter);
-            Main.myGame.addToBarracks(fighter);
+            Main.myGame.addToCollection(fighter);
         } else {
             System.out.println("Already in barracks box");
         }
@@ -318,8 +318,8 @@ public class BarracksController {
             armyBox.getChildren().add(l);
             inArmyBox.add(f);
         }
-        for (int i = 0; i < game.getBarracks().size(); i++) {
-            Fighter f = game.getBarracks().get(i);
+        for (int i = 0; i < game.getCollection().size(); i++) {
+            Fighter f = game.getCollection().get(i);
             barracksBox.getChildren().add(createLabel(f));
             inBarracksBox.add(f);
         }

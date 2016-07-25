@@ -1,37 +1,34 @@
 package Model;
 
-import Controller.BattleController;
-import Controller.MasterController;
-
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by William on 10/27/2015.
  */
-public enum Hero implements Placeable {
-    /**First 3 heroes**/
+public enum Commander implements Placeable {
+    /**First 3 commanders**/
     LIZARDKING(12,12,6,1, "Lizard King"), MODELX(6,12,4,4, "Model X"),
     CHAOS(12,6,4,4,"Chaos");
 
-    /**Name of hero**/
+    /**Name of commander**/
     private String name;
 
-    /**Stats of hero**/
+    /**Stats of commander**/
     private int attack, hp, movement, range;
 
-    /**Map of imagePaths of heroes**/
+    /**Map of imagePaths of commanders**/
     private Map<String, String> imagePath = new HashMap<>();
 
     /**
-     * Constructor for hero
+     * Constructor for commander
      * @param a int attack
      * @param h int hp
      * @param m int movement
      * @param r int range
      * @param n String name
      */
-    Hero(int a, int h, int m, int r, String n) {
+    Commander(int a, int h, int m, int r, String n) {
         name = n;
         attack = a;
         hp = h;
@@ -71,5 +68,5 @@ public enum Hero implements Placeable {
     public int getHp() {return hp;}
     public int getMov() {return movement;}
     public int getRange() {return range;}
-    public boolean isHero() {return true;}
+    public boolean isCommander() {return true;}
 }

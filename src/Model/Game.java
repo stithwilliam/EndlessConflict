@@ -17,8 +17,8 @@ public class Game {
     /**Fighters in the user's army**/
     private ArrayList<Fighter> army;
 
-    /**Fighters residing in the barracks**/
-    private ArrayList<Fighter> barracks;
+    /**Fighters in the user's collection**/
+    private ArrayList<Fighter> collection;
 
     /**The current map being played on**/
     private Map map;
@@ -60,7 +60,7 @@ public class Game {
         battleController.showAlly(map.getFighter());
         battleController.showEnemy(map.getEnemies().get(0));
         army = map.getAllies();
-        barracks = new ArrayList<>();
+        collection = new ArrayList<>();
 
     }
 
@@ -119,7 +119,7 @@ public class Game {
     public Fighter nextFighter(Fighter fighter) {
         ArrayList<Fighter> fighters = new ArrayList<>();
         fighters.addAll(army);
-        fighters.addAll(barracks);
+        fighters.addAll(collection);
         int idx = 0;
         Fighter f = null;
         while (f != fighter) {
@@ -141,7 +141,7 @@ public class Game {
     public Fighter prevFighter(Fighter fighter) {
         ArrayList<Fighter> fighters = new ArrayList<>();
         fighters.addAll(army);
-        fighters.addAll(barracks);
+        fighters.addAll(collection);
         int idx = fighters.size() - 1;
         Fighter f = null;
         while (f != fighter) {
@@ -165,8 +165,8 @@ public class Game {
     public ArrayList<Fighter> getArmy() {
         return army;
     }
-    public ArrayList<Fighter> getBarracks() {
-        return barracks;
+    public ArrayList<Fighter> getCollection() {
+        return collection;
     }
 
     /**Setters**/
@@ -178,15 +178,15 @@ public class Game {
     public void addToArmy(Fighter f) {
         army.add(f);
     }
-    public void addToBarracks(Fighter f) {
-        barracks.add(f);
+    public void addToCollection(Fighter f) {
+        collection.add(f);
     }
 
     /**Removers**/
     public void removeFromArmy(Fighter f) {
         army.remove(f);
     }
-    public void removeFromBarracks(Fighter f) {
-        barracks.remove(f);
+    public void removeFromCollection(Fighter f) {
+        collection.remove(f);
     }
 }

@@ -15,7 +15,7 @@ public class Fighter {
     private int xPos, yPos;
 
     /**properties of the fighter**/
-    private boolean melee, enemy, hasMoved, hasAttacked;
+    private boolean enemy, hasMoved, hasAttacked;
 
     /**stats of the fighter**/
     private int attack, maxHP, hp, movement, range;
@@ -67,9 +67,8 @@ public class Fighter {
     public int getMaxHP() {return maxHP;}
     public int getMov() {return movement;}
     public int getRange() {return range;}
-    public boolean isMelee() {return melee;}
     public boolean isEnemy() {return enemy;}
-    public boolean isHero() {return model.isHero();}
+    public boolean isCommander() {return model.isCommander();}
     public boolean hasMoved() {return hasMoved;}
     public boolean hasAttacked() {return hasAttacked;}
 

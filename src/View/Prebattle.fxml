@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BarracksController">
+   <children>
+      <Pane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: gray;">
+         <children>
+            <Button fx:id="okBtn" blendMode="HARD_LIGHT" layoutX="723.0" layoutY="554.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="70.0" style="-fx-text-fill: black;" text="OK">
+               <font>
+                  <Font name="Britannic Bold" size="18.0" />
+               </font>
+            </Button>
+         </children></Pane>
+      <VBox alignment="TOP_CENTER" layoutY="25.0" maxHeight="500.0" maxWidth="200.0" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: paleturquoise; -fx-border-width: 1; -fx-border-color: black;">
+         <children>
+            <Label alignment="CENTER" prefHeight="24.0" prefWidth="200.0" style="-fx-text-fill: black;" text="Available">
+               <font>
+                  <Font name="Britannic Bold" size="24.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </padding>
+            </Label>
+            <Button fx:id="availableUp" blendMode="HARD_LIGHT" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" style="-fx-text-fill: black;" text="UP">
+               <font>
+                  <Font name="Britannic Bold" size="18.0" />
+               </font>
+            </Button>
+            <VBox fx:id="availableBox" prefHeight="380.0" prefWidth="198.0" />
+            <Button fx:id="availableDown" blendMode="HARD_LIGHT" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" style="-fx-text-fill: black;" text="DOWN">
+               <font>
+                  <Font name="Britannic Bold" size="18.0" />
+               </font>
+            </Button>
+            <Label fx:id="availableNum" alignment="CENTER" prefHeight="24.0" prefWidth="200.0" style="-fx-text-fill: black;" text="x3">
+               <font>
+                  <Font name="Britannic Bold" size="24.0" />
+               </font>
+               <padding>
+                  <Insets bottom="5.0" top="5.0" />
+               </padding>
+            </Label>
+         </children>
+      </VBox>
+      <Button fx:id="backBtn" blendMode="HARD_LIGHT" layoutX="5.0" layoutY="555.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="70.0" style="-fx-text-fill: black;" text="Back">
+         <font>
+            <Font name="Britannic Bold" size="18.0" />
+         </font>
+      </Button>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="500.0" layoutX="250.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: royalblue;" width="300.0" />
+      <ImageView fx:id="fighterImage" fitHeight="192.0" fitWidth="192.0" layoutX="304.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Graphics/Fighter/modelXresting.gif" />
+         </image>
+      </ImageView>
+      <Label fx:id="nameLabel" alignment="CENTER" layoutX="250.0" layoutY="59.0" prefHeight="24.0" prefWidth="300.0" style="-fx-text-fill: black;" text="MODEL 0">
+         <font>
+            <Font name="Britannic Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="unitLabel" alignment="CENTER" layoutX="250.0" layoutY="293.0" prefHeight="24.0" prefWidth="300.0" style="-fx-text-fill: black;" text="Commander">
+         <font>
+            <Font name="Britannic Bold" size="24.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="214.0" layoutX="257.0" layoutY="330.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: lightgrey;" width="286.0" />
+      <Button fx:id="centerBtn" layoutX="320.0" layoutY="555.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="160.0" style="-fx-text-fill: black;" text="Remove">
+         <font>
+            <Font name="Britannic Bold" size="18.0" />
+         </font>
+      </Button>
+      <VBox alignment="TOP_CENTER" layoutX="600.0" layoutY="25.0" maxHeight="500.0" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: paleturquoise; -fx-border-width: 1; -fx-border-color: black;">
+         <children>
+            <Label alignment="CENTER" prefHeight="24.0" prefWidth="200.0" style="-fx-text-fill: black;" text="To Battle">
+               <font>
+                  <Font name="Britannic Bold" size="24.0" />
+               </font>
+               <padding>
+                  <Insets bottom="5.0" top="5.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Label>
+            <Button fx:id="toBattleUp" blendMode="HARD_LIGHT" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" style="-fx-text-fill: black;" text="UP">
+               <font>
+                  <Font name="Britannic Bold" size="18.0" />
+               </font>
+            </Button>
+            <VBox fx:id="toBattleBox" prefHeight="370.0" prefWidth="198.0" />
+            <Button fx:id="toBattleDown" blendMode="HARD_LIGHT" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" style="-fx-text-fill: black;" text="DOWN">
+               <font>
+                  <Font name="Britannic Bold" size="18.0" />
+               </font>
+            </Button>
+            <Label fx:id="toBattleLimit" alignment="CENTER" prefHeight="24.0" prefWidth="200.0" style="-fx-text-fill: black;" text="2/5">
+               <font>
+                  <Font name="Britannic Bold" size="24.0" />
+               </font>
+               <padding>
+                  <Insets bottom="5.0" top="5.0" />
+               </padding>
+            </Label>
+         </children>
+      </VBox>
+      <Label layoutX="480.0" layoutY="347.0" prefHeight="24.0" prefWidth="53.0" style="-fx-text-fill: black;" text="HP">
+         <font>
+            <Font name="Britannic Bold" size="24.0" />
+         </font>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </Label>
+      <Label fx:id="hpLabel" alignment="CENTER_RIGHT" layoutX="477.0" layoutY="378.0" prefHeight="24.0" prefWidth="53.0" style="-fx-text-fill: black;" text="40">
+         <font>
+            <Font name="Britannic Bold" size="24.0" />
+         </font>
+         <padding>
+            <Insets right="10.0" />
+         </padding>
+      </Label>
+      <Label layoutX="257.0" layoutY="347.0" prefHeight="24.0" prefWidth="85.0" style="-fx-text-fill: black;" text="Attack">
+         <font>
+            <Font name="Britannic Bold" size="24.0" />
+         </font>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </Label>
+      <Label fx:id="attackLabel" alignment="CENTER_RIGHT" layoutX="270.0" layoutY="378.0" prefHeight="24.0" prefWidth="53.0" style="-fx-text-fill: black;" text="40">
+         <font>
+            <Font name="Britannic Bold" size="24.0" />
+         </font>
+         <padding>
+            <Insets right="10.0" />
+         </padding>
+      </Label>
+      <Label layoutX="297.0" layoutY="428.0" prefHeight="24.0" prefWidth="85.0" style="-fx-text-fill: black;" text="Range">
+         <font>
+            <Font name="Britannic Bold" size="24.0" />
+         </font>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </Label>
+      <Label layoutX="400.0" layoutY="428.0" prefHeight="24.0" prefWidth="124.0" style="-fx-text-fill: black;" text="Movement">
+         <font>
+            <Font name="Britannic Bold" size="24.0" />
+         </font>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </Label>
+      <Label fx:id="rangeLabel" alignment="CENTER_RIGHT" layoutX="313.0" layoutY="457.0" prefHeight="24.0" prefWidth="53.0" style="-fx-text-fill: black;" text="40">
+         <font>
+            <Font name="Britannic Bold" size="24.0" />
+         </font>
+         <padding>
+            <Insets right="10.0" />
+         </padding>
+      </Label>
+      <Label fx:id="movementLabel" alignment="CENTER_RIGHT" layoutX="436.0" layoutY="457.0" prefHeight="24.0" prefWidth="53.0" style="-fx-text-fill: black;" text="40">
+         <font>
+            <Font name="Britannic Bold" size="24.0" />
+         </font>
+         <padding>
+            <Insets right="10.0" />
+         </padding>
+      </Label>
+      <Label fx:id="starsLabel" alignment="CENTER" layoutX="350.0" layoutY="504.0" prefHeight="24.0" prefWidth="101.0" style="-fx-text-fill: black;" text="***">
+         <font>
+            <Font name="Britannic Bold" size="24.0" />
+         </font>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </Label>
+   </children>
+</AnchorPane>

@@ -7,7 +7,7 @@ import java.util.*;
  */
 public enum Unit implements Placeable {
     /**First Units**/
-    SENTRYDRONE(4,8,3,3,"Sentry Drone"), SLIMEBALL(6,6,4,3,"Slime Ball"),
+    SENTRYDRONE(4,8,3,3,"Sentry Drone"), SLIMEBALL(6,6,3,3,"Slime Ball"),
     RANGER(8,4,3,3,"Human Ranger");
 
     /**Name of this Unit**/
@@ -39,6 +39,18 @@ public enum Unit implements Placeable {
         imagePath.put("RANGER", "/View/Graphics/Fighter/humanRanger.png");
     }
 
+    public String getDescription() {
+        switch (this) {
+            case SENTRYDRONE:
+                return ("10% chance for this unit to negate all damage from an attack.");
+            case SLIMEBALL:
+                return ("10% chance to spawn another Slime Ball when this unit kills an enemy.");
+            case RANGER:
+                return ("10% chance to deal double damage when this unit attacks.");
+            default:
+                return ("No description");
+        }
+    }
     /**Getters**/
     public String imagePath() { return imagePath.get(this.name());}
     public String getName() {return name;}

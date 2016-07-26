@@ -6,7 +6,7 @@ package Model;
 public class Fighter {
 
     /**Name of this Fighter**/
-    String name;
+    String name, description;
 
     /**model type of the fighter**/
     private Placeable model;
@@ -34,6 +34,7 @@ public class Fighter {
     public Fighter(Placeable p, int x, int y, boolean e) {
         model = p;
         name = p.getName();
+        description = p.getDescription();
         attack = model.getAtt();
         maxHP = model.getHp();
         hp = maxHP;
@@ -59,6 +60,7 @@ public class Fighter {
     public String toString() { return (name);}
     public String imagePath() {return model.imagePath();}
     public String getName() {return name;}
+    public String getDescription() {return description;}
     public Placeable getModel() {return model;}
     public int getxPos() {return xPos;}
     public int getyPos() {return yPos;}

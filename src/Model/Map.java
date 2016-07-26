@@ -8,11 +8,14 @@ import java.util.*;
  */
 public class Map {
 
+    /**Type of this map**/
+    private MapType mapType;
+
     /**The board of MapTiles that backs the map**/
     private MapTile[][] board;
 
     /**The list of fighters on the current map**/
-    private ArrayList<Fighter> fighters;
+    private LinkedList<Fighter> fighters;
 
     /**The current fighter that is selected on the map**/
     private Fighter fighter;
@@ -26,11 +29,24 @@ public class Map {
      * @param type the MapType that the new Map is based off of.
      */
     public Map(MapType type) {
+        mapType = type;
         board = type.getBoard();
         height = board.length;
         width = board[0].length;
-        fighters = type.getFighters();
-        fighter = fighters.get(0);
+        fighters = type.getEnemies();
+    }
+
+    public void placeArmy(List<Fighter> army) {
+        int i = 0;
+        for (Fighter f : army) {
+            if (i == 0) {
+                fighter = f;
+            }
+            f.setxPos(mapType.getXPos(i));
+            f.setyPos(mapType.getYPos(i));
+            fighters.add(f);
+            i++;
+        }
     }
 
     /**
@@ -565,7 +581,7 @@ public class Map {
      * @return Fighter the next Fighter
      */
     public Fighter nextFighter() {
-        ArrayList<Fighter> allies = getAllies();
+        LinkedList<Fighter> allies = getAllies();
         int idx = 0;
         Fighter f = null;
         while (f != fighter) {
@@ -584,7 +600,7 @@ public class Map {
      * @return Fighter the previous fighter
      */
     public Fighter prevFighter() {
-        ArrayList<Fighter> allies = getAllies();
+        LinkedList<Fighter> allies = getAllies();
         int idx = allies.size() - 1;
         Fighter f = null;
         while (f != fighter) {
@@ -630,10 +646,10 @@ public class Map {
     /**Getters**/
     public int getHeight() { return height;}
     public int getWidth() { return width;}
-    public ArrayList<Fighter> getFighters() { return fighters;}
+    public LinkedList<Fighter> getFighters() { return fighters;}
     public Fighter getFighter() { return fighter;}
-    public ArrayList<Fighter> getAllies() {
-        ArrayList<Fighter> list = new ArrayList<>();
+    public LinkedList<Fighter> getAllies() {
+        LinkedList<Fighter> list = new LinkedList<>();
         for (Fighter f : fighters) {
             if (!f.isEnemy()) {
                 list.add(f);
@@ -641,8 +657,8 @@ public class Map {
         }
         return list;
     }
-    public ArrayList<Fighter> getEnemies() {
-        ArrayList<Fighter> list = new ArrayList<>();
+    public LinkedList<Fighter> getEnemies() {
+        LinkedList<Fighter> list = new LinkedList<>();
         for (Fighter f : fighters) {
             if (f.isEnemy()) {
                 list.add(f);

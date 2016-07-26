@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Random;
 
 /**
@@ -55,13 +56,13 @@ public enum MapType {
         return new MapTile(tileBases[0], x, y);
     }
 
-    public ArrayList<Fighter> getFighters() {
-        ArrayList<Fighter> fighters = new ArrayList<>();
+    public LinkedList<Fighter> getEnemies() {
+        LinkedList<Fighter> fighters = new LinkedList<>();
         Game game = Main.myGame;
         Race race = game.getRace();
         switch (this) {
             case TUTORIAL:
-                Fighter hero = new Fighter(race.getHero(), 1, 3, false);
+                Fighter hero = new Fighter(race.getCommander(), 1, 3, false);
                 fighters.add(hero);
                 Fighter unit1 = new Fighter (race.getUnit(), 0, 2, false);
                 unit1.setName(unit1.getName() + " 1");
@@ -75,5 +76,25 @@ public enum MapType {
                 fighters.add(s);
         }
         return fighters;
+    }
+
+    public int getXPos(int i) {
+        switch (this) {
+            case TUTORIAL:
+                int[] arr = {1,0,0};
+                return arr[i];
+            default:
+                return -1;
+        }
+    }
+
+    public int getYPos(int i) {
+        switch (this) {
+            case TUTORIAL:
+                int[] arr = {3,2,4};
+                return arr[i];
+            default:
+                return -1;
+        }
     }
 }

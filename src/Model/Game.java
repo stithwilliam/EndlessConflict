@@ -2,8 +2,10 @@ package Model;
 
 import Controller.BattleController;
 import Controller.MasterController;
+import sun.awt.image.ImageWatched;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Random;
 
 /**
@@ -15,10 +17,13 @@ public class Game {
     private Race race;
 
     /**Fighters in the user's army**/
-    private ArrayList<Fighter> army;
+    private LinkedList<Fighter> army;
+
+    /**Limit of fighters in army**/
+    private int armyLimit = 3;
 
     /**Fighters in the user's collection**/
-    private ArrayList<Fighter> collection;
+    private LinkedList<Fighter> collection;
 
     /**The current map being played on**/
     private Map map;
@@ -36,13 +41,23 @@ public class Game {
         race = null;
         map = null;
         comp = null;
+        army = new LinkedList<>();
+        collection = new LinkedList<>();
+        armyLimit = 3;
+    }
+
+    public void endConfig() {
+        collection.add(new Fighter(race.getCommander()));
+        collection.add(new Fighter(race.getUnit()));
+        collection.add(new Fighter(race.getUnit()));
+        MasterController.getInstance().loadPrebattleScene();
     }
 
     /**
      * Called when the user makes it past the config screens
      * Creates the Tutorial map and displays it on the screen
      */
-    public void startGame() {
+    public void startTutorial() {
         MasterController.getInstance().setBattleScene();
         map = new Map(MapType.TUTORIAL);
         int startX = 1;
@@ -54,14 +69,12 @@ public class Game {
         while (!map.hasPathBetween(startX, startY, obj1X, obj1Y) || !map.hasPathBetween(startX, startY, obj2X, obj2Y)) {
             map = new Map(MapType.TUTORIAL);
         }
+        map.placeArmy(army);
         comp = new AI(this, map);
         battleController = MasterController.getInstance().getBattleController();
         battleController.constructMap(map);
         battleController.showAlly(map.getFighter());
         battleController.showEnemy(map.getEnemies().get(0));
-        army = map.getAllies();
-        collection = new ArrayList<>();
-
     }
 
     /**
@@ -69,7 +82,7 @@ public class Game {
      * Calls the AI to do it's turn.
      */
     public void endTurn() {
-        ArrayList<Fighter> allies = map.getAllies();
+        LinkedList<Fighter> allies = map.getAllies();
         for (Fighter f : allies) {
             f.setHasAttacked(false);
             f.setHasMoved(false);
@@ -155,6 +168,8 @@ public class Game {
         return fighter;
     }
 
+
+
     /**Getters**/
     public Map getMap() {
         return map;
@@ -162,10 +177,11 @@ public class Game {
     public Race getRace() {
         return race;
     }
-    public ArrayList<Fighter> getArmy() {
+    public int getArmyLimit() { return armyLimit;}
+    public LinkedList<Fighter> getArmy() {
         return army;
     }
-    public ArrayList<Fighter> getCollection() {
+    public LinkedList<Fighter> getCollection() {
         return collection;
     }
 
@@ -173,6 +189,7 @@ public class Game {
     public void setRace(Race c) {
         race = c;
     }
+    public void setArmy(LinkedList<Fighter> a) {army = a;}
 
     /**Adders**/
     public void addToArmy(Fighter f) {

@@ -17,6 +17,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 /**
  * Created by William on 10/26/2015.
@@ -130,7 +131,7 @@ public class BattleController {
      * Overloaded method. Populates the screen with the fighters
      * @param fighters
      */
-    private void populateMap(ArrayList<Fighter> fighters) {
+    private void populateMap(LinkedList<Fighter> fighters) {
         for (Fighter f : fighters) {
             int x = f.getxPos();
             int y = f.getyPos();

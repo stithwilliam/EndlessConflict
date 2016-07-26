@@ -25,7 +25,7 @@ public class MasterController {
     private Stage stage;
 
     /**Different scenes in the game**/
-    private Scene startScene, configScene, prebattleScene, battleScene;
+    private Scene startScene, configScene, battleScene;
 
     /**The singleton BattleController**/
     private BattleController battleController;
@@ -82,7 +82,7 @@ public class MasterController {
             Parent root = FXMLLoader.load(getClass().getResource("/View/Prebattle.fxml"));
             stage.setScene(new Scene(root));
         } catch (IOException e) {
-            System.out.println("Shit's broke: " + e);
+            System.out.println("Shit's broke: " + e.getCause());
         }
     }
 

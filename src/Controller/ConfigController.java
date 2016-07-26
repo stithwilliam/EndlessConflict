@@ -1,8 +1,6 @@
 package Controller;
 
-import Model.Race;
-import Model.Game;
-import Model.Main;
+import Model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -116,7 +114,7 @@ public class ConfigController {
         if (selected) {
             Game game = Main.myGame;
             game.setRace(race);
-            game.startGame();
+            game.endConfig();
         }
     }
 

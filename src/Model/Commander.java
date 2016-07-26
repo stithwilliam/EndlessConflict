@@ -8,7 +8,7 @@ import java.util.Map;
  */
 public enum Commander implements Placeable {
     /**First 3 commanders**/
-    LIZARDKING(12,12,6,1, "Lizard King"), MODELX(6,12,4,4, "Model X"),
+    LIZARDKING(12,12,6,1, "Lizard King"), MODEL0(6,12,4,4, "Model 0"),
     CHAOS(12,6,4,4,"Chaos");
 
     /**Name of commander**/
@@ -35,10 +35,25 @@ public enum Commander implements Placeable {
         movement = m;
         range = r;
         imagePath.put("LIZARDKING", "/View/Graphics/Fighter/lizardKing.png");
-        imagePath.put("MODELX", "/View/Graphics/Fighter/modelXresting.gif");
+        imagePath.put("MODEL0", "/View/Graphics/Fighter/modelXresting.gif");
         imagePath.put("CHAOS", "/View/Graphics/Fighter/commanderChaos.png");
     }
 
+    public String getDescription() {
+        switch (this) {
+            case MODEL0:
+                return ("10% chance for this unit to suspend an enemy in the air when attacking. " +
+                        "All other robots have 1 more health.");
+            case LIZARDKING:
+                return ("Can jump over obstacles on the map. " +
+                        "All other mutants have 1 more move.");
+            case CHAOS:
+                return ("10% chance to deal splash damage when this unit attacks. " +
+                        "All other humans have 1 more attack.");
+            default:
+                return ("No description");
+        }
+    }
 //    /**
 //     * Bio info for each hero.
 //     * TODO: Use this in game somewhere
@@ -49,7 +64,7 @@ public enum Commander implements Placeable {
 //            return "Created by infusing human DNA with that of a T-Rex, the Lizard King is the undeniable ruler of " +
 //                    "his battalion. Through fear and intimidation the Lizard King inspires obedience and fear from " +
 //                    "his allies and enemies alike.";
-//        } if (this == MODELX) {
+//        } if (this == MODEL0) {
 //            return "The Model X represents the epitome of The Singularity's battle tech. Even when disconnected " +
 //                    "its commander, the Model X is fully capable of leading an advanced robotic battalion against " +
 //                    "any kind of foe";

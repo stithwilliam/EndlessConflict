@@ -1,5 +1,7 @@
 package Model;
 
+import Controller.BattleController;
+
 import java.util.*;
 
 
@@ -23,6 +25,8 @@ public class Map {
     /**convenience vars for height and with of the map**/
     private int  width, height;
 
+    private LinkedList<Placeable> rewardList;
+
 
     /**
      * Constructor for Map.
@@ -34,6 +38,7 @@ public class Map {
         height = board.length;
         width = board[0].length;
         fighters = type.getEnemies();
+        rewardList = new LinkedList<>();
     }
 
     public void placeArmy(List<Fighter> army) {
@@ -48,6 +53,8 @@ public class Map {
             i++;
         }
     }
+
+
 
     /**
      * Utility function.
@@ -666,6 +673,11 @@ public class Map {
         }
         return list;
     }
+    /**Adders**/
+    public void addToRewardList(Placeable p) {rewardList.add(p);}
+
+    /**Getters**/
+
 
     /**Setters**/
     public void setFighter(Fighter f) {fighter = f;}

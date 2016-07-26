@@ -82,7 +82,7 @@ public class BattleController {
     private Map map;
     private Game game; // for convenience, game will never change
     private HashMap<StackPane, MapTile> paneToTile;
-    private MapTile tractorBeam;
+    private HashMap<MapTile, StackPane> tileToPane;
     private AnimationTimer scroller;
     private double deltX, deltY;
 
@@ -98,7 +98,7 @@ public class BattleController {
         int width = map.getWidth();
         int height = map.getHeight();
         paneToTile = new HashMap<>();
-        tractorBeam = null;
+        tileToPane = new HashMap<>();
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 MapTile tile = map.getMapTile(i, j);
@@ -108,6 +108,7 @@ public class BattleController {
                 tile.setStackPane(stackPane);
                 gridPane.add(stackPane, i, j);
                 paneToTile.put(stackPane, tile);
+                tileToPane.put(tile, stackPane);
             }
         }
         gridPane.setVgap(0);
@@ -140,7 +141,7 @@ public class BattleController {
         }
         Fighter fighter = map.getFighter();
         StackPane pane = map.getMapTile(fighter.getxPos(), fighter.getyPos()).getStackPane();
-        pane.getChildren().add(new ImageView("/View/Graphics/Tile/fighterSelect.gif"));
+        pane.getChildren().add(new ImageView(Graphic.FIGHTERSLCT.imagePath()));
     }
 
     /**
@@ -232,7 +233,7 @@ public class BattleController {
                 for (int j = 0; j < valid[0].length; j++) {
                     if (valid[i][j]) {
                         //ImageView move = getMoveSelect(i, j, valid);
-                        ImageView move = new ImageView("/View/Graphics/Tile/moveSelect.png");
+                        ImageView move = new ImageView(Graphic.MOVESLCT.imagePath());
                         StackPane pane = map.getMapTile(j, i).getStackPane();
                         if (move.getImage() != null) {
                             pane.getChildren().add(move);
@@ -616,10 +617,6 @@ public class BattleController {
             toConsole("GAME OVER");
         } else {
             toConsole("Your turn begins");
-            if (tractorBeam != null) {
-                tractorBeam.getStackPane().getChildren().remove(2);
-                tractorBeam = null;
-            }
             Fighter fighter = map.getAllies().get(0);
             map.setFighter(fighter);
             int x = fighter.getxPos();
@@ -691,6 +688,34 @@ public class BattleController {
         enemySprite.setImage(new Image(f.getModel().imagePath()));
         enemyHealthWheel.setImage(healthWheel(f));
         toConsole("" + f.getName() + ": " + f.getDescription());
+    }
+
+    public void showRewardChest(int x, int y) {
+        MapTile mapTile = map.getMapTile(x, y);
+        StackPane pane = tileToPane.get(mapTile);
+        ImageView chest = new ImageView(Graphic.REWARDCHEST.imagePath());
+        chest.setOpacity(0);
+        pane.getChildren().add(chest);
+        AnimationTimer chestAnimation = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                System.out.println("start");
+                if (chest.getOpacity() != 1) {
+                    chest.setOpacity(chest.getOpacity() + 0.01);
+                } else {
+                    chestView = true;
+                    if (i != 0) {
+                        chest.setOpacity(i);
+                        chest.setRotate(j);
+                        i -= 0.01;
+                        j += 5;
+                    } else {
+                        stop();
+                    }
+                }
+            }
+        };
+        chestAnimation.start();
 
     }
 

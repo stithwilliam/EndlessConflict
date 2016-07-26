@@ -106,6 +106,7 @@ public class Game {
         if (defender.getHp() <= 0) {
             s += (" and killed " + defender.getName() + "!");
             killedFighter(defender);
+            rewardChest(defender.getxPos(), defender.getyPos(), defender.getModel());
         } else {
             s += (". (" + defender.getHp() + "/" + defender.getMaxHP() + ") health remaining");
         }
@@ -122,6 +123,11 @@ public class Game {
             //MasterController.getInstance().setHeadquartersScene();
 
         }
+    }
+
+    private void rewardChest(int x, int y, Placeable model) {
+        map.addToRewardList(model);
+        battleController.showRewardChest(x, y);
     }
 
     /**

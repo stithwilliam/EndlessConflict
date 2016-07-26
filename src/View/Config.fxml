@@ -79,12 +79,12 @@
             </VBox>
             <VBox prefHeight="100.0" prefWidth="300.0">
                <children>
-                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" style="-fx-text-fill: black;" text="A rogue agent of U.N. special forces. Chaos excels at overwhelming his enemies with his overwhelming firepower." textAlignment="CENTER" wrapText="true">
+                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" style="-fx-text-fill: black;" text="A rogue agent of U.N. special forces. Chaos excels at overwhelming his enemies with his ferocious firepower." textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font name="Britannic Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" style="-fx-text-fill: #ffffff;" text="Excel at killing Robots and fall easily to Mutants" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" style="-fx-text-fill: #ffffff;" text="Has a chance to deal splash damage when attacking" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="Britannic Bold" size="18.0" />
                      </font>
@@ -133,7 +133,7 @@
                         <Font name="Britannic Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" text="Excel at killing Mutants and fall easily to Humans" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" text="Has a chance to disable it's enemy when attacking" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="Britannic Bold" size="18.0" />
                      </font>
@@ -182,7 +182,7 @@
                         <Font name="Britannic Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" text="Excel at killing Humans and fall easily to Robotsts" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                  <Label alignment="CENTER" maxWidth="300.0" prefHeight="50.0" text="Can jump over any obstacle on the battlefield" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="Britannic Bold" size="18.0" />
                      </font>

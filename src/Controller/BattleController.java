@@ -15,7 +15,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -40,9 +40,7 @@ public class BattleController {
     @FXML
     private Button atkBtn;
     @FXML
-    private Button skillsBtn;
-    @FXML
-    private Button itemsBtn;
+    private Button pauseBtn;
     @FXML
     private Button endTurnBtn;
     @FXML
@@ -58,11 +56,11 @@ public class BattleController {
     @FXML
     private Label allyAtk;
     @FXML
-    private Label allyDef;
+    private Label allyMove;
     @FXML
     private Label allyRange;
     @FXML
-    private Label allyType;
+    private Label allyRace;
     @FXML
     private Label allyHP;
     @FXML
@@ -70,11 +68,11 @@ public class BattleController {
     @FXML
     private Label enemyAtk;
     @FXML
-    private Label enemyDef;
+    private Label enemyMove;
     @FXML
     private Label enemyRange;
     @FXML
-    private Label enemyType;
+    private Label enemyRace;
     @FXML
     private Label enemyHP;
     @FXML
@@ -165,18 +163,28 @@ public class BattleController {
      * @param y
      */
     private void putInFocus(int x, int y) {
-        double targetX = 0; //gridPane.getTranslateX(); //TODO
-        double targetY = 0; //gridPane.getTranslateY();
+        double targetX = x * -64 + 64 * 4.5;
+        double targetY = y * -64 + 64 * 3.5;
+
+
         AnimationTimer scrollUntil = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 double gridX = gridPane.getTranslateX();
                 double gridY = gridPane.getTranslateY();
-                if (gridX == targetX && gridY == targetY) {
-                    this.stop();
+                boolean yInRange = false;
+                boolean xInRange = false;
+                double transX = gridX + (int)((targetX - gridX) / 10);
+                double transY = gridY + (int)((targetY - gridY) / 10);
+                if (transX > 0 || transX < map.getWidth() * -64 + 9 * 64 || Math.abs(gridX - targetX) < 10  ) {
+                    xInRange = true;
                 }
-                gridPane.setTranslateX(gridX + (int)((targetX - gridX) / 10) );
-                gridPane.setTranslateY(gridY + (int)((targetY - gridY) / 10) );
+                if (transY > 0 || transY < map.getHeight() * -64 + 7 * 64 || Math.abs(gridY - targetY) < 10) {
+                    yInRange = true;
+                }
+                if (xInRange && yInRange) this.stop();
+                if (!xInRange) gridPane.setTranslateX(transX);
+                if (!yInRange) gridPane.setTranslateY(transY);
 
             }
         };
@@ -328,7 +336,7 @@ public class BattleController {
                 }
             }
         } else {
-            putOnTerminal(fighter.getName() + " has already moved");
+            toConsole(fighter.getName() + " has already moved");
         }
     }
 
@@ -368,7 +376,7 @@ public class BattleController {
         pane.getChildren().add(new ImageView(Graphic.FIGHTERSLCT.imagePath()));
         pane.setOnMouseClicked(this::fighterClicked);
         //print to terminal
-        putOnTerminal(fighter.getName() + " moved to " + tile.getName() + " at " + (x + 1) + ", " + (y + 1));
+        toConsole(fighter.getName() + " moved to " + tile.getName() + " at " + (x + 1) + ", " + (y + 1));
         buttonsToDefault();
     }
 
@@ -383,8 +391,7 @@ public class BattleController {
         atkBtn.setOnAction(this::cancelMove);
         atkBtn.setOnMouseEntered(null);
         atkBtn.setOnMouseExited(null);
-        skillsBtn.setOnAction(this::cancelMove);
-        itemsBtn.setOnAction(this::cancelMove);
+        pauseBtn.setOnAction(this::cancelMove);
         endTurnBtn.setOnAction(this::cancelMove);
     }
 
@@ -395,18 +402,21 @@ public class BattleController {
      */
     private void cancelMove(ActionEvent e) {
         Fighter fighter = map.getFighter();
-        boolean[][] valid = map.getValidMoves(fighter);
-        for (int i = 0; i < valid[0].length; i++) {
-            for (int j = 0; j < valid.length; j++) {
-                if (valid[j][i]) {
-                    StackPane pane = map.getMapTile(i, j).getStackPane();
-                    pane.getChildren().remove(1);
-                    pane.setOnMouseClicked(null);
+        if ((Button) e.getSource() != moveBtn) {
+            boolean[][] valid = map.getValidMoves(fighter);
+            for (int i = 0; i < valid[0].length; i++) {
+                for (int j = 0; j < valid.length; j++) {
+                    if (valid[j][i]) {
+                        StackPane pane = map.getMapTile(i, j).getStackPane();
+                        pane.getChildren().remove(1);
+                        pane.setOnMouseClicked(null);
+                    }
                 }
             }
         }
-        putOnTerminal(fighter.getName() + "'s move was canceled");
+        toConsole(fighter.getName() + "'s move was canceled");
         buttonsToDefault();
+        moveBtn.setOnMouseExited(this::noShowMoves);
     }
 
     //ATTACK
@@ -445,11 +455,12 @@ public class BattleController {
      * @param e atkBtn
      */
     private void attackBtnExit(MouseEvent e) {
-        noShowAttacks();
+        noShowAttacks(e);
         atkBtn.setStyle("");
     }
 
-    private void noShowAttacks() {
+    private void noShowAttacks(MouseEvent e) {
+        System.out.println("no show");
         Fighter fighter = map.getFighter();
         boolean[][] valid = map.getValidAttacks(fighter);
         for (int i = 0; i < valid.length; i++) {
@@ -473,8 +484,9 @@ public class BattleController {
         Fighter fighter = map.getFighter();
         putInFocus(fighter.getxPos(), fighter.getyPos());
         if (!fighter.hasAttacked()) {
-            attackBtnExit(null);
+            noShowAttacks(null);
             boolean[][] valid = map.getAttackable(fighter);
+            boolean hasAttack = false;
             for (int i = 0; i < valid[0].length; i++) {
                 for (int j = 0; j < valid.length; j++) {
                     if (valid[j][i]) {
@@ -482,25 +494,19 @@ public class BattleController {
                         StackPane pane = map.getMapTile(i, j).getStackPane();
                         pane.getChildren().add(atk);
                         pane.setOnMouseClicked(this::attackHere);
-                    }
-                }
-            }
-            boolean hasAttack = false;
-            for (int i = 0; i < valid[0].length; i++) {
-                for (int j = 0; j < valid.length; j++) {
-                    if (valid[j][i]) {
                         hasAttack = true;
                     }
                 }
             }
             if (!hasAttack) {
                 atkBtn.setOnMouseExited(null);
-                putOnTerminal(fighter.getName() + " has no valid targets");
+                atkBtn.setOnAction(null);
+                toConsole(fighter.getName() + " has no valid targets");
             } else {
                 buttonsToCancelAttack();
             }
         } else {
-            putOnTerminal(fighter.getName() + " has already attacked");
+            toConsole(fighter.getName() + " has already attacked");
         }
     }
 
@@ -527,7 +533,7 @@ public class BattleController {
         StackPane pane = (StackPane) e.getSource();
         MapTile tile = paneToTile.get(pane);
         Fighter defender = map.getFighter(tile.getxPos(), tile.getyPos());
-        putOnTerminal(Main.myGame.attackFighter(fighter, defender));
+        toConsole(Main.myGame.attackFighter(fighter, defender));
         buttonsToDefault();
         showEnemy(defender);
     }
@@ -543,7 +549,7 @@ public class BattleController {
         atkBtn.setOnAction(this::cancelAttack);
         atkBtn.setOnMouseEntered(null);
         atkBtn.setOnMouseExited(null);
-        skillsBtn.setOnAction(this::cancelAttack);
+        pauseBtn.setOnAction(this::cancelAttack);
         atkBtn.setOnAction(this::cancelAttack);
         endTurnBtn.setOnAction(this::cancelAttack);
     }
@@ -555,19 +561,22 @@ public class BattleController {
      */
     private void cancelAttack(ActionEvent e) {
         Fighter fighter = map.getFighter();
-        boolean[][] valid = map.getAttackable(fighter);
-        for (int i = 0; i < valid[0].length; i++) {
-            for (int j = 0; j < valid.length; j++) {
-                if (valid[j][i]) {
-                    StackPane pane = map.getMapTile(i, j).getStackPane();
-                    int idx = pane.getChildren().size() - 1;
-                    pane.getChildren().remove(idx);
-                    pane.setOnMouseClicked(null);
+        //if ((Button) e.getSource() != atkBtn) {
+            boolean[][] valid = map.getAttackable(fighter);
+            for (int i = 0; i < valid[0].length; i++) {
+                for (int j = 0; j < valid.length; j++) {
+                    if (valid[j][i]) {
+                        StackPane pane = map.getMapTile(i, j).getStackPane();
+                        int idx = pane.getChildren().size() - 1;
+                        pane.getChildren().remove(idx);
+                        pane.setOnMouseClicked(null);
+                    }
                 }
             }
-        }
-        putOnTerminal(fighter.getName() + "'s attack was canceled");
+        //}
+        toConsole(fighter.getName() + "'s attack was canceled");
         buttonsToDefault();
+        //atkBtn.setOnMouseExited(this::noShowAttacks);
     }
 
     /**
@@ -576,23 +585,13 @@ public class BattleController {
      * Sets the valid tiles to attackHere().
      * @param e atkBtn
      */
-    private void setSkillsBtn(ActionEvent e) {
-//        Fighter fighter = map.getFighter();
-//        putInFocus(fighter.getxPos(), fighter.getyPos());
-//        if (fighter.getModel() instanceof Commander) {
-//            ((Commander) fighter.getModel()).showSkill();
-//        } else {
-//            putOnTerminal("I have no skills ");
-//        }
+    private void setPauseBtn(ActionEvent e) {
+        toConsole("I don't work yet. !_!");
     }
 
 
     //CONTROLS
 
-    private void setItemsBtn(ActionEvent e) {
-        putOnTerminal("I don't work yet.");
-        MasterController.getInstance().loadPrebattleScene();
-    }
 
     /**
      * Called when the end turn button is pressed.
@@ -601,7 +600,7 @@ public class BattleController {
      */
     private void setEndTurnBtn(ActionEvent e) {
         Fighter fighter = map.getFighter();
-        putOnTerminal("You ended your turn");
+        toConsole("You ended your turn");
         int x = fighter.getxPos();
         int y = fighter.getyPos();
         map.getMapTile(x, y).getStackPane().getChildren().remove(2);
@@ -614,9 +613,9 @@ public class BattleController {
      */
     public void startTurn() {
         if (map.getAllies().size() == 0) {
-            putOnTerminal("GAME OVER");
+            toConsole("GAME OVER");
         } else {
-            putOnTerminal("Your turn begins");
+            toConsole("Your turn begins");
             if (tractorBeam != null) {
                 tractorBeam.getStackPane().getChildren().remove(2);
                 tractorBeam = null;
@@ -629,6 +628,10 @@ public class BattleController {
         }
     }
 
+    private void buttonsToDefault(MouseEvent e) {
+        buttonsToDefault();
+    }
+
     /**
      * Resets the buttons to their default setting.
      */
@@ -639,8 +642,7 @@ public class BattleController {
         atkBtn.setOnAction(this::setAtkBtn);
         atkBtn.setOnMouseEntered(this::attackBtnEnter);
         atkBtn.setOnMouseExited(null);
-        skillsBtn.setOnAction(this::setSkillsBtn);
-        itemsBtn.setOnAction(this::setItemsBtn);
+        pauseBtn.setOnAction(this::setPauseBtn);
         endTurnBtn.setOnAction(this::setEndTurnBtn);
     }
 
@@ -671,8 +673,9 @@ public class BattleController {
     public void showAlly(Fighter f) {
         allyName.setText(f.getName());
         allyAtk.setText("ATT: " + f.getAtt());
-        allyDef.setText("MOV: " + f.getMov());
+        allyMove.setText("MOVE: " + f.getMov());
         allyRange.setText("RANGE: " + f.getRange());
+        allyRace.setText("RACE: " + f.getRace());
         allyHP.setText(f.getHp() + "/" + f.getMaxHP());
         allySprite.setImage(new Image(f.getModel().imagePath()));
         allyHealthWheel.setImage(healthWheel(f));
@@ -681,11 +684,14 @@ public class BattleController {
     public void showEnemy(Fighter f) {
         enemyName.setText(f.getName());
         enemyAtk.setText("ATT: " + f.getAtt());
-        enemyDef.setText("MOV: " + f.getMov());
+        enemyMove.setText("MOVE: " + f.getMov());
         enemyRange.setText("RANGE: " + f.getRange());
+        enemyRace.setText("RACE: " + f.getRace());
         enemyHP.setText(f.getHp() + "/" + f.getMaxHP());
         enemySprite.setImage(new Image(f.getModel().imagePath()));
         enemyHealthWheel.setImage(healthWheel(f));
+        toConsole("" + f.getName() + ": " + f.getDescription());
+
     }
 
     private Image healthWheel(Fighter f) {
@@ -735,30 +741,30 @@ public class BattleController {
      * Puts the given String s on the terminal
      * @param s
      */
-    private void putOnTerminal(String s) {
-        putOnTerminal(s, true);
+    private void toConsole(String s) {
+        toConsole(s, true);
     }
 
     /**
-     * Helper function for putOnTerminal.
+     * Helper function for toConsole.
      * Holds the logic for when to make new lines, and which labels to remove from the terminal.
      * @param s String to put on terminal
      * @param newEntry if this string begins the entry.
      */
-    private void putOnTerminal(String s, boolean newEntry) {
-        if (s.length() > 38) {
-            int cut = 38;
+    private void toConsole(String s, boolean newEntry) {
+        if (s.length() > 42) {
+            int cut = 42;
             while (s.charAt(cut) != ' ') {
                 cut--;
             }
             String s1 = s.substring(0, cut);
             String s2 = s.substring(cut);
             if (newEntry) {
-                putOnTerminal(s1, true);
+                toConsole(s1, true);
             } else {
-                putOnTerminal(s1, false);
+                toConsole(s1, false);
             }
-            putOnTerminal(s2, false);
+            toConsole(s2, false);
         } else {
             Label l;
             if (newEntry) {
@@ -816,7 +822,7 @@ public class BattleController {
         f.setyPos(nextY);
         MapTile nextTile = map.getMapTile(nextX, nextY);
         nextTile.getStackPane().getChildren().add(new ImageView(f.imagePath()));
-        putOnTerminal(f.getName() + " moved to (" + (nextX - 1) + ", " + (nextY - 1) + ").");
+        toConsole(f.getName() + " moved to (" + (nextX - 1) + ", " + (nextY - 1) + ").");
     }
 
     /**
@@ -826,7 +832,7 @@ public class BattleController {
      * @param defender
      */
     public void enemyAttack(Fighter attacker, Fighter defender) {
-        putOnTerminal(game.attackFighter(attacker, defender));
+        toConsole(game.attackFighter(attacker, defender));
         showAlly(map.getFighter());
     }
 
@@ -838,8 +844,7 @@ public class BattleController {
         moveBtn.setOnMouseEntered(this::moveBtnEnter);
         atkBtn.setOnAction(this::setAtkBtn);
         atkBtn.setOnMouseEntered(this::attackBtnEnter);
-        skillsBtn.setOnAction(this::setSkillsBtn);
-        itemsBtn.setOnAction(this::setItemsBtn);
+        pauseBtn.setOnAction(this::setPauseBtn);
         endTurnBtn.setOnAction(this::setEndTurnBtn);
         rightBtn.setOnMouseEntered(this::moveRight);
         rightBtn.setOnMouseExited(this::stopScroll);

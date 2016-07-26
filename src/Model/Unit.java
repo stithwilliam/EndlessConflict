@@ -51,6 +51,19 @@ public enum Unit implements Placeable {
                 return ("No description");
         }
     }
+
+    public String getRace() {
+        switch (this) {
+            case SENTRYDRONE:
+                return ("Robot");
+            case SLIMEBALL:
+                return ("Mutant");
+            case RANGER:
+                return ("Human");
+            default:
+                return ("None");
+        }
+    }
     /**Getters**/
     public String imagePath() { return imagePath.get(this.name());}
     public String getName() {return name;}

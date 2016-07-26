@@ -54,6 +54,19 @@ public enum Commander implements Placeable {
                 return ("No description");
         }
     }
+
+    public String getRace() {
+        switch (this) {
+            case MODEL0:
+                return ("Robot");
+            case LIZARDKING:
+                return ("Mutant");
+            case CHAOS:
+                return ("Human");
+            default:
+                return ("None");
+        }
+    }
 //    /**
 //     * Bio info for each hero.
 //     * TODO: Use this in game somewhere

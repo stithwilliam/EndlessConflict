@@ -31,17 +31,17 @@
       </Pane>
       <Pane layoutX="400.0" layoutY="460.0" prefHeight="140.0" prefWidth="400.0" style="-fx-background-color: midnightblue; -fx-border-width: 3; -fx-border-color: deepskyblue;">
          <children>
-            <Button fx:id="endTurnBtn" blendMode="HARD_LIGHT" contentDisplay="TOP" layoutX="313.0" layoutY="33.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="64.0" text=" END TURN" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="endTurnBtn" blendMode="HARD_LIGHT" contentDisplay="TOP" layoutX="305.0" layoutY="30.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" text=" END TURN" textAlignment="CENTER" wrapText="true">
                <font>
-                  <Font name="Britannic Bold" size="16.0" />
+                  <Font name="Britannic Bold" size="18.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="itemsBtn" blendMode="HARD_LIGHT" contentDisplay="TOP" graphicTextGap="0.0" layoutX="226.0" layoutY="33.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="64.0" text="ITEMS" textAlignment="CENTER" textOverrun="CLIP">
+            <Button fx:id="pauseBtn" alignment="CENTER" blendMode="HARD_LIGHT" contentDisplay="TOP" graphicTextGap="0.0" layoutX="208.0" layoutY="30.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" text="PAUSE GAME" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                <font>
-                  <Font name="Britannic Bold" size="16.0" />
+                  <Font name="Britannic Bold" size="18.0" />
                </font>
                <opaqueInsets>
                   <Insets />
@@ -53,28 +53,17 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="skillsBtn" blendMode="HARD_LIGHT" contentDisplay="TOP" layoutX="137.0" layoutY="33.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="64.0" text="SKILLS" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="moveBtn" blendMode="HARD_LIGHT" layoutX="14.0" layoutY="30.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" text="MOVE">
+               <font>
+                  <Font name="Britannic Bold" size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="atkBtn" blendMode="HARD_LIGHT" graphicTextGap="0.0" layoutX="111.0" layoutY="30.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" text="ATTACK" textOverrun="CLIP">
                <font>
                   <Font name="Britannic Bold" size="16.0" />
-               </font>
-               <padding>
-                  <Insets right="1.0" />
-               </padding>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="moveBtn" blendMode="HARD_LIGHT" layoutX="20.0" layoutY="15.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="96.0" text="MOVE">
-               <font>
-                  <Font name="Britannic Bold" size="18.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="atkBtn" blendMode="HARD_LIGHT" layoutX="20.0" layoutY="77.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="96.0" text="ATTACK">
-               <font>
-                  <Font name="Britannic Bold" size="18.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -119,7 +108,7 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Label fx:id="allyDef" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" style="-fx-text-fill: black;" text="DEF: 20" wrapText="true">
+            <Label fx:id="allyRange" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" style="-fx-text-fill: black;" text="MOVE: 20" wrapText="true">
                <font>
                   <Font name="Britannic Bold" size="14.0" />
                </font>
@@ -130,7 +119,7 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Label fx:id="allyRange" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" style="-fx-text-fill: black;" text="RANGE: 3" wrapText="true">
+            <Label fx:id="allyMove" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" style="-fx-text-fill: black;" text="RANGE: 3" wrapText="true">
                <font>
                   <Font name="Britannic Bold" size="14.0" />
                </font>
@@ -141,7 +130,7 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Label fx:id="allyType" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" style="-fx-text-fill: black;" text="TYPE: Robot" wrapText="true">
+            <Label fx:id="allyRace" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" style="-fx-text-fill: black;" text="TYPE: Robot" wrapText="true">
                <font>
                   <Font name="Britannic Bold" size="14.0" />
                </font>
@@ -199,7 +188,7 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Label fx:id="enemyDef" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" style="-fx-text-fill: black;" text="DEF: 20" wrapText="true">
+            <Label fx:id="enemyRange" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" style="-fx-text-fill: black;" text="MOVE: 20" wrapText="true">
                <font>
                   <Font name="Britannic Bold" size="14.0" />
                </font>
@@ -210,7 +199,7 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Label fx:id="enemyRange" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" style="-fx-text-fill: black;" text="RANGE: 20" wrapText="true">
+            <Label fx:id="enemyMove" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" style="-fx-text-fill: black;" text="RANGE: 20" wrapText="true">
                <font>
                   <Font name="Britannic Bold" size="14.0" />
                </font>
@@ -221,7 +210,7 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Label fx:id="enemyType" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" style="-fx-text-fill: black;" text="TYPE: Mutant" wrapText="true">
+            <Label fx:id="enemyRace" ellipsisString=".." graphicTextGap="0.0" prefHeight="48.0" prefWidth="94.0" style="-fx-text-fill: black;" text="TYPE: Mutant" wrapText="true">
                <font>
                   <Font name="Britannic Bold" size="14.0" />
                </font>

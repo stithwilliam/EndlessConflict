@@ -120,6 +120,7 @@ public class PrebattleController {
         label.setPrefHeight(24);
         label.setPrefWidth(200);
         label.setFont(new Font("Britannic Bold", 18));
+        label.setTextFill(Color.BLACK);
         label.setWrapText(true);
         labelFighterHashMap.put(label, f);
         fighterLabelHashMap.put(f, label);
@@ -189,7 +190,7 @@ public class PrebattleController {
         int inArmy = toBattle.size();
         int armyLimit = Main.myGame.getArmyLimit();
         toBattleLimit.setText("" + inArmy + "/" + armyLimit);
-        if (inArmy < armyLimit) {
+        if (inArmy < armyLimit && inArmy > 0) {
             toBattleLimit.setTextFill(Color.BLACK);
         } else if (inArmy == armyLimit) {
             toBattleLimit.setTextFill(Color.GREEN);
@@ -199,7 +200,7 @@ public class PrebattleController {
     }
 
     public boolean underLimit() {
-        if (toBattle.size() <= Main.myGame.getArmyLimit()) {
+        if (toBattle.size() <= Main.myGame.getArmyLimit() && toBattle.size() > 0) {
             return true;
         } else {
             return false;
@@ -231,6 +232,11 @@ public class PrebattleController {
         toBattle = new LinkedList<>();
         labelFighterHashMap = new HashMap<>();
         fighterLabelHashMap = new HashMap<>();
+
+        availableUp.setOpacity(0);
+        availableDown.setOpacity(0);
+        toBattleUp.setOpacity(0);
+        toBattleDown.setOpacity(0);
 
         backBtn.setOnAction(this::setBackBtn);
         okBtn.setOnAction(this::setOkBtn);

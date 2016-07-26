@@ -8,6 +8,7 @@ public interface Placeable {
     /**Getters**/
     String imagePath();
     String getName();
+    String getRace();
     String getDescription();
     boolean isCommander();
     int getAtt();

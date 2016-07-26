@@ -62,14 +62,6 @@ public enum MapType {
         Race race = game.getRace();
         switch (this) {
             case TUTORIAL:
-                Fighter hero = new Fighter(race.getCommander(), 1, 3, false);
-                fighters.add(hero);
-                Fighter unit1 = new Fighter (race.getUnit(), 0, 2, false);
-                unit1.setName(unit1.getName() + " 1");
-                fighters.add(unit1);
-                Fighter unit2 = new Fighter(race.getUnit(), 0, 4, false);
-                unit2.setName(unit2.getName() + " 2");
-                fighters.add(unit2);
                 Fighter w = new Fighter(race.getWeakRace().getUnit(), 8, 3, true);
                 fighters.add(w);
                 Fighter s = new Fighter(race.getStrongRace().getUnit(), 14, 3, true);

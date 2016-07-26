@@ -60,6 +60,7 @@ public class Fighter {
     public String toString() { return (name);}
     public String imagePath() {return model.imagePath();}
     public String getName() {return name;}
+    public String getRace() {return model.getRace();}
     public String getDescription() {return description;}
     public Placeable getModel() {return model;}
     public int getxPos() {return xPos;}

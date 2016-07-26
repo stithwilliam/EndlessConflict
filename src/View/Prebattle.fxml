@@ -24,7 +24,7 @@
                   <Font name="Britannic Bold" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="centerBtn" blendMode="HARD_LIGHT" layoutX="316.0" layoutY="556.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="160.0" style="-fx-text-fill: black;" text="Remove">
+            <Button fx:id="centerBtn" blendMode="HARD_LIGHT" layoutX="316.0" layoutY="544.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="160.0" style="-fx-text-fill: black;" text="Remove">
                <font>
                   <Font name="Britannic Bold" size="18.0" />
                </font>
@@ -69,23 +69,23 @@
             <Font name="Britannic Bold" size="18.0" />
          </font>
       </Button>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="500.0" layoutX="250.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: royalblue;" width="300.0" />
-      <ImageView fx:id="fighterImage" fitHeight="192.0" fitWidth="192.0" layoutX="304.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="500.0" layoutX="250.0" layoutY="41.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: royalblue;" width="300.0" />
+      <ImageView fx:id="fighterImage" fitHeight="192.0" fitWidth="192.0" layoutX="304.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Graphics/Fighter/modelXresting.gif" />
          </image>
       </ImageView>
-      <Label fx:id="nameLabel" alignment="CENTER" layoutX="250.0" layoutY="59.0" prefHeight="24.0" prefWidth="300.0" style="-fx-text-fill: black;" text="MODEL 0">
+      <Label fx:id="nameLabel" alignment="CENTER" layoutX="250.0" layoutY="50.0" prefHeight="24.0" prefWidth="300.0" style="-fx-text-fill: black;" text="MODEL 0">
          <font>
             <Font name="Britannic Bold" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="unitLabel" alignment="CENTER" layoutX="250.0" layoutY="293.0" prefHeight="24.0" prefWidth="300.0" style="-fx-text-fill: black;" text="Commander">
+      <Label fx:id="unitLabel" alignment="CENTER" layoutX="250.0" layoutY="284.0" prefHeight="24.0" prefWidth="300.0" style="-fx-text-fill: black;" text="Commander">
          <font>
             <Font name="Britannic Bold" size="24.0" />
          </font>
       </Label>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="214.0" layoutX="257.0" layoutY="330.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: lightgrey;" width="286.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="214.0" layoutX="257.0" layoutY="321.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: lightgrey;" width="286.0" />
       <VBox alignment="TOP_CENTER" layoutX="600.0" layoutY="25.0" maxHeight="500.0" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: aqua; -fx-border-width: 1; -fx-border-color: black;">
          <children>
             <Label alignment="CENTER" prefHeight="24.0" prefWidth="200.0" style="-fx-text-fill: black;" text="To Battle">
@@ -110,7 +110,7 @@
                   <Font name="Britannic Bold" size="18.0" />
                </font>
             </Button>
-            <Label fx:id="toBattleLimit" alignment="CENTER" prefHeight="24.0" prefWidth="200.0" style="-fx-text-fill: black;" text="2/5">
+            <Label fx:id="toBattleLimit" alignment="CENTER" prefHeight="24.0" prefWidth="200.0" text="2/5" textFill="RED">
                <font>
                   <Font name="Britannic Bold" size="24.0" />
                </font>
@@ -120,7 +120,7 @@
             </Label>
          </children>
       </VBox>
-      <Label layoutX="461.0" layoutY="450.0" prefHeight="24.0" prefWidth="70.0" style="-fx-text-fill: black;" text="Health">
+      <Label layoutX="461.0" layoutY="441.0" prefHeight="24.0" prefWidth="70.0" style="-fx-text-fill: black;" text="Health">
          <font>
             <Font name="Britannic Bold" size="18.0" />
          </font>
@@ -128,7 +128,7 @@
             <Insets left="10.0" />
          </padding>
       </Label>
-      <Label fx:id="hpLabel" alignment="CENTER_RIGHT" layoutX="468.0" layoutY="479.0" prefHeight="24.0" prefWidth="53.0" style="-fx-text-fill: black;" text="40">
+      <Label fx:id="hpLabel" alignment="CENTER_RIGHT" layoutX="468.0" layoutY="470.0" prefHeight="24.0" prefWidth="53.0" style="-fx-text-fill: black;" text="40">
          <font>
             <Font name="Britannic Bold" size="24.0" />
          </font>
@@ -136,7 +136,7 @@
             <Insets right="10.0" />
          </padding>
       </Label>
-      <Label layoutX="269.0" layoutY="450.0" prefHeight="24.0" prefWidth="70.0" style="-fx-text-fill: black;" text="Attack">
+      <Label layoutX="269.0" layoutY="441.0" prefHeight="24.0" prefWidth="70.0" style="-fx-text-fill: black;" text="Attack">
          <font>
             <Font name="Britannic Bold" size="18.0" />
          </font>
@@ -144,7 +144,7 @@
             <Insets left="10.0" />
          </padding>
       </Label>
-      <Label fx:id="attackLabel" alignment="CENTER_RIGHT" layoutX="276.0" layoutY="479.0" prefHeight="24.0" prefWidth="53.0" style="-fx-text-fill: black;" text="40">
+      <Label fx:id="attackLabel" alignment="CENTER_RIGHT" layoutX="276.0" layoutY="470.0" prefHeight="24.0" prefWidth="53.0" style="-fx-text-fill: black;" text="40">
          <font>
             <Font name="Britannic Bold" size="24.0" />
          </font>
@@ -152,7 +152,7 @@
             <Insets right="10.0" />
          </padding>
       </Label>
-      <Label layoutX="333.0" layoutY="450.0" prefHeight="24.0" prefWidth="70.0" style="-fx-text-fill: black;" text="Range">
+      <Label layoutX="333.0" layoutY="441.0" prefHeight="24.0" prefWidth="70.0" style="-fx-text-fill: black;" text="Range">
          <font>
             <Font name="Britannic Bold" size="18.0" />
          </font>
@@ -160,7 +160,7 @@
             <Insets left="10.0" />
          </padding>
       </Label>
-      <Label layoutX="403.0" layoutY="450.0" prefHeight="24.0" prefWidth="62.0" style="-fx-text-fill: black;" text="Move">
+      <Label layoutX="403.0" layoutY="441.0" prefHeight="24.0" prefWidth="62.0" style="-fx-text-fill: black;" text="Move">
          <font>
             <Font name="Britannic Bold" size="18.0" />
          </font>
@@ -168,7 +168,7 @@
             <Insets left="10.0" />
          </padding>
       </Label>
-      <Label fx:id="rangeLabel" alignment="CENTER_RIGHT" layoutX="341.0" layoutY="479.0" prefHeight="24.0" prefWidth="53.0" style="-fx-text-fill: black;" text="40">
+      <Label fx:id="rangeLabel" alignment="CENTER_RIGHT" layoutX="341.0" layoutY="470.0" prefHeight="24.0" prefWidth="53.0" style="-fx-text-fill: black;" text="40">
          <font>
             <Font name="Britannic Bold" size="24.0" />
          </font>
@@ -176,7 +176,7 @@
             <Insets right="10.0" />
          </padding>
       </Label>
-      <Label fx:id="movementLabel" alignment="CENTER_RIGHT" layoutX="404.0" layoutY="479.0" prefHeight="24.0" prefWidth="53.0" style="-fx-text-fill: black;" text="40">
+      <Label fx:id="movementLabel" alignment="CENTER_RIGHT" layoutX="404.0" layoutY="470.0" prefHeight="24.0" prefWidth="53.0" style="-fx-text-fill: black;" text="40">
          <font>
             <Font name="Britannic Bold" size="24.0" />
          </font>
@@ -184,7 +184,7 @@
             <Insets right="10.0" />
          </padding>
       </Label>
-      <Label fx:id="starsLabel" alignment="CENTER" layoutX="316.0" layoutY="510.0" prefHeight="24.0" prefWidth="160.0" text="***">
+      <Label fx:id="starsLabel" alignment="CENTER" layoutX="316.0" layoutY="501.0" prefHeight="24.0" prefWidth="160.0" text="***">
          <font>
             <Font name="Britannic Bold" size="36.0" />
          </font>
@@ -192,7 +192,7 @@
             <Insets left="10.0" />
          </padding>
       </Label>
-      <Label fx:id="descriptionLabel" layoutX="267.0" layoutY="339.0" prefHeight="98.0" prefWidth="263.0" text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna." textAlignment="CENTER" textFill="#008990" wrapText="true">
+      <Label fx:id="descriptionLabel" layoutX="267.0" layoutY="330.0" prefHeight="98.0" prefWidth="263.0" text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna." textAlignment="CENTER" textFill="#008990" wrapText="true">
          <font>
             <Font name="Britannic Bold" size="16.0" />
          </font>

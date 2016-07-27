@@ -34,6 +34,9 @@ public class Game {
     /**the BattleController in charge of the map screen**/
     private BattleController battleController;
 
+    /**The levels that the user has beaten. 1-5**/
+    private LinkedList<Boolean> levelsComplete;
+
     /**
      * Constructor for Game
      */
@@ -44,13 +47,22 @@ public class Game {
         army = new LinkedList<>();
         collection = new LinkedList<>();
         armyLimit = 3;
+        levelsComplete = new LinkedList<>();
+        for (int i = 0; i < 5; i++) {
+            if (i == 0) {
+                levelsComplete.add(true);
+            }
+            else {
+                levelsComplete.add(false);
+            }
+        }
     }
 
     public void endConfig() {
         collection.add(new Fighter(race.getCommander()));
         collection.add(new Fighter(race.getUnit()));
         collection.add(new Fighter(race.getUnit()));
-        MasterController.getInstance().loadPrebattleScene();
+        MasterController.getInstance().loadMapScene();
     }
 
     /**
@@ -190,12 +202,14 @@ public class Game {
     public LinkedList<Fighter> getCollection() {
         return collection;
     }
+    public boolean getLevelComplete(int i) {return levelsComplete.get(i);}
 
     /**Setters**/
     public void setRace(Race c) {
         race = c;
     }
     public void setArmy(LinkedList<Fighter> a) {army = a;}
+    public void completeLevel(int i) {levelsComplete.set(i, true);}
 
     /**Adders**/
     public void addToArmy(Fighter f) {

@@ -150,7 +150,7 @@ public class PrebattleController {
     }
 
     private void setBackBtn(ActionEvent e) {
-        MasterController.getInstance().setConfigScene();
+        MasterController.getInstance().loadMapScene();
     }
 
     private void setOkBtn(ActionEvent e) {

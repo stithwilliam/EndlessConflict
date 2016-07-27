@@ -86,6 +86,15 @@ public class MasterController {
         }
     }
 
+    public void loadMapScene() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/View/Map.fxml"));
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            System.out.println("Shit's broke: " + e.getCause());
+        }
+    }
+
     public void loadBattleScene() {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/View/Battle.fxml"));

@@ -5,9 +5,7 @@ import Controller.BattleController;
 import java.util.*;
 
 
-/**
- * Created by William on 10/26/2015.
- */
+
 public class Map {
 
     /**Type of this map**/
@@ -25,6 +23,7 @@ public class Map {
     /**convenience vars for height and with of the map**/
     private int  width, height;
 
+    /**List of rewards obtained on the current map**/
     private LinkedList<Placeable> rewardList;
 
 

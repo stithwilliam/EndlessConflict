@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: gold;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fff11f" height="93.0" layoutX="170.0" layoutY="41.0" stroke="BLACK" strokeType="INSIDE" width="498.0" />
+      <Text layoutX="337.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Victory!">
+         <font>
+            <Font name="Britannic Bold" size="48.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

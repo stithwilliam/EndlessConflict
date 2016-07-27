@@ -1,8 +1,9 @@
 package Controller;
 
 import Model.*;
-import javafx.animation.AnimationTimer;
+import javafx.animation.*;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,6 +16,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
+import javafx.util.Duration;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -461,7 +463,6 @@ public class BattleController {
     }
 
     private void noShowAttacks(MouseEvent e) {
-        System.out.println("no show");
         Fighter fighter = map.getFighter();
         boolean[][] valid = map.getValidAttacks(fighter);
         for (int i = 0; i < valid.length; i++) {
@@ -696,26 +697,45 @@ public class BattleController {
         ImageView chest = new ImageView(Graphic.REWARDCHEST.imagePath());
         chest.setOpacity(0);
         pane.getChildren().add(chest);
-        AnimationTimer chestAnimation = new AnimationTimer() {
+
+                FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), chest);
+                fadeIn.setFromValue(0);
+                fadeIn.setToValue(1);
+
+                ScaleTransition growIn = new ScaleTransition(Duration.seconds(1), chest);
+                growIn.setFromX(0);
+                growIn.setFromY(0);
+                growIn.setToX(1);
+                growIn.setToY(1);
+
+            ParallelTransition fadeGrowIn = new ParallelTransition();
+            fadeGrowIn.getChildren().addAll(fadeIn, growIn);
+
+                FadeTransition fadeOut = new FadeTransition(Duration.seconds(2), chest);
+                fadeOut.setFromValue(1);
+                fadeOut.setToValue(0);
+
+                RotateTransition spinOut = new RotateTransition(Duration.seconds(2), chest);
+                spinOut.setFromAngle(0);
+                spinOut.setToAngle(720);
+
+            ParallelTransition fadeSpinOut = new ParallelTransition();
+            fadeSpinOut.getChildren().addAll(fadeOut, spinOut);
+
+        SequentialTransition chestAnimation = new SequentialTransition();
+        chestAnimation.getChildren().addAll(fadeGrowIn, fadeSpinOut);
+
+        chestAnimation.setOnFinished(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(long now) {
-                System.out.println("start");
-                if (chest.getOpacity() != 1) {
-                    chest.setOpacity(chest.getOpacity() + 0.01);
-                } else {
-                    chestView = true;
-                    if (i != 0) {
-                        chest.setOpacity(i);
-                        chest.setRotate(j);
-                        i -= 0.01;
-                        j += 5;
-                    } else {
-                        stop();
-                    }
-                }
+            public void handle(ActionEvent event) {
+                pane.getChildren().remove(chest);
             }
-        };
-        chestAnimation.start();
+        });
+
+
+        chestAnimation.play();
+
+
 
     }
 

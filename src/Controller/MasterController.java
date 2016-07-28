@@ -97,6 +97,15 @@ public class MasterController {
         }
     }
 
+    public void loadRewardScene() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/View/Rewards.fxml"));
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            System.out.println("Shit's broke: " + e.getCause());
+        }
+    }
+
     /**Getters**/
     public BattleController getBattleController() { return battleController;}
 

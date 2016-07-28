@@ -636,6 +636,11 @@ public class Map {
         }
         return list;
     }
+
+    public List<Placeable> getRewardList() {
+        return rewardList;
+    }
+
     /**Adders**/
     public void addToRewardList(Placeable p) {rewardList.add(p);}
 

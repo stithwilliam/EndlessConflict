@@ -130,7 +130,7 @@ public class Game {
             rewardChest(f.getxPos(), f.getyPos(), f.getModel());
         }
         if (map.getEnemies().size() == 0) {
-            MasterController.getInstance().loadMapScene();
+            MasterController.getInstance().loadRewardScene();
 
         }
     }

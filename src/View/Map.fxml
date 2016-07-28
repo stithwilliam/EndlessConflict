@@ -57,7 +57,7 @@
             <Font name="Britannic Bold" size="49.0" />
          </font>
       </Button>
-      <Pane layoutX="150.0" layoutY="375.0" prefHeight="200.0" prefWidth="500.0">
+      <Pane fx:id="panelPane" layoutX="150.0" layoutY="375.0" prefHeight="200.0" prefWidth="500.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="GREY" height="200.0" opacity="0.66" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 25; -fx-arc-width: 25;" width="500.0" />
             <HBox prefHeight="200.0" prefWidth="500.0">

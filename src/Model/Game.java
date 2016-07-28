@@ -34,6 +34,9 @@ public class Game {
     /**the BattleController in charge of the map screen**/
     private BattleController battleController;
 
+    /**The current level selected**/
+    private int levelSelected;
+
     /**The levels that the user has beaten. 1-5**/
     private LinkedList<Boolean> levelsComplete;
 
@@ -56,6 +59,7 @@ public class Game {
                 levelsComplete.add(false);
             }
         }
+        levelSelected = 0;
     }
 
     public void endConfig() {
@@ -196,6 +200,7 @@ public class Game {
         return race;
     }
     public int getArmyLimit() { return armyLimit;}
+    public int getLevelSelected() { return levelSelected;}
     public LinkedList<Fighter> getArmy() {
         return army;
     }
@@ -209,6 +214,7 @@ public class Game {
         race = c;
     }
     public void setArmy(LinkedList<Fighter> a) {army = a;}
+    public void setLevelSelected(int i ) { levelSelected = i;}
     public void completeLevel(int i) {levelsComplete.set(i, true);}
 
     /**Adders**/

@@ -156,7 +156,7 @@ public class PrebattleController {
     private void setOkBtn(ActionEvent e) {
         if (underLimit()) {
             Main.myGame.setArmy(toBattle);
-            Main.myGame.startTutorial();
+            Main.myGame.startLevel1();
         }
     }
 

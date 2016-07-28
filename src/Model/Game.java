@@ -2,7 +2,6 @@ package Model;
 
 import Controller.BattleController;
 import Controller.MasterController;
-import sun.awt.image.ImageWatched;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -73,18 +72,9 @@ public class Game {
      * Called when the user makes it past the config screens
      * Creates the Tutorial map and displays it on the screen
      */
-    public void startTutorial() {
+    public void startLevel1() {
         MasterController.getInstance().setBattleScene();
-        map = new Map(MapType.TUTORIAL);
-        int startX = 1;
-        int startY = 2;
-        int obj1X = 8;
-        int obj1Y = 3;
-        int obj2X = 14;
-        int obj2Y = 3;
-        while (!map.hasPathBetween(startX, startY, obj1X, obj1Y) || !map.hasPathBetween(startX, startY, obj2X, obj2Y)) {
-            map = new Map(MapType.TUTORIAL);
-        }
+        map = new Map(MapType.LEVELONE);
         map.placeArmy(army);
         comp = new AI(this, map);
         battleController = MasterController.getInstance().getBattleController();

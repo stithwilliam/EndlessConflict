@@ -179,7 +179,7 @@ public class MapController {
         if (source == level1) {
             String unit1 = race.getWeakRace().getUnit().getName();
             String unit2 = race.getStrongRace().getUnit().getName();
-            descriptionLabel.setText("TUTORIAL: You have a few " + unit1 + "'s and " +
+            descriptionLabel.setText("LEVELONE: You have a few " + unit1 + "'s and " +
             unit2 + "'s as hostages. Might as well use them for training.");
             levelSelected = level.ONE;
             if (game.getLevelComplete(1)) {

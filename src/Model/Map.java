@@ -1,7 +1,5 @@
 package Model;
 
-import Controller.BattleController;
-
 import java.util.*;
 
 
@@ -46,8 +44,8 @@ public class Map {
             if (i == 0) {
                 fighter = f;
             }
-            f.setxPos(mapType.getXPos(i));
-            f.setyPos(mapType.getYPos(i));
+            f.setxPos(mapType.armyXPos(i));
+            f.setyPos(mapType.armyYPos(i));
             fighters.add(f);
             i++;
         }

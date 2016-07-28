@@ -55,6 +55,7 @@ public enum MapType {
         boolean pathBetween;
         switch (this) {
             case LEVELONE:
+                System.out.println("level 1");
                 h = 7;
                 w = 15;
                 start = new Coordinates(1, 2);
@@ -78,13 +79,14 @@ public enum MapType {
                         pathBetween = true;
                     }
                 }
+                return board;
             case LEVELTWO:
+                System.out.println("level 2");
                 h = 12;
                 w = 14;
                 board = new MapTile[h][w];
                 tileBases = new TileBase[]{P, F, R};
                 probs = new int[] {60, 25, 15};
-                board = new MapTile[h][w];
                 start = new Coordinates(2, 6);
                 objectives.add(new Coordinates(6, 2));
                 objectives.add(new Coordinates(11, 9));
@@ -107,12 +109,121 @@ public enum MapType {
                 }
                 return board;
             case LEVELTHREE:
-
+                System.out.println("level 3");
+                h = 12;
+                w = 14;
+                board = new MapTile[h][w];
+                tileBases = new TileBase[]{P, F, R};
+                probs = new int[] {60, 25, 15};
+                start = new Coordinates(2, 6);
+                objectives.add(new Coordinates(5, 9));
+                objectives.add(new Coordinates(11, 2));
+                pathBetween = false;
+                while (!pathBetween) {
+                    for (int i = 0; i < h; i++) {
+                        for (int j = 0; j < w; j++) {
+                            if ( ( (i <= 7 && i >= 5) && (j <= 2 && j >= 1) ) ||
+                                    ( (i <= 1 && i >= 2) && (j <= 12 && j >= 11) ) ||
+                                    (  (i <= 10 && i >= 9) && (j <= 6 && j >= 5) ) ) {
+                                board[i][j] = new MapTile(P, j, i);
+                            } else {
+                                board[i][j] = nextTile(board, tileBases, probs, j, i);
+                            }
+                        }
+                    }
+                    if (hasPathBetween(board, start, objectives.get(0)) && hasPathBetween(board, start, objectives.get(1))) {
+                        pathBetween = true;
+                    }
+                }
+                return board;
             case LEVELFOUR:
-
+                System.out.println("level 4");
+                h = 12;
+                w = 16;
+                board = new MapTile[h][w];
+                tileBases = new TileBase[]{P, F, R};
+                probs = new int[] {60, 25, 15};
+                start = new Coordinates(2, 6);
+                objectives.add(new Coordinates(5, 9));
+                objectives.add(new Coordinates(11, 2));
+                objectives.add(new Coordinates(14, 6));
+                pathBetween = false;
+                while (!pathBetween) {
+                    for (int i = 0; i < h; i++) {
+                        for (int j = 0; j < w; j++) {
+                            if ( ( (i <= 7 && i >= 5) && (j <= 2 && j >= 1) ) ||
+                                    ( (i <= 1 && i >= 2) && (j <= 6 && j >= 5) ) ||
+                                    ( (i <= 10 && i >= 9) && (j <= 12 && j >= 11) ) ||
+                                    (i == 6 && j == 14) ) {
+                                board[i][j] = new MapTile(P, j, i);
+                            } else {
+                                board[i][j] = nextTile(board, tileBases, probs, j, i);
+                            }
+                        }
+                    }
+                    if (hasPathBetween(board, start, objectives.get(0)) && hasPathBetween(board, start, objectives.get(1)) &&
+                            hasPathBetween(board, start, objectives.get(2))) {
+                        pathBetween = true;
+                    }
+                }
+                return board;
             case LEVELFIVE:
         }
         return board;
+    }
+
+    /**
+     * Gets the enemies that populate each level
+     * @return List<Fighter> enemies
+     */
+    public LinkedList<Fighter> getEnemies() {
+        LinkedList<Fighter> fighters = new LinkedList<>();
+        Game game = Main.myGame;
+        Race race = game.getRace();
+        switch (this) {
+            case LEVELONE:
+                Fighter w = new Fighter(race.getWeakRace().getUnit(), 8, 3, true);
+                fighters.add(w);
+                Fighter s = new Fighter(race.getStrongRace().getUnit(), 14, 3, true);
+                fighters.add(s);
+                return fighters;
+            case LEVELTWO:
+                Fighter f1 = new Fighter(race.getWeakRace().getUnit(), 5, 1, true);
+                fighters.add(f1);
+                Fighter f2 = new Fighter(race.getWeakRace().getUnit(), 6, 2, true);
+                fighters.add(f2);
+                Fighter f3 = new Fighter(race.getWeakRace().getUnit(), 11, 10, true);
+                fighters.add(f3);
+                Fighter f4 = new Fighter(race.getWeakRace().getCommander(), 12, 9, true);
+                fighters.add(f4);
+                return fighters;
+            case LEVELTHREE:
+                Fighter a1 = new Fighter(race.getStrongRace().getUnit(), 5, 10, true);
+                fighters.add(a1);
+                Fighter a2 = new Fighter(race.getStrongRace().getUnit(), 6, 9, true);
+                fighters.add(a2);
+                Fighter a3 = new Fighter(race.getStrongRace().getUnit(), 11, 1, true);
+                fighters.add(a3);
+                Fighter a4 = new Fighter(race.getStrongRace().getCommander(), 12, 2, true);
+                fighters.add(a4);
+                return fighters;
+            case LEVELFOUR:
+                Fighter b1 = new Fighter(race.getWeakRace().getUnit(), 5, 1, true);
+                fighters.add(b1);
+                Fighter b2 = new Fighter(race.getUnit(), 6, 2, true);
+                fighters.add(b2);
+                Fighter b3 = new Fighter(race.getStrongRace().getUnit(), 11, 10, true);
+                fighters.add(b3);
+                Fighter b4 = new Fighter(race.getUnit(), 12, 9, true);
+                fighters.add(b4);
+                Fighter b5 = new Fighter(race.getCommander(), 14, 6, true);
+                fighters.add(b5);
+                return fighters;
+            case LEVELFIVE:
+                return fighters;
+            default:
+                return fighters;
+        }
     }
 
     /**
@@ -203,42 +314,6 @@ public enum MapType {
     }
 
     /**
-     * Gets the enemies that populate each level
-     * @return List<Fighter> enemies
-     */
-    public LinkedList<Fighter> getEnemies() {
-        LinkedList<Fighter> fighters = new LinkedList<>();
-        Game game = Main.myGame;
-        Race race = game.getRace();
-        switch (this) {
-            case LEVELONE:
-                Fighter w = new Fighter(race.getWeakRace().getUnit(), 8, 3, true);
-                fighters.add(w);
-                Fighter s = new Fighter(race.getStrongRace().getUnit(), 14, 3, true);
-                fighters.add(s);
-                return fighters;
-            case LEVELTWO:
-                Fighter f1 = new Fighter(race.getWeakRace().getUnit(), 5, 1, true);
-                fighters.add(f1);
-                Fighter f2 = new Fighter(race.getWeakRace().getUnit(), 6, 2, true);
-                fighters.add(f2);
-                Fighter f3 = new Fighter(race.getWeakRace().getUnit(), 11, 10, true);
-                fighters.add(f3);
-                Fighter f4 = new Fighter(race.getWeakRace().getCommander(), 12, 9, true);
-                fighters.add(f4);
-                return fighters;
-            case LEVELTHREE:
-                return fighters;
-            case LEVELFOUR:
-                return fighters;
-            case LEVELFIVE:
-                return fighters;
-            default:
-                return fighters;
-        }
-    }
-
-    /**
      * Gets the limit for each level
      * @param lvl number
      * @return army limit
@@ -273,6 +348,12 @@ public enum MapType {
             case LEVELTWO:
                 arr = new int[] {2, 1, 1, 1};
                 return arr[i];
+            case LEVELTHREE:
+                arr = new int[] {2, 1, 1, 1};
+                return arr[i];
+            case LEVELFOUR:
+                arr = new int[] {2, 1, 1, 1};
+                return arr[i];
             default:
                 return -1;
         }
@@ -290,6 +371,12 @@ public enum MapType {
                 arr = new int[] {3,2,4};
                 return arr[i];
             case LEVELTWO:
+                arr = new int[] {6, 5, 7, 6};
+                return arr[i];
+            case LEVELTHREE:
+                arr = new int[] {6, 5, 7, 6};
+                return arr[i];
+            case LEVELFOUR:
                 arr = new int[] {6, 5, 7, 6};
                 return arr[i];
             default:

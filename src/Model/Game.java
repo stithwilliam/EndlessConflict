@@ -199,6 +199,12 @@ public class Game {
             return MapType.LEVELONE;
         } else if (levelSelected == 2) {
             return MapType.LEVELTWO;
+        } else if (levelSelected == 3) {
+            return MapType.LEVELTHREE;
+        } else if (levelSelected == 4) {
+            return MapType.LEVELFOUR;
+        } else if (levelSelected == 5) {
+            return MapType.LEVELFIVE;
         }
         else {
             return null;

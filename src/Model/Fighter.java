@@ -47,6 +47,10 @@ public class Fighter {
         hasMoved = false;
     }
 
+    public String details() {
+        return (name + ". xPos: " + xPos + ". yPos: " + yPos);
+    }
+
     /**Getters**/
     public String toString() { return (name);}
     public String imagePath() {return model.imagePath();}

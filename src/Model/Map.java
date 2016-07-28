@@ -16,7 +16,7 @@ public class Map {
     /**The current fighter that is selected on the map**/
     private Fighter fighter;
 
-    /**convenience vars for height and with of the map**/
+    /**convenience vars for height and width of the map**/
     private int  width, height;
 
     /**List of rewards obtained on the current map**/

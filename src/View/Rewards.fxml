@@ -1,18 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.shape.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: gold;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fff11f" height="93.0" layoutX="170.0" layoutY="41.0" stroke="BLACK" strokeType="INSIDE" width="498.0" />
-      <Text layoutX="337.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Victory!">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fff11f" height="105.0" layoutX="18.0" layoutY="15.0" stroke="#db7830f0" strokeType="INSIDE" width="756.0" />
+      <Text fill="#db7830" layoutX="274.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Victory!" wrappingWidth="252.40625">
          <font>
-            <Font name="Britannic Bold" size="48.0" />
+            <Font name="Britannic Bold" size="64.0" />
          </font>
       </Text>
+      <VBox alignment="TOP_CENTER" layoutX="202.0" layoutY="137.0" prefHeight="375.0" prefWidth="388.0" style="-fx-background-color: #fff11f; -fx-border-color: #db7830;">
+         <children>
+            <ImageView fitHeight="382.0" fitWidth="377.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Graphics/Tile/rewardsChestOpening.gif" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
+      <Button layoutX="322.0" layoutY="528.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="149.0" style="-fx-background-color: #fff11f; -fx-border-color: #db7830;" text="Continue" textFill="#db7830">
+         <font>
+            <Font name="Britannic Bold" size="26.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

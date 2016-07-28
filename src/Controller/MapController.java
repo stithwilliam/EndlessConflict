@@ -17,50 +17,50 @@ import javafx.util.Duration;
 
 import java.util.HashMap;
 
+/**
+ * Controller for Map.fxml
+ */
 public class MapController {
 
+    /**FXML Injections**/
     @FXML
     private Button level5;
-
     @FXML
     private Button level4;
-
     @FXML
     private Pane panelPane;
-
     @FXML
     private Button xBtn;
-
     @FXML
     private Button goBtn;
-
     @FXML
     private Button level1;
-
     @FXML
     private Button level3;
-
     @FXML
     private Label descriptionLabel;
-
     @FXML
     private Button level2;
-
     @FXML
     private Label rewardLabel;
 
+    /**If the bottom panel is showing**/
     private boolean panelShowing;
 
+    /**Enum for the levels**/
     private enum level {
         NONE, ONE, TWO, THREE, FOUR, FIVE
     }
 
+    /**The level that has been selected by the user**/
     private level levelSelected;
 
+    /**Hashmaps for levels to ints**/
     private HashMap<Button, level> buttonToLevel;
     private HashMap<level, Button> levelToButton;
     private HashMap<level, Integer> levelToInt;
 
+    /**Initializer**/
     public void initialize() {
         fixLevelButtons();
         level1.setOnAction(this::levelHandler);
@@ -107,6 +107,11 @@ public class MapController {
         xBtn.setOpacity(0);
     }
 
+    /**
+     * Called when go button is clicked.
+     * Proceeds to the prebattle scene for the selected level
+     * @param e
+     */
     private void setGoBtn(ActionEvent e) {
         if (levelSelected != level.NONE) {
             Main.myGame.setLevelSelected(levelToInt.get(levelSelected));
@@ -114,6 +119,11 @@ public class MapController {
         }
     }
 
+    /**
+     * Called when the X button is clicked.
+     * Fades away the bottom panel
+     * @param e
+     */
     private void setXBtn(ActionEvent e) {
             FadeTransition paneFade = new FadeTransition(Duration.seconds(.75), panelPane);
             paneFade.setFromValue(1);
@@ -133,6 +143,10 @@ public class MapController {
         panelShowing = false;
     }
 
+    /**
+     * Called when the mouse enters a level button.
+     * @param e
+     */
     private void levelEnter(MouseEvent e) {
         Button source = (Button) e.getSource();
         if (buttonToLevel.get(source) != levelSelected) {
@@ -140,6 +154,10 @@ public class MapController {
         }
     }
 
+    /**
+     * Called when the mouse exits a level button
+     * @param e
+     */
     private void levelExit(MouseEvent e) {
         Button source = (Button) e.getSource();
         if (buttonToLevel.get(source) != levelSelected) {
@@ -147,6 +165,11 @@ public class MapController {
         }
     }
 
+    /**
+     * Called when a level button is clicked.
+     * Sets the bottom panel and selects the proper level
+     * @param e
+     */
     private void levelHandler(ActionEvent e) {
         if (!panelShowing) {
 
@@ -230,6 +253,9 @@ public class MapController {
         }
     }
 
+    /**
+     * Helper method that fixes the level buttons so they show the proper color
+     */
     private void fixLevelButtons() {
         Game game = Main.myGame;
         level1.setTextFill(Color.AQUA);

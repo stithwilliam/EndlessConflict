@@ -1,7 +1,7 @@
 package Model;
 
 /**
- * Created by William on 10/26/2015.
+ * Enum for the race that the user has chosen
  */
 public enum Race {
 

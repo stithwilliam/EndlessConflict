@@ -16,71 +16,57 @@ import javafx.scene.text.Font;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+/**
+ * Controller for Prebattle.fxml
+ */
 public class PrebattleController {
 
+    /**FXML Injections**/
     @FXML
     private Label starsLabel;
-
     @FXML
     private Button toBattleDown;
-
     @FXML
     private Button toBattleUp;
-
     @FXML
     private Label availableNum;
-
     @FXML
     private Label rangeLabel;
-
     @FXML
     private Button okBtn;
-
     @FXML
     private VBox toBattleBox;
-
     @FXML
     private Button availableUp;
-
     @FXML
     private Label hpLabel;
-
     @FXML
     private Label movementLabel;
-
     @FXML
     private ImageView fighterImage;
-
     @FXML
     private Label attackLabel;
-
     @FXML
     private VBox availableBox;
-
     @FXML
     private Label unitLabel;
-
     @FXML
     private Button availableDown;
-
     @FXML
     private Button centerBtn;
-
     @FXML
     private Button backBtn;
-
     @FXML
     private Label toBattleLimit;
-
     @FXML
     private Label nameLabel;
-
     @FXML
     private Label descriptionLabel;
 
     /**Current fighter showing**/
     private Fighter fighter;
 
+    /**If the first label has been created**/
     private boolean firstLabel;
 
     /**List of fighters available and in army**/
@@ -92,6 +78,9 @@ public class PrebattleController {
     /**Hashmap that maps fighters to their labels**/
     private HashMap<Fighter, Label> fighterLabelHashMap;
 
+    /**
+     * Shows the current fighter in the center panel w/ stats
+     **/
     private void showFighter() {
         nameLabel.setText(fighter.getName());
         fighterImage.setImage(new Image(fighter.imagePath()));
@@ -109,6 +98,11 @@ public class PrebattleController {
         descriptionLabel.setText(fighter.getDescription());
     }
 
+    /**
+     * Creates a formatted label of fighter f
+     * @param f
+     * @return Label
+     */
     private Label createLabel(Fighter f) {
         String s = f.getName();
         Label label = new Label();
@@ -129,6 +123,11 @@ public class PrebattleController {
         return label;
     }
 
+    /**
+     * Called when a label is clicked.
+     * Sets fighter to this label and highlights it
+     * @param e
+     */
     private void labelClicked(MouseEvent e) {
         Label prevLabel = fighterLabelHashMap.get(fighter);
         prevLabel.setTextFill(Color.BLACK);
@@ -146,10 +145,19 @@ public class PrebattleController {
         }
     }
 
+    /**
+     * Called when back button is pressed. Returns to map screen.
+     * @param e
+     */
     private void setBackBtn(ActionEvent e) {
         MasterController.getInstance().loadMapScene();
     }
 
+    /**
+     * Called when ok button is pressed.
+     * If the army size is ok, starts the level.
+     * @param e
+     */
     private void setOkBtn(ActionEvent e) {
         if (underLimit()) {
             Main.myGame.setArmy(toBattle);
@@ -157,6 +165,11 @@ public class PrebattleController {
         }
     }
 
+    /**
+     * Called when the center button is pressed.
+     * Adds/removes the fighter from the army.
+     * @param e
+     */
     private void setCenterBtn(ActionEvent e) {
         if (available.contains(fighter)) {
             available.remove(fighter);
@@ -183,6 +196,9 @@ public class PrebattleController {
         }
     }
 
+    /**
+     * Fixes the army limit label to be accurate.
+     */
     private void fixLimitLabel() {
         int inArmy = toBattle.size();
         int lvl = Main.myGame.getLevelSelected();
@@ -197,7 +213,11 @@ public class PrebattleController {
         }
     }
 
-    public boolean underLimit() {
+    /**
+     * Helper method that tells if the army is under the limit or not
+     * @return boolean
+     */
+    private boolean underLimit() {
         if (toBattle.size() <= MapType.getArmyLimit(Main.myGame.getLevelSelected()) && toBattle.size() > 0) {
             return true;
         } else {
@@ -205,7 +225,12 @@ public class PrebattleController {
         }
     }
 
-    public int availableModelCount(Placeable model) {
+    /**
+     * Helper method for determing how many of one unit the user owns.
+     * @param model
+     * @return
+     */
+    private int availableModelCount(Placeable model) {
         int toRet = 0;
         for (Fighter f : available) {
             if (f.getModel() == model) {
@@ -215,7 +240,13 @@ public class PrebattleController {
         return toRet;
     }
 
-    public Fighter availableFighterWithModel(Placeable model) {
+    /**
+     * Gets an available fighter of the type model.
+     * If none are available returns null
+     * @param model
+     * @return Fighter
+     */
+    private Fighter availableFighterWithModel(Placeable model) {
         Fighter toRet = null;
         for (Fighter f : available) {
             if (f.getModel() == model) {
@@ -225,6 +256,9 @@ public class PrebattleController {
         return toRet;
     }
 
+    /**
+     * Initializer
+     */
     public void initialize() {
         available = new LinkedList<>();
         toBattle = new LinkedList<>();

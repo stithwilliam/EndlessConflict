@@ -14,10 +14,11 @@ import javafx.scene.text.Font;
 import java.util.List;
 
 /**
- * Created by William on 10/25/2015.
+ * Controller for Start.fxml
  */
 public class StartController {
 
+    /**FXML Injections**/
     @FXML
     private Button newGameBtn;
     @FXML
@@ -27,7 +28,10 @@ public class StartController {
     @FXML
     private Label titleLbl;
 
-    AnimationTimer timer;
+    /**Timer for the title animation**/
+    private AnimationTimer timer;
+
+    /**Vars for the title animation**/
     private double focusDist;
     private double focusMod;
     private boolean pos;

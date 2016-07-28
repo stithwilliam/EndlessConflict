@@ -4,13 +4,16 @@ import java.util.*;
 import java.util.function.Function;
 
 /**
- * Created by William on 11/4/2015.
+ * Enum for the different levels in the game
  */
 public enum MapType {
 
     /**Types of Map**/
     LEVELONE, LEVELTWO, LEVELTHREE, LEVELFOUR, LEVELFIVE;
 
+    /**
+     * Coordinates class. Used within MapType for path calculations
+     */
     private static class Coordinates {
         public int x;
         public int y;
@@ -33,7 +36,7 @@ public enum MapType {
     }
 
     /**
-     * Generates a board based on the type of map.
+     * Generates a board for each level.
      * @return MapTile[][] board
      */
     public MapTile[][] getBoard() {
@@ -112,6 +115,13 @@ public enum MapType {
         return board;
     }
 
+    /**
+     * Tells whether start and goal coordinates have a moveable path between them
+     * @param board to check path on
+     * @param start coordinates
+     * @param goal coordinates
+     * @return boolean
+     */
     public static boolean hasPathBetween(MapTile[][] board, Coordinates start, Coordinates goal) {
         boolean foundPath = false;
         List<Coordinates> visited = new LinkedList<>();
@@ -137,6 +147,12 @@ public enum MapType {
         return foundPath;
     }
 
+    /**
+     * Gives the available moves from a start coordinate
+     * @param board to look for moves on
+     * @param start coordinates
+     * @return List<Coordinates> of moves
+     */
     public static List<Coordinates> getMoves(MapTile[][] board, Coordinates start) {
         List<Coordinates> list = new LinkedList<>();
         int maxX = board[0].length - 1;
@@ -164,7 +180,15 @@ public enum MapType {
         return list;
     }
 
-    //helper function for getBoard, chooses a tile type
+    /**
+     * Chooses the next tile to be added during board generation
+     * @param board to add tile to
+     * @param tileBases what the tiles can be
+     * @param probs probability of each tile
+     * @param x pos of tile
+     * @param y pos of tile
+     * @return MapTile chosen
+     */
     private MapTile nextTile(MapTile[][] board, TileBase[] tileBases, int[] probs, int x, int y) { //TODO make touching tileBases more likely to appear
         Random r = new Random();
         int n = r.nextInt(100);
@@ -178,6 +202,10 @@ public enum MapType {
         return new MapTile(tileBases[0], x, y);
     }
 
+    /**
+     * Gets the enemies that populate each level
+     * @return List<Fighter> enemies
+     */
     public LinkedList<Fighter> getEnemies() {
         LinkedList<Fighter> fighters = new LinkedList<>();
         Game game = Main.myGame;
@@ -210,6 +238,11 @@ public enum MapType {
         }
     }
 
+    /**
+     * Gets the limit for each level
+     * @param lvl number
+     * @return army limit
+     */
     public static int getArmyLimit(int lvl) {
         if (lvl == 1) {
             return 3;
@@ -226,6 +259,11 @@ public enum MapType {
         }
     }
 
+    /**
+     * gets xPos of the ally fighters for this level
+     * @param i position in army
+     * @return xPos
+     */
     public int armyXPos(int i) {
         int[] arr;
         switch (this) {
@@ -240,6 +278,11 @@ public enum MapType {
         }
     }
 
+    /**
+     * gets yPos of the ally fighters for this level
+     * @param i position in army
+     * @return yPos
+     */
     public int armyYPos(int i) {
         int[] arr;
         switch (this) {

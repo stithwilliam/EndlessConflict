@@ -1,7 +1,7 @@
 package Model;
 
 /**
- * Created by William on 10/27/2015.
+ * The interface that all fighters implement
  */
 public interface Placeable {
 

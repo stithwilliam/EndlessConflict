@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 /**
- * Created by William on 10/26/2015.
+ * Controller for Battle.fxml
  */
 public class BattleController {
 
@@ -80,12 +80,20 @@ public class BattleController {
     @FXML
     private VBox terminal;
 
-    //Global vars
+    /**The map of the current battle**/
     private Map map;
-    private Game game; // for convenience, game will never change
+
+    /**Convenience, global game**/
+    private Game game;
+
+    /**HashMaps of panes to tiles**/
     private HashMap<StackPane, MapTile> paneToTile;
     private HashMap<MapTile, StackPane> tileToPane;
+
+    /**Map scroll animation**/
     private AnimationTimer scroller;
+
+    /**grid translation vars**/
     private double deltX, deltY;
 
     //GENERAL
@@ -129,7 +137,7 @@ public class BattleController {
     }
 
     /**
-     * Overloaded method. Populates the screen with the fighters
+     * Overloaded method. Populates the screen with the fighters provided
      * @param fighters
      */
     private void populateMap(LinkedList<Fighter> fighters) {
@@ -192,27 +200,6 @@ public class BattleController {
             }
         };
         scrollUntil.start();
-
-        /*double gridX = gridPane.getTranslateX();
-        double gridY = gridPane.getTranslateY();
-        while ((-1*gridX/64) > x) {
-            gridPane.setTranslateX(gridX + 64);
-            gridX = gridPane.getTranslateX();
-        }
-        while (((-1*gridX/64) + 9) < x) {
-            gridPane.setTranslateX(gridX - 64);
-            gridX = gridPane.getTranslateX();
-        }
-        while ((-1*gridY/64) > y) {
-            gridPane.setTranslateY(gridY + 64);
-            gridY = gridPane.getTranslateY();
-        }
-        while (((-1*gridY/64) + 5) < y) {
-            gridPane.setTranslateY(gridY - 64);
-            gridY = gridPane.getTranslateY();
-        }
-        deltX = 0;
-        deltY = 0;*/
     }
 
     //MOVE
@@ -227,6 +214,9 @@ public class BattleController {
         moveBtn.setStyle("-fx-border-color: cyan; -fx-border-width: 2");
     }
 
+    /**
+     * Helper method to show the moves of the current fighter on the battlefield.
+     */
     private void showMoves() {
         Fighter fighter = map.getFighter();
         if (!fighter.hasMoved()) {
@@ -246,58 +236,6 @@ public class BattleController {
             moveBtn.setOnMouseExited(this::noShowMoves);
         }
     }
-
-    /*
-    private ImageView getMoveSelect(int i, int j, boolean[][] valid) {
-        Fighter fighter = map.getFighter();
-        valid[fighter.getyPos()][fighter.getxPos()] = true;
-        boolean left, right, up, down;
-        Image image = null;
-        up = (i > 0 && !valid[i - 1][j]);
-        down = (i < valid.length - 1 && !valid[i + 1][j]);
-        left = (j > 0 && !valid[i][j - 1]);
-        right = (j < valid[0].length - 1 && !valid[i][j + 1]);
-        if (up && down && left && right) {
-            image = new Image("/View/Graphics/Tile/moveSelect1111.png");
-        }
-
-        else if (right && down && left && !up) {
-            image = new Image("/View/Graphics/Tile/moveSelect1110.png");
-        } else if (right && down && !left && up) {
-            image = new Image("/View/Graphics/Tile/moveSelect1101.png");
-        } else if (right && !down && left && up) {
-            image = new Image("/View/Graphics/Tile/moveSelect1011.png");
-        } else if (!right && down && left && up) {
-            image = new Image("/View/Graphics/Tile/moveSelect0111.png");
-        }
-
-        else if (right && down && !left && !up) {
-            image = new Image("/View/Graphics/Tile/moveSelect1100.png");
-        } else if (right && !down && left && !up) {
-            image = new Image("/View/Graphics/Tile/moveSelect1010.png");
-        } else if (!right && down && left && !up) {
-            image = new Image("/View/Graphics/Tile/moveSelect0110.png");
-        } else if (right && !down && !left && up) {
-            image = new Image("/View/Graphics/Tile/moveSelect1001.png");
-        } else if (!right && down && !left && up) {
-            image = new Image("/View/Graphics/Tile/moveSelect0101.png");
-        } else if (!right && !down && left && up) {
-            image = new Image("/View/Graphics/Tile/moveSelect0011.png");
-        }
-
-        else if (right && !down && !left && !up) {
-            image = new Image("/View/Graphics/Tile/moveSelect1000.png");
-        } else if (!right && down && !left && !up) {
-            image = new Image("/View/Graphics/Tile/moveSelect0100.png");
-        } else if (!right && !down && left && !up) {
-            image = new Image("/View/Graphics/Tile/moveSelect0010.png");
-        } else if (!right && !down && !left && up) {
-            image = new Image("/View/Graphics/Tile/moveSelect0001.png");
-        }
-
-        return new ImageView(image);
-    }
-    */
 
     /**
      * Called when the player exits the move button.
@@ -435,6 +373,9 @@ public class BattleController {
         atkBtn.setBlendMode(BlendMode.HARD_LIGHT);
     }
 
+    /**
+     * Helper method that shows the available attacks for the current fighter.
+     */
     private void showAttacks() {
         Fighter fighter = map.getFighter();
         if (!fighter.hasAttacked()) {
@@ -462,6 +403,10 @@ public class BattleController {
         atkBtn.setStyle("");
     }
 
+    /**
+     * Removes the available attacks shown on the battlefield
+     * @param e
+     */
     private void noShowAttacks(MouseEvent e) {
         Fighter fighter = map.getFighter();
         boolean[][] valid = map.getValidAttacks(fighter);
@@ -626,6 +571,10 @@ public class BattleController {
         }
     }
 
+    /**
+     * Needed when using a MouseEvent to send buttons to default
+     * @param e
+     */
     private void buttonsToDefault(MouseEvent e) {
         buttonsToDefault();
     }
@@ -668,6 +617,10 @@ public class BattleController {
         }
     }
 
+    /**
+     * Displays ally fighter f information in the side panel.
+     * @param f
+     */
     public void showAlly(Fighter f) {
         allyName.setText(f.getName());
         allyAtk.setText("ATT: " + f.getAtt());
@@ -679,6 +632,10 @@ public class BattleController {
         allyHealthWheel.setImage(healthWheel(f));
     }
 
+    /**
+     * Displays enemy fighter f information in the side panel.
+     * @param f
+     */
     public void showEnemy(Fighter f) {
         enemyName.setText(f.getName());
         enemyAtk.setText("ATT: " + f.getAtt());
@@ -691,6 +648,11 @@ public class BattleController {
         toConsole("" + f.getName() + ": " + f.getDescription());
     }
 
+    /**
+     * Animates a reward chest at x,y position.
+     * @param x
+     * @param y
+     */
     public void showRewardChest(int x, int y) {
         MapTile mapTile = map.getMapTile(x, y);
         StackPane pane = tileToPane.get(mapTile);
@@ -731,14 +693,14 @@ public class BattleController {
                 pane.getChildren().remove(chest);
             }
         });
-
-
         chestAnimation.play();
-
-
-
     }
 
+    /**
+     * Sets the health wheel in the side panel for fighter f.
+     * @param f
+     * @return
+     */
     private Image healthWheel(Fighter f) {
         int n = (f.getHp() * 100) / f.getMaxHP();
         String s = "";
@@ -827,6 +789,7 @@ public class BattleController {
         }
     }
 
+    /**Movement functions for when the edge of the screen is moused over**/
     private void moveRight(MouseEvent e) {
         deltX = 2;
     }

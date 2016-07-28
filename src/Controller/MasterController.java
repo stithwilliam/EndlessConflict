@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 /**
- * Created by William on 10/26/2015.
+ * Singleton master controller that is in charge of switching scenes and invoking other controllers
  */
 public class MasterController {
 
@@ -77,6 +77,7 @@ public class MasterController {
     public void setBattleScene() { stage.setScene(battleScene);}
 
     /**Scene loaders**/
+    /**Loads the prebattle scene**/
     public void loadPrebattleScene() {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/View/Prebattle.fxml"));
@@ -86,34 +87,13 @@ public class MasterController {
         }
     }
 
+    /**Loads the map scene**/
     public void loadMapScene() {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/View/Map.fxml"));
             stage.setScene(new Scene(root));
         } catch (IOException e) {
             System.out.println("Shit's broke: " + e.getCause());
-        }
-    }
-
-    public void loadBattleScene() {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/View/Battle.fxml"));
-            stage.setScene(new Scene(root));
-        } catch (IOException e) {
-            System.out.println("Shit's broke: " + e);
-
-        }
-    }
-
-    public void loadEquipScene(Fighter f) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/EquipmentChanger.fxml"));
-            Parent root = loader.load();
-            EquipController controller = loader.getController();
-            stage.setScene(new Scene(root));
-            controller.setFighter(f);
-        } catch (IOException e) {
-            System.out.println("Shit's broke: " + e);
         }
     }
 

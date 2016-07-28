@@ -3,7 +3,7 @@ package Model;
 import javafx.scene.layout.StackPane;
 
 /**
- * Created by William on 10/27/2015.
+ * Tiles that are placed on the map. Knows its x,y pos, the picture and the stackpane holding it
  */
 public class MapTile {
 

@@ -9,10 +9,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 
 /**
- * Created by William on 10/26/2015.
+ * Controller for Config.fxml
  */
 public class ConfigController {
 
+    /**FXML Injections**/
     @FXML
     private Button okBtn;
     @FXML
@@ -49,6 +50,9 @@ public class ConfigController {
         boxesToDefault();
     }
 
+    /**
+     * Sets the boxes to their default effect.
+     */
     private void boxesToDefault() {
         humanBox.setOnMouseEntered(this::humanEnter);
         humanBox.setOnMouseExited(this::humanExit);
@@ -126,8 +130,8 @@ public class ConfigController {
         MasterController.getInstance().setStartScene();
     }
 
-    /**Mouse hovering**/
 
+    /**Mouse hovering**/
     private void okEnter(MouseEvent e) {
         okBtn.setStyle("-fx-border-color: cyan; -fx-background-color: dimgrey; -fx-border-width: 3; -fx-border-radius: 3;");
         okBtn.setFont(Font.font("Britannic Bold", 22));

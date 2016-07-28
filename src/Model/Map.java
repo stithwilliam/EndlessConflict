@@ -2,8 +2,6 @@ package Model;
 
 import java.util.*;
 
-
-
 public class Map {
 
     /**Type of this map**/
@@ -38,6 +36,10 @@ public class Map {
         rewardList = new LinkedList<>();
     }
 
+    /**
+     * Places the given army on the map according to the MapType ally locations
+     * @param army to be placed
+     */
     public void placeArmy(List<Fighter> army) {
         int i = 0;
         for (Fighter f : army) {
@@ -636,9 +638,6 @@ public class Map {
     }
     /**Adders**/
     public void addToRewardList(Placeable p) {rewardList.add(p);}
-
-    /**Getters**/
-
 
     /**Setters**/
     public void setFighter(Fighter f) {fighter = f;}

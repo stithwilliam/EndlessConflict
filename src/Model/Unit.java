@@ -3,7 +3,7 @@ package Model;
 import java.util.*;
 
 /**
- * Created by William on 10/26/2015.
+ * The different units in the game
  */
 public enum Unit implements Placeable {
     /**First Units**/
@@ -39,6 +39,10 @@ public enum Unit implements Placeable {
         imagePath.put("RANGER", "/View/Graphics/Fighter/humanRanger.png");
     }
 
+    /**
+     * The description of this unit
+     * @return String description
+     */
     public String getDescription() {
         switch (this) {
             case SENTRYDRONE:
@@ -52,6 +56,10 @@ public enum Unit implements Placeable {
         }
     }
 
+    /**
+     * The race of this unit
+     * @return String race
+     */
     public String getRace() {
         switch (this) {
             case SENTRYDRONE:
@@ -64,6 +72,7 @@ public enum Unit implements Placeable {
                 return ("None");
         }
     }
+
     /**Getters**/
     public String imagePath() { return imagePath.get(this.name());}
     public String getName() {return name;}

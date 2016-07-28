@@ -4,9 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by William on 10/27/2015.
+ * The commanders in the game.
  */
 public enum Commander implements Placeable {
+
     /**First 3 commanders**/
     LIZARDKING(12,12,6,1, "Lizard King"), MODEL0(6,12,4,4, "Model 0"),
     CHAOS(12,6,4,4,"Chaos");
@@ -39,6 +40,10 @@ public enum Commander implements Placeable {
         imagePath.put("CHAOS", "/View/Graphics/Fighter/commanderChaos.png");
     }
 
+    /**
+     * The description of the commander.
+     * @return String description
+     */
     public String getDescription() {
         switch (this) {
             case MODEL0:
@@ -55,6 +60,10 @@ public enum Commander implements Placeable {
         }
     }
 
+    /**
+     * The race of the commander
+     * @return String
+     */
     public String getRace() {
         switch (this) {
             case MODEL0:

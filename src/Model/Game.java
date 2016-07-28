@@ -8,7 +8,8 @@ import java.util.LinkedList;
 import java.util.Random;
 
 /**
- * Created by William on 10/26/2015.
+ * Singleton game class that stores all of the user's data, as well as providing functionality
+ * for multi-screen events
  */
 public class Game {
 
@@ -57,6 +58,10 @@ public class Game {
         levelSelected = 0;
     }
 
+    /**
+     * Called when the config screen is finished.
+     * Sets up the preliminary collection and loads the map screen
+     */
     public void endConfig() {
         collection.add(new Fighter(race.getCommander()));
         collection.add(new Fighter(race.getUnit()));
@@ -109,7 +114,6 @@ public class Game {
         if (defender.getHp() <= 0) {
             s += (" and killed " + defender.getName() + "!");
             killedFighter(defender);
-            rewardChest(defender.getxPos(), defender.getyPos(), defender.getModel());
         } else {
             s += (". (" + defender.getHp() + "/" + defender.getMaxHP() + ") health remaining");
         }
@@ -122,12 +126,21 @@ public class Game {
      */
     public void killedFighter(Fighter f) {
         battleController.removeFighter(f);
+        if (f.isEnemy()) {
+            rewardChest(f.getxPos(), f.getyPos(), f.getModel());
+        }
         if (map.getEnemies().size() == 0) {
             MasterController.getInstance().loadMapScene();
 
         }
     }
 
+    /**
+     * Spawns a reward chest at position (x,y).
+     * @param x xPos
+     * @param y yPos
+     * @param model type of reward
+     */
     private void rewardChest(int x, int y, Placeable model) {
         map.addToRewardList(model);
         battleController.showRewardChest(x, y);
@@ -177,6 +190,10 @@ public class Game {
         return fighter;
     }
 
+    /**
+     * The MapType of the current map in use
+     * @return MapType
+     */
     private MapType getMapType() {
         if (levelSelected == 1) {
             return MapType.LEVELONE;

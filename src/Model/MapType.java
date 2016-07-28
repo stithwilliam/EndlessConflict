@@ -168,6 +168,35 @@ public enum MapType {
                 }
                 return board;
             case LEVELFIVE:
+                h = 16;
+                w = 16;
+                board = new MapTile[h][w];
+                tileBases = new TileBase[]{P, F, R};
+                probs = new int[] {60, 25, 15};
+                start = new Coordinates(2, 8);
+                objectives.add(new Coordinates(8, 13));
+                objectives.add(new Coordinates(8, 2));
+                objectives.add(new Coordinates(13, 2));
+                pathBetween = false;
+                while (!pathBetween) {
+                    for (int i = 0; i < h; i++) {
+                        for (int j = 0; j < w; j++) {
+                            if ( ( (i <= 9 && i >= 7) && (j <= 2 && j >= 0) ) ||
+                                    ( (i <= 1 && i >= 2) && (j <= 8 && j >= 7) ) ||
+                                    ( (i <= 13 && i >= 14) && (j <= 8 && j >= 7) ) ||
+                                    ( (i <= 8 && i <= 7) && (j <= 13 && j >= 14) ) ) {
+                                board[i][j] = new MapTile(P, j, i);
+                            } else {
+                                board[i][j] = nextTile(board, tileBases, probs, j, i);
+                            }
+                        }
+                    }
+                    if (hasPathBetween(board, start, objectives.get(0)) && hasPathBetween(board, start, objectives.get(1)) &&
+                            hasPathBetween(board, start, objectives.get(2))) {
+                        pathBetween = true;
+                    }
+                }
+                return board;
         }
         return board;
     }
@@ -220,9 +249,79 @@ public enum MapType {
                 fighters.add(b5);
                 return fighters;
             case LEVELFIVE:
+                Fighter c1 = new Fighter(race.getWeakRace().getUnit(), 7, 2, true);
+                fighters.add(c1);
+                Fighter c2 = new Fighter(race.getWeakRace().getCommander(), 8, 1, true);
+                fighters.add(c2);
+                Fighter c3 = new Fighter(race.getStrongRace().getUnit(), 7, 13, true);
+                fighters.add(c3);
+                Fighter c4 = new Fighter(race.getStrongRace().getCommander(), 8, 14, true);
+                fighters.add(c4);
+                Fighter c5 = new Fighter(race.getCommander(), 13, 8, true);
+                fighters.add(c5);
+                Fighter c6 = new Fighter(race.getUnit(), 14, 7, true);
+                fighters.add(c6);
+                Fighter c7 = new Fighter(race.getUnit(), 14, 9, true);
+                fighters.add(c7);
                 return fighters;
             default:
                 return fighters;
+        }
+    }
+
+    /**
+     * gets xPos of the ally fighters for this level
+     * @param i position in army
+     * @return xPos
+     */
+    public int armyXPos(int i) {
+        int[] arr;
+        switch (this) {
+            case LEVELONE:
+                arr = new int[] {1,0,0};
+                return arr[i];
+            case LEVELTWO:
+                arr = new int[] {2, 1, 1, 1};
+                return arr[i];
+            case LEVELTHREE:
+                arr = new int[] {2, 1, 1, 1};
+                return arr[i];
+            case LEVELFOUR:
+                arr = new int[] {2, 1, 1, 1};
+                return arr[i];
+            case LEVELFIVE:
+                arr = new int[] {2, 1, 1, 1, 0};
+                return arr[i];
+            default:
+                return -1;
+        }
+    }
+
+    /**
+     * gets yPos of the ally fighters for this level
+     * @param i position in army
+     * @return yPos
+     */
+    public int armyYPos(int i) {
+        int[] arr;
+        switch (this) {
+            case LEVELONE:
+                arr = new int[] {3,2,4};
+                return arr[i];
+            case LEVELTWO:
+                arr = new int[] {6, 5, 7, 6};
+                return arr[i];
+            case LEVELTHREE:
+                arr = new int[] {6, 5, 7, 6};
+                return arr[i];
+            case LEVELFOUR:
+                arr = new int[] {6, 5, 7, 6};
+                return arr[i];
+            case LEVELFIVE:
+                arr = new int[] {6, 5, 7, 6, 6};
+                return arr[i];
+            default:
+                return -1;
         }
     }
 
@@ -334,53 +433,4 @@ public enum MapType {
         }
     }
 
-    /**
-     * gets xPos of the ally fighters for this level
-     * @param i position in army
-     * @return xPos
-     */
-    public int armyXPos(int i) {
-        int[] arr;
-        switch (this) {
-            case LEVELONE:
-                arr = new int[] {1,0,0};
-                return arr[i];
-            case LEVELTWO:
-                arr = new int[] {2, 1, 1, 1};
-                return arr[i];
-            case LEVELTHREE:
-                arr = new int[] {2, 1, 1, 1};
-                return arr[i];
-            case LEVELFOUR:
-                arr = new int[] {2, 1, 1, 1};
-                return arr[i];
-            default:
-                return -1;
-        }
-    }
-
-    /**
-     * gets yPos of the ally fighters for this level
-     * @param i position in army
-     * @return yPos
-     */
-    public int armyYPos(int i) {
-        int[] arr;
-        switch (this) {
-            case LEVELONE:
-                arr = new int[] {3,2,4};
-                return arr[i];
-            case LEVELTWO:
-                arr = new int[] {6, 5, 7, 6};
-                return arr[i];
-            case LEVELTHREE:
-                arr = new int[] {6, 5, 7, 6};
-                return arr[i];
-            case LEVELFOUR:
-                arr = new int[] {6, 5, 7, 6};
-                return arr[i];
-            default:
-                return -1;
-        }
-    }
 }

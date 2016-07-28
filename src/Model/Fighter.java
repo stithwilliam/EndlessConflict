@@ -1,7 +1,7 @@
 package Model;
 
 /**
- * Created by William on 10/27/2015.
+ * Fighter class, used almost everywhere
  */
 public class Fighter {
 
@@ -47,16 +47,11 @@ public class Fighter {
         hasMoved = false;
     }
 
-    /**Getters**/
-    public String getStats() {
-        if (enemy) {
-            return "Enemy " + name + ": HP - " + hp + "/" + maxHP + ". Atk - " + attack +
-                    ". Mov - " + movement + ". Range - " + range;
-        } else {
-            return "Ally " + name + ": HP - " + hp + "/" + maxHP + ". Atk - " + attack +
-                    ". Mov - " + movement + ". Range - " + range;
-        }
+    public String details() {
+        return (name + ". xPos: " + xPos + ". yPos: " + yPos);
     }
+
+    /**Getters**/
     public String toString() { return (name);}
     public String imagePath() {return model.imagePath();}
     public String getName() {return name;}

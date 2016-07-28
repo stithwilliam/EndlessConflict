@@ -4,13 +4,11 @@ import java.util.Map;
 import java.util.HashMap;
 
 /**
- * Created by William on 11/10/2015.
+ * Graphic enum, used to easily get image paths for different graphics
  */
 public enum Graphic {
     /**Map Selectors**/
     MOVESLCT, ATTACKSLCT, FIGHTERSLCT, REWARDCHEST;
-
-
 
     /**map of all of the imagePaths of the Graphics**/
     private Map<String, String> imagePath;

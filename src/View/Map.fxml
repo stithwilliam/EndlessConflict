@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.paint.*?>
@@ -9,103 +10,94 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BattleController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MapController">
    <children>
-      <Pane layoutX="80.0" layoutY="80.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="386.0" prefWidth="640.0">
+      <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true">
+         <image>
+            <Image url="@Graphics/map.jpg" />
+         </image>
+      </ImageView>
+      <Button fx:id="level1" blendMode="SCREEN" layoutX="47.0" layoutY="88.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="96.0" style="-fx-background-color: dimgrey;" text="1" textFill="AQUA">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Britannic Bold" size="49.0" />
+         </font>
+      </Button>
+      <Button fx:id="level2" blendMode="SCREEN" layoutX="187.0" layoutY="88.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="96.0" style="-fx-background-color: dimgrey;" text="2" textFill="TOMATO">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Britannic Bold" size="49.0" />
+         </font>
+      </Button>
+      <Button fx:id="level3" blendMode="SCREEN" layoutX="327.0" layoutY="88.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="96.0" style="-fx-background-color: dimgrey;" text="3" textFill="TOMATO">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Britannic Bold" size="49.0" />
+         </font>
+      </Button>
+      <Button fx:id="level4" blendMode="SCREEN" layoutX="477.0" layoutY="88.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="96.0" style="-fx-background-color: dimgrey;" text="4" textFill="TOMATO">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Britannic Bold" size="49.0" />
+         </font>
+      </Button>
+      <Button fx:id="level5" blendMode="SCREEN" layoutX="624.0" layoutY="72.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="128.0" style="-fx-background-color: dimgrey;" text="5" textFill="TOMATO">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Britannic Bold" size="49.0" />
+         </font>
+      </Button>
+      <Pane fx:id="panelPane" layoutX="150.0" layoutY="375.0" prefHeight="200.0" prefWidth="500.0">
          <children>
-            <GridPane fx:id="gridPane" style="-: GREEN;">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="NEVER" maxWidth="64.0" minWidth="64.0" percentWidth="0.0" prefWidth="64.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints maxHeight="64.0" minHeight="64.0" percentHeight="0.0" prefHeight="64.0" valignment="BASELINE" vgrow="NEVER" />
-               </rowConstraints>
-            </GridPane>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="GREY" height="200.0" opacity="0.66" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 25; -fx-arc-width: 25;" width="500.0" />
+            <HBox prefHeight="200.0" prefWidth="500.0">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="400.0">
+                     <children>
+                        <Label fx:id="descriptionLabel" prefHeight="125.0" prefWidth="400.0" style="-fx-text-fill: BLACK;" text="TUTORIAL: You've been running for long enough. It's time to take a stand against your pursuers. " wrapText="true">
+                           <font>
+                              <Font name="Britannic Bold" size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="rewardLabel" prefHeight="75.0" prefWidth="400.0" style="-fx-text-fill: BLACK;" text="REWARD: 1 basic unit from each other race" wrapText="true">
+                           <font>
+                              <Font name="Britannic Bold" size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="173.0" prefWidth="100.0" />
+               </children>
+            </HBox>
          </children>
-         <padding>
-            <Insets right="5.0" />
-         </padding>
       </Pane>
-      <ImageView fitHeight="136.0" fitWidth="640.0" layoutX="80.0" layoutY="466.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Graphics/bottomBoard.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="80.0" fitWidth="640.0" layoutX="80.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Graphics/topBoard.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="600.0" fitWidth="80.0" layoutX="720.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Graphics/rightBoard.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="600.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Graphics/leftBoard.png" />
-         </image>
-      </ImageView>
-      <Rectangle fx:id="upRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="64.0" layoutX="336.0" layoutY="16.0" stroke="BLACK" strokeType="INSIDE" width="128.0" />
-      <Rectangle fx:id="leftRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="128.0" layoutX="16.0" layoutY="210.0" stroke="BLACK" strokeType="INSIDE" width="64.0" />
-      <Label layoutX="386.0" layoutY="36.0" text="UP">
+      <Button fx:id="goBtn" blendMode="HARD_LIGHT" layoutX="538.0" layoutY="447.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="96.0" text="GO">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
          <font>
-            <Font name="Britannic Bold" size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="40.0" layoutY="262.0" text="L">
-         <font>
-            <Font name="Britannic Bold" size="24.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="136.0" layoutY="466.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: grey;" width="336.0" />
-      <Rectangle fx:id="downRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="64.0" layoutX="336.0" layoutY="466.0" stroke="BLACK" strokeType="INSIDE" width="128.0" />
-      <Label layoutX="367.0" layoutY="486.0" text="DOWN">
-         <font>
-            <Font name="Britannic Bold" size="24.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="136.0" layoutX="464.0" layoutY="466.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: yellow;" width="336.0" />
-      <Button fx:id="moveBtn" layoutX="551.0" layoutY="477.0" mnemonicParsing="false" text="MOVE">
-         <font>
-            <Font name="Britannic Bold" size="18.0" />
+            <Font name="Britannic Bold" size="36.0" />
          </font>
       </Button>
-      <Rectangle fx:id="rightRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="128.0" layoutX="720.0" layoutY="209.0" stroke="BLACK" strokeType="INSIDE" width="64.0" />
-      <Label layoutX="746.0" layoutY="262.0" text="R">
+      <Button layoutX="590.0" layoutY="369.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="64.0" style="-fx-background-color: transparent;" text="X" fx:id="xBtn">
          <font>
-            <Font name="Britannic Bold" size="24.0" />
-         </font>
-      </Label>
-      <Button fx:id="atkBtn" layoutX="543.0" layoutY="519.0" mnemonicParsing="false" text="ATTACK">
-         <font>
-            <Font name="Britannic Bold" size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="skillsBtn" layoutX="552.0" layoutY="561.0" mnemonicParsing="false" text="SKILL">
-         <font>
-            <Font name="Britannic Bold" size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="nextBtn" layoutX="642.0" layoutY="504.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="48.0" text="&gt;&gt;&gt;">
-         <font>
-            <Font name="Britannic Bold" size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="prevBtn" layoutX="481.0" layoutY="504.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="48.0" text="&lt;&lt;&lt;">
-         <font>
-            <Font name="Britannic Bold" size="18.0" />
-         </font>
-      </Button>
-      <VBox prefHeight="200.0" prefWidth="100.0" />
-      <VBox fx:id="terminal" alignment="BOTTOM_RIGHT" layoutX="8.0" layoutY="473.0" maxHeight="122.0" maxWidth="320.0" minHeight="122.0" minWidth="320.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="122.0" prefWidth="320.0" style="-fx-background-color: BLACK;">
-         <padding>
-            <Insets right="5.0" />
-         </padding>
-      </VBox>
-      <Button fx:id="endTurnBtn" contentDisplay="TOP" layoutX="709.0" layoutY="491.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="70.0" text=" END TURN" textAlignment="CENTER" wrapText="true">
-         <font>
-            <Font name="Britannic Bold" size="18.0" />
+            <Font name="Britannic Bold" size="30.0" />
          </font>
       </Button>
    </children>

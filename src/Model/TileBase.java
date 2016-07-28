@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 /**
- * Created by William on 10/26/2015.
+ * Types of MapTiles
  */
 public enum TileBase {
     /**Types of Tiles in Tutorial Map**/

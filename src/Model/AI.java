@@ -2,11 +2,10 @@ package Model;
 
 import Controller.BattleController;
 import Controller.MasterController;
-
 import java.util.ArrayList;
 
 /**
- * Created by William on 11/13/2015.
+ * The AI logic
  */
 public class AI {
 
@@ -86,10 +85,6 @@ public class AI {
     //TODO: make this smarter
     /**
      * Helper function to determine which fighter the AI should choose to attack.
-     * Looks at game's difficulty to make a decision.
-     * EASY: attacks player with highest defense.
-     * MEDIUM: attacks player with lowest defense.
-     * HARD: attacks player based on their attack / defense combo.
      * @param a Fighter to compare with b
      * @param b Fighter to compare with a
      * @return The fighter chosen to attack.
@@ -122,7 +117,7 @@ public class AI {
 
     /**
      * Finds the tile that Fighter attacker should move to so that he can attack Fighter defender.
-     * TODO: Make this chosen tile smarter based on Difficulty.
+     * TODO: Make this chosen tile smarter
      * @param attacker Fighter that the AI is controlling
      * @param defender Ally Fighter to be attacked
      * @return The MapTile to move to

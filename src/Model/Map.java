@@ -1,13 +1,7 @@
 package Model;
 
-import Controller.BattleController;
-
 import java.util.*;
 
-
-/**
- * Created by William on 10/26/2015.
- */
 public class Map {
 
     /**Type of this map**/
@@ -25,6 +19,7 @@ public class Map {
     /**convenience vars for height and width of the map**/
     private int  width, height;
 
+    /**List of rewards obtained on the current map**/
     private LinkedList<Placeable> rewardList;
 
 
@@ -41,53 +36,21 @@ public class Map {
         rewardList = new LinkedList<>();
     }
 
+    /**
+     * Places the given army on the map according to the MapType ally locations
+     * @param army to be placed
+     */
     public void placeArmy(List<Fighter> army) {
         int i = 0;
         for (Fighter f : army) {
             if (i == 0) {
                 fighter = f;
             }
-            f.setxPos(mapType.getXPos(i));
-            f.setyPos(mapType.getYPos(i));
+            f.setxPos(mapType.armyXPos(i));
+            f.setyPos(mapType.armyYPos(i));
             fighters.add(f);
             i++;
         }
-    }
-
-
-
-    /**
-     * Utility function.
-     * Returns whether the two positions, (x1, y1) and (x2, y2), have a valid path between them.
-     * @param x1 int x1 position
-     * @param y1 int y1 position
-     * @param x2 int x2 position
-     * @param y2 int y2 position
-     * @return boolean if path between the positions
-     */
-    public boolean hasPathBetween(int x1, int y1, int x2, int y2) {
-        boolean foundPath = false;
-        MapTile startingTile = getMapTile(x1, y1);
-        HashSet<MapTile> visited = new HashSet<>();
-        Queue<MapTile> queue = new LinkedList<>();
-        for (MapTile x : getMoves(startingTile)) {
-            queue.add(x);
-        }
-        while (!queue.isEmpty()) {
-            MapTile tile = queue.poll();
-            if (tile.getxPos() == x2 && tile.getyPos() == y2) {
-                foundPath = true;
-                queue = new LinkedList<>();
-            } else {
-                for (MapTile x : getMoves(tile)) {
-                    if (!visited.contains(x)) {
-                        queue.add(x);
-                        visited.add(x);
-                    }
-                }
-            }
-        }
-        return foundPath;
     }
 
     /**
@@ -675,9 +638,6 @@ public class Map {
     }
     /**Adders**/
     public void addToRewardList(Placeable p) {rewardList.add(p);}
-
-    /**Getters**/
-
 
     /**Setters**/
     public void setFighter(Fighter f) {fighter = f;}

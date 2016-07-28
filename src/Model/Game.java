@@ -2,14 +2,14 @@ package Model;
 
 import Controller.BattleController;
 import Controller.MasterController;
-import sun.awt.image.ImageWatched;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
 
 /**
- * Created by William on 10/26/2015.
+ * Singleton game class that stores all of the user's data, as well as providing functionality
+ * for multi-screen events
  */
 public class Game {
 
@@ -18,9 +18,6 @@ public class Game {
 
     /**Fighters in the user's army**/
     private LinkedList<Fighter> army;
-
-    /**Limit of fighters in army**/
-    private int armyLimit = 3;
 
     /**Fighters in the user's collection**/
     private LinkedList<Fighter> collection;
@@ -34,6 +31,12 @@ public class Game {
     /**the BattleController in charge of the map screen**/
     private BattleController battleController;
 
+    /**The current level selected**/
+    private int levelSelected;
+
+    /**The levels that the user has beaten. 1-5**/
+    private LinkedList<Boolean> levelsComplete;
+
     /**
      * Constructor for Game
      */
@@ -43,37 +46,42 @@ public class Game {
         comp = null;
         army = new LinkedList<>();
         collection = new LinkedList<>();
-        armyLimit = 3;
+        levelsComplete = new LinkedList<>();
+        for (int i = 0; i < 5; i++) {
+            if (i == 0) {
+                levelsComplete.add(true);
+            }
+            else {
+                levelsComplete.add(false);
+            }
+        }
+        levelSelected = 0;
     }
 
+    /**
+     * Called when the config screen is finished.
+     * Sets up the preliminary collection and loads the map screen
+     */
     public void endConfig() {
         collection.add(new Fighter(race.getCommander()));
         collection.add(new Fighter(race.getUnit()));
         collection.add(new Fighter(race.getUnit()));
-        MasterController.getInstance().loadPrebattleScene();
+        MasterController.getInstance().loadMapScene();
     }
 
     /**
      * Called when the user makes it past the config screens
      * Creates the Tutorial map and displays it on the screen
      */
-    public void startTutorial() {
+    public void startLevel() {
         MasterController.getInstance().setBattleScene();
-        map = new Map(MapType.TUTORIAL);
-        int startX = 1;
-        int startY = 2;
-        int obj1X = 8;
-        int obj1Y = 3;
-        int obj2X = 14;
-        int obj2Y = 3;
-        while (!map.hasPathBetween(startX, startY, obj1X, obj1Y) || !map.hasPathBetween(startX, startY, obj2X, obj2Y)) {
-            map = new Map(MapType.TUTORIAL);
-        }
+        map = new Map(getMapType());
         map.placeArmy(army);
         comp = new AI(this, map);
         battleController = MasterController.getInstance().getBattleController();
         battleController.constructMap(map);
         battleController.showAlly(map.getFighter());
+        battleController.putInFocus(map.getFighter().getxPos(), map.getFighter().getyPos());
         battleController.showEnemy(map.getEnemies().get(0));
     }
 
@@ -106,7 +114,6 @@ public class Game {
         if (defender.getHp() <= 0) {
             s += (" and killed " + defender.getName() + "!");
             killedFighter(defender);
-            rewardChest(defender.getxPos(), defender.getyPos(), defender.getModel());
         } else {
             s += (". (" + defender.getHp() + "/" + defender.getMaxHP() + ") health remaining");
         }
@@ -119,12 +126,21 @@ public class Game {
      */
     public void killedFighter(Fighter f) {
         battleController.removeFighter(f);
+        if (f.isEnemy()) {
+            rewardChest(f.getxPos(), f.getyPos(), f.getModel());
+        }
         if (map.getEnemies().size() == 0) {
-            //MasterController.getInstance().setHeadquartersScene();
+            MasterController.getInstance().loadMapScene();
 
         }
     }
 
+    /**
+     * Spawns a reward chest at position (x,y).
+     * @param x xPos
+     * @param y yPos
+     * @param model type of reward
+     */
     private void rewardChest(int x, int y, Placeable model) {
         map.addToRewardList(model);
         battleController.showRewardChest(x, y);
@@ -174,7 +190,26 @@ public class Game {
         return fighter;
     }
 
-
+    /**
+     * The MapType of the current map in use
+     * @return MapType
+     */
+    private MapType getMapType() {
+        if (levelSelected == 1) {
+            return MapType.LEVELONE;
+        } else if (levelSelected == 2) {
+            return MapType.LEVELTWO;
+        } else if (levelSelected == 3) {
+            return MapType.LEVELTHREE;
+        } else if (levelSelected == 4) {
+            return MapType.LEVELFOUR;
+        } else if (levelSelected == 5) {
+            return MapType.LEVELFIVE;
+        }
+        else {
+            return null;
+        }
+    }
 
     /**Getters**/
     public Map getMap() {
@@ -183,19 +218,22 @@ public class Game {
     public Race getRace() {
         return race;
     }
-    public int getArmyLimit() { return armyLimit;}
+    public int getLevelSelected() { return levelSelected;}
     public LinkedList<Fighter> getArmy() {
         return army;
     }
     public LinkedList<Fighter> getCollection() {
         return collection;
     }
+    public boolean getLevelComplete(int i) {return levelsComplete.get(i);}
 
     /**Setters**/
     public void setRace(Race c) {
         race = c;
     }
     public void setArmy(LinkedList<Fighter> a) {army = a;}
+    public void setLevelSelected(int i ) { levelSelected = i;}
+    public void completeLevel(int i) {levelsComplete.set(i, true);}
 
     /**Adders**/
     public void addToArmy(Fighter f) {

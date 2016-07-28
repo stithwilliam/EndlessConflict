@@ -37,6 +37,8 @@ public class RewardsController {
 
     public void initialize() {
         Main.myGame.getMap().getRewardList(); //show the user the rewards they got
+        contBtn.setOnAction(this::setContBtn);
+        contBtn.setOnMouseEntered();
 
         FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), chestImage);
         fadeOut.setFromValue(1);
@@ -50,9 +52,12 @@ public class RewardsController {
         sequence.getChildren().add();
 
 
+
     }
 
-
+    private void setContBtn(ActionEvent e) {
+        //do something
+    }
 
   //  @FXML what to put here?
  //   void db7830(ActionEvent event)

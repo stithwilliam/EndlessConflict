@@ -165,7 +165,7 @@ public class BattleController {
      * @param x
      * @param y
      */
-    private void putInFocus(int x, int y) {
+    public void putInFocus(int x, int y) {
         double targetX = x * -64 + 64 * 4.5;
         double targetY = y * -64 + 64 * 3.5;
 

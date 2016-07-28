@@ -51,42 +51,6 @@ public class Map {
         }
     }
 
-
-
-    /**
-     * Utility function.
-     * Returns whether the two positions, (x1, y1) and (x2, y2), have a valid path between them.
-     * @param x1 int x1 position
-     * @param y1 int y1 position
-     * @param x2 int x2 position
-     * @param y2 int y2 position
-     * @return boolean if path between the positions
-     */
-    public boolean hasPathBetween(int x1, int y1, int x2, int y2) {
-        boolean foundPath = false;
-        MapTile startingTile = getMapTile(x1, y1);
-        HashSet<MapTile> visited = new HashSet<>();
-        Queue<MapTile> queue = new LinkedList<>();
-        for (MapTile x : getMoves(startingTile)) {
-            queue.add(x);
-        }
-        while (!queue.isEmpty()) {
-            MapTile tile = queue.poll();
-            if (tile.getxPos() == x2 && tile.getyPos() == y2) {
-                foundPath = true;
-                queue = new LinkedList<>();
-            } else {
-                for (MapTile x : getMoves(tile)) {
-                    if (!visited.contains(x)) {
-                        queue.add(x);
-                        visited.add(x);
-                    }
-                }
-            }
-        }
-        return foundPath;
-    }
-
     /**
      * Returns an array of costs, centered at (x, y).
      * @param x int x position

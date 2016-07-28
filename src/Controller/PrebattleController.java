@@ -1,9 +1,6 @@
 package Controller;
 
-import Model.Fighter;
-import Model.Game;
-import Model.Main;
-import Model.Placeable;
+import Model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -156,7 +153,7 @@ public class PrebattleController {
     private void setOkBtn(ActionEvent e) {
         if (underLimit()) {
             Main.myGame.setArmy(toBattle);
-            Main.myGame.startLevel1();
+            Main.myGame.startLevel();
         }
     }
 
@@ -188,7 +185,8 @@ public class PrebattleController {
 
     private void fixLimitLabel() {
         int inArmy = toBattle.size();
-        int armyLimit = Main.myGame.getArmyLimit();
+        int lvl = Main.myGame.getLevelSelected();
+        int armyLimit = MapType.getArmyLimit(lvl);
         toBattleLimit.setText("" + inArmy + "/" + armyLimit);
         if (inArmy < armyLimit && inArmy > 0) {
             toBattleLimit.setTextFill(Color.BLACK);
@@ -200,7 +198,7 @@ public class PrebattleController {
     }
 
     public boolean underLimit() {
-        if (toBattle.size() <= Main.myGame.getArmyLimit() && toBattle.size() > 0) {
+        if (toBattle.size() <= MapType.getArmyLimit(Main.myGame.getLevelSelected()) && toBattle.size() > 0) {
             return true;
         } else {
             return false;

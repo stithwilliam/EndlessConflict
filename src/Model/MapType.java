@@ -42,23 +42,26 @@ public enum MapType {
         Coordinates start = new Coordinates(0, 0);
         List<Coordinates> objectives = new LinkedList<>();
 
+        int h;
+        int w;
         TileBase F = TileBase.FOREST;
         TileBase P = TileBase.PLAIN;
         TileBase R = TileBase.ROCK;
+        TileBase[] tileBases;
+        int[] probs;
+        boolean pathBetween;
         switch (this) {
             case LEVELONE:
-                System.out.println("building level 1");
-                int h = 7;
-                int w = 15;
+                h = 7;
+                w = 15;
                 start = new Coordinates(1, 2);
                 objectives.add(new Coordinates(8, 3));
                 objectives.add(new Coordinates(14, 3));
-                TileBase[] tileBases = {P, F, R};
-                int[] probs = {65, 15, 20};
+                tileBases = new TileBase[]{P, F, R};
+                probs = new int[] {65, 15, 20};
                 board = new MapTile[h][w];
-                boolean pathBetween = false;
+                pathBetween = false;
                 while (!pathBetween) {
-                    System.out.println("generating a map");
                     for (int i = 0; i < h; i++) {
                         for (int j = 0; j < w; j++) {
                             if (((i <= 5 && i >= 2) && j <= 2) || ((i == 2 || i == 3 || i == 4) && (j == 8 || j == 7 || j == 9 || j >= 13))) {
@@ -69,16 +72,47 @@ public enum MapType {
                         }
                     }
                     if (hasPathBetween(board, start, objectives.get(0)) && hasPathBetween(board, start, objectives.get(1))) {
-                        System.out.println("has path between");
                         pathBetween = true;
                     }
                 }
+            case LEVELTWO:
+                h = 12;
+                w = 14;
+                board = new MapTile[h][w];
+                tileBases = new TileBase[]{P, F, R};
+                probs = new int[] {60, 25, 15};
+                board = new MapTile[h][w];
+                start = new Coordinates(2, 6);
+                objectives.add(new Coordinates(6, 2));
+                objectives.add(new Coordinates(11, 9));
+                pathBetween = false;
+                while (!pathBetween) {
+                    for (int i = 0; i < h; i++) {
+                        for (int j = 0; j < w; j++) {
+                            if ( ( (i <= 7 && i >= 5) && (j <= 2 && j >= 1) ) ||
+                                    ( (i <= 1 && i >= 2) && (j <= 6 && j >= 5) ) ||
+                                    (  (i <= 10 && i >= 9) && (j <= 12 && j >= 11) ) ) {
+                                board[i][j] = new MapTile(P, j, i);
+                            } else {
+                                board[i][j] = nextTile(board, tileBases, probs, j, i);
+                            }
+                        }
+                    }
+                    if (hasPathBetween(board, start, objectives.get(0)) && hasPathBetween(board, start, objectives.get(1))) {
+                        pathBetween = true;
+                    }
+                }
+                return board;
+            case LEVELTHREE:
+
+            case LEVELFOUR:
+
+            case LEVELFIVE:
         }
         return board;
     }
 
     public static boolean hasPathBetween(MapTile[][] board, Coordinates start, Coordinates goal) {
-        System.out.println("getting path");
         boolean foundPath = false;
         List<Coordinates> visited = new LinkedList<>();
         Queue<Coordinates> queue = new LinkedList<>();
@@ -87,7 +121,6 @@ public enum MapType {
             queue.add(x);
         }
         while (!queue.isEmpty()) {
-            System.out.println("queue length: " + queue.size());
             Coordinates tile = queue.poll();
             if (tile.x == goal.x && tile.y == goal.y) {
                 foundPath = true;
@@ -95,14 +128,12 @@ public enum MapType {
             } else {
                 for (Coordinates x : getMoves(board, tile)) {
                     if (!visited.contains(x)) {
-                        System.out.println("adding " + x.toString());
                         queue.add(x);
                         visited.add(x);
                     }
                 }
             }
         }
-        System.out.println("found path");
         return foundPath;
     }
 
@@ -157,14 +188,52 @@ public enum MapType {
                 fighters.add(w);
                 Fighter s = new Fighter(race.getStrongRace().getUnit(), 14, 3, true);
                 fighters.add(s);
+                return fighters;
+            case LEVELTWO:
+                Fighter f1 = new Fighter(race.getWeakRace().getUnit(), 5, 1, true);
+                fighters.add(f1);
+                Fighter f2 = new Fighter(race.getWeakRace().getUnit(), 6, 2, true);
+                fighters.add(f2);
+                Fighter f3 = new Fighter(race.getWeakRace().getUnit(), 11, 10, true);
+                fighters.add(f3);
+                Fighter f4 = new Fighter(race.getWeakRace().getCommander(), 12, 9, true);
+                fighters.add(f4);
+                return fighters;
+            case LEVELTHREE:
+                return fighters;
+            case LEVELFOUR:
+                return fighters;
+            case LEVELFIVE:
+                return fighters;
+            default:
+                return fighters;
         }
-        return fighters;
+    }
+
+    public static int getArmyLimit(int lvl) {
+        if (lvl == 1) {
+            return 3;
+        } else if (lvl == 2) {
+            return 4;
+        } else if (lvl == 3) {
+            return 4;
+        } else if (lvl == 4) {
+            return 4;
+        } else if (lvl == 5) {
+            return 5;
+        } else {
+            return 0;
+        }
     }
 
     public int armyXPos(int i) {
+        int[] arr;
         switch (this) {
             case LEVELONE:
-                int[] arr = {1,0,0};
+                arr = new int[] {1,0,0};
+                return arr[i];
+            case LEVELTWO:
+                arr = new int[] {2, 1, 1, 1};
                 return arr[i];
             default:
                 return -1;
@@ -172,9 +241,13 @@ public enum MapType {
     }
 
     public int armyYPos(int i) {
+        int[] arr;
         switch (this) {
             case LEVELONE:
-                int[] arr = {3,2,4};
+                arr = new int[] {3,2,4};
+                return arr[i];
+            case LEVELTWO:
+                arr = new int[] {6, 5, 7, 6};
                 return arr[i];
             default:
                 return -1;

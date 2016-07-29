@@ -48,6 +48,7 @@ public class Map {
             }
             f.setxPos(mapType.armyXPos(i));
             f.setyPos(mapType.armyYPos(i));
+            f.setHp(f.getMaxHP());
             fighters.add(f);
             i++;
         }

@@ -113,7 +113,7 @@ public class MapController {
      * @param e
      */
     private void setGoBtn(ActionEvent e) {
-        if (levelSelected != level.NONE) {
+        if (levelSelected != level.NONE && Main.myGame.getLevelComplete(levelToInt.get(levelSelected))) {
             Main.myGame.setLevelSelected(levelToInt.get(levelSelected));
             MasterController.getInstance().loadPrebattleScene();
         }
@@ -202,7 +202,7 @@ public class MapController {
         if (source == level1) {
             String unit1 = race.getWeakRace().getUnit().getName();
             String unit2 = race.getStrongRace().getUnit().getName();
-            descriptionLabel.setText("LEVELONE: You have a few " + unit1 + "'s and " +
+            descriptionLabel.setText("LEVEL ONE: You have a few " + unit1 + "'s and " +
             unit2 + "'s as hostages. Might as well use them for training.");
             levelSelected = level.ONE;
             if (game.getLevelComplete(1)) {
@@ -214,8 +214,16 @@ public class MapController {
         if (source == level2) {
             levelSelected = level.TWO;
             if (game.getLevelComplete(1)) {
-                descriptionLabel.setText("Level 2");
-                rewardLabel.setText("Reward 2");
+                Race enemy = race.getWeakRace();
+                String unit = enemy.getUnit().toString();
+                String command = enemy.getCommander().toString();
+                descriptionLabel.setText("LEVEL TWO: You regularly plan raids on roaming " +
+                enemy.toString() + " soldiers. Prepare to fight a team of " + unit + "s and a " + command);
+                if (game.getLevelComplete(2)) {
+                    rewardLabel.setText("Reward 2: A chance for " + unit);
+                } else {
+                    rewardLabel.setText("Reward 2: 1x " + command);
+                }
             } else {
                 descriptionLabel.setText("You have not unlocked this level yet!");
                 rewardLabel.setText("");

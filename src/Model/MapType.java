@@ -3,6 +3,13 @@ package Model;
 import java.util.*;
 import java.util.function.Function;
 
+import static Model.Commander.CHAOS;
+import static Model.Commander.LIZARDKING;
+import static Model.Commander.MODEL0;
+import static Model.Unit.RANGER;
+import static Model.Unit.SENTRYDRONE;
+import static Model.Unit.SLIMEBALL;
+
 /**
  * Enum for the different levels in the game
  */
@@ -326,6 +333,76 @@ public enum MapType {
     }
 
     /**
+     * Gets the limit for each level
+     * @param lvl number
+     * @return army limit
+     */
+    public static int getArmyLimit(int lvl) {
+        if (lvl == 1) {
+            return 3;
+        } else if (lvl == 2) {
+            return 4;
+        } else if (lvl == 3) {
+            return 4;
+        } else if (lvl == 4) {
+            return 4;
+        } else if (lvl == 5) {
+            return 5;
+        } else {
+            return 0;
+        }
+    }
+
+    public List<Placeable> getFirstRewards() {
+        List<Placeable> list;
+        Race race = Main.myGame.getRace();
+        switch (this) {
+            case LEVELONE:
+                list = new LinkedList<>();
+                list.add(race.getStrongRace().getUnit());
+                list.add(race.getWeakRace().getUnit());
+                return list;
+            case LEVELTWO:
+
+                return list;
+            case LEVELTHREE:
+
+                return list;
+            case LEVELFOUR:
+
+                return list;
+            case LEVELFIVE:
+
+                return list;
+        }
+    }
+
+    public static double rewardChance(Unit unit, int lvl) {
+        switch (unit) {
+            case RANGER:
+                return .25;
+            case SENTRYDRONE:
+                return .25;
+            case SLIMEBALL:
+                return .25;
+            default:
+                return 0;
+        }
+    }
+
+    public static double rewardChance(Commander comm, int lvl) {
+        switch(comm) {
+            case MODEL0:
+                return 0;
+            case LIZARDKING:
+                return 0;
+            case CHAOS:
+                return 0;
+            default:
+                return 0;
+        }
+    }
+    /**
      * Tells whether start and goal coordinates have a moveable path between them
      * @param board to check path on
      * @param start coordinates
@@ -412,25 +489,6 @@ public enum MapType {
         return new MapTile(tileBases[0], x, y);
     }
 
-    /**
-     * Gets the limit for each level
-     * @param lvl number
-     * @return army limit
-     */
-    public static int getArmyLimit(int lvl) {
-        if (lvl == 1) {
-            return 3;
-        } else if (lvl == 2) {
-            return 4;
-        } else if (lvl == 3) {
-            return 4;
-        } else if (lvl == 4) {
-            return 4;
-        } else if (lvl == 5) {
-            return 5;
-        } else {
-            return 0;
-        }
-    }
+
 
 }

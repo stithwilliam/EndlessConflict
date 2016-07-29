@@ -130,7 +130,8 @@ public class Game {
             rewardChest(f.getxPos(), f.getyPos(), f.getModel());
         }
         if (map.getEnemies().size() == 0) {
-            MasterController.getInstance().loadRewardScene();
+            completeLevel(levelSelected);
+            MasterController.getInstance().loadMapScene(); //TODO: switch to reward scene when functional
 
         }
     }
@@ -143,6 +144,7 @@ public class Game {
      */
     private void rewardChest(int x, int y, Placeable model) {
         map.addToRewardList(model);
+        addToCollection(new Fighter(model));
         battleController.showRewardChest(x, y);
     }
 

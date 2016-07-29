@@ -113,7 +113,7 @@ public class MapController {
      * @param e
      */
     private void setGoBtn(ActionEvent e) {
-        if (levelSelected != level.NONE && Main.myGame.getLevelComplete(levelToInt.get(levelSelected))) {
+        if (levelSelected != level.NONE && Main.myGame.getLevelComplete(levelToInt.get(levelSelected) - 1)) {
             Main.myGame.setLevelSelected(levelToInt.get(levelSelected));
             MasterController.getInstance().loadPrebattleScene();
         }
@@ -206,7 +206,7 @@ public class MapController {
             unit2 + "'s as hostages. Might as well use them for training.");
             levelSelected = level.ONE;
             if (game.getLevelComplete(1)) {
-                rewardLabel.setText("REWARD: Happiness");
+                rewardLabel.setText("REWARD: Remind yourself you can at least beat level one. A chance for hostages");
             } else {
                 rewardLabel.setText("REWARD: 1x " + unit1 + ". 1x " + unit2 + ".");
             }
@@ -220,9 +220,9 @@ public class MapController {
                 descriptionLabel.setText("LEVEL TWO: You regularly plan raids on roaming " +
                 enemy.toString() + " soldiers. Prepare to fight a team of " + unit + "s and a " + command);
                 if (game.getLevelComplete(2)) {
-                    rewardLabel.setText("Reward 2: A chance for " + unit);
+                    rewardLabel.setText("REWARD:: A chance for " + unit);
                 } else {
-                    rewardLabel.setText("Reward 2: 1x " + command);
+                    rewardLabel.setText("REWARD: 1x " + command);
                 }
             } else {
                 descriptionLabel.setText("You have not unlocked this level yet!");
@@ -232,8 +232,15 @@ public class MapController {
         if (source == level3) {
             levelSelected = level.THREE;
             if (game.getLevelComplete(2)) {
+                Race enemy = race.getStrongRace();
+                String unit = enemy.getUnit().toString();
+                String command = enemy.getCommander().toString();
                 descriptionLabel.setText("Level 3");
-                rewardLabel.setText("Reward 3");
+                if (game.getLevelComplete(3)) {
+                    rewardLabel.setText("REWARD: A chance for " + unit);
+                } else {
+                    rewardLabel.setText("REWARD: 1x " + command);
+                }
             } else {
                 descriptionLabel.setText("You have not unlocked this level yet!");
                 rewardLabel.setText("");

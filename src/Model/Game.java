@@ -5,6 +5,7 @@ import Controller.MasterController;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -37,6 +38,7 @@ public class Game {
     /**The levels that the user has beaten. 1-5**/
     private LinkedList<Boolean> levelsComplete;
 
+    private Fighter shieldedFighter = null;
     /**
      * Constructor for Game
      */
@@ -77,6 +79,9 @@ public class Game {
         MasterController.getInstance().setBattleScene();
         map = new Map(getMapType());
         map.placeArmy(army);
+        for (Placeable p : getMapType().getFirstRewards()) {
+            map.addToRewardList(p);
+        }
         comp = new AI(this, map);
         battleController = MasterController.getInstance().getBattleController();
         battleController.constructMap(map);
@@ -96,6 +101,16 @@ public class Game {
             f.setHasMoved(false);
         }
         comp.doTurn();
+        if (army.size() == 0) {
+            MasterController.getInstance().loadMapScene(); //TODO: Go to game over screen
+        }
+        if (shieldedFighter != null) {
+            shieldedFighter.setHp(shieldedFighter.getHp() - new Fighter(Commander.MODEL0).getAtt());
+            if (shieldedFighter.getHp() <= 0) {
+                shieldedFighter.setHp(1);
+            }
+            shieldedFighter = null;
+        }
         MasterController.getInstance().getBattleController().startTurn();
     }
 
@@ -107,17 +122,21 @@ public class Game {
      * @return String of attack summary to put on terminal
      */
     public String attackFighter(Fighter attacker, Fighter defender) {
-        Random r = new Random();
         int damage = attacker.getAtt();
         defender.setHp(defender.getHp() - damage);
         String s = (attacker.getName() + " dealt " + damage + " damage to " + defender.getName());
         if (defender.getHp() <= 0) {
             s += (" and killed " + defender.getName() + "!");
             killedFighter(defender);
-        } else {
-            s += (". (" + defender.getHp() + "/" + defender.getMaxHP() + ") health remaining");
         }
         return s;
+    }
+
+    public String shieldFighter(Fighter model0, Fighter ally) {
+        int shield = model0.getAtt();
+        ally.setHp(ally.getHp() + shield);
+        shieldedFighter = ally;
+        return (model0.getName() + " shielded " + shield + " damage for " + ally.getName() + " for this turn!");
     }
 
     /**
@@ -127,13 +146,31 @@ public class Game {
     public void killedFighter(Fighter f) {
         battleController.removeFighter(f);
         if (f.isEnemy()) {
-            rewardChest(f.getxPos(), f.getyPos(), f.getModel());
+            double rewardChance = getMapType().rewardChance(f);
+            Random random = new Random();
+            double d = random.nextDouble();
+            System.out.println("checking... d = " + d + " and rC = " + rewardChance);
+            if (d <= rewardChance) {
+                System.out.println("Reward!");
+                rewardChest(f.getxPos(), f.getyPos(), f.getModel());
+            }
         }
         if (map.getEnemies().size() == 0) {
-            completeLevel(levelSelected);
+            //TODO: Make this flashy
+            completeLevel();
             MasterController.getInstance().loadMapScene(); //TODO: switch to reward scene when functional
 
         }
+    }
+
+    public void completeLevel() {
+        List<Placeable> list = getMapType().getFirstRewards();
+        for (Placeable p : list) {
+            map.addToRewardList(p);
+            addToCollection(new Fighter(p)); //TODO: Move this to reward
+        }
+        levelsComplete.set(levelSelected, true);
+
     }
 
     /**
@@ -144,52 +181,8 @@ public class Game {
      */
     private void rewardChest(int x, int y, Placeable model) {
         map.addToRewardList(model);
-        addToCollection(new Fighter(model));
+        addToCollection(new Fighter(model)); //TODO: move this to reward
         battleController.showRewardChest(x, y);
-    }
-
-    /**
-     * gets the next fighter in army after f
-     * @param fighter The current Fighter
-     * @return Fighter the next Fighter
-     */
-    public Fighter nextFighter(Fighter fighter) {
-        ArrayList<Fighter> fighters = new ArrayList<>();
-        fighters.addAll(army);
-        fighters.addAll(collection);
-        int idx = 0;
-        Fighter f = null;
-        while (f != fighter) {
-            f = fighters.get(idx);
-            idx++;
-        }
-        if (idx == fighters.size()) {
-            idx = 0;
-        }
-        fighter = fighters.get(idx);
-        return fighter;
-    }
-
-    /**
-     * gets the previous fighter in army before fighter
-     * @param fighter The current Fighter
-     * @return Fighter the previous fighter
-     */
-    public Fighter prevFighter(Fighter fighter) {
-        ArrayList<Fighter> fighters = new ArrayList<>();
-        fighters.addAll(army);
-        fighters.addAll(collection);
-        int idx = fighters.size() - 1;
-        Fighter f = null;
-        while (f != fighter) {
-            f = fighters.get(idx);
-            idx--;
-        }
-        if (idx == -1) {
-            idx = fighters.size() - 1;
-        }
-        fighter = fighters.get(idx);
-        return fighter;
     }
 
     /**
@@ -228,6 +221,7 @@ public class Game {
         return collection;
     }
     public boolean getLevelComplete(int i) {return levelsComplete.get(i);}
+    public Fighter getShieldedFighter() {return shieldedFighter;}
 
     /**Setters**/
     public void setRace(Race c) {
@@ -235,7 +229,7 @@ public class Game {
     }
     public void setArmy(LinkedList<Fighter> a) {army = a;}
     public void setLevelSelected(int i ) { levelSelected = i;}
-    public void completeLevel(int i) {levelsComplete.set(i, true);}
+
 
     /**Adders**/
     public void addToArmy(Fighter f) {

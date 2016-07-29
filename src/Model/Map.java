@@ -49,6 +49,8 @@ public class Map {
             f.setxPos(mapType.armyXPos(i));
             f.setyPos(mapType.armyYPos(i));
             f.setHp(f.getMaxHP());
+            f.setHasMoved(false);
+            f.setHasAttacked(false);
             fighters.add(f);
             i++;
         }
@@ -220,23 +222,27 @@ public class Map {
      * @return List<MapTile> of adjacent, moveable tiles of tile
      */
     public List<MapTile> getMoves(MapTile tile) {
+        boolean lizard = false;
+        if (fighter.getModel() == Commander.LIZARDKING) {
+            lizard = true;
+        }
         int x = tile.getxPos();
         int y = tile.getyPos();
         List<MapTile> list = new ArrayList<>();
         MapTile left = getMapTile(x-1, y);
-        if (left != null && left.isMoveable()) {
+        if (left != null && (left.isMoveable() || lizard)) {
             list.add(left);
         }
         MapTile right = getMapTile(x+1, y);
-        if (right != null && right.isMoveable()) {
+        if (right != null && (right.isMoveable() || lizard)) {
             list.add(right);
         }
         MapTile up = getMapTile(x, y-1);
-        if (up != null && up.isMoveable()) {
+        if (up != null && (up.isMoveable() || lizard)) {
             list.add(up);
         }
         MapTile down = getMapTile(x, y+1);
-        if (down != null && down.isMoveable()) {
+        if (down != null && (down.isMoveable() || lizard)) {
             list.add(down);
         }
         return list;
@@ -382,12 +388,16 @@ public class Map {
      * @return boolean[][] array of attackable positions
      */
     public boolean[][] getAttackable(Fighter f) {
+        boolean model0 = false;
+        if (f.getModel() == Commander.MODEL0) {
+            model0 = true;
+        }
         boolean[][] valid = getValidAttacks(f);
         boolean[][] inRange = new boolean[height][width];
         boolean allyAttacking = !f.isEnemy();
         for (Fighter a : fighters) {
             if (allyAttacking) {
-                if (a.isEnemy()) {
+                if (a.isEnemy() || (model0 && a != fighter)) {
                     int x = a.getxPos();
                     int y = a.getyPos();
                     if (valid[y][x]) {
@@ -545,44 +555,6 @@ public class Map {
             }
         }
         return valid;
-    }
-
-    /**
-     * gets the next fighter in allies
-     * @return Fighter the next Fighter
-     */
-    public Fighter nextFighter() {
-        LinkedList<Fighter> allies = getAllies();
-        int idx = 0;
-        Fighter f = null;
-        while (f != fighter) {
-            f = allies.get(idx);
-            idx++;
-        }
-        if (idx == allies.size()) {
-            idx = 0;
-        }
-        fighter = allies.get(idx);
-        return fighter;
-    }
-
-    /**
-     * gets the previous fighter in allies
-     * @return Fighter the previous fighter
-     */
-    public Fighter prevFighter() {
-        LinkedList<Fighter> allies = getAllies();
-        int idx = allies.size() - 1;
-        Fighter f = null;
-        while (f != fighter) {
-            f = allies.get(idx);
-            idx--;
-        }
-        if (idx == -1) {
-            idx = allies.size() - 1;
-        }
-        fighter = allies.get(idx);
-        return fighter;
     }
 
     /**

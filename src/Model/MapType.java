@@ -363,21 +363,33 @@ public enum MapType {
                 list.add(race.getWeakRace().getUnit());
                 return list;
             case LEVELTWO:
-
+                list = new LinkedList<>();
+                list.add(race.getWeakRace().getCommander());
                 return list;
             case LEVELTHREE:
-
+                list = new LinkedList<>();
+                list.add(race.getStrongRace().getCommander());
                 return list;
             case LEVELFOUR:
-
+                list = new LinkedList<>();
                 return list;
             case LEVELFIVE:
-
+                list = new LinkedList<>();
                 return list;
+            default:
+                return new LinkedList<>();
         }
     }
 
-    public static double rewardChance(Unit unit, int lvl) {
+    public double rewardChance(Fighter f) {
+        if (f.getModel() instanceof Unit) {
+            return rewardChance((Unit) f.getModel());
+        } else {
+            return rewardChance((Commander) f.getModel());
+        }
+    }
+
+    public  double rewardChance(Unit unit) {
         switch (unit) {
             case RANGER:
                 return .25;
@@ -390,7 +402,7 @@ public enum MapType {
         }
     }
 
-    public static double rewardChance(Commander comm, int lvl) {
+    public static double rewardChance(Commander comm) {
         switch(comm) {
             case MODEL0:
                 return 0;

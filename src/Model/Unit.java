@@ -48,7 +48,7 @@ public enum Unit implements Placeable {
             case SENTRYDRONE:
                 return ("10% chance for this unit to negate all damage from an attack.");
             case SLIMEBALL:
-                return ("10% chance to spawn another Slime Ball when this unit kills an enemy.");
+                return ("Deals double damage when at melee range OR 10% to spawn another slime ball on death.");
             case RANGER:
                 return ("10% chance to deal double damage when this unit attacks.");
             default:

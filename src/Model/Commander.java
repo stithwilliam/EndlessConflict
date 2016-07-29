@@ -47,14 +47,11 @@ public enum Commander implements Placeable {
     public String getDescription() {
         switch (this) {
             case MODEL0:
-                return ("10% chance for this unit to suspend an enemy in the air when attacking. " +
-                        "All other robots have 1 more health.");
+                return ("Can attack allies to give health by way of a temporary shield.");
             case LIZARDKING:
-                return ("Can jump over obstacles on the map. " +
-                        "All other mutants have 1 more move.");
+                return ("Can jump over and onto obstacles on the map.");
             case CHAOS:
-                return ("10% chance to deal splash damage when this unit attacks. " +
-                        "All other humans have 1 more attack.");
+                return ("Range is doubled if Chaos has not moved this turn.");
             default:
                 return ("No description");
         }

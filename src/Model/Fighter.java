@@ -64,7 +64,13 @@ public class Fighter {
     public int getHp() {return hp;}
     public int getMaxHP() {return maxHP;}
     public int getMov() {return movement;}
-    public int getRange() {return range;}
+    public int getRange() {
+        if (model == Commander.CHAOS) {
+            return range * 2;
+        } else {
+            return range;
+        }
+    }
     public boolean isEnemy() {return enemy;}
     public boolean isCommander() {return model.isCommander();}
     public boolean hasMoved() {return hasMoved;}

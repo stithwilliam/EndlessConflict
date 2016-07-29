@@ -437,10 +437,16 @@ public class BattleController {
             for (int i = 0; i < valid[0].length; i++) {
                 for (int j = 0; j < valid.length; j++) {
                     if (valid[j][i]) {
-                        ImageView atk = new ImageView(Graphic.ATTACKSLCT.imagePath());
                         StackPane pane = map.getMapTile(i, j).getStackPane();
-                        pane.getChildren().add(atk);
-                        pane.setOnMouseClicked(this::attackHere);
+                        if (map.getMapTile(i,j).getFighter().isEnemy()) {
+                            ImageView atk = new ImageView(Graphic.ATTACKSLCT.imagePath());
+                            pane.getChildren().add(atk);
+                            pane.setOnMouseClicked(this::attackHere);
+                        } else {
+                            ImageView heal = new ImageView(Graphic.HEALSLCT.imagePath());
+                            pane.getChildren().add(heal);
+                            pane.setOnMouseClicked(this::attackHere);
+                        }
                         hasAttack = true;
                     }
                 }
@@ -480,7 +486,11 @@ public class BattleController {
         StackPane pane = (StackPane) e.getSource();
         MapTile tile = paneToTile.get(pane);
         Fighter defender = map.getFighter(tile.getxPos(), tile.getyPos());
-        toConsole(Main.myGame.attackFighter(fighter, defender));
+        if (fighter.getModel() == Commander.MODEL0 && !defender.isEnemy()) {
+            toConsole(Main.myGame.shieldFighter(fighter, defender));
+        } else {
+            toConsole(Main.myGame.attackFighter(fighter, defender));
+        }
         buttonsToDefault();
         showEnemy(defender);
     }
@@ -559,16 +569,13 @@ public class BattleController {
      * Checks if the player has lost, otherwise start the user's turn.
      */
     public void startTurn() {
-        if (map.getAllies().size() == 0) {
-            toConsole("GAME OVER");
-        } else {
-            toConsole("Your turn begins");
-            Fighter fighter = map.getAllies().get(0);
-            map.setFighter(fighter);
-            int x = fighter.getxPos();
-            int y = fighter.getyPos();
-            map.getMapTile(x, y).getStackPane().getChildren().add(new ImageView(Graphic.FIGHTERSLCT.imagePath()));
-        }
+        toConsole("Your turn begins");
+        Fighter fighter = map.getAllies().get(0);
+        map.setFighter(fighter);
+        showAlly(fighter);
+        int x = fighter.getxPos();
+        int y = fighter.getyPos();
+        map.getMapTile(x, y).getStackPane().getChildren().add(new ImageView(Graphic.FIGHTERSLCT.imagePath()));
     }
 
     /**
@@ -629,7 +636,11 @@ public class BattleController {
         allyRace.setText("RACE: " + f.getRace());
         allyHP.setText(f.getHp() + "/" + f.getMaxHP());
         allySprite.setImage(new Image(f.getModel().imagePath()));
-        allyHealthWheel.setImage(healthWheel(f));
+        if (game.getShieldedFighter() == f) {
+            allyHealthWheel.setImage(new Image(Graphic.SHIELDWHEEL.imagePath()));
+        } else {
+            allyHealthWheel.setImage(healthWheel(f));
+        }
     }
 
     /**
@@ -825,11 +836,15 @@ public class BattleController {
         int nextX = tile.getxPos();
         int nextY = tile.getyPos();
         MapTile oldTile = map.getMapTile(curX, curY);
-        oldTile.getStackPane().getChildren().remove(1);
+        StackPane oldPane = oldTile.getStackPane();
+        oldPane.getChildren().remove(1);
+        oldPane.setOnMouseClicked(null);
         f.setxPos(nextX);
         f.setyPos(nextY);
         MapTile nextTile = map.getMapTile(nextX, nextY);
-        nextTile.getStackPane().getChildren().add(new ImageView(f.imagePath()));
+        StackPane nextPane = nextTile.getStackPane();
+        nextPane.getChildren().add(new ImageView(f.imagePath()));
+        nextPane.setOnMouseClicked(this::fighterClicked);
         toConsole(f.getName() + " moved to (" + (nextX - 1) + ", " + (nextY - 1) + ").");
     }
 

@@ -60,6 +60,7 @@ public class Fighter {
     public Placeable getModel() {return model;}
     public int getxPos() {return xPos;}
     public int getyPos() {return yPos;}
+    public int getStars() {return model.getStars();}
     public int getAtt() {return attack;}
     public int getHp() {return hp;}
     public int getMaxHP() {return maxHP;}

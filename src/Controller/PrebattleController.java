@@ -55,6 +55,8 @@ public class PrebattleController {
     @FXML
     private Button centerBtn;
     @FXML
+    private Button upgradeBtn;
+    @FXML
     private Button backBtn;
     @FXML
     private Label toBattleLimit;
@@ -86,11 +88,16 @@ public class PrebattleController {
         fighterImage.setImage(new Image(fighter.imagePath()));
         if (fighter.isCommander()) {
             unitLabel.setText("Commander");
-            starsLabel.setText("***");
         } else {
             unitLabel.setText("Unit");
-            starsLabel.setText("*");
         }
+        int stars = fighter.getStars();
+        String x = "";
+        for (int i = 0; i < stars; i++) {
+            x += "*";
+        }
+        //TODO: upgrade button
+        starsLabel.setText(x);
         attackLabel.setText("" + fighter.getAtt());
         rangeLabel.setText("" + fighter.getRange());
         movementLabel.setText("" + fighter.getMov());
@@ -163,6 +170,23 @@ public class PrebattleController {
             Main.myGame.setArmy(toBattle);
             Main.myGame.startLevel();
         }
+    }
+
+    /**
+     * Called when upgrade button is pressed
+     * If user has 2 or more of the unit in their collection, upgrades the unit
+     * @param e
+     */
+    private void setUpgradeBtn(ActionEvent e) {
+
+    }
+
+    private boolean upgradeAvailable() {
+        int n = 0;
+        for (Fighter f : available) {
+            if (f.getModel() == fighter.getModel()) n++;
+        }
+        return (n >= 2);
     }
 
     /**
@@ -273,6 +297,7 @@ public class PrebattleController {
         backBtn.setOnAction(this::setBackBtn);
         okBtn.setOnAction(this::setOkBtn);
         centerBtn.setOnAction(this::setCenterBtn);
+        upgradeBtn.setOnAction(this::setUpgradeBtn);
 
         centerBtn.setText("Add");
         firstLabel = false;

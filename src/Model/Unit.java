@@ -7,8 +7,9 @@ import java.util.*;
  */
 public enum Unit implements Placeable {
     /**First Units**/
-    SENTRYDRONE(4,8,3,3,"Sentry Drone"), SLIMEBALL(6,6,3,3,"Slime Ball"),
-    RANGER(8,4,3,3,"Human Ranger");
+    SENTRYDRONE(4,8,3,3,"Sentry Drone"), SENTRYDRONEV2(5,9,3,3,"Sentry Drone V2"), SENTRYDRONEV3(6,10,3,3,"Sentry Drove V3"),   //Robot tier 1
+    SLIMEBALL(6,6,3,3,"Slime Ball"), BIGSLIMEBALL(7,7,3,3,"Big Slime Ball"), HUGESLIMEBALL(8,8,3,3,"Huge Slime Ball"),          //Mutant tier 1
+    RANGER(8,4,3,3,"Human Ranger"), VETERANRANGER(9,5,3,3,"Veteran Ranger"), ELITERANGER(10,6,3,3,"Elite Ranger");              //Human tier 1
 
     /**Name of this Unit**/
     String name;
@@ -46,10 +47,16 @@ public enum Unit implements Placeable {
     public String getDescription() {
         switch (this) {
             case SENTRYDRONE:
+            case SENTRYDRONEV2:
+            case SENTRYDRONEV3:
                 return ("10% chance for this unit to negate all damage from an attack.");
             case SLIMEBALL:
+            case BIGSLIMEBALL:
+            case HUGESLIMEBALL:
                 return ("Deals double damage when at melee range OR 10% to spawn another slime ball on death.");
             case RANGER:
+            case VETERANRANGER:
+            case ELITERANGER:
                 return ("10% chance to deal double damage when this unit attacks.");
             default:
                 return ("No description");
@@ -63,13 +70,38 @@ public enum Unit implements Placeable {
     public String getRace() {
         switch (this) {
             case SENTRYDRONE:
+            case SENTRYDRONEV2:
+            case SENTRYDRONEV3:
                 return ("Robot");
             case SLIMEBALL:
+            case BIGSLIMEBALL:
+            case HUGESLIMEBALL:
                 return ("Mutant");
             case RANGER:
+            case VETERANRANGER:
+            case ELITERANGER:
                 return ("Human");
             default:
                 return ("None");
+        }
+    }
+
+    public int getStars() {
+        switch (this) {
+            case SENTRYDRONE:
+            case RANGER:
+            case SLIMEBALL:
+                return 1;
+            case SENTRYDRONEV2:
+            case VETERANRANGER:
+            case BIGSLIMEBALL:
+                return 2;
+            case SENTRYDRONEV3:
+            case ELITERANGER:
+            case HUGESLIMEBALL:
+                return 3;
+            default:
+                return 0;
         }
     }
 

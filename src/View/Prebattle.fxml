@@ -24,7 +24,12 @@
                   <Font name="Britannic Bold" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="centerBtn" blendMode="HARD_LIGHT" layoutX="316.0" layoutY="544.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="160.0" style="-fx-text-fill: black;" text="Remove">
+            <Button fx:id="centerBtn" blendMode="HARD_LIGHT" layoutX="417.0" layoutY="544.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="160.0" style="-fx-text-fill: black;" text="Remove">
+               <font>
+                  <Font name="Britannic Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="upgradeBtn" blendMode="HARD_LIGHT" layoutX="224.0" layoutY="544.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="160.0" style="-fx-text-fill: black;" text="Upgrade">
                <font>
                   <Font name="Britannic Bold" size="18.0" />
                </font>

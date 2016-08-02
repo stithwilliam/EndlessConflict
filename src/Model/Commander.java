@@ -73,6 +73,10 @@ public enum Commander implements Placeable {
                 return ("None");
         }
     }
+
+    public int getStars() {
+        return 3;
+    }
 //    /**
 //     * Bio info for each hero.
 //     * TODO: Use this in game somewhere

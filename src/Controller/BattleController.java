@@ -296,6 +296,7 @@ public class BattleController {
                     StackPane pane = map.getMapTile(i, j).getStackPane();
                     pane.getChildren().remove(1);
                     pane.setOnMouseClicked(null);
+
                 }
             }
         }

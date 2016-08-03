@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
@@ -9,27 +10,28 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RewardsController">
    <children>
-      <ImageView fx:id="chestImage" fitHeight="600.0" fitWidth="800.0" pickOnBounds="true">
+      <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true">
          <image>
             <Image url="@Graphics/rewardBG.png" />
          </image>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fff11f" height="105.0" layoutX="18.0" layoutY="15.0" opacity="0.57" stroke="#db7830f0" strokeType="INSIDE" strokeWidth="4.0" width="756.0" />
-      <Text fill="#db7830" layoutX="274.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Victory!" wrappingWidth="252.40625">
-         <font>
-            <Font name="Britannic Bold" size="64.0" />
-         </font>
-      </Text>
-      <VBox fx:id="rewardsBox" alignment="TOP_CENTER" layoutX="202.0" layoutY="137.0" opacity="0.58" prefHeight="375.0" prefWidth="388.0" style="-fx-background-color: #fff11f; -fx-border-color: #db7830; -fx-border-width: 4;" />
-      <ImageView fitHeight="382.0" fitWidth="377.0" layoutX="210.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="image" fitHeight="384.0" fitWidth="384.0" layoutX="224.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Graphics/Tile/rewardsChestOpening.gif" />
+            <Image url="@Graphics/Tile/rewardChest.png" />
          </image>
       </ImageView>
-      <Button fx:id="contBtn" layoutX="322.0" layoutY="532.0" mnemonicParsing="false" opacity="0.55" prefHeight="51.0" prefWidth="149.0" style="-fx-background-color: #fff11f; -fx-border-color: #db7830; -fx-border-width: 4;" text="Continue" textFill="#db7830">
+      <Button fx:id="continueBtn" blendMode="SCREEN" layoutX="334.0" layoutY="514.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="132.0" style="-fx-background-color: dimgrey;" text="Continue" textFill="GOLDENROD">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
          <font>
             <Font name="Britannic Bold" size="24.0" />
          </font>
       </Button>
+      <Label fx:id="victory" layoutX="250.0" layoutY="20.0" text="Victory!" textFill="GOLDENROD">
+         <font>
+            <Font name="Britannic Bold" size="96.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

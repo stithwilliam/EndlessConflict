@@ -72,6 +72,7 @@ public class Fighter {
             return range;
         }
     }
+    public Placeable getUpgrade() {return model.getUpgrade();}
     public boolean isEnemy() {return enemy;}
     public boolean isCommander() {return model.isCommander();}
     public boolean hasMoved() {return hasMoved;}

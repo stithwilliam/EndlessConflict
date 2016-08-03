@@ -544,6 +544,7 @@ public class BattleController {
      * @param e atkBtn
      */
     private void setPauseBtn(ActionEvent e) {
+        MasterController.getInstance().loadRewardScene();
         toConsole("I don't work yet. !_!");
     }
 

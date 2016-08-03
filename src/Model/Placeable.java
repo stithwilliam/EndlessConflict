@@ -16,5 +16,6 @@ public interface Placeable {
     int getMov();
     int getRange();
     int getStars();
+    Placeable getUpgrade();
 
 }

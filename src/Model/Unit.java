@@ -36,8 +36,15 @@ public enum Unit implements Placeable {
         range = r;
         //images of Units
         imagePath.put("SENTRYDRONE", "/View/Graphics/Fighter/sentryDroneResting.gif");
+        imagePath.put("SENTRYDRONEV2", "/View/Graphics/Fighter/sentryDroneV2.gif");
+        imagePath.put("SENTRYDRONEV3", "/View/Graphics/Fighter/sentryDroneV3.gif");
         imagePath.put("SLIMEBALL", "/View/Graphics/Fighter/slimeBallResting.gif");
+        imagePath.put("BIGSLIMEBALL", "/View/Graphics/Fighter/slimeBallResting.gif");
+        imagePath.put("HUGESLIMEBALL", "/View/Graphics/Fighter/slimeBallResting.gif");
         imagePath.put("RANGER", "/View/Graphics/Fighter/humanRanger.png");
+        imagePath.put("VETERANRANGER", "/View/Graphics/Fighter/humanRanger.png");
+        imagePath.put("ELITERANGER", "/View/Graphics/Fighter/humanRanger.png");
+
     }
 
     /**
@@ -102,6 +109,29 @@ public enum Unit implements Placeable {
                 return 3;
             default:
                 return 0;
+        }
+    }
+
+    public Placeable getUpgrade() {
+        switch (this) {
+            case SENTRYDRONEV3:
+            case ELITERANGER:
+            case HUGESLIMEBALL:
+                return null;
+            case SLIMEBALL:
+                return BIGSLIMEBALL;
+            case BIGSLIMEBALL:
+                return HUGESLIMEBALL;
+            case RANGER:
+                return VETERANRANGER;
+            case VETERANRANGER:
+                return ELITERANGER;
+            case SENTRYDRONE:
+                return SENTRYDRONEV2;
+            case SENTRYDRONEV2:
+                return SENTRYDRONEV3;
+            default:
+                return null;
         }
     }
 

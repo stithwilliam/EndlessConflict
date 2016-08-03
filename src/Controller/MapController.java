@@ -141,6 +141,8 @@ public class MapController {
         panelFade.getChildren().addAll(paneFade, goFade, xFade);
         panelFade.play();
         panelShowing = false;
+        goBtn.setOnAction(null);
+        xBtn.setOnAction(null);
     }
 
     /**
@@ -189,6 +191,8 @@ public class MapController {
             panelFade.getChildren().addAll(paneFade, goFade, xFade);
             panelFade.play();
             panelShowing = true;
+            goBtn.setOnAction(this::setGoBtn);
+            xBtn.setOnAction(this::setXBtn);
         }
         if (levelSelected != level.NONE) {
             Button prev = levelToButton.get(levelSelected);
@@ -198,31 +202,32 @@ public class MapController {
         source.setStyle("-fx-border-color: yellow; -fx-background-color: dimgrey; -fx-border-width: 3; -fx-border-radius: 3;");
         Game game = Main.myGame;
         Race race = game.getRace();
+        Race wRace = race.getWeakRace();
+        Race sRace = race.getStrongRace();
+        String wUnit = race.getWeakRace().getUnit().getName();
+        String sUnit = race.getStrongRace().getUnit().getName();
+        String wComm = race.getWeakRace().getCommander().getName();
+        String sComm = race.getStrongRace().getCommander().getName();
 
         if (source == level1) {
-            String unit1 = race.getWeakRace().getUnit().getName();
-            String unit2 = race.getStrongRace().getUnit().getName();
-            descriptionLabel.setText("LEVEL ONE: You have a few " + unit1 + "'s and " +
-            unit2 + "'s as hostages. Might as well use them for training.");
+            descriptionLabel.setText("LEVEL ONE: You have a few " + wUnit + "'s and " +
+            sUnit + "'s as hostages. Might as well use them for training.");
             levelSelected = level.ONE;
             if (game.getLevelComplete(1)) {
                 rewardLabel.setText("REWARD: Remind yourself you can at least beat level one. A chance for hostages");
             } else {
-                rewardLabel.setText("REWARD: 1x " + unit1 + ". 1x " + unit2 + ".");
+                rewardLabel.setText("REWARD: 1x " + wUnit + ". 1x " + sUnit + ".");
             }
         }
         if (source == level2) {
             levelSelected = level.TWO;
             if (game.getLevelComplete(1)) {
-                Race enemy = race.getWeakRace();
-                String unit = enemy.getUnit().toString();
-                String command = enemy.getCommander().toString();
                 descriptionLabel.setText("LEVEL TWO: You regularly plan raids on roaming " +
-                enemy.toString() + " soldiers. Prepare to fight a team of " + unit + "s and a " + command);
+                wRace.toString() + " soldiers. Prepare to fight a team of " + wUnit + "s and a " + wComm);
                 if (game.getLevelComplete(2)) {
-                    rewardLabel.setText("REWARD:: A chance for " + unit);
+                    rewardLabel.setText("REWARD:: A chance for " + wUnit);
                 } else {
-                    rewardLabel.setText("REWARD: 1x " + command);
+                    rewardLabel.setText("REWARD: 1x " + wComm);
                 }
             } else {
                 descriptionLabel.setText("You have not unlocked this level yet!");
@@ -232,14 +237,12 @@ public class MapController {
         if (source == level3) {
             levelSelected = level.THREE;
             if (game.getLevelComplete(2)) {
-                Race enemy = race.getStrongRace();
-                String unit = enemy.getUnit().toString();
-                String command = enemy.getCommander().toString();
-                descriptionLabel.setText("Level 3");
+                descriptionLabel.setText("LEVEL THREE: When you get the chance you raid " +
+                sRace.toString() + " troops. Get ready to fight some " + sUnit + "s and a " + sComm);
                 if (game.getLevelComplete(3)) {
-                    rewardLabel.setText("REWARD: A chance for " + unit);
+                    rewardLabel.setText("REWARD: A chance for " + sUnit);
                 } else {
-                    rewardLabel.setText("REWARD: 1x " + command);
+                    rewardLabel.setText("REWARD: 1x " + sComm);
                 }
             } else {
                 descriptionLabel.setText("You have not unlocked this level yet!");
@@ -250,7 +253,11 @@ public class MapController {
             levelSelected = level.FOUR;
             if (game.getLevelComplete(3)) {
                 descriptionLabel.setText("Level 4");
-                rewardLabel.setText("Reward 4");
+                if (game.getLevelComplete(4)) {
+                    rewardLabel.setText("REWARD: a chance for " + race.getUnit().getName());
+                } else {
+                    rewardLabel.setText("REWARD: 2x " + race.getUnit().getName());
+                }
             } else {
                 descriptionLabel.setText("You have not unlocked this level yet!");
                 rewardLabel.setText("");
@@ -260,7 +267,11 @@ public class MapController {
             levelSelected = level.FIVE;
             if (game.getLevelComplete(4)) {
                 descriptionLabel.setText("Level 5");
-                rewardLabel.setText("Reward 5");
+                if (game.getLevelComplete(5)) {
+                    rewardLabel.setText("REWARD: a chance for some basic units");
+                } else {
+                    rewardLabel.setText("REWARD: 1x " + wUnit + ". 1x " + sUnit);
+                }
             } else {
                 descriptionLabel.setText("You have not unlocked this level yet!");
                 rewardLabel.setText("");

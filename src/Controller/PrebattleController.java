@@ -96,7 +96,11 @@ public class PrebattleController {
         for (int i = 0; i < stars; i++) {
             x += "*";
         }
-        //TODO: upgrade button
+        if (upgradeAvailable()) {
+            upgradeBtn.setTextFill(Color.GREEN);
+        } else {
+            upgradeBtn.setTextFill(Color.RED);
+        }
         starsLabel.setText(x);
         attackLabel.setText("" + fighter.getAtt());
         rangeLabel.setText("" + fighter.getRange());
@@ -178,7 +182,31 @@ public class PrebattleController {
      * @param e
      */
     private void setUpgradeBtn(ActionEvent e) {
-
+        Game game = Main.myGame;
+        if (upgradeAvailable()) {
+            available.remove(fighter);
+            availableBox.getChildren().remove(fighterLabelHashMap.get(fighter));
+            game.removeFromCollection(fighter);
+            Fighter rem = null;
+            for (Fighter f : available) {
+                if (f.getModel() == fighter.getModel()) {
+                    rem = f;
+                    break;
+                }
+            }
+            available.remove(rem);
+            game.removeFromCollection(rem);
+            Fighter n = new Fighter(fighter.getUpgrade());
+            available.add(n);
+            Label label = createLabel(n);
+            label.setTextFill(Color.YELLOW);
+            availableBox.getChildren().add(label);
+            int num = availableModelCount(n.getModel());
+            availableNum.setText("x" + num);
+            fighter = n;
+            game.addToCollection(n);
+            showFighter();
+        }
     }
 
     private boolean upgradeAvailable() {
@@ -186,7 +214,8 @@ public class PrebattleController {
         for (Fighter f : available) {
             if (f.getModel() == fighter.getModel()) n++;
         }
-        return (n >= 2);
+        Placeable model = fighter.getModel();
+        return ((n >= 2) && model.getUpgrade() != null);
     }
 
     /**

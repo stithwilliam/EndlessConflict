@@ -372,9 +372,13 @@ public enum MapType {
                 return list;
             case LEVELFOUR:
                 list = new LinkedList<>();
+                list.add(race.getUnit());
+                list.add(race.getUnit());
                 return list;
             case LEVELFIVE:
                 list = new LinkedList<>();
+                list.add(race.getWeakRace().getUnit());
+                list.add(race.getStrongRace().getUnit());
                 return list;
             default:
                 return new LinkedList<>();
